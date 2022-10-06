@@ -43,6 +43,9 @@ Free plugin version allows you to set up one custom email with all available fea
 
 == Changelog ==
 
+= 1.5.6 - 06/10/2022 =
+* Add deploy script.
+
 = 1.5.5 - 06/10/2022 =
 * WC tested up to: 6.9.
 * Readme.txt updated.
