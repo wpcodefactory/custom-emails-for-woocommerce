@@ -1,9 +1,9 @@
 === Custom Emails for WooCommerce ===
-Contributors: algoritmika, anbinder
+Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,10 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.5.5 - 06/10/2022 =
+* WC tested up to: 6.9.
+* Readme.txt updated.
 
 = 1.5.4 - 12/09/2022 =
 * Dev - Shortcodes - `[order_details]` - `plain_text` and `sent_to_admin` attributes added (both default to `no`).
