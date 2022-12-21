@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.5.3
+ * @version 1.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -194,9 +194,28 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
+	 * get_terms
+	 *
+	 * @version 1.6.0
+	 * @since   1.6.0
+	 *
+	 * @todo    [next] (dev) WPML
+	 * @todo    [maybe] (dev) replace this with AJAX
+	 * @todo    [maybe] (dev) add term ID to the title in the output?
+	 */
+	function get_terms( $taxonomy ) {
+		if ( ! isset( $this->terms[ $taxonomy ] ) ) {
+			$terms = get_terms( array( 'taxonomy' => $taxonomy ) );
+			$terms = ( ! is_wp_error( $terms ) ? wp_list_pluck( $terms, 'name', 'term_id' ) : array() );
+			$this->terms[ $taxonomy ] = $terms;
+		}
+		return $this->terms[ $taxonomy ];
+	}
+
+	/**
 	 * get_form_fields
 	 *
-	 * @version 1.3.1
+	 * @version 1.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -209,11 +228,18 @@ class Alg_WC_Custom_Email_Settings {
 	 */
 	function get_form_fields( $email ) {
 		return array(
+
 			'enabled' => array(
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable this email notification', 'woocommerce' ),
 				'default'     => 'yes',
+			),
+
+			// Triggers
+			'trigger_options' => array(
+				'title'       => __( 'Triggers', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
 			),
 			'trigger' => array(
 				'title'       => __( 'Trigger(s)', 'custom-emails-for-woocommerce' ),
@@ -248,47 +274,11 @@ class Alg_WC_Custom_Email_Settings {
 				),
 				'css'         => 'width:100%;',
 			),
-			'required_order_product_ids' => array(
-				'title'       => __( 'Require order product(s)', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_products(),
-				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ) . ' ' .
-					__( 'Option is ignored for non-order emails or if the option is empty.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
-			),
-			'excluded_order_product_ids' => array(
-				'title'       => __( 'Exclude order product(s)', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_products(),
-				'desc_tip'    => __( 'Email will not be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ) . ' ' .
-					__( 'Option is ignored for non-order emails or if the option is empty.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
-			),
-			'min_order_amount' => array(
-				'title'       => __( 'Minimum order amount', 'custom-emails-for-woocommerce' ),
-				'type'        => 'text',
-				'class'       => 'wc_input_price',
-				'placeholder' => '',
-				'default'     => '',
-				'desc_tip'    => __( 'Minimum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ) . ' ' .
-					__( 'Option is ignored for non-order emails or if the option is empty.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
-			),
-			'max_order_amount' => array(
-				'title'       => __( 'Maximum order amount', 'custom-emails-for-woocommerce' ),
-				'type'        => 'text',
-				'class'       => 'wc_input_price',
-				'placeholder' => '',
-				'default'     => '',
-				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ) . ' ' .
-					__( 'Option is ignored for non-order emails or if the option is empty.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+
+			// Email Data
+			'data_options' => array(
+				'title'       => __( 'Email Data', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
 			),
 			'recipient'  => array(
 				'title'       => __( 'Recipient(s)', 'woocommerce' ),
@@ -346,6 +336,92 @@ class Alg_WC_Custom_Email_Settings {
 				'default'     => $this->get_default_content(),
 				'css'         => 'width:100%;height:500px;',
 			),
+
+			// Order Options
+			'order_options' => array(
+				'title'       => __( 'Order Options', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
+				'description' => __( 'Options are ignored for non-order emails.', 'custom-emails-for-woocommerce' ),
+			),
+			'required_order_product_ids' => array(
+				'title'       => __( 'Require products', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_products(),
+				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'excluded_order_product_ids' => array(
+				'title'       => __( 'Exclude products', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_products(),
+				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'required_order_product_cats_ids' => array(
+				'title'       => __( 'Require product categories', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_terms( 'product_cat' ),
+				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'excluded_order_product_cats_ids' => array(
+				'title'       => __( 'Exclude product categories', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_terms( 'product_cat' ),
+				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'required_order_product_tags_ids' => array(
+				'title'       => __( 'Require product tags', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_terms( 'product_tag' ),
+				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'excluded_order_product_tags_ids' => array(
+				'title'       => __( 'Exclude product tags', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'placeholder' => '',
+				'default'     => array(),
+				'options'     => $this->get_terms( 'product_tag' ),
+				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'min_order_amount' => array(
+				'title'       => __( 'Minimum amount', 'custom-emails-for-woocommerce' ),
+				'type'        => 'text',
+				'class'       => 'wc_input_price',
+				'placeholder' => '',
+				'default'     => '',
+				'desc_tip'    => __( 'Minimum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'max_order_amount' => array(
+				'title'       => __( 'Maximum amount', 'custom-emails-for-woocommerce' ),
+				'type'        => 'text',
+				'class'       => 'wc_input_price',
+				'placeholder' => '',
+				'default'     => '',
+				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+
 		);
 	}
 

@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
-Tested up to: 6.0
-Stable tag: 1.5.5
+Tested up to: 6.1
+Stable tag: 1.6.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,7 +17,7 @@ Add custom emails to WooCommerce.
 
 * Set custom email **trigger(s)**. For example, send email when order status changed to "Completed", or only when it changed from "Pending payment" to "Completed". Custom order statuses are automatically added to the plugin's triggers list. You can choose from numerous triggers, like sending email on a new order, or when order was fully or partially refunded, or when note was added to the order. In addition you can set non-order emails, like sending an email to admin if anyone's password was reset, or new customer was created, or when a product is on backorder, and so on...
 * **Delay** emails. For example, send custom email one week after order was "Completed".
-* **Require and/or exclude order product(s)** - sent email only if there were selected products in the order.
+* **Require and/or exclude order product(s)** - sent email only if there were selected products, product categories or tags in the order.
 * Set **minimum and/or maximum order amount** - minimum/maximum order amount (subtotal) for email to be sent.
 * Set **subject**, **heading** and **content**. You can use the plugin's [shortcodes](https://wpfactory.com/item/custom-emails-for-woocommerce/#shortcodes) and/or standard WooCommerce email placeholders here.
 * Set **email type** - choose which format of email to send (plain text, HTML, multipart). Optionally wrap email in **WooCommerce email template**.
@@ -43,8 +43,16 @@ Free plugin version allows you to set up one custom email with all available fea
 
 == Changelog ==
 
-= 1.5.6 - 06/10/2022 =
-* Add deploy script.
+= 1.6.0 - 21/12/2022 =
+* Dev - Order Options - "Require product categories" option added.
+* Dev - Order Options - "Exclude product categories" option added.
+* Dev - Order Options - "Require product tags" option added.
+* Dev - Order Options - "Exclude product tags" option added.
+* Dev - Admin settings rearranged; subsection titles added.
+* Dev - Code refactoring.
+* Deploy script added.
+* Tested up to: 6.1.
+* WC tested up to: 7.2.
 
 = 1.5.5 - 06/10/2022 =
 * WC tested up to: 6.9.

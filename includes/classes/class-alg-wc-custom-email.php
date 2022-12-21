@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.5.2
+ * @version 1.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -66,6 +66,81 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
+	 * validate_order.
+	 *
+	 * @version 1.6.0
+	 * @since   1.6.0
+	 */
+	function validate_order( $order ) {
+
+		// Check filter
+		if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: New order: different status.', 'custom-emails-for-woocommerce' ),
+				$this->title ) );
+			return false;
+		}
+		// Check order products
+		$required_order_product_ids = $this->get_option( 'required_order_product_ids', array() );
+		if ( ! empty( $required_order_product_ids ) && ! $this->check_order_products( $order, $required_order_product_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Require order product(s)', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		$excluded_order_product_ids = $this->get_option( 'excluded_order_product_ids', array() );
+		if ( ! empty( $excluded_order_product_ids ) &&   $this->check_order_products( $order, $excluded_order_product_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Exclude order product(s)', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+
+		// Check order product cats
+		$required_order_product_cats_ids = $this->get_option( 'required_order_product_cats_ids', array() );
+		if ( ! empty( $required_order_product_cats_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_cats_ids, 'product_cat' ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Require order product categories', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		$excluded_order_product_cats_ids = $this->get_option( 'excluded_order_product_cats_ids', array() );
+		if ( ! empty( $excluded_order_product_cats_ids ) &&   $this->check_order_product_terms( $order, $excluded_order_product_cats_ids, 'product_cat' ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Exclude order product categories', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+
+		// Check order product tags
+		$required_order_product_tags_ids = $this->get_option( 'required_order_product_tags_ids', array() );
+		if ( ! empty( $required_order_product_tags_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_tags_ids, 'product_tag' ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Require order product tags', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		$excluded_order_product_tags_ids = $this->get_option( 'excluded_order_product_tags_ids', array() );
+		if ( ! empty( $excluded_order_product_tags_ids ) &&   $this->check_order_product_terms( $order, $excluded_order_product_tags_ids, 'product_tag' ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Exclude order product tags', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+
+		// Check order amounts
+		$min_order_amount = $this->get_option( 'min_order_amount', '' );
+		if ( ! empty( $min_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $min_order_amount ) && $this->get_order_amount( $order ) < $min_order_amount ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Minimum order amount', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		$max_order_amount = $this->get_option( 'max_order_amount', '' );
+		if ( ! empty( $max_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $max_order_amount ) && $this->get_order_amount( $order ) > $max_order_amount ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->title, __( 'Maximum order amount', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+
+		// All passed
+		return true;
+
+	}
+
+	/**
 	 * check_new_order_status.
 	 *
 	 * @version 1.0.0
@@ -93,12 +168,31 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @version 1.2.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [next] (feature) product cats, tags, custom taxonomies
-	 * @todo    [next] (feature) "require all products" (i.e. vs "require at least one")?
+	 * @todo    [next] (feature) "require all products" (i.e., vs "require at least one")?
 	 */
 	function check_order_products( $order, $product_ids ) {
 		foreach ( $order->get_items() as $item ) {
 			if ( in_array( $item['product_id'], $product_ids ) || in_array( $item['variation_id'], $product_ids ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * check_order_product_terms.
+	 *
+	 * @version 1.6.0
+	 * @since   1.6.0
+	 *
+	 * @todo    [next] (feature) custom taxonomies
+	 * @todo    [next] (feature) "require all" (i.e., vs "require at least one")?
+	 */
+	function check_order_product_terms( $order, $term_ids, $taxonomy ) {
+		foreach ( $order->get_items() as $item ) {
+			$_term_ids = get_the_terms( $item['product_id'], $taxonomy );
+			$_term_ids = ( ! is_wp_error( $_term_ids ) ? wp_list_pluck( $_term_ids, 'term_id' ) : array() );
+			if ( ! empty( array_intersect( $term_ids, $_term_ids ) ) ) {
 				return true;
 			}
 		}
@@ -144,7 +238,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * send_email.
 	 *
-	 * @version 1.5.2
+	 * @version 1.6.0
 	 * @since   1.3.0
 	 *
 	 * @todo    [next] [!] (dev) block (by products, amounts, etc.) only if it's not sent manually
@@ -158,12 +252,16 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @todo    [next] (dev) `debug`: add more info?
 	 */
 	function send_email( $object_id, $do_force_send, $note = '' ) {
+
+		// Debug
 		alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Triggered.', 'custom-emails-for-woocommerce' ), $this->title ) );
+
 		// Check if it's enabled
 		if ( ! $this->is_enabled() || ! apply_filters( 'alg_wc_custom_emails_is_enabled', true, $this, $object_id ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Disabled.', 'custom-emails-for-woocommerce' ), $this->title ) );
 			return;
 		}
+
 		// Delay
 		if ( ! $do_force_send && ! empty( $this->delay ) ) {
 			$class = str_replace( 'alg_wc_custom', 'Alg_WC_Custom_Email', $this->id );
@@ -172,61 +270,57 @@ class Alg_WC_Custom_Email extends WC_Email {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Delayed (%s): In %d seconds.', 'custom-emails-for-woocommerce' ), $this->title, $class, $delay ) );
 			return;
 		}
+
 		// Send email
 		$order = false;
 		$user  = false;
 		if ( $object_id ) {
+
 			if ( 'woocommerce_created_customer_notification' === current_filter() || apply_filters( 'alg_wc_custom_emails_is_user_email', false ) ) {
+
+				// User email
 				$user            = get_user_by( 'ID', $object_id );
 				$this->recipient = $user->user_email;
+
 			} else {
+
+				// Order email
 				$order = wc_get_order( $object_id );
 				if ( is_a( $order, 'WC_Order' ) ) {
-					$this->object = $order; // must be `object` as it's named so in parent class (`WC_Email`), e.g. for attachments
+
+					// Setting object (must be named `object` as it's named so in the parent class (`WC_Email`), e.g., for attachments)
+					$this->object = $order;
+
+					// Debug
 					alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Order #%s.', 'custom-emails-for-woocommerce' ), $this->title, $order->get_id() ) );
-					// Check filter
-					if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
-						alg_wc_custom_emails()->core->debug( sprintf( __( '%s: New order: different status.', 'custom-emails-for-woocommerce' ), $this->title ) );
+
+					// Validate order
+					if ( ! $this->validate_order( $order ) ) {
 						return;
 					}
-					// Check order products
-					$required_order_product_ids = $this->get_option( 'required_order_product_ids', array() );
-					if ( ! empty( $required_order_product_ids ) && ! $this->check_order_products( $order, $required_order_product_ids ) ) {
-						alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by "%s" option.', 'custom-emails-for-woocommerce' ), $this->title, __( 'Require order product(s)', 'custom-emails-for-woocommerce' ) ) );
-						return;
-					}
-					$excluded_order_product_ids = $this->get_option( 'excluded_order_product_ids', array() );
-					if ( ! empty( $excluded_order_product_ids ) &&   $this->check_order_products( $order, $excluded_order_product_ids ) ) {
-						alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by "%s" option.', 'custom-emails-for-woocommerce' ), $this->title, __( '"Exclude order product(s)', 'custom-emails-for-woocommerce' ) ) );
-						return;
-					}
-					// Check order amounts
-					$min_order_amount = $this->get_option( 'min_order_amount', '' );
-					if ( ! empty( $min_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $min_order_amount ) && $this->get_order_amount( $order ) < $min_order_amount ) {
-						alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by "%s" option.', 'custom-emails-for-woocommerce' ), $this->title, __( 'Minimum order amount', 'custom-emails-for-woocommerce' ) ) );
-						return;
-					}
-					$max_order_amount = $this->get_option( 'max_order_amount', '' );
-					if ( ! empty( $max_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $max_order_amount ) && $this->get_order_amount( $order ) > $max_order_amount ) {
-						alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by "%s" option.', 'custom-emails-for-woocommerce' ), $this->title, __( 'Maximum order amount', 'custom-emails-for-woocommerce' ) ) );
-						return;
-					}
+
 					// Placeholders
 					$this->placeholders['{order_date}']   = wc_format_datetime( $order->get_date_created() );
 					$this->placeholders['{order_number}'] = $order->get_order_number();
+
 					// Recipient
 					if ( $this->customer_email ) {
 						$this->recipient = $order->get_billing_email();
 					} elseif ( false !== strpos( $this->original_recipient, '%customer%' ) ) {
 						$this->recipient = str_replace( '%customer%', $order->get_billing_email(), $this->original_recipient );
 					}
+
 					// Order note
 					$order_note = sprintf( esc_html__( 'Sending "%s" email.', 'custom-emails-for-woocommerce' ), $this->get_title() ) .
 						( '' != $note ? ' ' . sprintf( esc_html__( 'Description: %s.', 'custom-emails-for-woocommerce' ), $note ) : '' );
 					$order->add_order_note( $order_note );
+
 				}
+
 			}
 		}
+
+		// Send
 		$res = $this->send(
 			$this->get_recipient(),
 			$this->get_processed_subject( $order, $user ),
@@ -234,7 +328,11 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$this->get_headers(),
 			$this->get_attachments()
 		);
-		alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Sent: %s', 'custom-emails-for-woocommerce' ), $this->title, ( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
+
+		// Debug
+		alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Sent: %s', 'custom-emails-for-woocommerce' ),
+			$this->title, ( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
+
 	}
 
 	/**
