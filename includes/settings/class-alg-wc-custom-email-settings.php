@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.6.0
+ * @version 1.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -215,7 +215,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields
 	 *
-	 * @version 1.6.0
+	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -227,16 +227,20 @@ class Alg_WC_Custom_Email_Settings {
 	 * @todo    [maybe] add "Reset email settings" option
 	 */
 	function get_form_fields( $email ) {
-		return array(
+		$fields = array();
 
+		// Enable/Disable
+		$fields = array_merge( $fields, array(
 			'enabled' => array(
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable this email notification', 'woocommerce' ),
 				'default'     => 'yes',
 			),
+		) );
 
-			// Triggers
+		// Triggers
+		$fields = array_merge( $fields, array(
 			'trigger_options' => array(
 				'title'       => __( 'Triggers', 'custom-emails-for-woocommerce' ),
 				'type'        => 'title',
@@ -274,8 +278,11 @@ class Alg_WC_Custom_Email_Settings {
 				),
 				'css'         => 'width:100%;',
 			),
+		) );
 
-			// Email Data
+		// Email Data
+		$wpml_active_languages = apply_filters( 'wpml_active_languages', null );
+		$fields = array_merge( $fields, array(
 			'data_options' => array(
 				'title'       => __( 'Email Data', 'custom-emails-for-woocommerce' ),
 				'type'        => 'title',
@@ -336,8 +343,24 @@ class Alg_WC_Custom_Email_Settings {
 				'default'     => $this->get_default_content(),
 				'css'         => 'width:100%;height:500px;',
 			),
+		) );
+		if ( $wpml_active_languages ) {
+			$fields = array_merge( $fields, array(
+				'required_wpml_languages' => array(
+					'title'       => __( 'Require WPML language', 'custom-emails-for-woocommerce' ),
+					'type'        => 'multiselect',
+					'class'       => 'chosen_select',
+					'placeholder' => '',
+					'default'     => array(),
+					'options'     => wp_list_pluck( $wpml_active_languages, 'native_name' ),
+					'desc_tip'    => __( 'Email will be sent only for selected current user languages.', 'custom-emails-for-woocommerce' ),
+					'css'         => 'width:100%;',
+				),
+			) );
+		}
 
-			// Order Options
+		// Order Options
+		$fields = array_merge( $fields, array(
 			'order_options' => array(
 				'title'       => __( 'Order Options', 'custom-emails-for-woocommerce' ),
 				'type'        => 'title',
@@ -421,8 +444,9 @@ class Alg_WC_Custom_Email_Settings {
 				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
 				'css'         => 'width:100%;',
 			),
+		) );
 
-		);
+		return $fields;
 	}
 
 }

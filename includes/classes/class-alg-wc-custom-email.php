@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.6.0
+ * @version 1.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -68,8 +68,11 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * validate_order.
 	 *
-	 * @version 1.6.0
+	 * @version 1.7.0
 	 * @since   1.6.0
+	 *
+	 * @see     https://wpml.org/faq/how-to-get-current-language-with-wpml/
+	 * @see     https://wpml.org/wpml-hook/wpml_active_languages/
 	 */
 	function validate_order( $order ) {
 
@@ -79,7 +82,18 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$this->title ) );
 			return false;
 		}
-		// Check order products
+
+		// Language
+		if ( apply_filters( 'wpml_active_languages', null ) ) {
+			$required_wpml_languages = $this->get_option( 'required_wpml_languages', array() );
+			if ( ! empty( $required_wpml_languages ) && ! in_array( apply_filters( 'wpml_current_language', null ), $required_wpml_languages ) ) {
+				alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+					$this->title, __( 'Require WPML language', 'custom-emails-for-woocommerce' ) ) );
+				return false;
+			}
+		}
+
+		// Order products
 		$required_order_product_ids = $this->get_option( 'required_order_product_ids', array() );
 		if ( ! empty( $required_order_product_ids ) && ! $this->check_order_products( $order, $required_order_product_ids ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
@@ -93,7 +107,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 			return false;
 		}
 
-		// Check order product cats
+		// Order product cats
 		$required_order_product_cats_ids = $this->get_option( 'required_order_product_cats_ids', array() );
 		if ( ! empty( $required_order_product_cats_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_cats_ids, 'product_cat' ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
@@ -107,7 +121,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 			return false;
 		}
 
-		// Check order product tags
+		// Order product tags
 		$required_order_product_tags_ids = $this->get_option( 'required_order_product_tags_ids', array() );
 		if ( ! empty( $required_order_product_tags_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_tags_ids, 'product_tag' ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
@@ -121,7 +135,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 			return false;
 		}
 
-		// Check order amounts
+		// Order amounts
 		$min_order_amount = $this->get_option( 'min_order_amount', '' );
 		if ( ! empty( $min_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $min_order_amount ) && $this->get_order_amount( $order ) < $min_order_amount ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),

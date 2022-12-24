@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,7 @@ Add custom emails to WooCommerce.
 * Send emails **manually** from **order actions** meta box on single order edit page, and/or in bulk from **bulk actions** dropdown on admin orders list.
 * Set email **recipient(s)** - customer, admin, custom email address.
 * Set email's **admin title**.
+* **WPML** and **Polylang** compatible.
 * And more...
 
 ### &#127942; Premium Version ###
@@ -42,6 +43,10 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.7.0 - 24/12/2022 =
+* Dev - Email Data - "Require WPML language" option added.
+* Dev - Shortcodes - `[translate]` shortcode added (for WPML and Polylang plugins).
 
 = 1.6.0 - 21/12/2022 =
 * Dev - Order Options - "Require product categories" option added.

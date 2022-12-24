@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 1.5.4
+ * @version 1.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,12 +17,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.5.0
+	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [later] not order related (e.g. customer; product)
 	 * @todo    [later] `[order_total_in_words]`
-	 * @todo    [maybe] move to a separate file?
 	 * @todo    [maybe] maybe use more general shortcodes (e.g. `[order]`) instead? or even more general (e.g. `[prop]`)?
 	 */
 	function __construct() {
@@ -30,6 +29,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'clear',                      array( $this, 'clear' ) );
 		add_shortcode( 'site_title',                 array( $this, 'site_title' ) );
 		add_shortcode( 'site_address',               array( $this, 'site_address' ) );
+		add_shortcode( 'translate',                  array( $this, 'translate' ) );
 		add_shortcode( 'order_meta',                 array( $this, 'order_meta' ) );
 		add_shortcode( 'order_func',                 array( $this, 'order_func' ) );
 		add_shortcode( 'order_number',               array( $this, 'order_number' ) );
@@ -46,6 +46,25 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'order_shipping_address',     array( $this, 'order_shipping_address' ) );
 		add_shortcode( 'order_item_names',           array( $this, 'order_item_names' ) );
 		add_shortcode( 'generate_coupon_code',       array( $this, 'generate_coupon_code' ) );
+	}
+
+	/**
+	 * translate.
+	 *
+	 * @version 1.7.0
+	 * @since   1.7.0
+	 */
+	function translate( $atts, $content = '' ) {
+		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
+		if ( isset( $atts['lang_text'] ) && isset( $atts['not_lang_text'] ) && ! empty( $atts['lang'] ) ) {
+			return ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ?
+				$atts['not_lang_text'] : $atts['lang_text'];
+		}
+		// E.g.: `[translate lang="EN,DE"]Text for EN & DE[/translate][translate not_lang="EN,DE"]Text for other languages[/translate]`
+		return (
+			( ! empty( $atts['lang'] )     && ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ) ||
+			( ! empty( $atts['not_lang'] ) &&     defined( 'ICL_LANGUAGE_CODE' ) &&   in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) ) ) )
+		) ? '' : $content;
 	}
 
 	/**
