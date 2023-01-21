@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.7.0
+ * @version 1.7.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -87,7 +87,7 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
-	 * get_triggers
+	 * get_triggers.
 	 *
 	 * @version 1.5.3
 	 * @since   1.0.0
@@ -162,7 +162,7 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
-	 * get_form_fields
+	 * get_placeholder_text.
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
@@ -174,27 +174,7 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
-	 * get_products
-	 *
-	 * @version 1.2.0
-	 * @since   1.2.0
-	 *
-	 * @see     https://github.com/woocommerce/woocommerce/wiki/wc_get_products-and-WC_Product_Query
-	 *
-	 * @todo    [next] (dev) WPML
-	 * @todo    [next] (dev) replace this with AJAX
-	 * @todo    [maybe] (dev) add product ID to the title in the output?
-	 */
-	function get_products() {
-		if ( ! isset( $this->products ) ) {
-			$products = wc_get_products( array( 'limit' => -1, 'return' => 'ids', 'type' => array_merge( array_keys( wc_get_product_types() ), array( 'variation' ) ) ) );
-			$this->products = array_map( 'get_the_title', array_combine( $products, $products ) );
-		}
-		return $this->products;
-	}
-
-	/**
-	 * get_terms
+	 * get_terms.
 	 *
 	 * @version 1.6.0
 	 * @since   1.6.0
@@ -213,9 +193,92 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
-	 * get_form_fields
+	 * get_ajax_options.
 	 *
-	 * @version 1.7.0
+	 * @version 1.7.1
+	 * @since   1.7.1
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1569
+	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1681
+	 *
+	 * @todo    [later] (dev) `customer`: add `guest` (check the "Order Status Rules" plugin)
+	 */
+	function get_ajax_options( $type, $email, $option, $key = false ) {
+		$options = array();
+
+		// Current value
+		$current = $email->get_option( $option, array() );
+		if ( false !== $key ) {
+			$current = ( isset( $current[ $key ] ) ? $current[ $key ] : array() );
+		}
+
+		// Post data
+		$post_data = $email->get_post_data();
+		$field_key = $email->get_field_key( $option );
+		if ( ! empty( $post_data[ $field_key ] ) && is_array( $post_data[ $field_key ] ) ) {
+			$current = array_unique( array_merge( $current, $post_data[ $field_key ] ) );
+		}
+
+		// Loop (ids)
+		foreach ( $current as $id ) {
+
+			// Prepare data
+			switch ( $type ) {
+				case 'product':
+					$obj      = wc_get_product( $id );
+					$is_valid = ( $obj && is_object( $obj ) );
+					break;
+				case 'customer':
+					$obj      = new WC_Customer( $id );
+					$is_valid = ( $obj && is_object( $obj ) && 0 != $obj->get_id() );
+					break;
+			}
+
+			// Get option
+			if ( ! $is_valid ) {
+
+				// Not valid
+				switch ( $type ) {
+					case 'product':
+						$res = sprintf( esc_html__( 'Product #%d', 'custom-emails-for-woocommerce' ), $id );
+						break;
+					case 'customer':
+						$res = sprintf( esc_html__( 'User #%d', 'custom-emails-for-woocommerce' ), $id );
+						break;
+				}
+
+			} else {
+
+				// Valid
+				switch ( $type ) {
+					case 'product':
+						$res = esc_html( wp_strip_all_tags( $obj->get_formatted_name() ) );
+						break;
+					case 'customer':
+						$res = sprintf(
+							/* translators: $1: customer name, $2 customer id, $3: customer email */
+							esc_html__( '%1$s (#%2$s &ndash; %3$s)', 'woocommerce' ),
+							$obj->get_first_name() . ' ' . $obj->get_last_name(),
+							$obj->get_id(),
+							$obj->get_email()
+						);
+						break;
+				}
+
+			}
+
+			// Add option
+			$options[ esc_attr( $id ) ] = $res;
+
+		}
+
+		return $options;
+	}
+
+	/**
+	 * get_form_fields.
+	 *
+	 * @version 1.7.1
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -369,22 +432,30 @@ class Alg_WC_Custom_Email_Settings {
 			'required_order_product_ids' => array(
 				'title'       => __( 'Require products', 'custom-emails-for-woocommerce' ),
 				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
+				'class'       => 'wc-product-search',
 				'default'     => array(),
-				'options'     => $this->get_products(),
+				'options'     => $this->get_ajax_options( 'product', $email, 'required_order_product_ids' ),
 				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
 				'css'         => 'width:100%;',
+				'custom_attributes' => array(
+					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
+					'data-action'      => 'woocommerce_json_search_products_and_variations',
+					'data-allow_clear' => true,
+				),
 			),
 			'excluded_order_product_ids' => array(
 				'title'       => __( 'Exclude products', 'custom-emails-for-woocommerce' ),
 				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
+				'class'       => 'wc-product-search',
 				'default'     => array(),
-				'options'     => $this->get_products(),
+				'options'     => $this->get_ajax_options( 'product', $email, 'excluded_order_product_ids' ),
 				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
 				'css'         => 'width:100%;',
+				'custom_attributes' => array(
+					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
+					'data-action'      => 'woocommerce_json_search_products_and_variations',
+					'data-allow_clear' => true,
+				),
 			),
 			'required_order_product_cats_ids' => array(
 				'title'       => __( 'Require product categories', 'custom-emails-for-woocommerce' ),

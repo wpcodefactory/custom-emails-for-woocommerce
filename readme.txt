@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,10 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.7.1 - 21/01/2023 =
+* Dev - Order Options - Require/Exclude products - Now using AJAX in admin settings.
+* WC tested up to: 7.3.
 
 = 1.7.0 - 24/12/2022 =
 * Dev - Email Data - "Require WPML language" option added.
