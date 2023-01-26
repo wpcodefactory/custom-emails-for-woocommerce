@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.7.0
+ * @version 1.7.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,11 +17,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * Constructor
 	 *
-	 * @version 1.3.0
+	 * @version 1.7.2
 	 * @since   1.0.0
 	 */
 	function __construct( $id = 1 ) {
+
 		// Properties
+		$this->alg_wc_ce_id       = $id;
 		$this->id                 = ( 1 == $id ? 'alg_wc_custom' : "alg_wc_custom_{$id}" );
 		$this->title              = alg_wc_custom_emails()->core->email_settings->get_title( $id );
 		$this->description        = alg_wc_custom_emails()->core->email_settings->get_description( $id );
@@ -31,10 +33,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 		$this->original_recipient = $this->get_option( 'recipient' );
 		$this->delay              = $this->get_option( 'delay', 0 );
 		$this->delay_unit         = $this->get_option( 'delay_unit', 1 );
+
 		// Triggers for this email
 		$this->hook_triggers();
+
 		// Call parent constructor
 		parent::__construct();
+
 		// Recipient
 		if ( ! $this->customer_email ) {
 			$this->recipient = $this->get_option( 'recipient' );
@@ -42,6 +47,51 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$this->recipient = get_option( 'admin_email' );
 			}
 		}
+
+		// Admin actions
+		add_action( 'woocommerce_update_options_email_' . $this->id, array( $this, 'admin_actions' ) );
+
+	}
+
+	/**
+	 * admin_actions.
+	 *
+	 * @version 1.7.2
+	 * @since   1.7.2
+	 *
+	 * @todo    [maybe] (dev) move this to another class/file?
+	 */
+	function admin_actions() {
+
+		// Copy settings
+		if ( 0 != ( $email_id_from = $this->get_option( 'copy_settings', 0 ) ) ) {
+			$this->update_option( 'copy_settings', 0 );
+			if ( ( $email_from = new Alg_WC_Custom_Email( $email_id_from ) ) ) {
+				foreach ( $email_from->form_fields as $field_id => $field_data ) {
+					if ( isset( $field_data['default'] ) ) {
+						$this->update_option( $field_id, $email_from->get_option( $field_id, $field_data['default'] ) );
+					}
+				}
+				$this->init_form_fields();
+				if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
+					WC_Admin_Settings::add_message( __( 'Your settings have been copied.', 'custom-emails-for-woocommerce' ) );
+				}
+			}
+		}
+
+		// Reset settings
+		if ( 'yes' === $this->get_option( 'reset_settings', 'no' ) ) {
+			$this->update_option( 'reset_settings', 'no' );
+			foreach ( $this->form_fields as $field_id => $field_data ) {
+				if ( isset( $field_data['default'] ) ) {
+					$this->update_option( $field_id, $field_data['default'] );
+				}
+			}
+			if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
+				WC_Admin_Settings::add_message( __( 'Your settings have been reset.', 'custom-emails-for-woocommerce' ) );
+			}
+		}
+
 	}
 
 	/**

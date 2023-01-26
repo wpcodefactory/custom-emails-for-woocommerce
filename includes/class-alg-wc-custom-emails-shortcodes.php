@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 1.7.0
+ * @version 1.7.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -70,7 +70,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * generate_coupon_code.
 	 *
-	 * @version 1.4.1
+	 * @version 1.7.2
 	 * @since   1.1.0
 	 *
 	 * @todo    [next] (dev) generate coupon from *order*
@@ -100,7 +100,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'post_status'  => 'publish',
 			'post_author'  => 1,
 			'post_type'    => 'shop_coupon',
-			'post_excerpt' => sprintf( esc_html__( 'Created by "%s" plugin', 'custom-emails-for-woocommerce' ), __( 'Custom Emails for WooCommerce', 'custom-emails-for-woocommerce' ) ),
+			'post_excerpt' => sprintf( esc_html__( 'Created by the "%s" plugin', 'custom-emails-for-woocommerce' ),
+				__( 'Custom Emails for WooCommerce', 'custom-emails-for-woocommerce' ) ),
 		);
 		$coupon_id = wp_insert_post( $coupon );
 		if ( $coupon_id && ! is_wp_error( $coupon_id ) ) {

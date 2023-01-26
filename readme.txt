@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,11 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.7.2 - 26/01/2023 =
+* Dev - Admin Options - "Copy settings" tool added.
+* Dev - Admin Options - "Reset settings" tool added.
+* Dev - Shortcodes - `[generate_coupon_code]` - Coupon description (`post_excerpt`) updated.
 
 = 1.7.1 - 21/01/2023 =
 * Dev - Order Options - Require/Exclude products - Now using AJAX in admin settings.

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.7.1
+ * @version 1.7.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -276,9 +276,24 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
+	 * get_copy_emails_option.
+	 *
+	 * @version 1.7.2
+	 * @since   1.7.2
+	 */
+	function get_copy_emails_option( $email ) {
+		$copy_emails = apply_filters( 'alg_wc_custom_email_settings_copy', array(
+			0 => __( 'Select an email&hellip;', 'custom-emails-for-woocommerce' ),
+			1 => alg_wc_custom_emails()->core->email_settings->get_title( 1 ),
+		) );
+		unset( $copy_emails[ $email->alg_wc_ce_id ] );
+		return ( count( $copy_emails ) > 1 ? $copy_emails : false );
+	}
+
+	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.7.1
+	 * @version 1.7.2
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -287,7 +302,6 @@ class Alg_WC_Custom_Email_Settings {
 	 * @todo    [next] (dev) add sections, e.g. "Conditions"
 	 * @todo    [maybe] replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
 	 * @todo    [maybe] separate option for plain content
-	 * @todo    [maybe] add "Reset email settings" option
 	 */
 	function get_form_fields( $email ) {
 		$fields = array();
@@ -514,6 +528,36 @@ class Alg_WC_Custom_Email_Settings {
 				'default'     => '',
 				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
 				'css'         => 'width:100%;',
+			),
+		) );
+
+		// Admin Option
+		$fields = array_merge( $fields, array(
+			'admin_options' => array(
+				'title'       => __( 'Admin Options', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
+			),
+		) );
+		if ( ( $copy_emails = $this->get_copy_emails_option( $email ) ) ) {
+			$fields = array_merge( $fields, array(
+				'copy_settings' => array(
+					'title'       => __( 'Copy settings', 'custom-emails-for-woocommerce' ),
+					'type'        => 'select',
+					'class'       => 'chosen_select',
+					'default'     => 0,
+					'options'     => $copy_emails,
+					'description' => __( 'Select an email to copy settings from and save changes.', 'custom-emails-for-woocommerce' ),
+					'desc_tip'    => __( 'Please note that there is no undo for this action. Your current email settings will be overwritten.', 'custom-emails-for-woocommerce' ),
+				),
+			) );
+		}
+		$fields = array_merge( $fields, array(
+			'reset_settings' => array(
+				'title'       => __( 'Reset settings', 'custom-emails-for-woocommerce' ),
+				'type'        => 'checkbox',
+				'label'       => '<strong>' . __( 'Reset', 'custom-emails-for-woocommerce' ) . '</strong>',
+				'description' => __( 'Check the box and save changes to reset.', 'custom-emails-for-woocommerce' ),
+				'default'     => 'no',
 			),
 		) );
 
