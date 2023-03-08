@@ -1,26 +1,43 @@
-#: includes/class-alg-wc-custom-emails-admin.php:92
-#: includes/pro/class-alg-wc-custom-emails-pro.php:130
+#: includes/class-alg-wc-custom-emails-admin.php:101
+#: includes/pro/class-alg-wc-custom-emails-pro.php:184
 msgid "bulk actions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:110
+#: includes/class-alg-wc-custom-emails-admin.php:119
 #, php-format
 msgid "Emails: \"%s\" sent for %d orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:134
-#: includes/pro/class-alg-wc-custom-emails-pro.php:145
+#: includes/class-alg-wc-custom-emails-admin.php:143
+#: includes/pro/class-alg-wc-custom-emails-pro.php:199
 msgid "manually"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:150
-#: includes/class-alg-wc-custom-emails-admin.php:169
-#: includes/pro/class-alg-wc-custom-emails-pro.php:163
-#: includes/pro/class-alg-wc-custom-emails-pro.php:184
+#: includes/class-alg-wc-custom-emails-admin.php:154
+#: includes/class-alg-wc-custom-emails-admin.php:168
+#: includes/class-alg-wc-custom-emails-admin.php:230
+#: includes/class-alg-wc-custom-emails-admin.php:280
+#: includes/pro/class-alg-wc-custom-emails-pro.php:137
+#: includes/pro/class-alg-wc-custom-emails-pro.php:165
+#: includes/pro/class-alg-wc-custom-emails-pro.php:212
+#: includes/pro/class-alg-wc-custom-emails-pro.php:228
 #: includes/settings/class-alg-wc-custom-email-settings.php:426
 #: includes/settings/class-alg-wc-custom-email-settings.php:564
 #, php-format
 msgid "Send email: %s"
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:191
+#: includes/class-alg-wc-custom-emails-admin.php:254
+msgid "Link has expired."
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:194
+msgid "order actions column"
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:257
+msgid "order preview"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-core.php:75
@@ -200,17 +217,17 @@ msgstr ""
 msgid "failed"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:64
+#: includes/pro/class-alg-wc-custom-emails-pro.php:66
 #, php-format
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:66
+#: includes/pro/class-alg-wc-custom-emails-pro.php:68
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:81
 msgid "settings"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:68
+#: includes/pro/class-alg-wc-custom-emails-pro.php:70
 #: includes/settings/class-alg-wc-custom-email-settings.php:36
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:52
 #, php-format
@@ -556,34 +573,42 @@ msgstr ""
 msgid "Orders > Bulk actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:579
+#: includes/settings/class-alg-wc-custom-email-settings.php:572
+msgid "Orders > Preview"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:573
+msgid "Orders > Actions column"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:581
 msgid "Settings Tools"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:586
+#: includes/settings/class-alg-wc-custom-email-settings.php:588
 msgid "Copy settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:591
+#: includes/settings/class-alg-wc-custom-email-settings.php:593
 msgid "Select an email to copy settings from and save changes."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:592
+#: includes/settings/class-alg-wc-custom-email-settings.php:594
 msgid ""
 "Please note that there is no undo for this action. Your current email "
 "settings will be overwritten."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:598
+#: includes/settings/class-alg-wc-custom-email-settings.php:600
 msgid "Reset settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:600
+#: includes/settings/class-alg-wc-custom-email-settings.php:602
 #: includes/settings/class-alg-wc-custom-emails-settings.php:49
 msgid "Reset"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:601
+#: includes/settings/class-alg-wc-custom-email-settings.php:603
 #: includes/settings/class-alg-wc-custom-emails-settings.php:50
 msgid "Check the box and save changes to reset."
 msgstr ""

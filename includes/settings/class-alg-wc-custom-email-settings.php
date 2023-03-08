@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.8.0
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -304,7 +304,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.8.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -569,6 +569,8 @@ class Alg_WC_Custom_Email_Settings {
 				'options'     => array(
 					'order_actions_single'  => __( 'Edit order > Order actions', 'custom-emails-for-woocommerce' ),
 					'order_actions_bulk'    => __( 'Orders > Bulk actions', 'custom-emails-for-woocommerce' ),
+					'order_actions_preview' => __( 'Orders > Preview', 'custom-emails-for-woocommerce' ),
+					'order_actions_column'  => __( 'Orders > Actions column', 'custom-emails-for-woocommerce' ),
 				),
 			),
 		) );

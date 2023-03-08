@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,7 +21,7 @@ Add custom emails to WooCommerce.
 * Set **minimum and/or maximum order amount** - minimum/maximum order amount (subtotal) for email to be sent.
 * Set **subject**, **heading** and **content**. You can use the plugin's [shortcodes](https://wpfactory.com/item/custom-emails-for-woocommerce/#shortcodes) and/or standard WooCommerce email placeholders here.
 * Set **email type** - choose which format of email to send (plain text, HTML, multipart). Optionally wrap email in **WooCommerce email template**.
-* Send emails **manually** from **order actions** meta box on single order edit page, and/or in bulk from **bulk actions** dropdown on admin orders list.
+* Send emails **manually**, for example, from the **Order actions** meta box on single order edit page, or in bulk from the **Bulk actions** dropdown on admin orders list.
 * Set email **recipient(s)** - customer, admin, custom email address.
 * Set email's **admin title**.
 * **WPML** and **Polylang** compatible.
@@ -43,6 +43,12 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.9.0 - 08/03/2023 =
+* Dev - Admin Options - Admin actions - "Orders > Preview" option added.
+* Dev - Admin Options - Admin actions - "Orders > Actions column" option added.
+* Dev - Admin Options - Admin actions - Code refactoring.
+* Dev - Developers - `alg_wc_custom_emails_order_product_term_ids` filter added.
 
 = 1.8.0 - 08/03/2023 =
 * Dev - Admin Options - "Admin actions" option added (defaults to "Edit order > Order actions" and "Orders > Bulk actions").

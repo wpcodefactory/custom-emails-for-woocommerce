@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 1.8.0
+ * @version 1.9.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -218,7 +218,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * check_order_product_terms.
 	 *
-	 * @version 1.6.0
+	 * @version 1.9.0
 	 * @since   1.6.0
 	 *
 	 * @todo    [next] (feature) custom taxonomies
@@ -226,9 +226,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 */
 	function check_order_product_terms( $order, $term_ids, $taxonomy ) {
 		foreach ( $order->get_items() as $item ) {
-			$_term_ids = get_the_terms( $item['product_id'], $taxonomy );
-			$_term_ids = ( ! is_wp_error( $_term_ids ) ? wp_list_pluck( $_term_ids, 'term_id' ) : array() );
-			if ( ! empty( array_intersect( $term_ids, $_term_ids ) ) ) {
+			$product_term_ids = get_the_terms( $item['product_id'], $taxonomy );
+			$product_term_ids = ( ! is_wp_error( $product_term_ids ) ? wp_list_pluck( $product_term_ids, 'term_id' ) : array() );
+			$product_term_ids = apply_filters( 'alg_wc_custom_emails_order_product_term_ids', $product_term_ids, $item, $order, $term_ids, $taxonomy );
+			if ( ! empty( array_intersect( $term_ids, $product_term_ids ) ) ) {
 				return true;
 			}
 		}
