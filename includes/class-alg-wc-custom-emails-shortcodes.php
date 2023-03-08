@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 1.7.2
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -243,7 +243,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * if.
 	 *
-	 * @version 1.0.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 */
 	function if( $atts, $content = '' ) {
@@ -252,21 +252,31 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 		$value1 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value1'] ) );
 		$value2 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value2'] ) );
-		switch ( $atts['operator'] ) {
+		return ( $this->eval_operator( $value1, $atts['operator'], $value2 ) ? do_shortcode( $content ) : '' );
+	}
+
+	/**
+	 * eval_operator.
+	 *
+	 * @version 1.8.0
+	 * @since   1.8.0
+	 */
+	function eval_operator( $value1, $operator, $value2 ) {
+		switch ( $operator ) {
 			case 'equal':
-				return ( $value1 == $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 == $value2 );
 			case 'not_equal':
-				return ( $value1 != $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 != $value2 );
 			case 'less':
-				return ( $value1 <  $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 <  $value2 );
 			case 'less_or_equal':
-				return ( $value1 <= $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 <= $value2 );
 			case 'greater':
-				return ( $value1 >  $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 >  $value2 );
 			case 'greater_or_equal':
-				return ( $value1 >= $value2 ? do_shortcode( $content ) : '' );
+				return ( $value1 >= $value2 );
 		}
-		return '';
+		return false;
 	}
 
 	/**

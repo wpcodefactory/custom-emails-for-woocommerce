@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 1.5.3
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -135,10 +135,13 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_emails.
 	 *
-	 * @version 1.3.1
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 */
 	function add_custom_emails( $emails ) {
+		if ( ! class_exists( 'Alg_WC_Custom_Email_Order_Validator' ) ) {
+			require_once( 'classes/class-alg-wc-custom-email-order-validator.php' );
+		}
 		if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) {
 			require_once( 'classes/class-alg-wc-custom-email.php' );
 		}

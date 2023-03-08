@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.7.2
+Stable tag: 1.8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,16 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.8.0 - 08/03/2023 =
+* Dev - Admin Options - "Admin actions" option added (defaults to "Edit order > Order actions" and "Orders > Bulk actions").
+* Dev - Admin Options - Admin settings rearranged ("Settings Tools" subsection added).
+* Dev - Order Options - Require/Exclude product categories/tags - Listing empty categories/tags as well now.
+* Dev - Order Options - "Logical operator" option added (defaults to `AND`).
+* Dev - Order Options - Code refactoring (`Alg_WC_Custom_Email_Order_Validator` class added).
+* Dev - Shortcodes - `[if]` - Code refactoring.
+* Dev - Compatibility - "Email Customizer for WooCommerce (Pro)" by ThemeHigh - PHP notice (regarding calling the `wc_get_product()` function too early) fixed.
+* WC tested up to: 7.4.
 
 = 1.7.2 - 26/01/2023 =
 * Dev - Admin Options - "Copy settings" tool added.

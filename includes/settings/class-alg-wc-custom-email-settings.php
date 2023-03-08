@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.7.2
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -97,6 +97,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @todo    [maybe] (dev) `renewal`: only add if `WC_Subscriptions` class exist?
 	 */
 	function get_triggers() {
+
 		// Init
 		$triggers = array(
 			'new_order'                   => array(),
@@ -109,6 +110,7 @@ class Alg_WC_Custom_Email_Settings {
 			'renewal_order_status_change' => array(),
 			'extra'                       => array(),
 		);
+
 		// Order triggers
 		$triggers['new_order']['woocommerce_new_order_notification_alg_wc_ce_any'] = __( 'New order (Any status)', 'custom-emails-for-woocommerce' );
 		$order_statuses = wc_get_order_statuses();
@@ -126,6 +128,7 @@ class Alg_WC_Custom_Email_Settings {
 				}
 			}
 		}
+
 		// Extra triggers
 		$triggers['extra'] = array(
 			'woocommerce_reset_password_notification'           => __( 'Reset password notification', 'custom-emails-for-woocommerce' ),
@@ -158,7 +161,10 @@ class Alg_WC_Custom_Email_Settings {
 		foreach ( $enabled_trigger_groups as $trigger_group ) {
 			$enabled_triggers[ $all_trigger_groups[ $trigger_group ] ] = $triggers[ $trigger_group ];
 		}
+
+		// Result
 		return $enabled_triggers;
+
 	}
 
 	/**
@@ -176,7 +182,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_terms.
 	 *
-	 * @version 1.6.0
+	 * @version 1.8.0
 	 * @since   1.6.0
 	 *
 	 * @todo    [next] (dev) WPML
@@ -185,7 +191,7 @@ class Alg_WC_Custom_Email_Settings {
 	 */
 	function get_terms( $taxonomy ) {
 		if ( ! isset( $this->terms[ $taxonomy ] ) ) {
-			$terms = get_terms( array( 'taxonomy' => $taxonomy ) );
+			$terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false ) );
 			$terms = ( ! is_wp_error( $terms ) ? wp_list_pluck( $terms, 'name', 'term_id' ) : array() );
 			$this->terms[ $taxonomy ] = $terms;
 		}
@@ -195,7 +201,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_ajax_options.
 	 *
-	 * @version 1.7.1
+	 * @version 1.8.0
 	 * @since   1.7.1
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1569
@@ -205,6 +211,11 @@ class Alg_WC_Custom_Email_Settings {
 	 */
 	function get_ajax_options( $type, $email, $option, $key = false ) {
 		$options = array();
+
+		// Make sure we are not calling the `wc_get_product()` function too early: https://github.com/woocommerce/woocommerce/blob/7.4.1/plugins/woocommerce/includes/wc-product-functions.php#L64
+		if ( ! did_action( 'woocommerce_init' ) || ! did_action( 'woocommerce_after_register_taxonomy' ) || ! did_action( 'woocommerce_after_register_post_type' ) ) {
+			return $options;
+		}
 
 		// Current value
 		$current = $email->get_option( $option, array() );
@@ -293,15 +304,15 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.7.2
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
 	 * @todo    [next] (feature) `cc` and `bcc`
 	 * @todo    [next] (desc) `delay`: better desc
 	 * @todo    [next] (dev) add sections, e.g. "Conditions"
-	 * @todo    [maybe] replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
-	 * @todo    [maybe] separate option for plain content
+	 * @todo    [maybe] (dev) replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
+	 * @todo    [maybe] (feature) separate option for plain content
 	 */
 	function get_form_fields( $email ) {
 		$fields = array();
@@ -529,12 +540,43 @@ class Alg_WC_Custom_Email_Settings {
 				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
 				'css'         => 'width:100%;',
 			),
+			'order_conditions_logical_operator' => array(
+				'title'       => __( 'Logical operator', 'custom-emails-for-woocommerce' ),
+				'type'        => 'select',
+				'class'       => 'chosen_select',
+				'default'     => 'AND',
+				'options'     => array(
+					'AND' => 'AND',
+					'OR'  => 'OR',
+				),
+			),
 		) );
 
 		// Admin Option
 		$fields = array_merge( $fields, array(
 			'admin_options' => array(
 				'title'       => __( 'Admin Options', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
+			),
+			'admin_actions' => array(
+				'title'       => __( 'Admin actions', 'custom-emails-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'This will add "%s" option to the selected positions.', 'custom-emails-for-woocommerce' ),
+					sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ), $this->get_title() ) ),
+				'type'        => 'multiselect',
+				'class'       => 'chosen_select',
+				'css'         => 'width:100%;',
+				'default'     => array( 'order_actions_single', 'order_actions_bulk' ),
+				'options'     => array(
+					'order_actions_single'  => __( 'Edit order > Order actions', 'custom-emails-for-woocommerce' ),
+					'order_actions_bulk'    => __( 'Orders > Bulk actions', 'custom-emails-for-woocommerce' ),
+				),
+			),
+		) );
+
+		// Settings Tools
+		$fields = array_merge( $fields, array(
+			'settings_tools' => array(
+				'title'       => __( 'Settings Tools', 'custom-emails-for-woocommerce' ),
 				'type'        => 'title',
 			),
 		) );

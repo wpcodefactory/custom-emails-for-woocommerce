@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 1.5.1
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,24 +17,31 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.3.1
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
+
 		// Admin core
 		if ( 'yes' === get_option( 'alg_wc_custom_emails_plugin_enabled', 'yes' ) ) {
-			// Order actions
+
+			// Edit order > Order actions (dropdown)
 			add_filter( 'woocommerce_order_actions',                         array( $this, 'add_order_actions' ), PHP_INT_MAX );
 			add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
-			// Bulk actions
-			add_filter( 'bulk_actions-edit-shop_order',                      array( $this, 'add_order_actions' ), 20, 1 );
+
+			// Orders > Bulk actions (dropdown)
+			add_filter( 'bulk_actions-edit-shop_order',                      array( $this, 'add_order_actions_bulk' ), 20, 1 );
 			add_filter( 'handle_bulk_actions-edit-shop_order',               array( $this, 'do_order_actions_bulk' ), 10, 3 );
 			add_action( 'admin_notices',                                     array( $this, 'bulk_action_admin_notice' ) );
+
 			// Content template script
 			add_action( 'admin_footer',                                      array( $this, 'add_content_template_script' ) );
+
 		}
+
 		// Admin core loaded
 		do_action( 'alg_wc_custom_emails_admin_core_loaded', $this );
+
 	}
 
 	/**
@@ -130,14 +137,39 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * add_order_actions.
 	 *
-	 * @version 1.4.1
+	 * @version 1.8.0
 	 * @since   1.0.0
-	 *
-	 * @todo    [later] (dev) make this optional
 	 */
 	function add_order_actions( $actions ) {
-		$actions['alg_wc_send_email_custom'] = sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ), alg_wc_custom_emails()->core->email_settings->get_title() );
+		if (
+			( $wc_emails = WC_Emails::instance() ) &&
+			isset( $wc_emails->emails['Alg_WC_Custom_Email'] ) &&
+			$wc_emails->emails['Alg_WC_Custom_Email'] instanceof WC_Email &&
+			in_array( 'order_actions_single', $wc_emails->emails['Alg_WC_Custom_Email']->get_option( 'admin_actions', array( 'order_actions_single', 'order_actions_bulk' ) ) )
+		) {
+			$actions['alg_wc_send_email_custom'] = sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+				alg_wc_custom_emails()->core->email_settings->get_title() );
+		}
 		return apply_filters( 'alg_wc_custom_emails_admin_add_order_actions', $actions );
+	}
+
+	/**
+	 * add_order_actions_bulk.
+	 *
+	 * @version 1.8.0
+	 * @since   1.8.0
+	 */
+	function add_order_actions_bulk( $actions ) {
+		if (
+			( $wc_emails = WC_Emails::instance() ) &&
+			isset( $wc_emails->emails['Alg_WC_Custom_Email'] ) &&
+			$wc_emails->emails['Alg_WC_Custom_Email'] instanceof WC_Email &&
+			in_array( 'order_actions_bulk', $wc_emails->emails['Alg_WC_Custom_Email']->get_option( 'admin_actions', array( 'order_actions_single', 'order_actions_bulk' ) ) )
+		) {
+			$actions['alg_wc_send_email_custom'] = sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+				alg_wc_custom_emails()->core->email_settings->get_title() );
+		}
+		return apply_filters( 'alg_wc_custom_emails_admin_add_order_actions_bulk', $actions );
 	}
 
 }

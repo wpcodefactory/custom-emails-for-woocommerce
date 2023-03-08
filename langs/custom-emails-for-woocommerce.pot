@@ -1,21 +1,24 @@
-#: includes/class-alg-wc-custom-emails-admin.php:85
-#: includes/pro/class-alg-wc-custom-emails-pro.php:129
+#: includes/class-alg-wc-custom-emails-admin.php:92
+#: includes/pro/class-alg-wc-custom-emails-pro.php:130
 msgid "bulk actions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:103
+#: includes/class-alg-wc-custom-emails-admin.php:110
 #, php-format
 msgid "Emails: \"%s\" sent for %d orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:127
-#: includes/pro/class-alg-wc-custom-emails-pro.php:144
+#: includes/class-alg-wc-custom-emails-admin.php:134
+#: includes/pro/class-alg-wc-custom-emails-pro.php:145
 msgid "manually"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:139
-#: includes/pro/class-alg-wc-custom-emails-pro.php:156
-#: includes/settings/class-alg-wc-custom-email-settings.php:415
+#: includes/class-alg-wc-custom-emails-admin.php:150
+#: includes/class-alg-wc-custom-emails-admin.php:169
+#: includes/pro/class-alg-wc-custom-emails-pro.php:163
+#: includes/pro/class-alg-wc-custom-emails-pro.php:184
+#: includes/settings/class-alg-wc-custom-email-settings.php:426
+#: includes/settings/class-alg-wc-custom-email-settings.php:564
 #, php-format
 msgid "Send email: %s"
 msgstr ""
@@ -29,47 +32,47 @@ msgstr ""
 msgid "delayed"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:217
+#: includes/class-alg-wc-custom-emails-core.php:220
 msgid "Order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:218
+#: includes/class-alg-wc-custom-emails-core.php:221
 msgid "Order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:219
+#: includes/class-alg-wc-custom-emails-core.php:222
 msgid "New order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:221
+#: includes/class-alg-wc-custom-emails-core.php:224
 msgid "Extra"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:223
-#: includes/class-alg-wc-custom-emails-core.php:224
 #: includes/class-alg-wc-custom-emails-core.php:226
 #: includes/class-alg-wc-custom-emails-core.php:227
-#: includes/class-alg-wc-custom-emails-core.php:228
+#: includes/class-alg-wc-custom-emails-core.php:229
+#: includes/class-alg-wc-custom-emails-core.php:230
+#: includes/class-alg-wc-custom-emails-core.php:231
 msgid "Subscriptions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:223
+#: includes/class-alg-wc-custom-emails-core.php:226
 msgid "Subscription status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:224
+#: includes/class-alg-wc-custom-emails-core.php:227
 msgid "Subscription status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:226
+#: includes/class-alg-wc-custom-emails-core.php:229
 msgid "Renewal order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:227
+#: includes/class-alg-wc-custom-emails-core.php:230
 msgid "Renewal order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:228
+#: includes/class-alg-wc-custom-emails-core.php:231
 msgid "Renewal new order"
 msgstr ""
 
@@ -90,124 +93,124 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:77
-msgid "Your settings have been copied."
-msgstr ""
-
-#: includes/classes/class-alg-wc-custom-email.php:91
-#: includes/settings/class-alg-wc-custom-emails-settings.php:89
-msgid "Your settings have been reset."
-msgstr ""
-
-#: includes/classes/class-alg-wc-custom-email.php:131
-#, php-format
-msgid "%s: New order: different status."
-msgstr ""
-
-#: includes/classes/class-alg-wc-custom-email.php:140
-#: includes/classes/class-alg-wc-custom-email.php:149
-#: includes/classes/class-alg-wc-custom-email.php:155
-#: includes/classes/class-alg-wc-custom-email.php:163
-#: includes/classes/class-alg-wc-custom-email.php:169
-#: includes/classes/class-alg-wc-custom-email.php:177
-#: includes/classes/class-alg-wc-custom-email.php:183
-#: includes/classes/class-alg-wc-custom-email.php:191
-#: includes/classes/class-alg-wc-custom-email.php:197
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:82
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:98
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:114
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:130
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:146
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:162
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:178
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:194
+#: includes/classes/class-alg-wc-custom-email.php:141
 #, php-format
 msgid "%s: Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:141
-#: includes/settings/class-alg-wc-custom-email-settings.php:427
-msgid "Require WPML language"
-msgstr ""
-
-#: includes/classes/class-alg-wc-custom-email.php:150
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:83
 msgid "Require order product(s)"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:156
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:99
 msgid "Exclude order product(s)"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:164
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:115
 msgid "Require order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:170
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:131
 msgid "Exclude order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:178
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:147
 msgid "Require order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:184
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:163
 msgid "Exclude order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:192
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:179
 msgid "Minimum order amount"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:198
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:195
 msgid "Maximum order amount"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:321
+#: includes/classes/class-alg-wc-custom-email.php:78
+msgid "Your settings have been copied."
+msgstr ""
+
+#: includes/classes/class-alg-wc-custom-email.php:92
+#: includes/settings/class-alg-wc-custom-emails-settings.php:89
+msgid "Your settings have been reset."
+msgstr ""
+
+#: includes/classes/class-alg-wc-custom-email.php:132
+#, php-format
+msgid "%s: New order: different status."
+msgstr ""
+
+#: includes/classes/class-alg-wc-custom-email.php:142
+#: includes/settings/class-alg-wc-custom-email-settings.php:438
+msgid "Require WPML language"
+msgstr ""
+
+#: includes/classes/class-alg-wc-custom-email.php:203
 #, php-format
 msgid "%s: Triggered."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:325
+#: includes/classes/class-alg-wc-custom-email.php:207
 #, php-format
 msgid "%s: Disabled."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:334
+#: includes/classes/class-alg-wc-custom-email.php:216
 #, php-format
 msgid "%s: Delayed (%s): In %d seconds."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:359
+#: includes/classes/class-alg-wc-custom-email.php:241
 #, php-format
 msgid "%s: Order #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:378
+#: includes/classes/class-alg-wc-custom-email.php:260
 #, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:379
+#: includes/classes/class-alg-wc-custom-email.php:261
 #, php-format
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:397
+#: includes/classes/class-alg-wc-custom-email.php:279
 #, php-format
 msgid "%s: Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:398
+#: includes/classes/class-alg-wc-custom-email.php:280
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:398
+#: includes/classes/class-alg-wc-custom-email.php:280
 msgid "failed"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:63
+#: includes/pro/class-alg-wc-custom-emails-pro.php:64
 #, php-format
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:65
+#: includes/pro/class-alg-wc-custom-emails-pro.php:66
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:81
 msgid "settings"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:67
+#: includes/pro/class-alg-wc-custom-emails-pro.php:68
 #: includes/settings/class-alg-wc-custom-email-settings.php:36
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:52
 #, php-format
@@ -236,326 +239,351 @@ msgstr ""
 msgid "[%s] Order (%s) - %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:113
+#: includes/settings/class-alg-wc-custom-email-settings.php:115
 msgid "New order (Any status)"
-msgstr ""
-
-#: includes/settings/class-alg-wc-custom-email-settings.php:117
-#, php-format
-msgid "New order (%s)"
-msgstr ""
-
-#: includes/settings/class-alg-wc-custom-email-settings.php:118
-#, php-format
-msgid "Order status updated to %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-email-settings.php:119
 #, php-format
-msgid "Renewal new order (%s)"
+msgid "New order (%s)"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-email-settings.php:120
 #, php-format
+msgid "Order status updated to %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:121
+#, php-format
+msgid "Renewal new order (%s)"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:122
+#, php-format
 msgid "Renewal order status updated to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:124
+#: includes/settings/class-alg-wc-custom-email-settings.php:126
 #, php-format
 msgid "Order status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:125
+#: includes/settings/class-alg-wc-custom-email-settings.php:127
 #, php-format
 msgid "Renewal order status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:131
+#: includes/settings/class-alg-wc-custom-email-settings.php:134
 msgid "Reset password notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:132
+#: includes/settings/class-alg-wc-custom-email-settings.php:135
 msgid "Order fully refunded notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:133
+#: includes/settings/class-alg-wc-custom-email-settings.php:136
 msgid "Order partially refunded notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:134
+#: includes/settings/class-alg-wc-custom-email-settings.php:137
 msgid "New customer note notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:135
+#: includes/settings/class-alg-wc-custom-email-settings.php:138
 msgid "Low stock notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:136
+#: includes/settings/class-alg-wc-custom-email-settings.php:139
 msgid "No stock notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:137
+#: includes/settings/class-alg-wc-custom-email-settings.php:140
 msgid "Product on backorder notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:138
+#: includes/settings/class-alg-wc-custom-email-settings.php:141
 msgid "Created customer notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:145
+#: includes/settings/class-alg-wc-custom-email-settings.php:148
 #, php-format
 msgid "Subscription status updated to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:149
+#: includes/settings/class-alg-wc-custom-email-settings.php:152
 #, php-format
 msgid "Subscription status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:172
+#: includes/settings/class-alg-wc-custom-email-settings.php:178
 #, php-format
 msgid ""
 "You can use <a href=\"%s\" target=\"_blank\">shortcodes</a> and/or <span "
 "title=\"%s\" style=\"%s\">standard placeholders</span> here."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:243
+#: includes/settings/class-alg-wc-custom-email-settings.php:254
 #, php-format
 msgid "Product #%d"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:246
+#: includes/settings/class-alg-wc-custom-email-settings.php:257
 #, php-format
 msgid "User #%d"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:260
+#: includes/settings/class-alg-wc-custom-email-settings.php:271
 #, php-format
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:286
+#: includes/settings/class-alg-wc-custom-email-settings.php:297
 msgid "Select an email&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:312
+#: includes/settings/class-alg-wc-custom-email-settings.php:323
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:314
+#: includes/settings/class-alg-wc-custom-email-settings.php:325
 msgid "Enable this email notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:322
+#: includes/settings/class-alg-wc-custom-email-settings.php:333
 msgid "Triggers"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:326
+#: includes/settings/class-alg-wc-custom-email-settings.php:337
 msgid "Trigger(s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:332
+#: includes/settings/class-alg-wc-custom-email-settings.php:343
 msgid ""
 "Please note, that all <em>new orders</em> in WooCommerce by default are "
 "created with \"Pending payment\" status."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:336
+#: includes/settings/class-alg-wc-custom-email-settings.php:347
 msgid "Delay"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:344
+#: includes/settings/class-alg-wc-custom-email-settings.php:355
 msgid "Delay unit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:350
+#: includes/settings/class-alg-wc-custom-email-settings.php:361
 msgid "seconds"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:351
+#: includes/settings/class-alg-wc-custom-email-settings.php:362
 msgid "minutes"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:352
+#: includes/settings/class-alg-wc-custom-email-settings.php:363
 msgid "hours"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:353
+#: includes/settings/class-alg-wc-custom-email-settings.php:364
 msgid "days"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:354
+#: includes/settings/class-alg-wc-custom-email-settings.php:365
 msgid "weeks"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:364
+#: includes/settings/class-alg-wc-custom-email-settings.php:375
 msgid "Email Data"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:368
+#: includes/settings/class-alg-wc-custom-email-settings.php:379
 msgid "Recipient(s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:370
+#: includes/settings/class-alg-wc-custom-email-settings.php:381
 #, php-format
 msgid "Enter recipients (comma separated) for this email. Defaults to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:372
+#: includes/settings/class-alg-wc-custom-email-settings.php:383
 #, php-format
 msgid "Use %s for customer billing email."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:378
+#: includes/settings/class-alg-wc-custom-email-settings.php:389
 msgid "Subject"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:386
+#: includes/settings/class-alg-wc-custom-email-settings.php:397
 msgid "Email type"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:388
+#: includes/settings/class-alg-wc-custom-email-settings.php:399
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:395
+#: includes/settings/class-alg-wc-custom-email-settings.php:406
 msgid "WC email template"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:396
+#: includes/settings/class-alg-wc-custom-email-settings.php:407
 msgid "Wrap"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:401
+#: includes/settings/class-alg-wc-custom-email-settings.php:412
 msgid "Email heading"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:403
+#: includes/settings/class-alg-wc-custom-email-settings.php:414
 msgid ""
 "Used only if \"WC email template\" option is enabled and only for \"HTML\" "
 "email type."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:410
+#: includes/settings/class-alg-wc-custom-email-settings.php:421
 msgid "Email content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:412
+#: includes/settings/class-alg-wc-custom-email-settings.php:423
 msgid "Please make sure content is not empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:414
+#: includes/settings/class-alg-wc-custom-email-settings.php:425
 #, php-format
 msgid ""
 "You can test this email by opening some order's admin edit page, and "
 "selecting \"%s\" in \"Order actions\"."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:417
+#: includes/settings/class-alg-wc-custom-email-settings.php:428
 msgid "Default content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:433
+#: includes/settings/class-alg-wc-custom-email-settings.php:444
 msgid "Email will be sent only for selected current user languages."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:442
+#: includes/settings/class-alg-wc-custom-email-settings.php:453
 msgid "Order Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:444
+#: includes/settings/class-alg-wc-custom-email-settings.php:455
 msgid "Options are ignored for non-order emails."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:447
+#: includes/settings/class-alg-wc-custom-email-settings.php:458
 msgid "Require products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:452
-#: includes/settings/class-alg-wc-custom-email-settings.php:481
-#: includes/settings/class-alg-wc-custom-email-settings.php:501
+#: includes/settings/class-alg-wc-custom-email-settings.php:463
+#: includes/settings/class-alg-wc-custom-email-settings.php:492
+#: includes/settings/class-alg-wc-custom-email-settings.php:512
 msgid ""
 "Email will be sent only if there is at least one of the selected products in "
 "the order."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:455
-#: includes/settings/class-alg-wc-custom-email-settings.php:469
+#: includes/settings/class-alg-wc-custom-email-settings.php:466
+#: includes/settings/class-alg-wc-custom-email-settings.php:480
 msgid "Search for a product&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:461
+#: includes/settings/class-alg-wc-custom-email-settings.php:472
 msgid "Exclude products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:466
-#: includes/settings/class-alg-wc-custom-email-settings.php:491
-#: includes/settings/class-alg-wc-custom-email-settings.php:511
+#: includes/settings/class-alg-wc-custom-email-settings.php:477
+#: includes/settings/class-alg-wc-custom-email-settings.php:502
+#: includes/settings/class-alg-wc-custom-email-settings.php:522
 msgid ""
 "Email will NOT be sent if there is at least one of the selected products in "
 "the order."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:475
+#: includes/settings/class-alg-wc-custom-email-settings.php:486
 msgid "Require product categories"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:485
+#: includes/settings/class-alg-wc-custom-email-settings.php:496
 msgid "Exclude product categories"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:495
+#: includes/settings/class-alg-wc-custom-email-settings.php:506
 msgid "Require product tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:505
+#: includes/settings/class-alg-wc-custom-email-settings.php:516
 msgid "Exclude product tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:515
+#: includes/settings/class-alg-wc-custom-email-settings.php:526
 msgid "Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:520
+#: includes/settings/class-alg-wc-custom-email-settings.php:531
 msgid "Minimum order amount (subtotal) for email to be sent."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:524
+#: includes/settings/class-alg-wc-custom-email-settings.php:535
 msgid "Maximum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:529
+#: includes/settings/class-alg-wc-custom-email-settings.php:540
 msgid "Maximum order amount (subtotal) for email to be sent."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:537
+#: includes/settings/class-alg-wc-custom-email-settings.php:544
+msgid "Logical operator"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:558
 msgid "Admin Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:544
+#: includes/settings/class-alg-wc-custom-email-settings.php:562
+msgid "Admin actions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:563
+#, php-format
+msgid "This will add \"%s\" option to the selected positions."
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:570
+msgid "Edit order > Order actions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:571
+msgid "Orders > Bulk actions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:579
+msgid "Settings Tools"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-email-settings.php:586
 msgid "Copy settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:549
+#: includes/settings/class-alg-wc-custom-email-settings.php:591
 msgid "Select an email to copy settings from and save changes."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:550
+#: includes/settings/class-alg-wc-custom-email-settings.php:592
 msgid ""
 "Please note that there is no undo for this action. Your current email "
 "settings will be overwritten."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:556
+#: includes/settings/class-alg-wc-custom-email-settings.php:598
 msgid "Reset settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:558
+#: includes/settings/class-alg-wc-custom-email-settings.php:600
 #: includes/settings/class-alg-wc-custom-emails-settings.php:49
 msgid "Reset"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:559
+#: includes/settings/class-alg-wc-custom-email-settings.php:601
 #: includes/settings/class-alg-wc-custom-emails-settings.php:50
 msgid "Check the box and save changes to reset."
 msgstr ""
