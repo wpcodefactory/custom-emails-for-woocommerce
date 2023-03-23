@@ -53,6 +53,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 *
 	 * @version 1.7.0
 	 * @since   1.7.0
+	 *
+	 * @todo    [next] (dev) try to get *order* language (see `get_order_wpml_language()`)
 	 */
 	function translate( $atts, $content = '' ) {
 		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`

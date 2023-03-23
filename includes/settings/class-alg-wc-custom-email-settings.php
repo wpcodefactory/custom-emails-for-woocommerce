@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.9.0
+ * @version 1.9.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -304,7 +304,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.1
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -435,13 +435,14 @@ class Alg_WC_Custom_Email_Settings {
 		if ( $wpml_active_languages ) {
 			$fields = array_merge( $fields, array(
 				'required_wpml_languages' => array(
-					'title'       => __( 'Require WPML language', 'custom-emails-for-woocommerce' ),
+					'title'       => __( 'WPML/Polylang language', 'custom-emails-for-woocommerce' ),
 					'type'        => 'multiselect',
 					'class'       => 'chosen_select',
 					'placeholder' => '',
 					'default'     => array(),
 					'options'     => wp_list_pluck( $wpml_active_languages, 'native_name' ),
-					'desc_tip'    => __( 'Email will be sent only for selected current user languages.', 'custom-emails-for-woocommerce' ),
+					'desc_tip'    => __( 'Require WPML/Polylang language.', 'custom-emails-for-woocommerce' ) . ' ' .
+						__( 'Email will be sent only for selected current user languages.', 'custom-emails-for-woocommerce' ),
 					'css'         => 'width:100%;',
 				),
 			) );

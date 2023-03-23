@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,12 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 1.9.1 - 23/03/2023 =
+* Dev - WPML/Polylang language - Order language detection algorithm improved.
+* Dev - WPML/Polylang language - Admin option renamed (was "Require WPML language").
+* Dev - WPML/Polylang language - Code moved to the `Alg_WC_Custom_Email_Order_Validator` class.
+* WC tested up to: 7.5.
 
 = 1.9.0 - 08/03/2023 =
 * Dev - Admin Options - Admin actions - "Orders > Preview" option added.

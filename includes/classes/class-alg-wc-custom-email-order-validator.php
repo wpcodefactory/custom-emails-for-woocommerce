@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 1.9.0
+ * @version 1.9.1
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -27,11 +27,29 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 1.8.0
+	 * @version 1.9.1
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
 
+		// Check filter
+		if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: New order: different status.', 'custom-emails-for-woocommerce' ),
+				$this->email->title ) );
+			return false;
+		}
+
+		// WPML/Polylang language
+		if ( apply_filters( 'wpml_active_languages', null ) ) {
+			$required_wpml_languages = $this->email->get_option( 'required_wpml_languages', array() );
+			if ( ! empty( $required_wpml_languages ) && ! in_array( $this->get_order_wpml_language( $order ), $required_wpml_languages ) ) {
+				alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title, __( 'Require WPML language', 'custom-emails-for-woocommerce' ) ) );
+				return false;
+			}
+		}
+
+		// Order options
 		$checks = array(
 			'required_products',
 			'excluded_products',
@@ -68,6 +86,86 @@ class Alg_WC_Custom_Email_Order_Validator {
 
 		}
 
+	}
+
+	/**
+	 * get_order_wpml_language.
+	 *
+	 * @version 1.9.1
+	 * @since   1.9.1
+	 *
+	 * @see     https://wpml.org/faq/how-to-get-current-language-with-wpml/
+	 * @see     https://wpml.org/wpml-hook/wpml_active_languages/
+	 * @see     https://polylang.pro/doc/function-reference/
+	 *
+	 * @todo    [maybe] (dev) `ICL_LANGUAGE_CODE`?
+	 */
+	function get_order_wpml_language( $order ) {
+
+		// WPML order language (meta)
+		if ( ( $lang = $order->get_meta( 'wpml_language' ) ) ) {
+			return $lang;
+		}
+
+		// Polylang order language (term)
+		$terms = get_the_terms( $order->get_id(), 'language' );
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				if ( ! empty( $term->slug ) ) {
+					return $term->slug;
+				}
+			}
+		}
+
+		// WPML current language
+		if ( ( $lang = apply_filters( 'wpml_current_language', null ) ) ) {
+			return $lang;
+		}
+
+		// Polylang current language
+		if ( function_exists( 'pll_current_language' ) && ( $lang = pll_current_language() ) ) {
+			return $lang;
+		}
+
+		// WPML language in `$_REQUEST`
+		if ( ! empty( $_REQUEST['meta'] ) && is_array( $_REQUEST['meta'] ) ) {
+			foreach ( $_REQUEST['meta'] as $meta ) {
+				if ( isset( $meta['key'] ) && 'wpml_language' === $meta['key'] && ! empty( $meta['value'] ) ) {
+					return wc_clean( $meta['value'] );
+				}
+			}
+		}
+
+		// Polylang language in `$_REQUEST`
+		if ( ! empty( $_REQUEST['post_lang_choice'] ) ) {
+			return wc_clean( $_REQUEST['post_lang_choice'] );
+		}
+
+		// No results
+		return false;
+
+	}
+
+	/**
+	 * check_new_order_status.
+	 *
+	 * @version 1.9.1
+	 * @since   1.0.0
+	 */
+	function check_new_order_status( $order ) {
+		$triggers = $this->email->get_option( 'trigger' );
+		if ( in_array( 'woocommerce_new_order_notification_alg_wc_ce_any', $triggers ) ) {
+			return true;
+		}
+		foreach ( $triggers as $trigger ) {
+			if ( false !== ( $pos = strpos( $trigger, 'woocommerce_new_order_notification_' ) ) ) {
+				$status = 'wc-' . substr( $trigger, 35 );
+				if ( $order->has_status( $status ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**

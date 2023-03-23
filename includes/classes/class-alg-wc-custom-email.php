@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.8.0
+ * @version 1.9.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -117,61 +117,6 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
-	 * validate_order.
-	 *
-	 * @version 1.8.0
-	 * @since   1.6.0
-	 *
-	 * @see     https://wpml.org/faq/how-to-get-current-language-with-wpml/
-	 * @see     https://wpml.org/wpml-hook/wpml_active_languages/
-	 */
-	function validate_order( $order ) {
-
-		// Check filter
-		if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: New order: different status.', 'custom-emails-for-woocommerce' ),
-				$this->title ) );
-			return false;
-		}
-
-		// Language
-		if ( apply_filters( 'wpml_active_languages', null ) ) {
-			$required_wpml_languages = $this->get_option( 'required_wpml_languages', array() );
-			if ( ! empty( $required_wpml_languages ) && ! in_array( apply_filters( 'wpml_current_language', null ), $required_wpml_languages ) ) {
-				alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-					$this->title, __( 'Require WPML language', 'custom-emails-for-woocommerce' ) ) );
-				return false;
-			}
-		}
-
-		// Validate order
-		return $this->order_validator->validate( $order );
-
-	}
-
-	/**
-	 * check_new_order_status.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function check_new_order_status( $order ) {
-		$triggers = $this->get_option( 'trigger' );
-		if ( in_array( 'woocommerce_new_order_notification_alg_wc_ce_any', $triggers ) ) {
-			return true;
-		}
-		foreach ( $triggers as $trigger ) {
-			if ( false !== ( $pos = strpos( $trigger, 'woocommerce_new_order_notification_' ) ) ) {
-				$status = 'wc-' . substr( $trigger, 35 );
-				if ( $order->has_status( $status ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * trigger.
 	 *
 	 * @version 1.3.0
@@ -184,7 +129,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * send_email.
 	 *
-	 * @version 1.6.0
+	 * @version 1.9.1
 	 * @since   1.3.0
 	 *
 	 * @todo    [next] [!] (dev) block (by products, amounts, etc.) only if it's not sent manually
@@ -241,7 +186,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 					alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Order #%s.', 'custom-emails-for-woocommerce' ), $this->title, $order->get_id() ) );
 
 					// Validate order
-					if ( ! $this->validate_order( $order ) ) {
+					if ( ! $this->order_validator->validate( $order ) ) {
 						return;
 					}
 
