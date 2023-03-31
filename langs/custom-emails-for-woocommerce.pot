@@ -49,47 +49,47 @@ msgstr ""
 msgid "delayed"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:220
+#: includes/class-alg-wc-custom-emails-core.php:232
 msgid "Order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:221
+#: includes/class-alg-wc-custom-emails-core.php:233
 msgid "Order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:222
+#: includes/class-alg-wc-custom-emails-core.php:234
 msgid "New order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:224
+#: includes/class-alg-wc-custom-emails-core.php:236
 msgid "Extra"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:226
-#: includes/class-alg-wc-custom-emails-core.php:227
-#: includes/class-alg-wc-custom-emails-core.php:229
-#: includes/class-alg-wc-custom-emails-core.php:230
-#: includes/class-alg-wc-custom-emails-core.php:231
+#: includes/class-alg-wc-custom-emails-core.php:238
+#: includes/class-alg-wc-custom-emails-core.php:239
+#: includes/class-alg-wc-custom-emails-core.php:241
+#: includes/class-alg-wc-custom-emails-core.php:242
+#: includes/class-alg-wc-custom-emails-core.php:243
 msgid "Subscriptions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:226
+#: includes/class-alg-wc-custom-emails-core.php:238
 msgid "Subscription status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:227
+#: includes/class-alg-wc-custom-emails-core.php:239
 msgid "Subscription status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:229
+#: includes/class-alg-wc-custom-emails-core.php:241
 msgid "Renewal order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:230
+#: includes/class-alg-wc-custom-emails-core.php:242
 msgid "Renewal order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:231
+#: includes/class-alg-wc-custom-emails-core.php:243
 msgid "Renewal new order"
 msgstr ""
 

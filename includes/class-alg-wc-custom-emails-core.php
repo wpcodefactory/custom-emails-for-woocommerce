@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 1.8.0
+ * @version 1.9.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -152,26 +152,38 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * process_content.
 	 *
-	 * @version 1.3.1
+	 * @version 1.9.3
 	 * @since   1.0.0
 	 */
-	function process_content( $content, $placeholders, $order, $user ) {
+	function process_content( $content, $placeholders, $order, $user, $email ) {
+
 		// Placeholders
 		$content = str_replace( array_keys( $placeholders ), $placeholders, $content );
+
 		// Shortcodes
 		$this->shortcodes->order = false;
 		$this->shortcodes->user  = false;
+		$this->shortcodes->email = false;
+
+		if ( is_a( $email, 'WC_Email' ) ) {
+			$this->shortcodes->email = $email;
+		}
 		if ( is_a( $order, 'WC_Order' ) ) {
 			$this->shortcodes->order = $order;
 		}
 		if ( is_a( $user, 'WP_User' ) ) {
 			$this->shortcodes->user = $user;
 		}
+
 		$content = do_shortcode( $content );
+
 		$this->shortcodes->order = false;
 		$this->shortcodes->user  = false;
+		$this->shortcodes->email = false;
+
 		// Final content
 		return $content;
+
 	}
 
 	/**

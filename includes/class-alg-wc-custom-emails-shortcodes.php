@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 1.8.0
+ * @version 1.9.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -310,18 +310,18 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * order_details.
 	 *
-	 * @version 1.5.4
+	 * @version 1.9.3
 	 * @since   1.0.0
 	 */
 	function order_details( $atts, $content = '' ) {
-		if ( ! $this->order ) {
+		if ( ! $this->order || ! $this->email ) {
 			return '';
 		}
 		$sent_to_admin = ( isset( $atts['sent_to_admin'] ) && filter_var( $atts['sent_to_admin'], FILTER_VALIDATE_BOOLEAN ) );
 		$plain_text    = ( isset( $atts['plain_text'] )    && filter_var( $atts['plain_text'],    FILTER_VALIDATE_BOOLEAN ) );
 		$wc_emails     = WC_Emails::instance();
 		ob_start();
-		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text );
+		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text, $this->email );
 		return $this->return_shortcode( ob_get_clean(), $atts );
 	}
 
