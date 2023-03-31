@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.9.1
+ * @version 1.9.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -224,6 +224,24 @@ class Alg_WC_Custom_Email extends WC_Email {
 		alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Sent: %s', 'custom-emails-for-woocommerce' ),
 			$this->title, ( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
 
+	}
+
+	/**
+	 * Get email attachments.
+	 *
+	 * @version 1.9.2
+	 * @since   1.9.2
+	 *
+	 * @return  array
+	 */
+	function get_attachments() {
+		$attachments     = array();
+		$raw_attachments = $this->get_option( 'attachments', '' );
+		$raw_attachments = array_map( 'trim', explode( PHP_EOL, $raw_attachments ) );
+		foreach ( $raw_attachments as $attachment ) {
+			$attachments[] = ABSPATH . $attachment;
+		}
+		return apply_filters( 'woocommerce_email_attachments', $attachments, $this->id, $this->object, $this );
 	}
 
 	/**

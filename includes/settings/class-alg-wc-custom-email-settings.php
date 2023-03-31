@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.9.1
+ * @version 1.9.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -304,7 +304,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.9.1
+	 * @version 1.9.2
 	 * @since   1.0.0
 	 *
 	 * @todo    [next] (feature) "Custom trigger(s)"
@@ -430,6 +430,15 @@ class Alg_WC_Custom_Email_Settings {
 				'placeholder' => '',
 				'default'     => $this->get_default_content(),
 				'css'         => 'width:100%;height:500px;',
+			),
+			'attachments' => array(
+				'title'       => __( 'Email attachments', 'custom-emails-for-woocommerce' ),
+				'type'        => 'textarea',
+				'description' => sprintf( __( 'File paths in %s, e.g.: %s', 'custom-emails-for-woocommerce' ),
+					'<code>' . ABSPATH . '</code>', '<code>' . 'wp-content/uploads/example.pdf' . '</code>' ),
+				'desc_tip'    => __( 'One file path per line.', 'custom-emails-for-woocommerce' ),
+				'default'     => '',
+				'css'         => 'width:100%;height:200px;',
 			),
 		) );
 		if ( $wpml_active_languages ) {
