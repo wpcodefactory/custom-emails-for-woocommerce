@@ -20,7 +20,7 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 1.3.1
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
+	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
 	 */
 	function __construct() {
 		// Core
@@ -69,7 +69,7 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 1.4.1
 	 * @since   1.3.0
 	 *
-	 * @todo    [next] (dev) better debug info
+	 * @todo    (dev) better debug info
 	 */
 	function send_delayed_email( $email, $object_id ) {
 		$this->debug( sprintf( esc_html__( '%s: Sending delayed email.', 'custom-emails-for-woocommerce' ), $email ) );
@@ -82,7 +82,7 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 1.3.0
 	 * @since   1.3.0
 	 *
-	 * @todo    [next] (dev) what's with `WC()->payment_gateways()` and `WC()->shipping()`?
+	 * @todo    (dev) what's with `WC()->payment_gateways()` and `WC()->shipping()`?
 	 */
 	function send_email( $email, $object_id, $note = '' ) {
 		WC()->payment_gateways();
@@ -98,7 +98,7 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 1.5.3
 	 * @since   1.0.0
 	 *
-	 * @todo    [next] [!] (dev) maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
+	 * @todo    (dev) [!] maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
 	 */
 	function add_custom_email_trigger_actions( $email_actions ) {
 
@@ -223,8 +223,8 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 1.5.3
 	 * @since   1.5.0
 	 *
-	 * @todo    [next] [!] (dev) add `subscription_status` and `subscription_status_change` to the default value || remove this option entirely?
-	 * @todo    [next] [!] (feature) `_switch_notification`
+	 * @todo    (dev) [!] add `subscription_status` and `subscription_status_change` to the default value || remove this option entirely?
+	 * @todo    (feature) [!] `_switch_notification`
 	 */
 	function get_trigger_groups() {
 		return array(

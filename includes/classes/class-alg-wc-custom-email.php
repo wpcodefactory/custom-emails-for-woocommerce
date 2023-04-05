@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.9.3
+ * @version 1.9.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -60,7 +60,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @version 1.8.0
 	 * @since   1.7.2
 	 *
-	 * @todo    [maybe] (dev) move this to another class/file?
+	 * @todo    (dev) move this to another class/file?
 	 */
 	function admin_settings_tools() {
 
@@ -129,18 +129,18 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * send_email.
 	 *
-	 * @version 1.9.1
+	 * @version 1.9.5
 	 * @since   1.3.0
 	 *
-	 * @todo    [next] [!] (dev) block (by products, amounts, etc.) only if it's not sent manually
-	 * @todo    [next] (dev) "Order note": add "email delayed until..." note
-	 * @todo    [next] (dev) "Order note": better description
-	 * @todo    [next] (dev) `delay`: better debug info
-	 * @todo    [next] (dev) `delay`: `wp_next_scheduled()`?
-	 * @todo    [next] (dev) `delay`: add `current_filter()` to the args?
-	 * @todo    [next] (dev) `$this->object = $user;`?
-	 * @todo    [next] (dev) check if it's already sent for the current `$object_id`?
-	 * @todo    [next] (dev) `debug`: add more info?
+	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
+	 * @todo    (dev) "Order note": add "email delayed until..." note
+	 * @todo    (dev) "Order note": better description
+	 * @todo    (dev) `delay`: better debug info
+	 * @todo    (dev) `delay`: `wp_next_scheduled()`?
+	 * @todo    (dev) `delay`: add `current_filter()` to the args?
+	 * @todo    (dev) `$this->object = $user;`?
+	 * @todo    (dev) check if it's already sent for the current `$object_id`?
+	 * @todo    (dev) `debug`: add more info?
 	 */
 	function send_email( $object_id, $do_force_send, $note = '' ) {
 
@@ -212,17 +212,21 @@ class Alg_WC_Custom_Email extends WC_Email {
 		}
 
 		// Send
-		$res = $this->send(
-			$this->get_recipient(),
-			$this->get_processed_subject( $order, $user ),
-			$this->get_processed_content( $order, $user ),
-			$this->get_headers(),
-			$this->get_attachments()
-		);
+		if ( apply_filters( 'alg_wc_custom_emails_do_send', true, $this ) ) {
 
-		// Debug
-		alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Sent: %s', 'custom-emails-for-woocommerce' ),
-			$this->title, ( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
+			$res = $this->send(
+				$this->get_recipient(),
+				$this->get_processed_subject( $order, $user ),
+				$this->get_processed_content( $order, $user ),
+				$this->get_headers(),
+				$this->get_attachments()
+			);
+
+			// Debug
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Sent: %s', 'custom-emails-for-woocommerce' ),
+				$this->title, ( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
+
+		}
 
 	}
 
@@ -260,7 +264,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @version 1.9.3
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] optional `wpautop()`
+	 * @todo    (dev) optional `wpautop()`
 	 */
 	function get_processed_content( $order, $user ) {
 		return alg_wc_custom_emails()->core->process_content( $this->get_content(), $this->placeholders, $order, $user, $this );

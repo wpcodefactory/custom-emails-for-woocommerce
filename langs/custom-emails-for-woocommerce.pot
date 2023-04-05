@@ -1,22 +1,34 @@
-#: includes/class-alg-wc-custom-emails-admin.php:101
+#: includes/class-alg-wc-custom-emails-admin.php:73
+msgid "Are you sure?"
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:96
+msgid "Invalid user role."
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:100
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails-admin.php:160
 #: includes/pro/class-alg-wc-custom-emails-pro.php:184
 msgid "bulk actions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:119
+#: includes/class-alg-wc-custom-emails-admin.php:178
 #, php-format
 msgid "Emails: \"%s\" sent for %d orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:143
+#: includes/class-alg-wc-custom-emails-admin.php:202
 #: includes/pro/class-alg-wc-custom-emails-pro.php:199
 msgid "manually"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:154
-#: includes/class-alg-wc-custom-emails-admin.php:168
-#: includes/class-alg-wc-custom-emails-admin.php:230
-#: includes/class-alg-wc-custom-emails-admin.php:280
+#: includes/class-alg-wc-custom-emails-admin.php:213
+#: includes/class-alg-wc-custom-emails-admin.php:227
+#: includes/class-alg-wc-custom-emails-admin.php:289
+#: includes/class-alg-wc-custom-emails-admin.php:339
 #: includes/pro/class-alg-wc-custom-emails-pro.php:137
 #: includes/pro/class-alg-wc-custom-emails-pro.php:165
 #: includes/pro/class-alg-wc-custom-emails-pro.php:212
@@ -27,16 +39,16 @@ msgstr ""
 msgid "Send email: %s"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:191
-#: includes/class-alg-wc-custom-emails-admin.php:254
+#: includes/class-alg-wc-custom-emails-admin.php:250
+#: includes/class-alg-wc-custom-emails-admin.php:313
 msgid "Link has expired."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:194
+#: includes/class-alg-wc-custom-emails-admin.php:253
 msgid "order actions column"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:257
+#: includes/class-alg-wc-custom-emails-admin.php:316
 msgid "order preview"
 msgstr ""
 
@@ -203,16 +215,16 @@ msgstr ""
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:224
+#: includes/classes/class-alg-wc-custom-email.php:226
 #, php-format
 msgid "%s: Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:225
+#: includes/classes/class-alg-wc-custom-email.php:227
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:225
+#: includes/classes/class-alg-wc-custom-email.php:227
 msgid "failed"
 msgstr ""
 
@@ -228,14 +240,14 @@ msgstr ""
 
 #: includes/pro/class-alg-wc-custom-emails-pro.php:70
 #: includes/settings/class-alg-wc-custom-email-settings.php:36
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:52
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:75
 #, php-format
 msgid "Custom email #%d"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-email-settings.php:36
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:83
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:52
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:75
 msgid "Custom email"
 msgstr ""
 
@@ -711,36 +723,40 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:61
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:42
+msgid "Delete"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:91
 msgid "No scheduled emails found."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:64
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:97
 msgid "Email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:65
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:98
 msgid "Date"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:66
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:99
 msgid "Object ID"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:66
-msgid "E.g. order ID."
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:99
+msgid "E.g., order ID."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:70
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:104
 msgid "Refresh list"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:71
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:105
 #, php-format
 msgid "Current time: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:83
+#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:120
 msgid "Scheduled Emails"
 msgstr ""
 

@@ -20,9 +20,9 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] not order related (e.g. customer; product)
-	 * @todo    [later] `[order_total_in_words]`
-	 * @todo    [maybe] maybe use more general shortcodes (e.g. `[order]`) instead? or even more general (e.g. `[prop]`)?
+	 * @todo    (dev) not order related (e.g., customer; product)
+	 * @todo    (dev) `[order_total_in_words]`
+	 * @todo    (dev) maybe use more general shortcodes (e.g., `[order]`) instead? or even more general (e.g., `[prop]`)?
 	 */
 	function __construct() {
 		add_shortcode( 'if',                         array( $this, 'if' ) );
@@ -54,7 +54,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.7.0
 	 * @since   1.7.0
 	 *
-	 * @todo    [next] (dev) try to get *order* language (see `get_order_wpml_language()`)
+	 * @todo    (dev) try to get *order* language (see `get_order_wpml_language()`)
 	 */
 	function translate( $atts, $content = '' ) {
 		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
@@ -75,10 +75,10 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.7.2
 	 * @since   1.1.0
 	 *
-	 * @todo    [next] (dev) generate coupon from *order*
-	 * @todo    [next] (dev) more `$atts`, e.g. `discount_type`
-	 * @todo    [next] (dev) optional `customer_email`
-	 * @todo    [next] (dev) optional `first_name` in coupon code
+	 * @todo    (dev) generate coupon from *order*
+	 * @todo    (dev) more `$atts`, e.g. `discount_type`
+	 * @todo    (dev) optional `customer_email`
+	 * @todo    (dev) optional `first_name` in coupon code
 	 */
 	function generate_coupon_code( $atts, $content = '' ) {
 		if ( ! $this->user || ! isset( $atts['amount'] ) ) {
@@ -135,9 +135,9 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.5.0
 	 * @since   1.5.0
 	 *
-	 * @todo    [next] (feature) optionally `$product->get_formatted_name()`
-	 * @todo    [next] (feature) customizable sep
-	 * @todo    [next] (feature) `[order_item_props]`
+	 * @todo    (feature) optionally `$product->get_formatted_name()`
+	 * @todo    (feature) customizable sep
+	 * @todo    (feature) `[order_item_props]`
 	 */
 	function order_item_names( $atts, $content = '' ) {
 		if ( ! $this->order ) {
@@ -370,7 +370,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] add (optional) function args
+	 * @todo    (dev) add (optional) function args
 	 */
 	function order_func( $atts, $content = '' ) {
 		if ( ! $this->order || ! isset( $atts['func'] ) || ! is_callable( array( $this->order, $atts['func'] ) ) ) {
@@ -416,7 +416,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [maybe] more common atts, e.g. find/replace, strip_tags, any_func, etc.
+	 * @todo    (dev) more common atts, e.g. find/replace, strip_tags, any_func, etc.
 	 */
 	function return_shortcode( $value, $atts ) {
 		if ( is_numeric( $value ) ) {

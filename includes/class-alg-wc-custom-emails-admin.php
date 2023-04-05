@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 1.9.4
+ * @version 1.9.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.5
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -30,27 +30,86 @@ class Alg_WC_Custom_Emails_Admin {
 			add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
 
 			// Orders > Bulk actions (dropdown)
-			add_filter( 'bulk_actions-edit-shop_order',                      array( $this, 'add_order_actions_bulk' ), 20, 1 );
-			add_filter( 'handle_bulk_actions-edit-shop_order',               array( $this, 'do_order_actions_bulk' ), 10, 3 );
-			add_action( 'admin_notices',                                     array( $this, 'bulk_action_admin_notice' ) );
+			add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_actions_bulk' ), 20, 1 );
+			add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'do_order_actions_bulk' ), 10, 3 );
+			add_action( 'admin_notices',                       array( $this, 'bulk_action_admin_notice' ) );
 
 			// Orders > Preview
-			add_filter( 'woocommerce_admin_order_preview_actions',           array( $this, 'add_order_actions_preview' ), 10, 2 );
-			add_filter( 'admin_init',                                        array( $this, 'do_order_actions_preview' ) );
+			add_filter( 'woocommerce_admin_order_preview_actions', array( $this, 'add_order_actions_preview' ), 10, 2 );
+			add_filter( 'admin_init',                              array( $this, 'do_order_actions_preview' ) );
 
 			// Orders > Actions (column)
-			add_filter( 'woocommerce_admin_order_actions',                   array( $this, 'add_order_actions_column' ), 10, 2 );
-			add_filter( 'admin_init',                                        array( $this, 'do_order_actions_column' ) );
-			add_action( 'admin_footer',                                      array( $this, 'order_actions_column_icon_style' ) );
+			add_filter( 'woocommerce_admin_order_actions', array( $this, 'add_order_actions_column' ), 10, 2 );
+			add_filter( 'admin_init',                      array( $this, 'do_order_actions_column' ) );
+			add_action( 'admin_footer',                    array( $this, 'order_actions_column_icon_style' ) );
 
 			// Content template script
-			add_action( 'admin_footer',                                      array( $this, 'add_content_template_script' ) );
+			add_action( 'admin_footer', array( $this, 'add_content_template_script' ) );
 
 		}
+
+		// Unschedule email
+		add_action( 'wp_loaded',    array( $this, 'unschedule_email' ) );
+		add_action( 'admin_footer', array( $this, 'unschedule_email_confirm_js' ) );
 
 		// Admin core loaded
 		do_action( 'alg_wc_custom_emails_admin_core_loaded', $this );
 
+	}
+
+	/**
+	 * unschedule_email_confirm_js.
+	 *
+	 * @version 1.9.5
+	 * @since   1.9.5
+	 *
+	 * @todo    (dev) load only on `page=wc-settings&tab=alg_wc_custom_emails&section=scheduled`
+	 * @todo    (dev) `#content`?
+	 */
+	function unschedule_email_confirm_js() {
+		?><script>
+			jQuery( document ).ready( function () {
+				jQuery( '.alg-wc-custom-emails-unschedule' ).on( 'click', function ( e ) {
+					if ( confirm( <?php echo "'" . esc_html__( 'Are you sure?', 'custom-emails-for-woocommerce' ) . "'"; ?> ) ) {
+						var url = jQuery( this ).attr( 'href' );
+						jQuery( '#content' ).load( url );
+					} else {
+						e.preventDefault();
+					}
+				} );
+			} );
+		</script><?php
+	}
+
+	/**
+	 * unschedule_email.
+	 *
+	 * @version 1.9.5
+	 * @since   1.9.5
+	 *
+	 * @todo    (dev) add success/error notice
+	 */
+	function unschedule_email() {
+		if ( isset( $_REQUEST['alg_wc_ce_unschedule'], $_REQUEST['alg_wc_ce_unschedule_object_id'], $_REQUEST['alg_wc_ce_unschedule_time'], $_REQUEST['_wpnonce'] ) ) {
+
+			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+				wp_die( esc_html__( 'Invalid user role.', 'custom-emails-for-woocommerce' ) );
+			}
+
+			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'] ) ) {
+				wp_die( esc_html__( 'Invalid nonce.', 'custom-emails-for-woocommerce' ) );
+			}
+
+			$class     = wc_clean( $_REQUEST['alg_wc_ce_unschedule'] );
+			$object_id = intval( $_REQUEST['alg_wc_ce_unschedule_object_id'] );
+			$time      = intval( $_REQUEST['alg_wc_ce_unschedule_time'] );
+
+			wp_unschedule_event( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+
+			wp_safe_redirect( remove_query_arg( array( 'alg_wc_ce_unschedule', 'alg_wc_ce_unschedule_object_id', 'alg_wc_ce_unschedule_time', '_wpnonce' ) ) );
+			exit;
+
+		}
 	}
 
 	/**
@@ -59,8 +118,8 @@ class Alg_WC_Custom_Emails_Admin {
 	 * @version 1.4.1
 	 * @since   1.3.1
 	 *
-	 * @todo    [next] (dev) more templates
-	 * @todo    [next] (dev) move this to a separate JS file?
+	 * @todo    (dev) more templates
+	 * @todo    (dev) move this to a separate JS file?
 	 */
 	function add_content_template_script() {
 		if (
@@ -127,7 +186,7 @@ class Alg_WC_Custom_Emails_Admin {
 	 * @version 1.3.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [next] (dev) remove this?
+	 * @todo    (dev) remove this?
 	 */
 	function send_order_email( $email, $order, $note ) {
 		alg_wc_custom_emails()->core->send_email( $email, $order->get_id(), $note );
@@ -179,7 +238,7 @@ class Alg_WC_Custom_Emails_Admin {
 	 *
 	 * @see     https://wordpress.stackexchange.com/questions/256513/should-nonce-be-sanitized
 	 *
-	 * @todo    [next] (dev) merge with `do_order_actions_preview()`?
+	 * @todo    (dev) merge with `do_order_actions_preview()`?
 	 */
 	function do_order_actions_column() {
 		if (
@@ -266,7 +325,7 @@ class Alg_WC_Custom_Emails_Admin {
 	 * @version 1.9.0
 	 * @since   1.9.0
 	 *
-	 * @todo    [next] (dev) better `url`
+	 * @todo    (dev) better `url`
 	 */
 	function add_order_actions_preview( $actions, $order ) {
 		if ( $this->do_add_admin_action( 'Alg_WC_Custom_Email', 'order_actions_preview' ) ) {

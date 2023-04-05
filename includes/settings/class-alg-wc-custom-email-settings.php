@@ -42,7 +42,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] customizable description (similar as it is now with title)
+	 * @todo    (dev) customizable description (similar as it is now with title)
 	 */
 	function get_description( $id = 1 ) {
 		return __( 'Custom emails are sent to the recipient list when selected triggers are called.', 'custom-emails-for-woocommerce' );
@@ -74,7 +74,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] better default content (include more shortcodes, e.g. `[clear]`, `[if]` etc.)
+	 * @todo    (dev) better default content (include more shortcodes, e.g. `[clear]`, `[if]` etc.)
 	 */
 	function get_default_content() {
 		return '[order_details]' . PHP_EOL .
@@ -92,9 +92,9 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.5.3
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] (dev) `renewal`: are we sure all of them exist?
-	 * @todo    [later] (dev) `renewal`: `woocommerce_new_order_renewal_notification_alg_wc_ce_any`?
-	 * @todo    [maybe] (dev) `renewal`: only add if `WC_Subscriptions` class exist?
+	 * @todo    (dev) `renewal`: are we sure all of them exist?
+	 * @todo    (dev) `renewal`: `woocommerce_new_order_renewal_notification_alg_wc_ce_any`?
+	 * @todo    (dev) `renewal`: only add if `WC_Subscriptions` class exist?
 	 */
 	function get_triggers() {
 
@@ -185,9 +185,9 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.8.0
 	 * @since   1.6.0
 	 *
-	 * @todo    [next] (dev) WPML
-	 * @todo    [maybe] (dev) replace this with AJAX
-	 * @todo    [maybe] (dev) add term ID to the title in the output?
+	 * @todo    (dev) WPML
+	 * @todo    (dev) replace this with AJAX
+	 * @todo    (dev) add term ID to the title in the output?
 	 */
 	function get_terms( $taxonomy ) {
 		if ( ! isset( $this->terms[ $taxonomy ] ) ) {
@@ -207,7 +207,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1569
 	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1681
 	 *
-	 * @todo    [later] (dev) `customer`: add `guest` (check the "Order Status Rules" plugin)
+	 * @todo    (dev) `customer`: add `guest` (check the "Order Status Rules" plugin)
 	 */
 	function get_ajax_options( $type, $email, $option, $key = false ) {
 		$options = array();
@@ -307,12 +307,12 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.9.2
 	 * @since   1.0.0
 	 *
-	 * @todo    [next] (feature) "Custom trigger(s)"
-	 * @todo    [next] (feature) `cc` and `bcc`
-	 * @todo    [next] (desc) `delay`: better desc
-	 * @todo    [next] (dev) add sections, e.g. "Conditions"
-	 * @todo    [maybe] (dev) replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
-	 * @todo    [maybe] (feature) separate option for plain content
+	 * @todo    (feature) "Custom trigger(s)"
+	 * @todo    (feature) `cc` and `bcc`
+	 * @todo    (desc) `delay`: better desc
+	 * @todo    (dev) add sections, e.g. "Conditions"
+	 * @todo    (dev) replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
+	 * @todo    (feature) separate option for plain content
 	 */
 	function get_form_fields( $email ) {
 		$fields = array();

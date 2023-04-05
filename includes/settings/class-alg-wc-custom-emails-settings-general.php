@@ -32,10 +32,10 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	 * @version 1.5.1
 	 * @since   1.0.0
 	 *
-	 * @todo    [later] (desc) `alg_wc_custom_emails_enabled_trigger_groups`
-	 * @todo    [maybe] (dev) `alg_wc_custom_emails_titles`: move to the email settings?
-	 * @todo    [maybe] (dev) `alg_wc_custom_emails_titles`: icon for settings (e.g. `<span class="dashicons dashicons-admin-settings"></span>`)?
-	 * @todo    [maybe] (desc) `alg_wc_custom_emails_total`: better desc?
+	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
+	 * @todo    (dev) `alg_wc_custom_emails_titles`: move to the email settings?
+	 * @todo    (dev) `alg_wc_custom_emails_titles`: icon for settings (e.g. `<span class="dashicons dashicons-admin-settings"></span>`)?
+	 * @todo    (desc) `alg_wc_custom_emails_total`: better desc?
 	 */
 	function get_settings() {
 

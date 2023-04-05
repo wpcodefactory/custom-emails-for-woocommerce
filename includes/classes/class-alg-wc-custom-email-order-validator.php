@@ -98,7 +98,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 * @see     https://wpml.org/wpml-hook/wpml_active_languages/
 	 * @see     https://polylang.pro/doc/function-reference/
 	 *
-	 * @todo    [maybe] (dev) `ICL_LANGUAGE_CODE`?
+	 * @todo    (dev) `ICL_LANGUAGE_CODE`?
 	 */
 	function get_order_wpml_language( $order ) {
 
@@ -302,7 +302,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 * @version 1.2.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [next] (feature) "require all products" (i.e., vs "require at least one")?
+	 * @todo    (feature) "require all products" (i.e., vs "require at least one")?
 	 */
 	function check_order_products( $order, $product_ids ) {
 		foreach ( $order->get_items() as $item ) {
@@ -319,8 +319,8 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 * @version 1.9.0
 	 * @since   1.6.0
 	 *
-	 * @todo    [next] (feature) custom taxonomies
-	 * @todo    [next] (feature) "require all" (i.e., vs "require at least one")?
+	 * @todo    (feature) custom taxonomies
+	 * @todo    (feature) "require all" (i.e., vs "require at least one")?
 	 */
 	function check_order_product_terms( $order, $term_ids, $taxonomy ) {
 		foreach ( $order->get_items() as $item ) {
@@ -342,7 +342,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Order.html
 	 *
-	 * @todo    [next] (feature) total (vs subtotal), discounts, fees, taxes, shipping
+	 * @todo    (feature) total (vs subtotal), discounts, fees, taxes, shipping
 	 */
 	function get_order_amount( $order ) {
 		return $order->get_subtotal();
@@ -354,7 +354,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 * @version 1.2.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [next] (dev) better epsilon value?
+	 * @todo    (dev) better epsilon value?
 	 */
 	function is_equal_float( $float1, $float2 ) {
 		return ( abs( $float1 - $float2 ) < ( defined( 'PHP_FLOAT_EPSILON' ) ? PHP_FLOAT_EPSILON : 0.000001 ) );
