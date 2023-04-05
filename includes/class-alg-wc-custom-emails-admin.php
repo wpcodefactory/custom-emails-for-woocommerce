@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 1.9.0
+ * @version 1.9.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -288,7 +288,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * do_add_admin_action.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.4
 	 * @since   1.9.0
 	 */
 	function do_add_admin_action( $email, $option ) {
@@ -296,7 +296,7 @@ class Alg_WC_Custom_Emails_Admin {
 			( $wc_emails = WC_Emails::instance() ) &&
 			isset( $wc_emails->emails[ $email ] ) &&
 			$wc_emails->emails[ $email ] instanceof WC_Email &&
-			in_array( $option, $wc_emails->emails[ $email ]->get_option( 'admin_actions', array( 'order_actions_single', 'order_actions_bulk' ) ) )
+			in_array( $option, $wc_emails->emails[ $email ]->get_option( 'admin_actions', array() ) )
 		);
 	}
 
