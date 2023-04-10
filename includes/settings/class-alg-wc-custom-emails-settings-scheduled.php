@@ -54,6 +54,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	 * @todo    (dev) code refactoring, e.g., `$title = ...`
 	 * @todo    (desc) better desc: "No scheduled emails found ..."
 	 * @todo    (dev) `human_time_diff()`
+	 * @todo    (feature) add "send now" buttons?
 	 */
 	function get_delayed_emails_info() {
 

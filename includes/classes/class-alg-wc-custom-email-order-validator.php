@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 1.9.1
+ * @version 1.9.6
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -171,14 +171,14 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_products
 	 *
-	 * @version 1.8.0
+	 * @version 1.9.6
 	 * @since   1.8.0
 	 */
 	function required_products( $order ) {
 		$required_order_product_ids = $this->email->get_option( 'required_order_product_ids', array() );
 		if ( ! empty( $required_order_product_ids ) && ! $this->check_order_products( $order, $required_order_product_ids ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order product(s)', 'custom-emails-for-woocommerce' ) ) );
+				$this->email->title, __( 'Require order products', 'custom-emails-for-woocommerce' ) ) );
 			return false;
 		}
 		return ( ! empty( $required_order_product_ids ) ? true : null );
@@ -187,14 +187,14 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_products
 	 *
-	 * @version 1.8.0
+	 * @version 1.9.6
 	 * @since   1.8.0
 	 */
 	function excluded_products( $order ) {
 		$excluded_order_product_ids = $this->email->get_option( 'excluded_order_product_ids', array() );
 		if ( ! empty( $excluded_order_product_ids ) && $this->check_order_products( $order, $excluded_order_product_ids ) ) {
 			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order product(s)', 'custom-emails-for-woocommerce' ) ) );
+				$this->email->title, __( 'Exclude order products', 'custom-emails-for-woocommerce' ) ) );
 			return false;
 		}
 		return ( ! empty( $excluded_order_product_ids ) ? true : null );

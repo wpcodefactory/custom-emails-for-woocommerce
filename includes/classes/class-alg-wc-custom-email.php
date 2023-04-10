@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 1.9.5
+ * @version 1.9.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -19,6 +19,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 *
 	 * @version 1.8.0
 	 * @since   1.0.0
+	 *
+	 * @todo    (dev) prefix all custom class methods and properties with `alg_wc_ce_`
 	 */
 	function __construct( $id = 1 ) {
 
@@ -129,7 +131,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * send_email.
 	 *
-	 * @version 1.9.5
+	 * @version 1.9.6
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
@@ -162,7 +164,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 			return;
 		}
 
-		// Send email
+		// Email
 		$order = false;
 		$user  = false;
 		if ( $object_id ) {
@@ -212,7 +214,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 		}
 
 		// Send
-		if ( apply_filters( 'alg_wc_custom_emails_do_send', true, $this ) ) {
+		if ( $this->alg_wc_ce_do_send() ) {
 
 			$res = $this->send(
 				$this->get_recipient(),
@@ -228,6 +230,64 @@ class Alg_WC_Custom_Email extends WC_Email {
 
 		}
 
+	}
+
+	/**
+	 * alg_wc_ce_do_send.
+	 *
+	 * @version 1.9.6
+	 * @since   1.9.6
+	 */
+	function alg_wc_ce_do_send() {
+
+		// Filter
+		if ( ! apply_filters( 'alg_wc_custom_emails_do_send', true, $this ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
+				$this->title, 'alg_wc_custom_emails_do_send' ) );
+			return false;
+		}
+
+		// Exclude recipients
+		if ( '' !== ( $exclude_recipients = $this->get_option( 'exclude_recipients', '' ) ) ) {
+			$exclude_recipients = array_filter( array_map( 'trim', explode( ',', str_replace( PHP_EOL, ',', $exclude_recipients ) ) ) );
+			foreach ( $exclude_recipients as $exclude_recipient ) {
+				if ( $exclude_recipient === $this->get_recipient() || $this->alg_wc_ce_wildcard_match( $exclude_recipient, $this->get_recipient() ) ) {
+					$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+						__( 'Exclude recipients', 'custom-emails-for-woocommerce' ) ) );
+					return false;
+				}
+			}
+		}
+
+		// All checks passed
+		return true;
+
+	}
+
+	/**
+	 * alg_wc_ce_debug.
+	 *
+	 * @version 1.9.6
+	 * @since   1.9.6
+	 *
+	 * @todo    (dev) use this everywhere
+	 */
+	function alg_wc_ce_debug( $message ) {
+		alg_wc_custom_emails()->core->debug( sprintf( '%s: %s', $this->title, $message ) );
+	}
+
+	/**
+	 * alg_wc_ce_wildcard_match.
+	 *
+	 * @version 1.9.6
+	 * @since   1.9.6
+	 */
+	function alg_wc_ce_wildcard_match( $pattern, $subject ) {
+		$pattern = strtr( $pattern, array(
+			'*' => '.*?', // 0 or more (lazy) - asterisk (*)
+			'?' => '.',   // 1 character - question mark (?)
+		) );
+		return preg_match( "/$pattern/", $subject );
 	}
 
 	/**

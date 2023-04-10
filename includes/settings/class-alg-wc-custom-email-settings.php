@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.9.2
+ * @version 1.9.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -304,10 +304,10 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.9.2
+	 * @version 1.9.6
 	 * @since   1.0.0
 	 *
-	 * @todo    (feature) "Custom trigger(s)"
+	 * @todo    (feature) "Custom triggers"
 	 * @todo    (feature) `cc` and `bcc`
 	 * @todo    (desc) `delay`: better desc
 	 * @todo    (dev) add sections, e.g. "Conditions"
@@ -334,7 +334,7 @@ class Alg_WC_Custom_Email_Settings {
 				'type'        => 'title',
 			),
 			'trigger' => array(
-				'title'       => __( 'Trigger(s)', 'custom-emails-for-woocommerce' ),
+				'title'       => __( 'Triggers', 'custom-emails-for-woocommerce' ),
 				'type'        => 'multiselect',
 				'class'       => 'chosen_select',
 				'placeholder' => '',
@@ -376,7 +376,7 @@ class Alg_WC_Custom_Email_Settings {
 				'type'        => 'title',
 			),
 			'recipient'  => array(
-				'title'       => __( 'Recipient(s)', 'woocommerce' ),
+				'title'       => __( 'Recipients', 'woocommerce' ),
 				'type'        => 'text',
 				'description' => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to %s.', 'woocommerce' ),
 						'<code>' . esc_attr( get_option( 'admin_email' ) ) . '</code>' ) . ' ' .
@@ -438,7 +438,7 @@ class Alg_WC_Custom_Email_Settings {
 					'<code>' . ABSPATH . '</code>', '<code>' . 'wp-content/uploads/example.pdf' . '</code>' ),
 				'desc_tip'    => __( 'One file path per line.', 'custom-emails-for-woocommerce' ),
 				'default'     => '',
-				'css'         => 'width:100%;height:200px;',
+				'css'         => 'width:100%;height:100px;',
 			),
 		) );
 		if ( $wpml_active_languages ) {
@@ -552,6 +552,9 @@ class Alg_WC_Custom_Email_Settings {
 			),
 			'order_conditions_logical_operator' => array(
 				'title'       => __( 'Logical operator', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => sprintf( __( 'Logical operator for the "Order Options" section, for example: %s vs %s.', 'custom-emails-for-woocommerce' ),
+					'<br><em>"' . __( 'Require products AND Minimum amount', 'custom-emails-for-woocommerce' ) . '"</em><br>',
+					'<br><em>"' . __( 'Require products OR Minimum amount', 'custom-emails-for-woocommerce' )  . '"</em>' ),
 				'type'        => 'select',
 				'class'       => 'chosen_select',
 				'default'     => 'AND',
@@ -582,6 +585,25 @@ class Alg_WC_Custom_Email_Settings {
 					'order_actions_preview' => __( 'Orders > Preview', 'custom-emails-for-woocommerce' ),
 					'order_actions_column'  => __( 'Orders > Actions column', 'custom-emails-for-woocommerce' ),
 				),
+			),
+		) );
+
+		// Advanced Option
+		$fields = array_merge( $fields, array(
+			'advanced_options' => array(
+				'title'       => __( 'Advanced Options', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
+			),
+			'exclude_recipients' => array(
+				'title'       => __( 'Exclude recipients', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => sprintf( __( 'Excludes recipient email addresses. For example, if you are using the `%s` placeholder for the recipient, you may want to block some email addresses from getting the email.', 'custom-emails-for-woocommerce' ),
+						'%customer%' ) . ' ' .
+					__( 'Ignored if empty.', 'custom-emails-for-woocommerce' ),
+				'description' => sprintf( __( 'Separate emails with a comma or with a new line. You can also use wildcard (%s) here, for example: %s', 'custom-emails-for-woocommerce' ),
+					'<code>*</code>', '<code>*@example.com,email@example.net</code>' ),
+				'type'        => 'textarea',
+				'css'         => 'width:100%;height:100px;',
+				'default'     => '',
 			),
 		) );
 
