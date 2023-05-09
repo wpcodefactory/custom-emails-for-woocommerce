@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 1.9.3
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -79,7 +79,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * send_email.
 	 *
-	 * @version 1.3.0
+	 * @version 2.0.0
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) what's with `WC()->payment_gateways()` and `WC()->shipping()`?
@@ -88,7 +88,7 @@ class Alg_WC_Custom_Emails_Core {
 		WC()->payment_gateways();
 		WC()->shipping();
 		if ( ! empty( WC()->mailer()->emails[ $email ] ) ) {
-			WC()->mailer()->emails[ $email ]->send_email( $object_id, true, $note );
+			WC()->mailer()->emails[ $email ]->alg_wc_ce_send_email( $object_id, true, $note );
 		}
 	}
 
