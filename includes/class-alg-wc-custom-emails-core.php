@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.0.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -15,28 +15,54 @@ if ( ! class_exists( 'Alg_WC_Custom_Emails_Core' ) ) :
 class Alg_WC_Custom_Emails_Core {
 
 	/**
+	 * do_debug.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $do_debug;
+
+	/**
+	 * email_settings.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $email_settings;
+
+	/**
+	 * shortcodes.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $shortcodes;
+
+	/**
 	 * Constructor.
 	 *
-	 * @version 1.3.1
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
 	 */
 	function __construct() {
-		// Core
-		if ( 'yes' === get_option( 'alg_wc_custom_emails_plugin_enabled', 'yes' ) ) {
-			// Properties
-			$this->do_debug       = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
-			$this->email_settings = require_once( 'settings/class-alg-wc-custom-email-settings.php' );
-			$this->shortcodes     = require_once( 'class-alg-wc-custom-emails-shortcodes.php' );
-			// Hooks
-			add_filter( 'woocommerce_email_classes', array( $this, 'add_custom_emails' ) );
-			add_filter( 'woocommerce_email_actions', array( $this, 'add_custom_email_trigger_actions' ) );
-			// Delayed emails
-			add_action( 'alg_wc_custom_emails_send_email', array( $this, 'send_delayed_email' ), 10, 2 );
-		}
+
+		// Properties
+		$this->do_debug       = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
+		$this->email_settings = require_once( 'settings/class-alg-wc-custom-email-settings.php' );
+		$this->shortcodes     = require_once( 'class-alg-wc-custom-emails-shortcodes.php' );
+
+		// Hooks
+		add_filter( 'woocommerce_email_classes', array( $this, 'add_custom_emails' ) );
+		add_filter( 'woocommerce_email_actions', array( $this, 'add_custom_email_trigger_actions' ) );
+
+		// Delayed emails
+		add_action( 'alg_wc_custom_emails_send_email', array( $this, 'send_delayed_email' ), 10, 2 );
+
 		// Core loaded
 		do_action( 'alg_wc_custom_emails_core_loaded', $this );
+
 	}
 
 	/**
@@ -95,15 +121,17 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_email_trigger_actions.
 	 *
-	 * @version 1.5.3
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
 	 */
 	function add_custom_email_trigger_actions( $email_actions ) {
 
+		// Checkout order processed (new order)
 		$email_actions[] = 'woocommerce_checkout_order_processed';
 
+		// Order statuses
 		$order_statuses = wc_get_order_statuses();
 		foreach ( $order_statuses as $id => $name ) {
 			$slug = substr( $id, 3 );
@@ -129,7 +157,15 @@ class Alg_WC_Custom_Emails_Core {
 			}
 		}
 
+		// Custom triggers
+		$custom_triggers = $this->get_custom_triggers();
+		if ( ! empty( $custom_triggers ) ) {
+			$email_actions = array_merge( $email_actions, array_keys( $custom_triggers ) );
+		}
+
+		// Final email actions
 		return $email_actions;
+
 	}
 
 	/**
@@ -139,14 +175,19 @@ class Alg_WC_Custom_Emails_Core {
 	 * @since   1.0.0
 	 */
 	function add_custom_emails( $emails ) {
+
 		if ( ! class_exists( 'Alg_WC_Custom_Email_Order_Validator' ) ) {
 			require_once( 'classes/class-alg-wc-custom-email-order-validator.php' );
 		}
+
 		if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) {
 			require_once( 'classes/class-alg-wc-custom-email.php' );
 		}
+
 		$emails['Alg_WC_Custom_Email'] = new Alg_WC_Custom_Email();
+
 		return apply_filters( 'alg_wc_custom_emails_add', $emails );
+
 	}
 
 	/**
@@ -243,6 +284,22 @@ class Alg_WC_Custom_Emails_Core {
 			'renewal_new_order'           => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Renewal new order', 'custom-emails-for-woocommerce' ),
 
 		);
+	}
+
+	/**
+	 * get_custom_triggers.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	function get_custom_triggers() {
+		$res = array();
+		$custom_triggers = array_map( 'trim', explode( PHP_EOL, get_option( 'alg_wc_custom_emails_custom_triggers', '' ) ) );
+		foreach ( $custom_triggers as $custom_trigger ) {
+			$custom_trigger = array_map( 'trim', explode( '|', $custom_trigger, 2 ) );
+			$res[ $custom_trigger[0] ] = ( isset( $custom_trigger[1] ) ? $custom_trigger[1] : $custom_trigger[0] );
+		}
+		return $res;
 	}
 
 }

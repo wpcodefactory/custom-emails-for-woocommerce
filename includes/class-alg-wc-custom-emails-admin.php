@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 1.9.5
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,36 +17,31 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.9.5
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
-		// Admin core
-		if ( 'yes' === get_option( 'alg_wc_custom_emails_plugin_enabled', 'yes' ) ) {
+		// Edit order > Order actions (dropdown)
+		add_filter( 'woocommerce_order_actions',                         array( $this, 'add_order_actions' ), PHP_INT_MAX );
+		add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
 
-			// Edit order > Order actions (dropdown)
-			add_filter( 'woocommerce_order_actions',                         array( $this, 'add_order_actions' ), PHP_INT_MAX );
-			add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
+		// Orders > Bulk actions (dropdown)
+		add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_actions_bulk' ), 20, 1 );
+		add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'do_order_actions_bulk' ), 10, 3 );
+		add_action( 'admin_notices',                       array( $this, 'bulk_action_admin_notice' ) );
 
-			// Orders > Bulk actions (dropdown)
-			add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_actions_bulk' ), 20, 1 );
-			add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'do_order_actions_bulk' ), 10, 3 );
-			add_action( 'admin_notices',                       array( $this, 'bulk_action_admin_notice' ) );
+		// Orders > Preview
+		add_filter( 'woocommerce_admin_order_preview_actions', array( $this, 'add_order_actions_preview' ), 10, 2 );
+		add_filter( 'admin_init',                              array( $this, 'do_order_actions_preview' ) );
 
-			// Orders > Preview
-			add_filter( 'woocommerce_admin_order_preview_actions', array( $this, 'add_order_actions_preview' ), 10, 2 );
-			add_filter( 'admin_init',                              array( $this, 'do_order_actions_preview' ) );
+		// Orders > Actions (column)
+		add_filter( 'woocommerce_admin_order_actions', array( $this, 'add_order_actions_column' ), 10, 2 );
+		add_filter( 'admin_init',                      array( $this, 'do_order_actions_column' ) );
+		add_action( 'admin_footer',                    array( $this, 'order_actions_column_icon_style' ) );
 
-			// Orders > Actions (column)
-			add_filter( 'woocommerce_admin_order_actions', array( $this, 'add_order_actions_column' ), 10, 2 );
-			add_filter( 'admin_init',                      array( $this, 'do_order_actions_column' ) );
-			add_action( 'admin_footer',                    array( $this, 'order_actions_column_icon_style' ) );
-
-			// Content template script
-			add_action( 'admin_footer', array( $this, 'add_content_template_script' ) );
-
-		}
+		// Content template script
+		add_action( 'admin_footer', array( $this, 'add_content_template_script' ) );
 
 		// Unschedule email
 		add_action( 'wp_loaded',    array( $this, 'unschedule_email' ) );

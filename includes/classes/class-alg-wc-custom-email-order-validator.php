@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 1.9.6
+ * @version 2.1.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -299,7 +299,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * check_order_products.
 	 *
-	 * @version 1.2.0
+	 * @version 2.1.0
 	 * @since   1.2.0
 	 *
 	 * @todo    (feature) "require all products" (i.e., vs "require at least one")?
@@ -307,16 +307,16 @@ class Alg_WC_Custom_Email_Order_Validator {
 	function check_order_products( $order, $product_ids ) {
 		foreach ( $order->get_items() as $item ) {
 			if ( in_array( $item['product_id'], $product_ids ) || in_array( $item['variation_id'], $product_ids ) ) {
-				return true;
+				return apply_filters( 'alg_wc_custom_emails_check_order_products', true, $order, $product_ids );
 			}
 		}
-		return false;
+		return apply_filters( 'alg_wc_custom_emails_check_order_products', false, $order, $product_ids );
 	}
 
 	/**
 	 * check_order_product_terms.
 	 *
-	 * @version 1.9.0
+	 * @version 2.1.0
 	 * @since   1.6.0
 	 *
 	 * @todo    (feature) custom taxonomies
@@ -328,10 +328,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 			$product_term_ids = ( ! is_wp_error( $product_term_ids ) ? wp_list_pluck( $product_term_ids, 'term_id' ) : array() );
 			$product_term_ids = apply_filters( 'alg_wc_custom_emails_order_product_term_ids', $product_term_ids, $item, $order, $term_ids, $taxonomy );
 			if ( ! empty( array_intersect( $term_ids, $product_term_ids ) ) ) {
-				return true;
+				return apply_filters( 'alg_wc_custom_emails_check_order_product_terms', true, $order, $term_ids, $taxonomy );
 			}
 		}
-		return false;
+		return apply_filters( 'alg_wc_custom_emails_check_order_product_terms', false, $order, $term_ids, $taxonomy );
 	}
 
 	/**

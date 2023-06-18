@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 1.5.1
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.5.1
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -38,25 +38,6 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	 * @todo    (desc) `alg_wc_custom_emails_total`: better desc?
 	 */
 	function get_settings() {
-
-		$plugin_settings = array(
-			array(
-				'title'    => __( 'Custom Emails Options', 'custom-emails-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_custom_emails_plugin_options',
-			),
-			array(
-				'title'    => __( 'Custom Emails', 'custom-emails-for-woocommerce' ),
-				'desc'     => '<strong>' . __( 'Enable plugin', 'custom-emails-for-woocommerce' ) . '</strong>',
-				'id'       => 'alg_wc_custom_emails_plugin_enabled',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_custom_emails_plugin_options',
-			),
-		);
 
 		$general_settings = apply_filters( 'alg_wc_custom_emails_admin_settings_general', array(
 			array(
@@ -106,6 +87,19 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'options'  => alg_wc_custom_emails()->core->get_trigger_groups(),
 			),
 			array(
+				'title'    => __( 'Custom triggers', 'custom-emails-for-woocommerce' ),
+				'desc'     => __( 'One trigger per line.', 'custom-emails-for-woocommerce' ) . '<br>' .
+					sprintf( __( 'Format: %s or %s, e.g.: %s or %s.', 'custom-emails-for-woocommerce' ),
+						'<code>action</code>',
+						'<code>action|title</code>',
+						'<code>woocommerce_checkout_order_processed</code>',
+						'<code>woocommerce_checkout_order_processed|' . __( 'Checkout order processed', 'custom-emails-for-woocommerce' ) . '</code>' ),
+				'id'       => 'alg_wc_custom_emails_custom_triggers',
+				'default'  => '',
+				'type'     => 'textarea',
+				'css'      => 'height:150px;font-family:monospace;',
+			),
+			array(
 				'title'    => __( 'Debug', 'custom-emails-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'custom-emails-for-woocommerce' ),
 				'desc_tip' => sprintf( __( 'Will add a log to %s.', 'custom-emails-for-woocommerce' ),
@@ -120,7 +114,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 			),
 		);
 
-		return array_merge( $plugin_settings, $general_settings, $advanced_settings );
+		return array_merge( $general_settings, $advanced_settings );
 	}
 
 }

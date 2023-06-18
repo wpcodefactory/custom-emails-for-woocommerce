@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Main Class
  *
- * @version 1.4.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -21,6 +21,22 @@ final class Alg_WC_Custom_Emails {
 	 * @since 1.0.0
 	 */
 	public $version = ALG_WC_CUSTOM_EMAILS_VERSION;
+
+	/**
+	 * core.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $core;
+
+	/**
+	 * admin_core.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $admin_core;
 
 	/**
 	 * @var   Alg_WC_Custom_Emails The single instance of the class
@@ -92,10 +108,11 @@ final class Alg_WC_Custom_Emails {
 	/**
 	 * includes.
 	 *
-	 * @version 1.4.0
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 */
 	function includes() {
+		require_once( 'alg-wc-custom-emails-functions.php' );
 		$this->core = require_once( 'class-alg-wc-custom-emails-core.php' );
 	}
 

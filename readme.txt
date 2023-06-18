@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,6 +44,21 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.1.0 - 18/06/2023 =
+* Fix - Admin settings - "Shortcodes" link fixed in the "placeholder text".
+* Dev - General - "Enable plugin" option removed.
+* Dev - General - "Custom triggers" option added.
+* Dev - Shortcodes - `[if]` - `operator` - `in` and `not_in` operators added.
+* Dev - Shortcodes - `[order_item_product_ids]` shortcode added.
+* Dev - Shortcodes - `[order_downloads]` shortcode added.
+* Dev - Shortcodes - `[order_user_data]` shortcode added. E.g., `[order_user_data key="user_nicename"]`.
+* Dev - Shortcodes - `[order_user_id]` shortcode added.
+* Dev - Developers - `alg_wc_ce_send_email()` function added.
+* Dev - Developers - `alg_wc_custom_emails_check_order_products` filter added.
+* Dev - Developers - `alg_wc_custom_emails_check_order_product_terms` filter added.
+* Dev - Code refactoring.
+* WC tested up to: 7.8.
 
 = 2.0.0 - 09/05/2023 =
 * Dev - Code refactoring - `Alg_WC_Custom_Email` class.

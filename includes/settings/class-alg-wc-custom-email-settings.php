@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 1.9.6
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -89,7 +89,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_triggers.
 	 *
-	 * @version 1.5.3
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `renewal`: are we sure all of them exist?
@@ -162,6 +162,14 @@ class Alg_WC_Custom_Email_Settings {
 			$enabled_triggers[ $all_trigger_groups[ $trigger_group ] ] = $triggers[ $trigger_group ];
 		}
 
+		// Custom triggers
+		foreach ( alg_wc_custom_emails()->core->get_custom_triggers() as $custom_trigger_action => $custom_trigger_title ) {
+			$triggers['custom_triggers'][ $custom_trigger_action . '_notification' ] = $custom_trigger_title;
+		}
+		if ( ! empty( $triggers['custom_triggers'] ) ) {
+			$enabled_triggers[ __( 'Custom triggers', 'custom-emails-for-woocommerce' ) ] = $triggers['custom_triggers'];
+		}
+
 		// Result
 		return $enabled_triggers;
 
@@ -170,13 +178,13 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_placeholder_text.
 	 *
-	 * @version 1.0.0
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 */
 	function get_placeholder_text() {
 		$placeholders = array( '{site_title}', '{site_address}', '{order_number}', '{order_date}' );
 		return sprintf( __( 'You can use <a href="%s" target="_blank">shortcodes</a> and/or <span title="%s" style="%s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
-			'https://wpfactory.com/item/custom-emails-for-woocommerce/#shortcodes', implode( ', ', $placeholders ), 'text-decoration:underline;' );
+			'https://wpfactory.com/docs/custom-emails-for-woocommerce/shortcodes/', implode( ', ', $placeholders ), 'text-decoration:underline;' );
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 1.9.3
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -15,9 +15,33 @@ if ( ! class_exists( 'Alg_WC_Custom_Emails_Shortcodes' ) ) :
 class Alg_WC_Custom_Emails_Shortcodes {
 
 	/**
+	 * order.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $order = false;
+
+	/**
+	 * user.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $user = false;
+
+	/**
+	 * email.
+	 *
+	 * @version 2.1.0
+	 * @since   1.0.0
+	 */
+	public $email = false;
+
+	/**
 	 * Constructor.
 	 *
-	 * @version 1.7.0
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -42,9 +66,13 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'order_total_items_count',    array( $this, 'order_total_items_count' ) );
 		add_shortcode( 'order_date',                 array( $this, 'order_date' ) );
 		add_shortcode( 'order_details',              array( $this, 'order_details' ) );
+		add_shortcode( 'order_downloads',            array( $this, 'order_downloads' ) );
 		add_shortcode( 'order_billing_address',      array( $this, 'order_billing_address' ) );
 		add_shortcode( 'order_shipping_address',     array( $this, 'order_shipping_address' ) );
 		add_shortcode( 'order_item_names',           array( $this, 'order_item_names' ) );
+		add_shortcode( 'order_item_product_ids',     array( $this, 'order_item_product_ids' ) );
+		add_shortcode( 'order_user_id',              array( $this, 'order_user_id' ) );
+		add_shortcode( 'order_user_data',            array( $this, 'order_user_data' ) );
 		add_shortcode( 'generate_coupon_code',       array( $this, 'generate_coupon_code' ) );
 	}
 
@@ -130,13 +158,43 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
+	 * order_user_id.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	function order_user_id( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_user_id(), $atts );
+	}
+
+	/**
+	 * order_user_data.
+	 *
+	 * e.g., `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	function order_user_data( $atts, $content = '' ) {
+		if ( ! $this->order || ! isset( $atts['key'] ) ) {
+			return '';
+		}
+		$key = $atts['key'];
+		$res = ( ( $user = $this->order->get_user() ) && isset( $user->data->{$key} ) ? $user->data->{$key} : '' );
+		return $this->return_shortcode( $res, $atts );
+	}
+
+	/**
 	 * order_item_names.
 	 *
 	 * @version 1.5.0
 	 * @since   1.5.0
 	 *
 	 * @todo    (feature) optionally `$product->get_formatted_name()`
-	 * @todo    (feature) customizable sep
+	 * @todo    (feature) customizable sep?
 	 * @todo    (feature) `[order_item_props]`
 	 */
 	function order_item_names( $atts, $content = '' ) {
@@ -149,6 +207,27 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 		$order_item_names = implode( ', ', $order_item_names );
 		return $this->return_shortcode( $order_item_names, $atts );
+	}
+
+	/**
+	 * order_item_product_ids.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 *
+	 * @todo    (feature) customizable sep?
+	 * @todo    (feature) optionally `product_id` only (i.e., ignore `variation_id`)?
+	 */
+	function order_item_product_ids( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		$order_item_product_ids = array();
+		foreach ( $this->order->get_items() as $item ) {
+			$order_item_product_ids[] = ( ! empty( $item['variation_id'] ) ? $item['variation_id'] : $item['product_id'] );
+		}
+		$order_item_product_ids = implode( ', ', $order_item_product_ids );
+		return $this->return_shortcode( $order_item_product_ids, $atts );
 	}
 
 	/**
@@ -260,7 +339,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * eval_operator.
 	 *
-	 * @version 1.8.0
+	 * @version 2.1.0
 	 * @since   1.8.0
 	 */
 	function eval_operator( $value1, $operator, $value2 ) {
@@ -277,6 +356,10 @@ class Alg_WC_Custom_Emails_Shortcodes {
 				return ( $value1 >  $value2 );
 			case 'greater_or_equal':
 				return ( $value1 >= $value2 );
+			case 'in':
+				return (   in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
+			case 'not_in':
+				return ( ! in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
 		}
 		return false;
 	}
@@ -322,6 +405,24 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		$wc_emails     = WC_Emails::instance();
 		ob_start();
 		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text, $this->email );
+		return $this->return_shortcode( ob_get_clean(), $atts );
+	}
+
+	/**
+	 * order_downloads.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	function order_downloads( $atts, $content = '' ) {
+		if ( ! $this->order || ! $this->email ) {
+			return '';
+		}
+		$sent_to_admin = ( isset( $atts['sent_to_admin'] ) && filter_var( $atts['sent_to_admin'], FILTER_VALIDATE_BOOLEAN ) );
+		$plain_text    = ( isset( $atts['plain_text'] )    && filter_var( $atts['plain_text'],    FILTER_VALIDATE_BOOLEAN ) );
+		$wc_emails     = WC_Emails::instance();
+		ob_start();
+		$wc_emails->order_downloads( $this->order, $sent_to_admin, $plain_text, $this->email );
 		return $this->return_shortcode( ob_get_clean(), $atts );
 	}
 
