@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.0.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -79,13 +79,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * get_content_html.
 	 *
-	 * @version 1.3.1
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function get_content_html() {
 		$content = $this->get_option( 'content' );
 		if ( 'yes' === $this->get_option( 'wrap_in_wc_template', 'yes' ) ) {
-			$content = alg_wc_custom_emails()->core->wrap_in_wc_email_template( $content, $this->get_heading() );
+			$content = alg_wc_custom_emails()->core->wrap_in_wc_email_template( $content, $this->get_heading(), $this );
 		}
 		return $content;
 	}

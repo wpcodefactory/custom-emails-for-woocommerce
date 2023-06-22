@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -19,6 +19,8 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 *
 	 * @version 1.8.0
 	 * @since   1.8.0
+	 *
+	 * @todo    (dev) `public $email;`
 	 */
 	function __construct( $email ) {
 		$this->email = $email;
@@ -27,7 +29,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 1.9.1
+	 * @version 2.2.0
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
@@ -59,6 +61,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 			'excluded_product_tags',
 			'min_amount',
 			'max_amount',
+			'required_payment_gateways',
+			'excluded_payment_gateways',
+			'required_shipping_methods',
+			'excluded_shipping_methods',
 		);
 
 		if ( 'AND' === $this->email->get_option( 'order_conditions_logical_operator', 'AND' ) ) {
@@ -166,6 +172,114 @@ class Alg_WC_Custom_Email_Order_Validator {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * check_payment_gateway.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function check_payment_gateway( $order, $payment_gateways ) {
+		$order_payment_gateway = ( is_callable( array( $order, 'get_payment_method' ) ) ? $order->get_payment_method() : false );
+		return in_array( $order_payment_gateway, $payment_gateways );
+	}
+
+	/**
+	 * required_payment_gateways
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function required_payment_gateways( $order ) {
+		$required_order_payment_gateway_ids = $this->email->get_option( 'required_order_payment_gateway_ids', array() );
+		if ( ! empty( $required_order_payment_gateway_ids ) && ! $this->check_payment_gateway( $order, $required_order_payment_gateway_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Require order payment gateways', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $required_order_payment_gateway_ids ) ? true : null );
+	}
+
+	/**
+	 * excluded_payment_gateways
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function excluded_payment_gateways( $order ) {
+		$excluded_order_payment_gateway_ids = $this->email->get_option( 'excluded_order_payment_gateway_ids', array() );
+		if ( ! empty( $excluded_order_payment_gateway_ids ) && $this->check_payment_gateway( $order, $excluded_order_payment_gateway_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Exclude order payment gateways', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $excluded_order_payment_gateway_ids ) ? true : null );
+	}
+
+	/**
+	 * is_array_intersect.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function is_array_intersect( $array1, $array2 ) {
+		$intersect = array_intersect( $array1, $array2 );
+		return ( ! empty( $intersect ) );
+	}
+
+	/**
+	 * get_shipping_method_instance_id.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function get_shipping_method_instance_id( $shipping_method ) {
+		return $shipping_method->get_instance_id();
+	}
+
+	/**
+	 * check_shipping_method_instances.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function check_shipping_method_instances( $order, $shipping_instances ) {
+		$order_shipping_methods   = ( is_callable( array( $order, 'get_shipping_methods' ) ) ? $order->get_shipping_methods() : array() );
+		$order_shipping_instances = ( ! empty( $order_shipping_methods ) ? array_map( array( $this, 'get_shipping_method_instance_id' ), $order_shipping_methods ) : array() );
+		return $this->is_array_intersect( $order_shipping_instances, $shipping_instances );
+	}
+
+	/**
+	 * required_shipping_methods
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function required_shipping_methods( $order ) {
+		$required_order_shipping_instance_ids = $this->email->get_option( 'required_order_shipping_instance_ids', array() );
+		if ( ! empty( $required_order_shipping_instance_ids ) && ! $this->check_shipping_method_instances( $order, $required_order_shipping_instance_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Require order shipping methods', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $required_order_shipping_instance_ids ) ? true : null );
+	}
+
+	/**
+	 * excluded_shipping_methods
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function excluded_shipping_methods( $order ) {
+		$excluded_order_shipping_instance_ids = $this->email->get_option( 'excluded_order_shipping_instance_ids', array() );
+		if ( ! empty( $excluded_order_shipping_instance_ids ) && $this->check_shipping_method_instances( $order, $excluded_order_shipping_instance_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Exclude order shipping methods', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $excluded_order_shipping_instance_ids ) ? true : null );
 	}
 
 	/**

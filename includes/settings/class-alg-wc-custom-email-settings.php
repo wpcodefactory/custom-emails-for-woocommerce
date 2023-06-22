@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -178,13 +178,59 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_placeholder_text.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function get_placeholder_text() {
 		$placeholders = array( '{site_title}', '{site_address}', '{order_number}', '{order_date}' );
-		return sprintf( __( 'You can use <a href="%s" target="_blank">shortcodes</a> and/or <span title="%s" style="%s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
+		return sprintf( __( 'You can use <a href="%s" target="_blank">shortcodes</a> or <span title="%s" style="%s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
 			'https://wpfactory.com/docs/custom-emails-for-woocommerce/shortcodes/', implode( ', ', $placeholders ), 'text-decoration:underline;' );
+	}
+
+	/**
+	 * get_gateways.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 *
+	 * @todo    (dev) add "Other" and/or "N/A" options?
+	 */
+	function get_gateways() {
+		return ( ( $gateways = WC()->payment_gateways()->payment_gateways ) ? wp_list_pluck( $gateways, 'method_title', 'id' ) : array() );
+	}
+
+	/**
+	 * get_shipping_zones.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function get_shipping_zones( $include_empty_zone = true ) {
+		$zones = WC_Shipping_Zones::get_zones();
+		if ( $include_empty_zone ) {
+			$zone                                                = new WC_Shipping_Zone( 0 );
+			$zones[ $zone->get_id() ]                            = $zone->get_data();
+			$zones[ $zone->get_id() ]['zone_id']                 = $zone->get_id();
+			$zones[ $zone->get_id() ]['formatted_zone_location'] = $zone->get_formatted_location();
+			$zones[ $zone->get_id() ]['shipping_methods']        = $zone->get_shipping_methods();
+		}
+		return $zones;
+	}
+
+	/**
+	 * get_shipping_methods_instances.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function get_shipping_methods_instances() {
+		$shipping_methods = array();
+		foreach ( $this->get_shipping_zones() as $zone_id => $zone_data ) {
+			foreach ( $zone_data['shipping_methods'] as $shipping_method ) {
+				$shipping_methods[ $shipping_method->instance_id ] = $zone_data['zone_name'] . ': ' . $shipping_method->title;
+			}
+		}
+		return $shipping_methods;
 	}
 
 	/**
@@ -312,7 +358,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 1.9.6
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) "Custom triggers"
@@ -556,6 +602,38 @@ class Alg_WC_Custom_Email_Settings {
 				'placeholder' => '',
 				'default'     => '',
 				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
+				'css'         => 'width:100%;',
+			),
+			'required_order_payment_gateway_ids' => array(
+				'title'       => __( 'Require payment gateways', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'wc-enhanced-select',
+				'default'     => array(),
+				'options'     => $this->get_gateways(),
+				'css'         => 'width:100%;',
+			),
+			'excluded_order_payment_gateway_ids' => array(
+				'title'       => __( 'Exclude payment gateways', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'wc-enhanced-select',
+				'default'     => array(),
+				'options'     => $this->get_gateways(),
+				'css'         => 'width:100%;',
+			),
+			'required_order_shipping_instance_ids' => array(
+				'title'       => __( 'Require shipping methods', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'wc-enhanced-select',
+				'default'     => array(),
+				'options'     => $this->get_shipping_methods_instances(),
+				'css'         => 'width:100%;',
+			),
+			'excluded_order_shipping_instance_ids' => array(
+				'title'       => __( 'Exclude shipping methods', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'wc-enhanced-select',
+				'default'     => array(),
+				'options'     => $this->get_shipping_methods_instances(),
 				'css'         => 'width:100%;',
 			),
 			'order_conditions_logical_operator' => array(

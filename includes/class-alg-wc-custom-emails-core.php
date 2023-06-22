@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -230,32 +230,44 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * wrap_in_wc_email_template.
 	 *
-	 * @version 1.0.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
-	function wrap_in_wc_email_template( $content, $email_heading = '' ) {
-		return $this->get_wc_email_template_part( 'header', $email_heading ) .
+	function wrap_in_wc_email_template( $content, $email_heading = '', $email = null ) {
+		return $this->get_wc_email_template_part( 'header', $email_heading, $email ) .
 			$content .
-		str_replace( '{site_title}', wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), $this->get_wc_email_template_part( 'footer' ) );
+		str_replace( '{site_title}', wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), $this->get_wc_email_template_part( 'footer', '', $email ) );
 	}
 
 	/**
 	 * get_wc_email_template_part.
 	 *
-	 * @version 1.0.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
-	function get_wc_email_template_part( $part, $email_heading = '' ) {
+	function get_wc_email_template_part( $part, $email_heading = '', $email = null ) {
 		ob_start();
+		$do_use_actions = ( 'yes' === get_option( 'alg_wc_custom_emails_wrap_in_wc_template_use_actions', 'no' ) );
 		switch ( $part ) {
+
 			case 'header':
-				wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
+				if ( $do_use_actions ) {
+					do_action( 'woocommerce_email_header', $email_heading, $email );
+				} else {
+					wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
+				}
 				break;
+
 			case 'footer':
-				wc_get_template( 'emails/email-footer.php' );
+				if ( $do_use_actions ) {
+					do_action( 'woocommerce_email_footer', $email );
+				} else {
+					wc_get_template( 'emails/email-footer.php' );
+				}
 				break;
+
 		}
-		return ob_get_clean();
+		return apply_filters( 'alg_wc_custom_emails_get_wc_email_template_part', ob_get_clean(), $part, $email_heading, $email );
 	}
 
 	/**
