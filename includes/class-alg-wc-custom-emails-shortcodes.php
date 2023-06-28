@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.1.0
+ * @version 2.2.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -62,6 +62,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'order_total_excl_tax',       array( $this, 'order_total_excl_tax' ) );
 		add_shortcode( 'order_shipping_total',       array( $this, 'order_shipping_total' ) );
 		add_shortcode( 'order_shipping_method',      array( $this, 'order_shipping_method' ) );
+		add_shortcode( 'order_payment_method_id',    array( $this, 'order_payment_method_id' ) );
 		add_shortcode( 'order_payment_method_title', array( $this, 'order_payment_method_title' ) );
 		add_shortcode( 'order_total_items_count',    array( $this, 'order_total_items_count' ) );
 		add_shortcode( 'order_date',                 array( $this, 'order_date' ) );
@@ -306,6 +307,19 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->order->get_payment_method_title(), $atts );
+	}
+
+	/**
+	 * order_payment_method_id.
+	 *
+	 * @version 2.2.1
+	 * @since   2.2.1
+	 */
+	function order_payment_method_id( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_payment_method(), $atts );
 	}
 
 	/**

@@ -105,12 +105,12 @@ msgstr ""
 msgid "Renewal new order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:133
+#: includes/class-alg-wc-custom-emails-shortcodes.php:134
 #, php-format
 msgid "Created by the \"%s\" plugin"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:134
+#: includes/class-alg-wc-custom-emails-shortcodes.php:135
 msgid "Custom Emails for WooCommerce"
 msgstr ""
 
