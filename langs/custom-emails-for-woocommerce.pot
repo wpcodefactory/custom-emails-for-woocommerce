@@ -114,11 +114,11 @@ msgstr ""
 msgid "Custom Emails for WooCommerce"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:149
+#: includes/class-alg-wc-custom-emails.php:166
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:152
+#: includes/class-alg-wc-custom-emails.php:169
 msgid "Go Pro"
 msgstr ""
 

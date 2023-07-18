@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,6 +27,7 @@ Add custom emails to WooCommerce.
 * Set email **recipient(s)** - customer, admin, custom email address.
 * Set email's **admin title**.
 * **WPML** and **Polylang** compatible.
+* **"High-Performance Order Storage (HPOS)"** compatible.
 * And more...
 
 ### &#127942; Premium Version ###
@@ -45,6 +46,12 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.2.3 - 18/07/2023 =
+* Dev – "High-Performance Order Storage (HPOS)" compatibility.
+* Dev - Developers - `alg_wc_custom_emails_subject` filter added.
+* Dev - Developers - `alg_wc_custom_emails_content` filter added.
+* WC tested up to: 7.9.
 
 = 2.2.2 - 18/07/2023 =
 * Dev - Developers - `alg_wc_custom_emails_do_send_order_email` filter added.

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Main Class
  *
- * @version 2.1.0
+ * @version 2.2.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -65,7 +65,7 @@ final class Alg_WC_Custom_Emails {
 	/**
 	 * Alg_WC_Custom_Emails Constructor.
 	 *
-	 * @version 1.4.0
+	 * @version 2.2.3
 	 * @since   1.0.0
 	 *
 	 * @access  public
@@ -79,6 +79,9 @@ final class Alg_WC_Custom_Emails {
 
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
+
+		// Declare compatibility with custom order tables for WooCommerce
+		add_action( 'before_woocommerce_init', array( $this, 'wc_declare_compatibility' ) );
 
 		// Pro
 		if ( 'custom-emails-for-woocommerce-pro.php' === basename( ALG_WC_CUSTOM_EMAILS_FILE ) ) {
@@ -103,6 +106,20 @@ final class Alg_WC_Custom_Emails {
 	 */
 	function localize() {
 		load_plugin_textdomain( 'custom-emails-for-woocommerce', false, dirname( plugin_basename( ALG_WC_CUSTOM_EMAILS_FILE ) ) . '/langs/' );
+	}
+
+	/**
+	 * wc_declare_compatibility.
+	 *
+	 * @version 2.2.3
+	 * @since   2.2.3
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+	 */
+	function wc_declare_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', ALG_WC_CUSTOM_EMAILS_FILE, true );
+		}
 	}
 
 	/**

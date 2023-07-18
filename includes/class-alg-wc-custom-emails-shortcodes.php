@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.2.1
+ * @version 2.2.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -469,14 +469,14 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * order_meta.
 	 *
-	 * @version 1.0.0
+	 * @version 2.2.3
 	 * @since   1.0.0
 	 */
 	function order_meta( $atts, $content = '' ) {
 		if ( ! $this->order || ! isset( $atts['key'] ) ) {
 			return '';
 		}
-		return $this->return_shortcode( get_post_meta( $this->order->get_id(), $atts['key'], true ), $atts );
+		return $this->return_shortcode( $this->order->get_meta( $atts['key'] ), $atts );
 	}
 
 	/**
