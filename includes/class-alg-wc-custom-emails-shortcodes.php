@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.2.3
+ * @version 2.2.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.1
+	 * @version 2.2.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -70,6 +70,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'order_downloads',            array( $this, 'order_downloads' ) );
 		add_shortcode( 'order_billing_address',      array( $this, 'order_billing_address' ) );
 		add_shortcode( 'order_shipping_address',     array( $this, 'order_shipping_address' ) );
+		add_shortcode( 'order_item_meta',            array( $this, 'order_item_meta' ) );
 		add_shortcode( 'order_item_names',           array( $this, 'order_item_names' ) );
 		add_shortcode( 'order_item_product_ids',     array( $this, 'order_item_product_ids' ) );
 		add_shortcode( 'order_user_id',              array( $this, 'order_user_id' ) );
@@ -208,6 +209,31 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 		$order_item_names = implode( ', ', $order_item_names );
 		return $this->return_shortcode( $order_item_names, $atts );
+	}
+
+	/**
+	 * order_item_meta.
+	 *
+	 * @version 2.2.4
+	 * @since   2.2.4
+	 *
+	 * @todo    (feature) customizable sep?
+	 */
+	function order_item_meta( $atts, $content = '' ) {
+		if ( ! $this->order || ( ! isset( $atts['key'] ) && empty( $atts['debug'] ) ) ) {
+			return '';
+		}
+		$is_debug = ( ! isset( $atts['key'] ) );
+		$meta     = array();
+		foreach ( $this->order->get_items() as $item ) {
+			$meta[] = ( ! $is_debug ?
+				$item->get_meta( $atts['key'] ) :
+				'<pre>' . print_r( $item->get_meta_data(), true ) . '</pre>'
+			);
+		}
+		$sep  = ( ! $is_debug ? ', ' : '' );
+		$meta = implode( $sep, $meta );
+		return $this->return_shortcode( $meta, $atts );
 	}
 
 	/**
