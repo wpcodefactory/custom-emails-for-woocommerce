@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.2.3
+ * @version 2.2.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -185,7 +185,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.2.2
+	 * @version 2.2.5
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
@@ -223,7 +223,10 @@ class Alg_WC_Custom_Email extends WC_Email {
 		$user  = false;
 		if ( $object_id ) {
 
-			if ( 'woocommerce_created_customer_notification' === current_filter() || apply_filters( 'alg_wc_custom_emails_is_user_email', false ) ) {
+			if (
+				'woocommerce_created_customer_notification' === current_filter() ||
+				apply_filters( 'alg_wc_custom_emails_is_user_email', false, current_filter() )
+			) {
 
 				// User email
 				$user            = get_user_by( 'ID', $object_id );

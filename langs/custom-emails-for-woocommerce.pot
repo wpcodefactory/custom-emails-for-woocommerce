@@ -105,12 +105,12 @@ msgstr ""
 msgid "Renewal new order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:135
+#: includes/class-alg-wc-custom-emails-shortcodes.php:141
 #, php-format
 msgid "Created by the \"%s\" plugin"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:136
+#: includes/class-alg-wc-custom-emails-shortcodes.php:142
 msgid "Custom Emails for WooCommerce"
 msgstr ""
 
@@ -218,46 +218,46 @@ msgstr ""
 msgid "Delayed (%s): In %d seconds."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:242
+#: includes/classes/class-alg-wc-custom-email.php:245
 #, php-format
 msgid "Order #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:246
-#: includes/classes/class-alg-wc-custom-email.php:306
+#: includes/classes/class-alg-wc-custom-email.php:249
+#: includes/classes/class-alg-wc-custom-email.php:309
 #, php-format
 msgid "Blocked by the \"%s\" filter."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:268
+#: includes/classes/class-alg-wc-custom-email.php:271
 #, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:269
+#: includes/classes/class-alg-wc-custom-email.php:272
 #, php-format
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:289
+#: includes/classes/class-alg-wc-custom-email.php:292
 #, php-format
 msgid "Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:290
+#: includes/classes/class-alg-wc-custom-email.php:293
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:290
+#: includes/classes/class-alg-wc-custom-email.php:293
 msgid "failed"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:316
+#: includes/classes/class-alg-wc-custom-email.php:319
 #, php-format
 msgid "Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:317
+#: includes/classes/class-alg-wc-custom-email.php:320
 #: includes/settings/class-alg-wc-custom-email-settings.php:684
 msgid "Exclude recipients"
 msgstr ""

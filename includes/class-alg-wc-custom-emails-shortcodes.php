@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.2.4
+ * @version 2.2.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.4
+	 * @version 2.2.5
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -49,11 +49,13 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @todo    (dev) maybe use more general shortcodes (e.g., `[order]`) instead? or even more general (e.g., `[prop]`)?
 	 */
 	function __construct() {
+
 		add_shortcode( 'if',                         array( $this, 'if' ) );
 		add_shortcode( 'clear',                      array( $this, 'clear' ) );
 		add_shortcode( 'site_title',                 array( $this, 'site_title' ) );
 		add_shortcode( 'site_address',               array( $this, 'site_address' ) );
 		add_shortcode( 'translate',                  array( $this, 'translate' ) );
+
 		add_shortcode( 'order_meta',                 array( $this, 'order_meta' ) );
 		add_shortcode( 'order_func',                 array( $this, 'order_func' ) );
 		add_shortcode( 'order_number',               array( $this, 'order_number' ) );
@@ -75,7 +77,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'order_item_product_ids',     array( $this, 'order_item_product_ids' ) );
 		add_shortcode( 'order_user_id',              array( $this, 'order_user_id' ) );
 		add_shortcode( 'order_user_data',            array( $this, 'order_user_data' ) );
+
 		add_shortcode( 'generate_coupon_code',       array( $this, 'generate_coupon_code' ) );
+
+		add_shortcode( 'user_prop',                  array( $this, 'user_prop' ) );
+
 	}
 
 	/**
@@ -157,6 +163,19 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		} else {
 			return '';
 		}
+	}
+
+	/**
+	 * user_prop.
+	 *
+	 * @version 2.2.5
+	 * @since   2.2.5
+	 */
+	function user_prop( $atts, $content = '' ) {
+		if ( ! $this->user || ! isset( $atts['key'] ) ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->user->get( $atts['key'] ), $atts );
 	}
 
 	/**
