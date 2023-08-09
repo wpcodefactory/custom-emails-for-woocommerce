@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.2.0
+ * @version 2.2.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -358,9 +358,10 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.6
 	 * @since   1.0.0
 	 *
+	 * @todo    (dev) move this function to a separate file/class
 	 * @todo    (feature) "Custom triggers"
 	 * @todo    (feature) `cc` and `bcc`
 	 * @todo    (desc) `delay`: better desc
@@ -406,7 +407,10 @@ class Alg_WC_Custom_Email_Settings {
 				'custom_attributes' => array( 'min' => 0, 'step' => 0.01 ),
 			),
 			'delay_unit' => array(
-				'description' => __( 'Delay unit', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => __( 'Delay unit.', 'custom-emails-for-woocommerce' ),
+				'description' => sprintf( __( 'Scheduled emails will be listed in <a href="%s">%s</a>.', 'custom-emails-for-woocommerce' ),
+					admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_emails&section=scheduled' ),
+					__( 'WooCommerce > Settings > Custom Emails > Scheduled', 'custom-emails-for-woocommerce' ) ),
 				'type'        => 'select',
 				'class'       => 'chosen_select',
 				'placeholder' => '',

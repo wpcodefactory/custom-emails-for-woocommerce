@@ -191,6 +191,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
 	 * @todo    (dev) "Order note": add "email delayed until..." note
 	 * @todo    (dev) "Order note": better description
+	 * @todo    (dev) `delay`: use Action Scheduler?
 	 * @todo    (dev) `delay`: better debug info
 	 * @todo    (dev) `delay`: `wp_next_scheduled()`?
 	 * @todo    (dev) `delay`: add `current_filter()` to the args?
