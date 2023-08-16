@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 2.2.0
+ * @version 2.2.7
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.7
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -106,6 +106,18 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'id'       => 'alg_wc_custom_emails_wrap_in_wc_template_use_actions',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Base dir', 'custom-emails-for-woocommerce' ),
+				'desc_tip' => __( 'Affects "Email Data > Email attachments" options.', 'custom-emails-for-woocommerce' ),
+				'id'       => 'alg_wc_custom_emails_base_dir',
+				'default'  => 'abspath',
+				'type'     => 'select',
+				'class'    => 'wc-enhanced-select',
+				'options'  => array(
+					'abspath'       => __( 'WP root directory', 'custom-emails-for-woocommerce' ),
+					'wp_upload_dir' => __( 'WP upload directory', 'custom-emails-for-woocommerce' ),
+				),
 			),
 			array(
 				'title'    => __( 'Debug', 'custom-emails-for-woocommerce' ),

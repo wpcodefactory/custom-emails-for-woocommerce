@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.2.0
+ * @version 2.2.7
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -86,6 +86,45 @@ class Alg_WC_Custom_Emails_Core {
 	function debug( $message ) {
 		if ( $this->do_debug ) {
 			$this->add_to_log( $message );
+		}
+	}
+
+	/**
+	 * get_base_dir.
+	 *
+	 * E.g., for attachments.
+	 *
+	 * @version 2.2.7
+	 * @since   2.2.7
+	 */
+	function get_base_dir() {
+		$option = get_option( 'alg_wc_custom_emails_base_dir', 'abspath' );
+		switch ( $option ) {
+			case 'wp_upload_dir':
+				$dir = wp_upload_dir();
+				$res = $dir['basedir'];
+				break;
+			default: // 'abspath'
+				$res = ABSPATH;
+		}
+		return apply_filters( 'alg_wc_custom_emails_base_dir', trailingslashit( $res ) );
+	}
+
+	/**
+	 * get_base_dir_example.
+	 *
+	 * Used in the settings.
+	 *
+	 * @version 2.2.7
+	 * @since   2.2.7
+	 */
+	function get_base_dir_example() {
+		$option = get_option( 'alg_wc_custom_emails_base_dir', 'abspath' );
+		switch ( $option ) {
+			case 'wp_upload_dir':
+				return 'example.pdf';
+			default: // 'abspath'
+				return 'wp-content/uploads/example.pdf';
 		}
 	}
 

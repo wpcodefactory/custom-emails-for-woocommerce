@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,11 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.2.7 - 16/08/2023 =
+* Fix - Declaring HPOS compatibility for the free plugin version, even if the Pro version is activated.
+* Dev - General - "Base dir" option added (defaults to "WP root directory"). Affects the "Email attachments" options.
+* Dev - Debug - Email attachments info added.
 
 = 2.2.6 - 09/08/2023 =
 * Dev - Admin settings - Delay - Description updated.
