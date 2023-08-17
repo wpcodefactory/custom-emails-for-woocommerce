@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.2.7
+ * @version 2.2.8
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -202,7 +202,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.2.5
+	 * @version 2.2.8
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
@@ -222,7 +222,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 		$this->alg_wc_ce_debug( __( 'Triggered.', 'custom-emails-for-woocommerce' ) );
 
 		// Check if it's enabled
-		if ( ! $this->is_enabled() || ! apply_filters( 'alg_wc_custom_emails_is_enabled', true, $this, $object_id ) ) {
+		if ( ! $this->is_enabled() || ! apply_filters( 'alg_wc_custom_emails_is_enabled', true, $this, $object_id, $do_force_send ) ) {
 			$this->alg_wc_ce_debug( __( 'Disabled.', 'custom-emails-for-woocommerce' ) );
 			return;
 		}
