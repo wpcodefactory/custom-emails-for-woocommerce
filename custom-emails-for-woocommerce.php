@@ -3,12 +3,12 @@
 Plugin Name: Custom Emails for WooCommerce
 Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
 Description: Add custom emails to WooCommerce.
-Version: 2.2.9
+Version: 2.3.0
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: custom-emails-for-woocommerce
 Domain Path: /langs
-WC tested up to: 8.1
+WC tested up to: 8.2
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +30,7 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '2.2.9' );
+defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '2.3.0' );
 
 defined( 'ALG_WC_CUSTOM_EMAILS_FILE' ) || define( 'ALG_WC_CUSTOM_EMAILS_FILE', __FILE__ );
 

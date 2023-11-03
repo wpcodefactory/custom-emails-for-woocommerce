@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 2.1.0
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -27,9 +27,11 @@ class Alg_WC_Custom_Emails_Admin {
 		add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
 
 		// Orders > Bulk actions (dropdown)
-		add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_actions_bulk' ), 20, 1 );
-		add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'do_order_actions_bulk' ), 10, 3 );
-		add_action( 'admin_notices',                       array( $this, 'bulk_action_admin_notice' ) );
+		add_filter( 'bulk_actions-edit-shop_order',                   array( $this, 'add_order_actions_bulk' ), 20 );
+		add_filter( 'bulk_actions-woocommerce_page_wc-orders',        array( $this, 'add_order_actions_bulk' ), 20 );
+		add_filter( 'handle_bulk_actions-edit-shop_order',            array( $this, 'do_order_actions_bulk' ), 10, 3 );
+		add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( $this, 'do_order_actions_bulk' ), 10, 3 );
+		add_action( 'admin_notices',                                  array( $this, 'bulk_action_admin_notice' ) );
 
 		// Orders > Preview
 		add_filter( 'woocommerce_admin_order_preview_actions', array( $this, 'add_order_actions_preview' ), 10, 2 );

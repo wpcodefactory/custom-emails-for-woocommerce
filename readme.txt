@@ -1,9 +1,9 @@
 === Custom Emails for WooCommerce ===
-Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 2.2.9
+Stable tag: 2.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,12 +47,16 @@ Free plugin version allows you to set up one custom email with all available fea
 
 == Changelog ==
 
+= 2.3.0 - 03/11/2023 =
+* Fix - Admin Options - Admin actions - Orders > Bulk actions - HPOS compatibility (`wc-orders` page).
+* WC tested up to: 8.2.
+
 = 2.2.9 - 25/09/2023 =
 * WC tested up to: 8.1.
-* Update plugin icon, banner.
+* Plugin icon, banner updated.
 
 = 2.2.8 - 17/08/2023 =
-* Dev - Developers - `alg_wc_custom_emails_is_enabled` - `$do_force_send` parameter added.
+* Dev - Developers - `alg_wc_custom_emails_is_enabled` filter - `$do_force_send` parameter added.
 
 = 2.2.7 - 16/08/2023 =
 * Fix - Declaring HPOS compatibility for the free plugin version, even if the Pro version is activated.
