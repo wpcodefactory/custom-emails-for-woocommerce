@@ -2,13 +2,13 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.2.8
+ * @version 2.4.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) :
 
@@ -94,27 +94,51 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
+	 * alg_wc_ce_do_add_header_and_footer.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function alg_wc_ce_do_add_header_and_footer() {
+		return ( 'yes' === $this->get_option( 'wrap_in_wc_template', 'yes' ) );
+	}
+
+	/**
 	 * get_content_html.
 	 *
-	 * @version 2.2.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 */
 	function get_content_html() {
-		$content = $this->get_option( 'content' );
-		if ( 'yes' === $this->get_option( 'wrap_in_wc_template', 'yes' ) ) {
-			$content = alg_wc_custom_emails()->core->wrap_in_wc_email_template( $content, $this->get_heading(), $this );
-		}
-		return $content;
+		return wc_get_template_html(
+			'emails/alg-wc-custom-email.php',
+			array(
+				'order'         => $this->object,
+				'email_heading' => $this->get_heading(),
+				'content'       => $this->get_option( 'content' ),
+				'plain_text'    => false,
+				'email'         => $this,
+			)
+		);
 	}
 
 	/**
 	 * get_content_plain.
 	 *
-	 * @version 1.0.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 */
 	function get_content_plain() {
-		return $this->get_option( 'content' );
+		return wc_get_template_html(
+			'emails/plain/alg-wc-custom-email.php',
+			array(
+				'order'         => $this->object,
+				'email_heading' => $this->get_heading(),
+				'content'       => $this->get_option( 'content' ),
+				'plain_text'    => true,
+				'email'         => $this,
+			)
+		);
 	}
 
 	/**

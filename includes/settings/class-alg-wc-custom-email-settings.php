@@ -2,13 +2,13 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.2.7
+ * @version 2.4.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_Custom_Email_Settings' ) ) :
 
@@ -358,7 +358,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.2.7
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
@@ -461,15 +461,16 @@ class Alg_WC_Custom_Email_Settings {
 				'css'         => 'width:100%;',
 			),
 			'wrap_in_wc_template' => array(
-				'title'       => __( 'WC email template', 'custom-emails-for-woocommerce' ),
-				'label'       => __( 'Wrap', 'custom-emails-for-woocommerce' ),
+				'title'       => __( 'Header & footer', 'custom-emails-for-woocommerce' ),
+				'label'       => __( 'Add', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => __( 'Adds WooCommerce email header and footer to the content.', 'custom-emails-for-woocommerce' ),
 				'type'        => 'checkbox',
 				'default'     => 'yes',
 			),
 			'heading' => array(
 				'title'       => __( 'Email heading', 'woocommerce' ),
 				'type'        => 'text',
-				'desc_tip'    => __( 'Used only if "WC email template" option is enabled and only for "HTML" email type.', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => __( 'Used only if "Header & footer" option is enabled.', 'custom-emails-for-woocommerce' ),
 				'description' => $this->get_placeholder_text(),
 				'placeholder' => $this->get_default_heading(),
 				'default'     => '',

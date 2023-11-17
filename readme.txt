@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
-Tested up to: 6.3
-Stable tag: 2.3.0
+Tested up to: 6.4
+Stable tag: 2.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,15 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.4.0 - 17/11/2023 =
+* Dev - General - Advanced Options - "Use actions for WC email template" option removed (now always using actions).
+* Dev - Email Data - "WC email template" option renamed to "Header & footer". Now the option is applied to "Plain text" emails as well.
+* Dev - Using overridable email templates now.
+* Dev - Code refactoring.
+* Dev - Developers - `alg_wc_custom_emails_get_wc_email_template_part` filter removed.
+* Tested up to: 6.4.
+* WC tested up to: 8.3.
 
 = 2.3.0 - 03/11/2023 =
 * Fix - Admin Options - Admin actions - Orders > Bulk actions - HPOS compatibility (`wc-orders` page).

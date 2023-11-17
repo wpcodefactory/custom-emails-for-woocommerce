@@ -2,13 +2,13 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.2.7
+ * @version 2.4.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_Custom_Emails_Core' ) ) :
 
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
@@ -59,6 +59,9 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Delayed emails
 		add_action( 'alg_wc_custom_emails_send_email', array( $this, 'send_delayed_email' ), 10, 2 );
+
+		// Templates
+		add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
 
 		// Core loaded
 		do_action( 'alg_wc_custom_emails_core_loaded', $this );
@@ -87,6 +90,22 @@ class Alg_WC_Custom_Emails_Core {
 		if ( $this->do_debug ) {
 			$this->add_to_log( $message );
 		}
+	}
+
+	/**
+	 * locate_template.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function locate_template( $template, $template_name, $template_path ) {
+		if (
+			in_array( $template_name, array( 'emails/alg-wc-custom-email.php', 'emails/plain/alg-wc-custom-email.php' ) ) &&
+			! file_exists( $template )
+		) {
+			return alg_wc_custom_emails()->plugin_path() . '/templates/' . $template_name;
+		}
+		return $template;
 	}
 
 	/**
@@ -264,49 +283,6 @@ class Alg_WC_Custom_Emails_Core {
 		// Final content
 		return $content;
 
-	}
-
-	/**
-	 * wrap_in_wc_email_template.
-	 *
-	 * @version 2.2.0
-	 * @since   1.0.0
-	 */
-	function wrap_in_wc_email_template( $content, $email_heading = '', $email = null ) {
-		return $this->get_wc_email_template_part( 'header', $email_heading, $email ) .
-			$content .
-		str_replace( '{site_title}', wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), $this->get_wc_email_template_part( 'footer', '', $email ) );
-	}
-
-	/**
-	 * get_wc_email_template_part.
-	 *
-	 * @version 2.2.0
-	 * @since   1.0.0
-	 */
-	function get_wc_email_template_part( $part, $email_heading = '', $email = null ) {
-		ob_start();
-		$do_use_actions = ( 'yes' === get_option( 'alg_wc_custom_emails_wrap_in_wc_template_use_actions', 'no' ) );
-		switch ( $part ) {
-
-			case 'header':
-				if ( $do_use_actions ) {
-					do_action( 'woocommerce_email_header', $email_heading, $email );
-				} else {
-					wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading ) );
-				}
-				break;
-
-			case 'footer':
-				if ( $do_use_actions ) {
-					do_action( 'woocommerce_email_footer', $email );
-				} else {
-					wc_get_template( 'emails/email-footer.php' );
-				}
-				break;
-
-		}
-		return apply_filters( 'alg_wc_custom_emails_get_wc_email_template_part', ob_get_clean(), $part, $email_heading, $email );
 	}
 
 	/**

@@ -2,13 +2,13 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 2.2.7
+ * @version 2.4.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_Custom_Emails_Settings_General' ) ) :
 
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.7
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -98,14 +98,6 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'default'  => '',
 				'type'     => 'textarea',
 				'css'      => 'height:150px;font-family:monospace;',
-			),
-			array(
-				'title'    => __( 'Use actions for WC email template', 'custom-emails-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'custom-emails-for-woocommerce' ),
-				'desc_tip' => __( 'Affects "Email Data > WC email template" options.', 'custom-emails-for-woocommerce' ),
-				'id'       => 'alg_wc_custom_emails_wrap_in_wc_template_use_actions',
-				'default'  => 'no',
-				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Base dir', 'custom-emails-for-woocommerce' ),
