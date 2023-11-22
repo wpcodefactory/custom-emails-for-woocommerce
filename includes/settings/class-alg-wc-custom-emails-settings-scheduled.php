@@ -118,14 +118,14 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	function get_settings() {
 		return array(
 			array(
-				'title'    => __( 'Scheduled Emails', 'custom-emails-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_custom_emails_scheduled',
-				'desc'     => $this->get_delayed_emails_info(),
+				'title' => __( 'Scheduled Emails', 'custom-emails-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_custom_emails_scheduled',
+				'desc'  => $this->get_delayed_emails_info(),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_custom_emails_scheduled',
+				'type'  => 'sectionend',
+				'id'    => 'alg_wc_custom_emails_scheduled',
 			),
 		);
 	}

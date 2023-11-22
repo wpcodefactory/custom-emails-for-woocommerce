@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 2.4.0
+ * @version 2.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -41,32 +41,32 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 
 		$general_settings = apply_filters( 'alg_wc_custom_emails_admin_settings_general', array(
 			array(
-				'title'    => __( 'General Options', 'custom-emails-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Settings for each custom email are located in %s.', 'custom-emails-for-woocommerce' ),
-					'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=email' ) . '">' . __( 'WooCommerce > Settings > Emails', 'custom-emails-for-woocommerce' ) . '</a>' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_custom_emails_general_options',
+				'title'             => __( 'General Options', 'custom-emails-for-woocommerce' ),
+				'desc'              => sprintf( __( 'Settings for each custom email are located in %s.', 'custom-emails-for-woocommerce' ),
+					sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=wc-settings&tab=email' ), __( 'WooCommerce > Settings > Emails', 'custom-emails-for-woocommerce' ) ) ),
+				'type'              => 'title',
+				'id'                => 'alg_wc_custom_emails_general_options',
 			),
 			array(
-				'title'    => __( 'Number of custom emails', 'custom-emails-for-woocommerce' ),
-				'desc'     => apply_filters( 'alg_wc_custom_emails_admin_settings',
+				'title'             => __( 'Number of custom emails', 'custom-emails-for-woocommerce' ),
+				'desc'              => apply_filters( 'alg_wc_custom_emails_admin_settings',
 					'You will need <a href="https://wpfactory.com/item/custom-emails-for-woocommerce/">Custom Emails for WooCommerce Pro</a> plugin to add more than one custom email.', 'button-total' ),
-				'id'       => 'alg_wc_custom_emails_total',
-				'default'  => 1,
-				'type'     => 'number',
+				'id'                => 'alg_wc_custom_emails_total',
+				'default'           => 1,
+				'type'              => 'number',
 				'custom_attributes' => apply_filters( 'alg_wc_custom_emails_admin_settings', array( 'readonly' => 'readonly' ), 'array-total' ),
 			),
 			array(
-				'title'    => __( 'Admin title', 'custom-emails-for-woocommerce' ),
-				'desc'     => '[<a href="' . admin_url( 'admin.php?page=wc-settings&tab=email&section=alg_wc_custom_email' ) . '">' .
-					__( 'settings', 'custom-emails-for-woocommerce' ) . '</a>]',
-				'id'       => 'alg_wc_custom_emails_titles[1]',
-				'default'  => __( 'Custom email', 'custom-emails-for-woocommerce' ),
-				'type'     => 'text',
+				'title'             => __( 'Admin title', 'custom-emails-for-woocommerce' ),
+				'desc'              => sprintf( '[<a href="%s">%s</a>]',
+					admin_url( 'admin.php?page=wc-settings&tab=email&section=alg_wc_custom_email' ), __( 'settings', 'custom-emails-for-woocommerce' ) ),
+				'id'                => 'alg_wc_custom_emails_titles[1]',
+				'default'           => __( 'Custom email', 'custom-emails-for-woocommerce' ),
+				'type'              => 'text',
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_custom_emails_general_options',
+				'type'              => 'sectionend',
+				'id'                => 'alg_wc_custom_emails_general_options',
 			),
 		) );
 

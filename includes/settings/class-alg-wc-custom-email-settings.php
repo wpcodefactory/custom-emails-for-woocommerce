@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.4.0
+ * @version 2.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -178,13 +178,13 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_placeholder_text.
 	 *
-	 * @version 2.2.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 */
 	function get_placeholder_text() {
 		$placeholders = array( '{site_title}', '{site_address}', '{order_number}', '{order_date}' );
 		return sprintf( __( 'You can use <a href="%s" target="_blank">shortcodes</a> or <span title="%s" style="%s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
-			'https://wpfactory.com/docs/custom-emails-for-woocommerce/shortcodes/', implode( ', ', $placeholders ), 'text-decoration:underline;' );
+			'https://wpfactory.com/docs/custom-emails-for-woocommerce/', implode( ', ', $placeholders ), 'text-decoration:underline;' );
 	}
 
 	/**
@@ -356,9 +356,23 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
+	 * get_user_roles.
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function get_user_roles() {
+		global $wp_roles;
+		return array_merge(
+			array( 'alg_wc_ce_guest' => __( 'No role (guest)', 'custom-emails-for-woocommerce' ) ),
+			( ! empty( $wp_roles->roles ) ? wp_list_pluck( apply_filters( 'editable_roles', $wp_roles->roles ), 'name' ) : array() )
+		);
+	}
+
+	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.4.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
@@ -385,44 +399,44 @@ class Alg_WC_Custom_Email_Settings {
 		// Triggers
 		$fields = array_merge( $fields, array(
 			'trigger_options' => array(
-				'title'       => __( 'Triggers', 'custom-emails-for-woocommerce' ),
-				'type'        => 'title',
+				'title'             => __( 'Triggers', 'custom-emails-for-woocommerce' ),
+				'type'              => 'title',
 			),
 			'trigger' => array(
-				'title'       => __( 'Triggers', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_triggers(),
-				'desc_tip'    => __( 'Please note, that all <em>new orders</em> in WooCommerce by default are created with "Pending payment" status.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Triggers', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => array(),
+				'options'           => $this->get_triggers(),
+				'desc_tip'          => __( 'Please note, that all <em>new orders</em> in WooCommerce by default are created with "Pending payment" status.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'delay' => array(
-				'title'       => __( 'Delay', 'custom-emails-for-woocommerce' ),
-				'type'        => 'number',
-				'placeholder' => '',
-				'default'     => 0,
-				'css'         => 'width:100%;',
+				'title'             => __( 'Delay', 'custom-emails-for-woocommerce' ),
+				'type'              => 'number',
+				'placeholder'       => '',
+				'default'           => 0,
+				'css'               => 'width:100%;',
 				'custom_attributes' => array( 'min' => 0, 'step' => 0.01 ),
 			),
 			'delay_unit' => array(
-				'desc_tip'    => __( 'Delay unit.', 'custom-emails-for-woocommerce' ),
-				'description' => sprintf( __( 'Scheduled emails will be listed in <a href="%s">%s</a>.', 'custom-emails-for-woocommerce' ),
+				'desc_tip'          => __( 'Delay unit.', 'custom-emails-for-woocommerce' ),
+				'description'       => sprintf( __( 'Scheduled emails will be listed in <a href="%s">%s</a>.', 'custom-emails-for-woocommerce' ),
 					admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_emails&section=scheduled' ),
 					__( 'WooCommerce > Settings > Custom Emails > Scheduled', 'custom-emails-for-woocommerce' ) ),
-				'type'        => 'select',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => 1,
-				'options'     => array(
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => 1,
+				'options'           => array(
 					1                 => __( 'seconds', 'custom-emails-for-woocommerce' ),
 					MINUTE_IN_SECONDS => __( 'minutes', 'custom-emails-for-woocommerce' ),
 					HOUR_IN_SECONDS   => __( 'hours', 'custom-emails-for-woocommerce' ),
 					DAY_IN_SECONDS    => __( 'days', 'custom-emails-for-woocommerce' ),
 					WEEK_IN_SECONDS   => __( 'weeks', 'custom-emails-for-woocommerce' ),
 				),
-				'css'         => 'width:100%;',
+				'css'               => 'width:100%;',
 			),
 		) );
 
@@ -520,18 +534,18 @@ class Alg_WC_Custom_Email_Settings {
 		// Order Options
 		$fields = array_merge( $fields, array(
 			'order_options' => array(
-				'title'       => __( 'Order Options', 'custom-emails-for-woocommerce' ),
-				'type'        => 'title',
-				'description' => __( 'Options are ignored for non-order emails.', 'custom-emails-for-woocommerce' ),
+				'title'             => __( 'Order Options', 'custom-emails-for-woocommerce' ),
+				'type'              => 'title',
+				'description'       => __( 'Options are ignored for non-order emails.', 'custom-emails-for-woocommerce' ),
 			),
 			'required_order_product_ids' => array(
-				'title'       => __( 'Require products', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-product-search',
-				'default'     => array(),
-				'options'     => $this->get_ajax_options( 'product', $email, 'required_order_product_ids' ),
-				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Require products', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-product-search',
+				'default'           => array(),
+				'options'           => $this->get_ajax_options( 'product', $email, 'required_order_product_ids' ),
+				'desc_tip'          => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 				'custom_attributes' => array(
 					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
 					'data-action'      => 'woocommerce_json_search_products_and_variations',
@@ -539,13 +553,13 @@ class Alg_WC_Custom_Email_Settings {
 				),
 			),
 			'excluded_order_product_ids' => array(
-				'title'       => __( 'Exclude products', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-product-search',
-				'default'     => array(),
-				'options'     => $this->get_ajax_options( 'product', $email, 'excluded_order_product_ids' ),
-				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Exclude products', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-product-search',
+				'default'           => array(),
+				'options'           => $this->get_ajax_options( 'product', $email, 'excluded_order_product_ids' ),
+				'desc_tip'          => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 				'custom_attributes' => array(
 					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
 					'data-action'      => 'woocommerce_json_search_products_and_variations',
@@ -553,104 +567,144 @@ class Alg_WC_Custom_Email_Settings {
 				),
 			),
 			'required_order_product_cats_ids' => array(
-				'title'       => __( 'Require product categories', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_terms( 'product_cat' ),
-				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Require product categories', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => array(),
+				'options'           => $this->get_terms( 'product_cat' ),
+				'desc_tip'          => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'excluded_order_product_cats_ids' => array(
-				'title'       => __( 'Exclude product categories', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_terms( 'product_cat' ),
-				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Exclude product categories', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => array(),
+				'options'           => $this->get_terms( 'product_cat' ),
+				'desc_tip'          => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'required_order_product_tags_ids' => array(
-				'title'       => __( 'Require product tags', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_terms( 'product_tag' ),
-				'desc_tip'    => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Require product tags', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => array(),
+				'options'           => $this->get_terms( 'product_tag' ),
+				'desc_tip'          => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'excluded_order_product_tags_ids' => array(
-				'title'       => __( 'Exclude product tags', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'chosen_select',
-				'placeholder' => '',
-				'default'     => array(),
-				'options'     => $this->get_terms( 'product_tag' ),
-				'desc_tip'    => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Exclude product tags', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'placeholder'       => '',
+				'default'           => array(),
+				'options'           => $this->get_terms( 'product_tag' ),
+				'desc_tip'          => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'min_order_amount' => array(
-				'title'       => __( 'Minimum amount', 'custom-emails-for-woocommerce' ),
-				'type'        => 'text',
-				'class'       => 'wc_input_price',
-				'placeholder' => '',
-				'default'     => '',
-				'desc_tip'    => __( 'Minimum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Minimum amount', 'custom-emails-for-woocommerce' ),
+				'type'              => 'text',
+				'class'             => 'wc_input_price',
+				'placeholder'       => '',
+				'default'           => '',
+				'desc_tip'          => __( 'Minimum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'max_order_amount' => array(
-				'title'       => __( 'Maximum amount', 'custom-emails-for-woocommerce' ),
-				'type'        => 'text',
-				'class'       => 'wc_input_price',
-				'placeholder' => '',
-				'default'     => '',
-				'desc_tip'    => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Maximum amount', 'custom-emails-for-woocommerce' ),
+				'type'              => 'text',
+				'class'             => 'wc_input_price',
+				'placeholder'       => '',
+				'default'           => '',
+				'desc_tip'          => __( 'Maximum order amount (subtotal) for email to be sent.', 'custom-emails-for-woocommerce' ),
+				'css'               => 'width:100%;',
 			),
 			'required_order_payment_gateway_ids' => array(
-				'title'       => __( 'Require payment gateways', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-enhanced-select',
-				'default'     => array(),
-				'options'     => $this->get_gateways(),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Require payment gateways', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_gateways(),
+				'css'               => 'width:100%;',
 			),
 			'excluded_order_payment_gateway_ids' => array(
-				'title'       => __( 'Exclude payment gateways', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-enhanced-select',
-				'default'     => array(),
-				'options'     => $this->get_gateways(),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Exclude payment gateways', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_gateways(),
+				'css'               => 'width:100%;',
 			),
 			'required_order_shipping_instance_ids' => array(
-				'title'       => __( 'Require shipping methods', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-enhanced-select',
-				'default'     => array(),
-				'options'     => $this->get_shipping_methods_instances(),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Require shipping methods', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_shipping_methods_instances(),
+				'css'               => 'width:100%;',
 			),
 			'excluded_order_shipping_instance_ids' => array(
-				'title'       => __( 'Exclude shipping methods', 'custom-emails-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-enhanced-select',
-				'default'     => array(),
-				'options'     => $this->get_shipping_methods_instances(),
-				'css'         => 'width:100%;',
+				'title'             => __( 'Exclude shipping methods', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_shipping_methods_instances(),
+				'css'               => 'width:100%;',
+			),
+			'required_order_user_ids' => array(
+				'title'             => __( 'Require users', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-customer-search',
+				'default'           => array(),
+				'options'           => $this->get_ajax_options( 'customer', $email, 'required_order_user_ids' ),
+				'css'               => 'width:100%;',
+				'custom_attributes' => array(
+					'data-placeholder' => __( 'Search for a user&hellip;', 'woocommerce' ),
+					'data-allow_clear' => true,
+				),
+			),
+			'excluded_order_user_ids' => array(
+				'title'             => __( 'Exclude users', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-customer-search',
+				'default'           => array(),
+				'options'           => $this->get_ajax_options( 'customer', $email, 'excluded_order_user_ids' ),
+				'css'               => 'width:100%;',
+				'custom_attributes' => array(
+					'data-placeholder' => __( 'Search for a user&hellip;', 'woocommerce' ),
+					'data-allow_clear' => true,
+				),
+			),
+			'required_order_user_roles' => array(
+				'title'             => __( 'Require user roles', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_user_roles(),
+				'css'               => 'width:100%;',
+			),
+			'excluded_order_user_roles' => array(
+				'title'             => __( 'Exclude user roles', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => $this->get_user_roles(),
+				'css'               => 'width:100%;',
 			),
 			'order_conditions_logical_operator' => array(
-				'title'       => __( 'Logical operator', 'custom-emails-for-woocommerce' ),
-				'desc_tip'    => sprintf( __( 'Logical operator for the "Order Options" section, for example: %s vs %s.', 'custom-emails-for-woocommerce' ),
+				'title'             => __( 'Logical operator', 'custom-emails-for-woocommerce' ),
+				'desc_tip'          => sprintf( __( 'Logical operator for the "Order Options" section, for example: %s vs %s.', 'custom-emails-for-woocommerce' ),
 					'<br><em>"' . __( 'Require products AND Minimum amount', 'custom-emails-for-woocommerce' ) . '"</em><br>',
 					'<br><em>"' . __( 'Require products OR Minimum amount', 'custom-emails-for-woocommerce' )  . '"</em>' ),
-				'type'        => 'select',
-				'class'       => 'chosen_select',
-				'default'     => 'AND',
-				'options'     => array(
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'default'           => 'AND',
+				'options'           => array(
 					'AND' => 'AND',
 					'OR'  => 'OR',
 				),

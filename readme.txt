@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,6 +20,7 @@ Add custom emails to WooCommerce.
 * **Require/exclude order product(s)** - sent email only if there were selected products, product categories or tags in the order.
 * Set **minimum/maximum order amount** - minimum/maximum order amount (subtotal) for email to be sent.
 * Require/exclude order **payment gateways** or **shipping methods**.
+* Require/exclude order **user roles** or **users**.
 * Set **subject**, **heading** and **content**. You can use the plugin's [shortcodes](https://wpfactory.com/docs/custom-emails-for-woocommerce/shortcodes/) or standard WooCommerce email placeholders here.
 * **Attach files** to the custom emails.
 * Set **email type** - choose which format of email to send (plain text, HTML, multipart). Optionally wrap email in **WooCommerce email template**.
@@ -46,6 +47,13 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.5.0 - 22/11/2023 =
+* Dev - Order Options - "Require users" option added.
+* Dev - Order Options - "Exclude users" option added.
+* Dev - Order Options - "Require user roles" option added.
+* Dev - Order Options - "Exclude user roles" option added.
+* Dev - Code refactoring.
 
 = 2.4.0 - 17/11/2023 =
 * Dev - General - Advanced Options - "Use actions for WC email template" option removed (now always using actions).

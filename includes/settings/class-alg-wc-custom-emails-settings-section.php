@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Section Settings
  *
- * @version 1.0.0
+ * @version 2.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,22 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_Custom_Emails_Settings_Section' ) ) :
 
 class Alg_WC_Custom_Emails_Settings_Section {
+
+	/**
+	 * id.
+	 *
+	 * @version 2.5.0
+	 * @since   1.0.0
+	 */
+	public $id;
+
+	/**
+	 * desc.
+	 *
+	 * @version 2.5.0
+	 * @since   1.0.0
+	 */
+	public $desc;
 
 	/**
 	 * Constructor.

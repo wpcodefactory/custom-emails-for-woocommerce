@@ -40,21 +40,21 @@ class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
 		global $current_section;
 		return array_merge( apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() ), array(
 			array(
-				'title'     => __( 'Reset Settings', 'custom-emails-for-woocommerce' ),
-				'type'      => 'title',
-				'id'        => $this->id . '_' . $current_section . '_reset_options',
+				'title'    => __( 'Reset Settings', 'custom-emails-for-woocommerce' ),
+				'type'     => 'title',
+				'id'       => $this->id . '_' . $current_section . '_reset_options',
 			),
 			array(
-				'title'     => __( 'Reset section settings', 'custom-emails-for-woocommerce' ),
-				'desc'      => '<strong>' . __( 'Reset', 'custom-emails-for-woocommerce' ) . '</strong>',
-				'desc_tip'  => __( 'Check the box and save changes to reset.', 'custom-emails-for-woocommerce' ),
-				'id'        => $this->id . '_' . $current_section . '_reset',
-				'default'   => 'no',
-				'type'      => 'checkbox',
+				'title'    => __( 'Reset section settings', 'custom-emails-for-woocommerce' ),
+				'desc'     => '<strong>' . __( 'Reset', 'custom-emails-for-woocommerce' ) . '</strong>',
+				'desc_tip' => __( 'Check the box and save changes to reset.', 'custom-emails-for-woocommerce' ),
+				'id'       => $this->id . '_' . $current_section . '_reset',
+				'default'  => 'no',
+				'type'     => 'checkbox',
 			),
 			array(
-				'type'      => 'sectionend',
-				'id'        => $this->id . '_' . $current_section . '_reset_options',
+				'type'     => 'sectionend',
+				'id'       => $this->id . '_' . $current_section . '_reset_options',
 			),
 		) );
 	}

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 2.2.0
+ * @version 2.5.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 2.2.0
+	 * @version 2.5.0
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
@@ -65,6 +65,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 			'excluded_payment_gateways',
 			'required_shipping_methods',
 			'excluded_shipping_methods',
+			'required_users',
+			'excluded_users',
+			'required_user_roles',
+			'excluded_user_roles',
 		);
 
 		if ( 'AND' === $this->email->get_option( 'order_conditions_logical_operator', 'AND' ) ) {
@@ -92,6 +96,95 @@ class Alg_WC_Custom_Email_Order_Validator {
 
 		}
 
+	}
+
+	/**
+	 * check_user_id.
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function check_user_id( $order, $user_ids ) {
+		$order_user_id = ( is_callable( array( $order, 'get_user_id' ) ) ? $order->get_user_id() : false );
+		return in_array( $order_user_id, $user_ids );
+	}
+
+	/**
+	 * check_user_role.
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function check_user_role( $order, $user_roles ) {
+		$order_user_id    = ( is_callable( array( $order, 'get_user_id' ) ) ? $order->get_user_id() : false );
+		$order_user       = ( $order_user_id ? get_user_by( 'id', $order_user_id ) : false );
+		$order_user_roles = ( $order_user && ! empty( $order_user->roles ) ? (array) $order_user->roles : array( 'alg_wc_ce_guest' ) );
+		$intersect        = array_intersect( $order_user_roles, $user_roles );
+		return ( ! empty( $intersect ) );
+	}
+
+	/**
+	 * required_users.
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function required_users( $order ) {
+		$required_user_ids = $this->email->get_option( 'required_order_user_ids', array() );
+		if ( ! empty( $required_user_ids ) && ! $this->check_user_id( $order, $required_user_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Require users', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $required_user_ids ) ? true : null );
+	}
+
+	/**
+	 * excluded_users
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function excluded_users( $order ) {
+		$excluded_user_ids = $this->email->get_option( 'excluded_order_user_ids', array() );
+		if ( ! empty( $excluded_user_ids ) && $this->check_user_id( $order, $excluded_user_ids ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Exclude users', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $excluded_user_ids ) ? true : null );
+	}
+
+	/**
+	 * required_user_roles.
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function required_user_roles( $order ) {
+		$required_user_roles = $this->email->get_option( 'required_order_user_roles', array() );
+		if ( ! empty( $required_user_roles ) && ! $this->check_user_role( $order, $required_user_roles ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Require user roles', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $required_user_roles ) ? true : null );
+	}
+
+	/**
+	 * excluded_user_roles
+	 *
+	 * @version 2.5.0
+	 * @since   2.5.0
+	 */
+	function excluded_user_roles( $order ) {
+		$excluded_user_roles = $this->email->get_option( 'excluded_order_user_roles', array() );
+		if ( ! empty( $excluded_user_roles ) && $this->check_user_role( $order, $excluded_user_roles ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Exclude user roles', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $excluded_user_roles ) ? true : null );
 	}
 
 	/**
