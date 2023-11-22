@@ -21,7 +21,7 @@ Add custom emails to WooCommerce.
 * Set **minimum/maximum order amount** - minimum/maximum order amount (subtotal) for email to be sent.
 * Require/exclude order **payment gateways** or **shipping methods**.
 * Require/exclude order **user roles** or **users**.
-* Set **subject**, **heading** and **content**. You can use the plugin's [shortcodes](https://wpfactory.com/docs/custom-emails-for-woocommerce/shortcodes/) or standard WooCommerce email placeholders here.
+* Set **subject**, **heading** and **content**. You can use the plugin's [shortcodes](https://wpfactory.com/docs/custom-emails-for-woocommerce/) or standard WooCommerce email placeholders here.
 * **Attach files** to the custom emails.
 * Set **email type** - choose which format of email to send (plain text, HTML, multipart). Optionally wrap email in **WooCommerce email template**.
 * Send emails **manually**, for example, from the **Order actions** meta box on single order edit page, or in bulk from the **Bulk actions** dropdown on admin orders list.
