@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.2.5
+ * @version 2.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -31,6 +31,14 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	public $user = false;
 
 	/**
+	 * product.
+	 *
+	 * @version 2.6.0
+	 * @since   2.6.0
+	 */
+	public $product = false;
+
+	/**
 	 * email.
 	 *
 	 * @version 2.1.0
@@ -41,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.5
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -81,6 +89,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		add_shortcode( 'generate_coupon_code',       array( $this, 'generate_coupon_code' ) );
 
 		add_shortcode( 'user_prop',                  array( $this, 'user_prop' ) );
+
+		add_shortcode( 'product_func',               array( $this, 'product_func' ) );
 
 	}
 
@@ -163,6 +173,22 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		} else {
 			return '';
 		}
+	}
+
+	/**
+	 * product_func.
+	 *
+	 * @version 2.6.0
+	 * @since   2.6.0
+	 *
+	 * @todo    (dev) add (optional) function args
+	 */
+	function product_func( $atts, $content = '' ) {
+		if ( ! $this->product || ! isset( $atts['func'] ) || ! is_callable( array( $this->product, $atts['func'] ) ) ) {
+			return '';
+		}
+		$func = $atts['func'];
+		return $this->return_shortcode( $this->product->{$func}(), $atts );
 	}
 
 	/**

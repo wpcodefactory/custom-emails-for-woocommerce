@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.5.0
+Stable tag: 2.6.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ Add custom emails to WooCommerce.
 
 ### &#9989; Main Features ###
 
-* Set custom email **trigger(s)**. For example, send email when order status changed to "Completed", or only when it changed from "Pending payment" to "Completed". Custom order statuses are automatically added to the plugin's triggers list. You can choose from numerous triggers, like sending email on a new order, or when order was fully or partially refunded, or when note was added to the order. In addition you can set non-order emails, like sending an email to admin if anyone's password was reset, or new customer was created, or when a product is on backorder, and so on...
+* Set custom email **trigger(s)**. For example, send email when order status changed to "Completed", or only when it changed from "Pending payment" to "Completed". Custom order statuses are automatically added to the plugin's triggers list. You can choose from numerous triggers, like sending email on a new order, or when order was fully or partially refunded, or when note was added to the order. In addition, you can set non-order emails, like sending an email to admin if anyone's password was reset, or new customer was created, or when a product is on backorder, published, or updated, and so on...
 * **Delay** emails. For example, send custom email one week after order was "Completed".
 * **Require/exclude order product(s)** - sent email only if there were selected products, product categories or tags in the order.
 * Set **minimum/maximum order amount** - minimum/maximum order amount (subtotal) for email to be sent.
@@ -47,6 +47,11 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.6.0 - 30/11/2023 =
+* Dev - Triggers - Extra - "Product published" and "Product updated" triggers added.
+* Dev - Shortcodes - `[product_func]` shortcode added.
+* Dev - Code refactoring.
 
 = 2.5.0 - 22/11/2023 =
 * Dev - Order Options - "Require users" option added.

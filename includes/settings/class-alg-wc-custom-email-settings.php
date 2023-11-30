@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.5.0
+ * @version 2.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -89,9 +89,10 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_triggers.
 	 *
-	 * @version 2.1.0
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
+	 * @todo    (dev) `alg_wc_ce_product_published_notification`: `woocommerce_new_product`?
 	 * @todo    (dev) `renewal`: are we sure all of them exist?
 	 * @todo    (dev) `renewal`: `woocommerce_new_order_renewal_notification_alg_wc_ce_any`?
 	 * @todo    (dev) `renewal`: only add if `WC_Subscriptions` class exist?
@@ -138,6 +139,8 @@ class Alg_WC_Custom_Email_Settings {
 			'woocommerce_low_stock_notification'                => __( 'Low stock notification', 'custom-emails-for-woocommerce' ),
 			'woocommerce_no_stock_notification'                 => __( 'No stock notification', 'custom-emails-for-woocommerce' ),
 			'woocommerce_product_on_backorder_notification'     => __( 'Product on backorder notification', 'custom-emails-for-woocommerce' ),
+			'alg_wc_ce_product_published_notification'          => __( 'Product published', 'custom-emails-for-woocommerce' ),
+			'woocommerce_update_product_notification'           => __( 'Product updated', 'custom-emails-for-woocommerce' ),
 			'woocommerce_created_customer_notification'         => __( 'Created customer notification', 'custom-emails-for-woocommerce' ),
 		);
 

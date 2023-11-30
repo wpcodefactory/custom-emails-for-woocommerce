@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.4.0
+ * @version 2.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -195,7 +195,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_hook_triggers.
 	 *
-	 * @version 2.0.0
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 */
 	function alg_wc_ce_hook_triggers() {
@@ -204,11 +204,10 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$is_new_order_hook_added = false;
 			foreach ( $triggers as $trigger ) {
 				if ( ! $is_new_order_hook_added && false !== strpos( $trigger, 'woocommerce_new_order_notification_' ) ) {
-					add_action( 'woocommerce_checkout_order_processed_notification', array( $this, 'alg_wc_ce_trigger' ), PHP_INT_MAX );
+					$trigger                 = 'woocommerce_checkout_order_processed_notification';
 					$is_new_order_hook_added = true;
-				} else {
-					add_action( $trigger, array( $this, 'alg_wc_ce_trigger' ), PHP_INT_MAX );
 				}
+				add_action( $trigger, array( $this, 'alg_wc_ce_trigger' ), PHP_INT_MAX );
 			}
 		}
 	}
@@ -226,7 +225,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.2.8
+	 * @version 2.6.0
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
@@ -261,8 +260,9 @@ class Alg_WC_Custom_Email extends WC_Email {
 		}
 
 		// Email
-		$order = false;
-		$user  = false;
+		$order   = false;
+		$user    = false;
+		$product = false;
 		if ( $object_id ) {
 
 			if (
@@ -274,49 +274,55 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$user            = get_user_by( 'ID', $object_id );
 				$this->recipient = $user->user_email;
 
-			} else {
+			} elseif ( ( $_product = wc_get_product( $object_id ) ) && is_a( $_product, 'WC_Product' ) ) {
+
+				// Product email
+				$product = $_product;
+
+				// Debug
+				$this->alg_wc_ce_debug( sprintf( __( 'Product #%s.', 'custom-emails-for-woocommerce' ), $product->get_id() ) );
+
+			} elseif ( ( $_order = wc_get_order( $object_id ) ) && is_a( $_order, 'WC_Order' ) ) {
 
 				// Order email
-				$order = wc_get_order( $object_id );
-				if ( is_a( $order, 'WC_Order' ) ) {
+				$order = $_order;
 
-					// Setting object (must be named `object` as it's named so in the parent class (`WC_Email`), e.g., for attachments)
-					$this->object = $order;
+				// Setting object (must be named `object` as it's named so in the parent class (`WC_Email`), e.g., for attachments)
+				$this->object = $order;
 
-					// Debug
-					$this->alg_wc_ce_debug( sprintf( __( 'Order #%s.', 'custom-emails-for-woocommerce' ), $order->get_id() ) );
+				// Debug
+				$this->alg_wc_ce_debug( sprintf( __( 'Order #%s.', 'custom-emails-for-woocommerce' ), $order->get_id() ) );
 
-					// Filter
-					if ( ! apply_filters( 'alg_wc_custom_emails_do_send_order_email', true, $this, $order ) ) {
-						$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
-							'alg_wc_custom_emails_do_send_order_email' ) );
-						return;
-					}
-
-					// Validate order
-					if ( ! $this->alg_wc_ce_order_validator->validate( $order ) ) {
-						return;
-					}
-
-					// Placeholders
-					$this->placeholders['{order_date}']   = wc_format_datetime( $order->get_date_created() );
-					$this->placeholders['{order_number}'] = $order->get_order_number();
-
-					// Recipient
-					if ( $this->customer_email ) {
-						$this->recipient = $order->get_billing_email();
-					} elseif ( false !== strpos( $this->alg_wc_ce_original_recipient, '%customer%' ) ) {
-						$this->recipient = str_replace( '%customer%', $order->get_billing_email(), $this->alg_wc_ce_original_recipient );
-					}
-
-					// Order note
-					$order_note = sprintf( esc_html__( 'Sending "%s" email.', 'custom-emails-for-woocommerce' ), $this->get_title() ) .
-						( '' != $note ? ' ' . sprintf( esc_html__( 'Description: %s.', 'custom-emails-for-woocommerce' ), $note ) : '' );
-					$order->add_order_note( $order_note );
-
+				// Filter
+				if ( ! apply_filters( 'alg_wc_custom_emails_do_send_order_email', true, $this, $order ) ) {
+					$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
+						'alg_wc_custom_emails_do_send_order_email' ) );
+					return;
 				}
 
+				// Validate order
+				if ( ! $this->alg_wc_ce_order_validator->validate( $order ) ) {
+					return;
+				}
+
+				// Placeholders
+				$this->placeholders['{order_date}']   = wc_format_datetime( $order->get_date_created() );
+				$this->placeholders['{order_number}'] = $order->get_order_number();
+
+				// Recipient
+				if ( $this->customer_email ) {
+					$this->recipient = $order->get_billing_email();
+				} elseif ( false !== strpos( $this->alg_wc_ce_original_recipient, '%customer%' ) ) {
+					$this->recipient = str_replace( '%customer%', $order->get_billing_email(), $this->alg_wc_ce_original_recipient );
+				}
+
+				// Order note
+				$order_note = sprintf( esc_html__( 'Sending "%s" email.', 'custom-emails-for-woocommerce' ), $this->get_title() ) .
+					( '' != $note ? ' ' . sprintf( esc_html__( 'Description: %s.', 'custom-emails-for-woocommerce' ), $note ) : '' );
+				$order->add_order_note( $order_note );
+
 			}
+
 		}
 
 		// Send
@@ -324,8 +330,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 
 			$res = $this->send(
 				$this->get_recipient(),
-				$this->alg_wc_ce_get_processed_subject( $order, $user ),
-				$this->alg_wc_ce_get_processed_content( $order, $user ),
+				$this->alg_wc_ce_get_processed_subject( $order, $user, $product ),
+				$this->alg_wc_ce_get_processed_content( $order, $user, $product ),
 				$this->get_headers(),
 				$this->get_attachments()
 			);
@@ -387,25 +393,25 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_get_processed_subject.
 	 *
-	 * @version 2.2.3
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 */
-	function alg_wc_ce_get_processed_subject( $order, $user ) {
-		$subject = alg_wc_custom_emails()->core->process_content( $this->get_subject(), $this->placeholders, $order, $user, $this );
-		return apply_filters( 'alg_wc_custom_emails_subject', $subject, $this, $order, $user );
+	function alg_wc_ce_get_processed_subject( $order, $user, $product ) {
+		$subject = alg_wc_custom_emails()->core->process_content( $this->get_subject(), $this->placeholders, $order, $user, $product, $this );
+		return apply_filters( 'alg_wc_custom_emails_subject', $subject, $this, $order, $user, $product );
 	}
 
 	/**
 	 * alg_wc_ce_get_processed_content.
 	 *
-	 * @version 2.2.3
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) optional `wpautop()`
 	 */
-	function alg_wc_ce_get_processed_content( $order, $user ) {
-		$content = alg_wc_custom_emails()->core->process_content( $this->get_content(), $this->placeholders, $order, $user, $this );
-		return apply_filters( 'alg_wc_custom_emails_content', $content, $this, $order, $user );
+	function alg_wc_ce_get_processed_content( $order, $user, $product ) {
+		$content = alg_wc_custom_emails()->core->process_content( $this->get_content(), $this->placeholders, $order, $user, $product, $this );
+		return apply_filters( 'alg_wc_custom_emails_content', $content, $this, $order, $user, $product );
 	}
 
 	/**

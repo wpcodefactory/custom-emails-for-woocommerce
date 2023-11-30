@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.4.0
+ * @version 2.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.4.0
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
@@ -62,6 +62,9 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Templates
 		add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
+
+		// Product published
+		add_action( 'transition_post_status', array( $this, 'alg_wc_ce_product_published' ), 10, 3 );
 
 		// Core loaded
 		do_action( 'alg_wc_custom_emails_core_loaded', $this );
@@ -89,6 +92,22 @@ class Alg_WC_Custom_Emails_Core {
 	function debug( $message ) {
 		if ( $this->do_debug ) {
 			$this->add_to_log( $message );
+		}
+	}
+
+	/**
+	 * alg_wc_ce_product_published.
+	 *
+	 * @version 2.6.0
+	 * @since   2.6.0
+	 *
+	 * @see     https://developer.wordpress.org/reference/hooks/transition_post_status/
+	 *
+	 * @todo    (dev) run this only if `alg_wc_ce_product_published` is in `$email->get_option( 'trigger' )` for at least one of the emails?
+	 */
+	function alg_wc_ce_product_published( $new_status, $old_status, $post ) {
+		if ( 'product' === $post->post_type && 'publish' === $new_status && 'publish' !== $old_status ) {
+			do_action( 'alg_wc_ce_product_published', $post->ID );
 		}
 	}
 
@@ -179,7 +198,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_email_trigger_actions.
 	 *
-	 * @version 2.1.0
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
@@ -201,6 +220,10 @@ class Alg_WC_Custom_Emails_Core {
 				}
 			}
 		}
+
+		// Products
+		$email_actions[] = 'alg_wc_ce_product_published';
+		$email_actions[] = 'woocommerce_update_product';
 
 		// WooCommerce Subscriptions
 		$order_statuses = ( function_exists( 'wcs_get_subscription_statuses' ) ? wcs_get_subscription_statuses() : array() );
@@ -251,18 +274,19 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * process_content.
 	 *
-	 * @version 1.9.3
+	 * @version 2.6.0
 	 * @since   1.0.0
 	 */
-	function process_content( $content, $placeholders, $order, $user, $email ) {
+	function process_content( $content, $placeholders, $order, $user, $product, $email ) {
 
 		// Placeholders
 		$content = str_replace( array_keys( $placeholders ), $placeholders, $content );
 
 		// Shortcodes
-		$this->shortcodes->order = false;
-		$this->shortcodes->user  = false;
-		$this->shortcodes->email = false;
+		$this->shortcodes->order   = false;
+		$this->shortcodes->user    = false;
+		$this->shortcodes->product = false;
+		$this->shortcodes->email   = false;
 
 		if ( is_a( $email, 'WC_Email' ) ) {
 			$this->shortcodes->email = $email;
@@ -273,12 +297,16 @@ class Alg_WC_Custom_Emails_Core {
 		if ( is_a( $user, 'WP_User' ) ) {
 			$this->shortcodes->user = $user;
 		}
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$this->shortcodes->product = $product;
+		}
 
 		$content = do_shortcode( $content );
 
-		$this->shortcodes->order = false;
-		$this->shortcodes->user  = false;
-		$this->shortcodes->email = false;
+		$this->shortcodes->order   = false;
+		$this->shortcodes->user    = false;
+		$this->shortcodes->product = false;
+		$this->shortcodes->email   = false;
 
 		// Final content
 		return $content;
