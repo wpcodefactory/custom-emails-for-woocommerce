@@ -228,6 +228,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @version 2.6.0
 	 * @since   1.3.0
 	 *
+	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
+	 * @todo    (dev) `$order`, `$user`, `$product`: use `$data = array( 'order' => x, 'user' => y, 'product' => z )` instead?
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
 	 * @todo    (dev) "Order note": add "email delayed until..." note
 	 * @todo    (dev) "Order note": better description

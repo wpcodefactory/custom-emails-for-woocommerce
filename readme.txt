@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,6 +47,11 @@ Free plugin version allows you to set up one custom email with all available fea
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.6.1 - 14/12/2023 =
+* Dev - Shortcodes - `[if]` - `case_insensitive` attribute added.
+* Dev - Shortcodes - `[if]` - `operator` - `find` and `not_find` operators added.
+* WC tested up to: 8.4.
 
 = 2.6.0 - 30/11/2023 =
 * Dev - Triggers - Extra - "Product published" and "Product updated" triggers added.

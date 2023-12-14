@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.6.0
+ * @version 2.6.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -409,22 +409,31 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * if.
 	 *
-	 * @version 1.8.0
+	 * @version 2.6.1
 	 * @since   1.0.0
 	 */
 	function if( $atts, $content = '' ) {
+
 		if ( ! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) || '' === $content ) {
 			return '';
 		}
+
 		$value1 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value1'] ) );
 		$value2 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value2'] ) );
+
+		if ( isset( $atts['case_insensitive'] ) && filter_var( $atts['case_insensitive'], FILTER_VALIDATE_BOOLEAN ) ) {
+			$value1 = strtolower( $value1 );
+			$value2 = strtolower( $value2 );
+		}
+
 		return ( $this->eval_operator( $value1, $atts['operator'], $value2 ) ? do_shortcode( $content ) : '' );
+
 	}
 
 	/**
 	 * eval_operator.
 	 *
-	 * @version 2.1.0
+	 * @version 2.6.1
 	 * @since   1.8.0
 	 */
 	function eval_operator( $value1, $operator, $value2 ) {
@@ -445,6 +454,10 @@ class Alg_WC_Custom_Emails_Shortcodes {
 				return (   in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
 			case 'not_in':
 				return ( ! in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
+			case 'find':
+				return ( false !== strpos( $value2, $value1 ) );
+			case 'not_find':
+				return ( false === strpos( $value2, $value1 ) );
 		}
 		return false;
 	}

@@ -242,64 +242,64 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:245
+#: includes/classes/class-alg-wc-custom-email.php:247
 msgid "Triggered."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:249
+#: includes/classes/class-alg-wc-custom-email.php:251
 msgid "Disabled."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:258
+#: includes/classes/class-alg-wc-custom-email.php:260
 #, php-format
 msgid "Delayed (%s): In %d seconds."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:283
+#: includes/classes/class-alg-wc-custom-email.php:285
 #, php-format
 msgid "Product #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:294
+#: includes/classes/class-alg-wc-custom-email.php:296
 #, php-format
 msgid "Order #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:298
-#: includes/classes/class-alg-wc-custom-email.php:357
+#: includes/classes/class-alg-wc-custom-email.php:300
+#: includes/classes/class-alg-wc-custom-email.php:359
 #, php-format
 msgid "Blocked by the \"%s\" filter."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:320
+#: includes/classes/class-alg-wc-custom-email.php:322
 #, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:321
+#: includes/classes/class-alg-wc-custom-email.php:323
 #, php-format
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:340
+#: includes/classes/class-alg-wc-custom-email.php:342
 #, php-format
 msgid "Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:341
+#: includes/classes/class-alg-wc-custom-email.php:343
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:341
+#: includes/classes/class-alg-wc-custom-email.php:343
 msgid "failed"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:367
+#: includes/classes/class-alg-wc-custom-email.php:369
 #, php-format
 msgid "Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:368
+#: includes/classes/class-alg-wc-custom-email.php:370
 #: includes/settings/class-alg-wc-custom-email-settings.php:747
 msgid "Exclude recipients"
 msgstr ""
