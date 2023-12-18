@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,7 +145,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
-= 2.6.2 - 14/12/2023 =
+= 2.6.3 - 18/12/2023 =
+* Fix readme.txt file error.
+
+= 2.6.2 - 18/12/2023 =
 * Update readme.txt file.
 
 = 2.6.1 - 14/12/2023 =
