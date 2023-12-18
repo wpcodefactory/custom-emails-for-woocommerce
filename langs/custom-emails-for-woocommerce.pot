@@ -1,760 +1,760 @@
-#: includes/class-alg-wc-custom-emails-admin.php:70
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:70
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:93
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:93
 msgid "Invalid user role."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:97
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:97
 msgid "Invalid nonce."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:157
-#: includes/pro/class-alg-wc-custom-emails-pro.php:197
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:157
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:197
 msgid "bulk actions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:175
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:175
 #, php-format
 msgid "Emails: \"%s\" sent for %d orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:199
-#: includes/pro/class-alg-wc-custom-emails-pro.php:212
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:199
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:212
 msgid "manually"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:210
-#: includes/class-alg-wc-custom-emails-admin.php:224
-#: includes/class-alg-wc-custom-emails-admin.php:286
-#: includes/class-alg-wc-custom-emails-admin.php:336
-#: includes/pro/class-alg-wc-custom-emails-pro.php:150
-#: includes/pro/class-alg-wc-custom-emails-pro.php:178
-#: includes/pro/class-alg-wc-custom-emails-pro.php:225
-#: includes/pro/class-alg-wc-custom-emails-pro.php:241
-#: includes/settings/class-alg-wc-custom-email-settings.php:502
-#: includes/settings/class-alg-wc-custom-email-settings.php:726
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:210
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:224
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:286
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:336
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:150
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:178
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:225
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:241
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:502
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:726
 #, php-format
 msgid "Send email: %s"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:247
-#: includes/class-alg-wc-custom-emails-admin.php:310
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:247
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:310
 msgid "Link has expired."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:250
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:250
 msgid "order actions column"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:313
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-admin.php:313
 msgid "order preview"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:178
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:178
 #, php-format
 msgid "%s: Sending delayed email."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:179
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:179
 msgid "delayed"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:328
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:328
 msgid "Order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:329
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:329
 msgid "Order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:330
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:330
 msgid "New order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:332
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:332
 msgid "Extra"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:334
-#: includes/class-alg-wc-custom-emails-core.php:335
-#: includes/class-alg-wc-custom-emails-core.php:337
-#: includes/class-alg-wc-custom-emails-core.php:338
-#: includes/class-alg-wc-custom-emails-core.php:339
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:334
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:335
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:337
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:338
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:339
 msgid "Subscriptions"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:334
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:334
 msgid "Subscription status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:335
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:335
 msgid "Subscription status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:337
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:337
 msgid "Renewal order status updated to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:338
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:338
 msgid "Renewal order status updated from to"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-core.php:339
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-core.php:339
 msgid "Renewal new order"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:151
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-shortcodes.php:151
 #, php-format
 msgid "Created by the \"%s\" plugin"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-shortcodes.php:152
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails-shortcodes.php:152
 msgid "Custom Emails for WooCommerce"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:169
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails.php:169
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:172
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\class-alg-wc-custom-emails.php:172
 msgid "Go Pro"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:39
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:39
 #, php-format
 msgid "%s: New order: different status."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:48
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:135
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:151
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:167
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:183
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:290
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:306
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:355
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:371
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:387
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:403
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:419
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:435
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:451
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:467
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:483
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:499
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:48
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:135
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:151
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:167
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:183
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:290
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:306
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:355
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:371
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:387
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:403
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:419
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:435
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:451
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:467
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:483
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:499
 #, php-format
 msgid "%s: Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:49
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:49
 msgid "Require WPML language"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:136
-#: includes/settings/class-alg-wc-custom-email-settings.php:663
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:136
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:663
 msgid "Require users"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:152
-#: includes/settings/class-alg-wc-custom-email-settings.php:675
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:152
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:675
 msgid "Exclude users"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:168
-#: includes/settings/class-alg-wc-custom-email-settings.php:687
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:168
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:687
 msgid "Require user roles"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:184
-#: includes/settings/class-alg-wc-custom-email-settings.php:695
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:184
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:695
 msgid "Exclude user roles"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:291
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:291
 msgid "Require order payment gateways"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:307
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:307
 msgid "Exclude order payment gateways"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:356
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:356
 msgid "Require order shipping methods"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:372
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:372
 msgid "Exclude order shipping methods"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:388
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:388
 msgid "Require order products"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:404
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:404
 msgid "Exclude order products"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:420
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:420
 msgid "Require order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:436
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:436
 msgid "Exclude order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:452
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:452
 msgid "Require order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:468
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:468
 msgid "Exclude order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:484
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:484
 msgid "Minimum order amount"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:500
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email-order-validator.php:500
 msgid "Maximum order amount"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:82
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:82
 #, php-format
 msgid "Email attachment: %s [%s]."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:85
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:85
 msgid "ok"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:86
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:86
 msgid "does not exist!"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:175
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:175
 msgid "Your settings have been copied."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:189
-#: includes/settings/class-alg-wc-custom-emails-settings.php:89
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:189
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:89
 msgid "Your settings have been reset."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:247
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:247
 msgid "Triggered."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:251
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:251
 msgid "Disabled."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:260
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:260
 #, php-format
 msgid "Delayed (%s): In %d seconds."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:285
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:285
 #, php-format
 msgid "Product #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:296
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:296
 #, php-format
 msgid "Order #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:300
-#: includes/classes/class-alg-wc-custom-email.php:359
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:300
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:359
 #, php-format
 msgid "Blocked by the \"%s\" filter."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:322
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:322
 #, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:323
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:323
 #, php-format
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:342
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:342
 #, php-format
 msgid "Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:343
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:343
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:343
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:343
 msgid "failed"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:369
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:369
 #, php-format
 msgid "Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:370
-#: includes/settings/class-alg-wc-custom-email-settings.php:747
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\classes\class-alg-wc-custom-email.php:370
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:747
 msgid "Exclude recipients"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:77
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:77
 #, php-format
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:79
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:62
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:79
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:62
 msgid "settings"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:81
-#: includes/settings/class-alg-wc-custom-email-settings.php:36
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:76
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\pro\class-alg-wc-custom-emails-pro.php:81
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:36
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:76
 #, php-format
 msgid "Custom email #%d"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:36
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:64
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:76
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:36
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:64
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:76
 msgid "Custom email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:48
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:48
 msgid ""
 "Custom emails are sent to the recipient list when selected triggers are "
 "called."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:58
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:58
 #, php-format
 msgid "Order %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:68
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:68
 #, php-format
 msgid "[%s] Order (%s) - %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:116
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:116
 msgid "New order (Any status)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:120
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:120
 #, php-format
 msgid "New order (%s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:121
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:121
 #, php-format
 msgid "Order status updated to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:122
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:122
 #, php-format
 msgid "Renewal new order (%s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:123
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:123
 #, php-format
 msgid "Renewal order status updated to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:127
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:127
 #, php-format
 msgid "Order status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:128
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:128
 #, php-format
 msgid "Renewal order status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:135
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:135
 msgid "Reset password notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:136
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:136
 msgid "Order fully refunded notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:137
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:137
 msgid "Order partially refunded notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:138
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:138
 msgid "New customer note notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:139
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:139
 msgid "Low stock notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:140
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:140
 msgid "No stock notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:141
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:141
 msgid "Product on backorder notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:142
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:142
 msgid "Product published"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:143
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:143
 msgid "Product updated"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:144
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:144
 msgid "Created customer notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:151
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:151
 #, php-format
 msgid "Subscription status updated to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:155
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:155
 #, php-format
 msgid "Subscription status %s to %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:173
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:90
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:173
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:90
 msgid "Custom triggers"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:189
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:189
 #, php-format
 msgid ""
 "You can use <a href=\"%s\" target=\"_blank\">shortcodes</a> or <span title="
 "\"%s\" style=\"%s\">standard placeholders</span> here."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:311
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:311
 #, php-format
 msgid "Product #%d"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:314
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:314
 #, php-format
 msgid "User #%d"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:328
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:328
 #, php-format
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:354
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:354
 msgid "Select an email&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:370
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:370
 msgid "No role (guest)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:395
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:395
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:397
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:397
 msgid "Enable this email notification"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:405
-#: includes/settings/class-alg-wc-custom-email-settings.php:409
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:405
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:409
 msgid "Triggers"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:415
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:415
 msgid ""
 "Please note, that all <em>new orders</em> in WooCommerce by default are "
 "created with \"Pending payment\" status."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:419
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:419
 msgid "Delay"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:427
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:427
 msgid "Delay unit."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:428
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:428
 #, php-format
 msgid "Scheduled emails will be listed in <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:430
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:430
 msgid "WooCommerce > Settings > Custom Emails > Scheduled"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:436
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:436
 msgid "seconds"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:437
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:437
 msgid "minutes"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:438
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:438
 msgid "hours"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:439
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:439
 msgid "days"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:440
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:440
 msgid "weeks"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:450
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:450
 msgid "Email Data"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:454
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:454
 msgid "Recipients"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:456
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:456
 #, php-format
 msgid "Enter recipients (comma separated) for this email. Defaults to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:458
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:458
 #, php-format
 msgid "Use %s for customer billing email."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:464
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:464
 msgid "Subject"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:472
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:472
 msgid "Email type"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:474
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:474
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:481
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:481
 msgid "Header & footer"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:482
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:482
 msgid "Add"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:483
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:483
 msgid "Adds WooCommerce email header and footer to the content."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:488
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:488
 msgid "Email heading"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:490
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:490
 msgid "Used only if \"Header & footer\" option is enabled."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:497
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:497
 msgid "Email content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:499
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:499
 msgid "Please make sure content is not empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:501
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:501
 #, php-format
 msgid ""
 "You can test this email by opening some order's admin edit page, and "
 "selecting \"%s\" in \"Order actions\"."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:504
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:504
 msgid "Default content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:511
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:511
 msgid "Email attachments"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:513
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:513
 #, php-format
 msgid "File paths in %s, e.g.: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:516
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:516
 msgid "One file path per line."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:524
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:524
 msgid "WPML/Polylang language"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:530
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:530
 msgid "Require WPML/Polylang language."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:531
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:531
 msgid "Email will be sent only for selected current user languages."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:540
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:540
 msgid "Order Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:542
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:542
 msgid "Options are ignored for non-order emails."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:545
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:545
 msgid "Require products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:550
-#: includes/settings/class-alg-wc-custom-email-settings.php:579
-#: includes/settings/class-alg-wc-custom-email-settings.php:599
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:550
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:579
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:599
 msgid ""
 "Email will be sent only if there is at least one of the selected products in "
 "the order."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:553
-#: includes/settings/class-alg-wc-custom-email-settings.php:567
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:553
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:567
 msgid "Search for a product&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:559
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:559
 msgid "Exclude products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:564
-#: includes/settings/class-alg-wc-custom-email-settings.php:589
-#: includes/settings/class-alg-wc-custom-email-settings.php:609
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:564
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:589
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:609
 msgid ""
 "Email will NOT be sent if there is at least one of the selected products in "
 "the order."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:573
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:573
 msgid "Require product categories"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:583
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:583
 msgid "Exclude product categories"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:593
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:593
 msgid "Require product tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:603
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:603
 msgid "Exclude product tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:613
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:613
 msgid "Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:618
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:618
 msgid "Minimum order amount (subtotal) for email to be sent."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:622
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:622
 msgid "Maximum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:627
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:627
 msgid "Maximum order amount (subtotal) for email to be sent."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:631
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:631
 msgid "Require payment gateways"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:639
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:639
 msgid "Exclude payment gateways"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:647
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:647
 msgid "Require shipping methods"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:655
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:655
 msgid "Exclude shipping methods"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:670
-#: includes/settings/class-alg-wc-custom-email-settings.php:682
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:670
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:682
 msgid "Search for a user&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:703
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:703
 msgid "Logical operator"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:704
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:704
 #, php-format
 msgid ""
 "Logical operator for the \"Order Options\" section, for example: %s vs %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:705
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:705
 msgid "Require products AND Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:706
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:706
 msgid "Require products OR Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:720
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:720
 msgid "Admin Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:724
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:724
 msgid "Admin actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:725
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:725
 #, php-format
 msgid "This will add \"%s\" option to the selected positions."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:732
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:732
 msgid "Edit order > Order actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:733
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:733
 msgid "Orders > Bulk actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:734
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:734
 msgid "Orders > Preview"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:735
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:735
 msgid "Orders > Actions column"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:743
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:75
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:743
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:75
 msgid "Advanced Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:748
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:748
 #, php-format
 msgid ""
 "Excludes recipient email addresses. For example, if you are using the `%s` "
@@ -762,184 +762,184 @@ msgid ""
 "from getting the email."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:750
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:750
 msgid "Ignored if empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:751
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:751
 #, php-format
 msgid ""
 "Separate emails with a comma or with a new line. You can also use wildcard "
 "(%s) here, for example: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:762
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:762
 msgid "Settings Tools"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:769
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:769
 msgid "Copy settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:774
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:774
 msgid "Select an email to copy settings from and save changes."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:775
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:775
 msgid ""
 "Please note that there is no undo for this action. Your current email "
 "settings will be overwritten."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:781
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:781
 msgid "Reset settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:783
-#: includes/settings/class-alg-wc-custom-emails-settings.php:49
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:783
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:49
 msgid "Reset"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-email-settings.php:784
-#: includes/settings/class-alg-wc-custom-emails-settings.php:50
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-email-settings.php:784
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:50
 msgid "Check the box and save changes to reset."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:25
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:25
 msgid "General"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:44
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:44
 msgid "General Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:45
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:45
 #, php-format
 msgid "Settings for each custom email are located in %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:46
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:46
 msgid "WooCommerce > Settings > Emails"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:51
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:51
 msgid "Number of custom emails"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:60
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:60
 msgid "Admin title"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:80
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:80
 msgid "Enabled triggers groups"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:81
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:81
 msgid ""
 "This will set which triggers you will see in each custom email settings."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:82
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:82
 msgid ""
 "Disabling some triggers groups can help you to make triggers list more "
 "manageable."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:91
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:91
 msgid "One trigger per line."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:92
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:92
 #, php-format
 msgid "Format: %s or %s, e.g.: %s or %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:96
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:96
 msgid "Checkout order processed"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:103
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:103
 msgid "Base dir"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:104
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:104
 msgid "Affects \"Email Data > Email attachments\" options."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:110
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:110
 msgid "WP root directory"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:111
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:111
 msgid "WP upload directory"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:115
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:115
 msgid "Debug"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:116
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:116
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:117
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:117
 #, php-format
 msgid "Will add a log to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:118
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-general.php:118
 msgid "WooCommerce > Status > Logs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:25
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:25
 msgid "Scheduled"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:42
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:42
 msgid "Delete"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:92
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:92
 msgid "No scheduled emails found."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:98
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:98
 msgid "Email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:99
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:99
 msgid "Date"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:100
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:100
 msgid "Object ID"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:100
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:100
 msgid "E.g., order ID."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:105
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:105
 msgid "Refresh list"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:106
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:106
 #, php-format
 msgid "Current time: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:121
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings-scheduled.php:121
 msgid "Scheduled Emails"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings.php:25
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:25
 msgid "Custom Emails"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings.php:43
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:43
 msgid "Reset Settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings.php:48
+#: E:\xampp_php_8\htdocs\wpfactory-local\wp-content\plugins\custom-emails-for-woocommerce-pro\includes\settings\class-alg-wc-custom-emails-settings.php:48
 msgid "Reset section settings"
 msgstr ""
