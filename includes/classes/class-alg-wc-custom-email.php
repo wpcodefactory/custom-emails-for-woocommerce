@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.6.0
+ * @version 2.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -223,9 +223,29 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
+	 * schedule_single.
+	 *
+	 * @version 2.7.0
+	 * @since   2.7.0
+	 *
+	 * @see     https://developer.wordpress.org/reference/functions/wp_schedule_single_event/
+	 * @see     https://actionscheduler.org/api/
+	 *
+	 * @todo    (dev) `alg_wc_custom_emails_scheduler`: default to `as`
+	 */
+	function schedule_single( $timestamp, $hook, $args ) {
+		$scheduler = get_option( 'alg_wc_custom_emails_scheduler', 'wp_cron' );
+		if ( 'wp_cron' === $scheduler ) {
+			wp_schedule_single_event( $timestamp, $hook, $args );
+		} elseif ( 'as' === $scheduler ) {
+			as_schedule_single_action( $timestamp, $hook, $args );
+		}
+	}
+
+	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.6.0
+	 * @version 2.7.0
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -233,7 +253,6 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @todo    (dev) [!] block (by products, amounts, etc.) only if it's not sent manually
 	 * @todo    (dev) "Order note": add "email delayed until..." note
 	 * @todo    (dev) "Order note": better description
-	 * @todo    (dev) `delay`: use Action Scheduler?
 	 * @todo    (dev) `delay`: better debug info
 	 * @todo    (dev) `delay`: `wp_next_scheduled()`?
 	 * @todo    (dev) `delay`: add `current_filter()` to the args?
@@ -256,7 +275,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 		if ( ! $do_force_send && ! empty( $this->alg_wc_ce_delay ) ) {
 			$class = str_replace( 'alg_wc_custom', 'Alg_WC_Custom_Email', $this->id );
 			$delay = intval( $this->alg_wc_ce_delay * $this->alg_wc_ce_delay_unit );
-			wp_schedule_single_event( time() + $delay, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+			$this->schedule_single( time() + $delay, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
 			$this->alg_wc_ce_debug( sprintf( __( 'Delayed (%s): In %d seconds.', 'custom-emails-for-woocommerce' ), $class, $delay ) );
 			return;
 		}

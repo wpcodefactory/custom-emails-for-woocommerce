@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 2.5.0
+ * @version 2.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.5.0
+	 * @version 2.7.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -109,6 +109,18 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'options'  => array(
 					'abspath'       => __( 'WP root directory', 'custom-emails-for-woocommerce' ),
 					'wp_upload_dir' => __( 'WP upload directory', 'custom-emails-for-woocommerce' ),
+				),
+			),
+			array(
+				'title'    => __( 'Scheduler', 'custom-emails-for-woocommerce' ),
+				'desc_tip' => __( 'Affects "Delay" options (scheduled emails).', 'custom-emails-for-woocommerce' ),
+				'id'       => 'alg_wc_custom_emails_scheduler',
+				'default'  => 'wp_cron',
+				'type'     => 'select',
+				'class'    => 'wc-enhanced-select',
+				'options'  => array(
+					'wp_cron' => __( 'WP Cron', 'custom-emails-for-woocommerce' ),
+					'as'      => __( 'Action Scheduler', 'custom-emails-for-woocommerce' ),
 				),
 			),
 			array(

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 2.3.0
+ * @version 2.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -81,13 +81,14 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * unschedule_email.
 	 *
-	 * @version 1.9.5
+	 * @version 2.7.0
 	 * @since   1.9.5
 	 *
 	 * @todo    (dev) add success/error notice
+	 * @todo    (dev) code refactoring: `function unschedule_single() {}`?
 	 */
 	function unschedule_email() {
-		if ( isset( $_REQUEST['alg_wc_ce_unschedule'], $_REQUEST['alg_wc_ce_unschedule_object_id'], $_REQUEST['alg_wc_ce_unschedule_time'], $_REQUEST['_wpnonce'] ) ) {
+		if ( isset( $_REQUEST['alg_wc_ce_unscheduler'], $_REQUEST['_wpnonce'] ) ) {
 
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
 				wp_die( esc_html__( 'Invalid user role.', 'custom-emails-for-woocommerce' ) );
@@ -97,14 +98,43 @@ class Alg_WC_Custom_Emails_Admin {
 				wp_die( esc_html__( 'Invalid nonce.', 'custom-emails-for-woocommerce' ) );
 			}
 
-			$class     = wc_clean( $_REQUEST['alg_wc_ce_unschedule'] );
-			$object_id = intval( $_REQUEST['alg_wc_ce_unschedule_object_id'] );
-			$time      = intval( $_REQUEST['alg_wc_ce_unschedule_time'] );
+			$unscheduler = wc_clean( $_REQUEST['alg_wc_ce_unscheduler'] );
 
-			wp_unschedule_event( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+			if ( 'wp_cron' === $unscheduler ) {
+				if ( isset( $_REQUEST['alg_wc_ce_unschedule_class'], $_REQUEST['alg_wc_ce_unschedule_object_id'], $_REQUEST['alg_wc_ce_unschedule_time'] ) ) {
 
-			wp_safe_redirect( remove_query_arg( array( 'alg_wc_ce_unschedule', 'alg_wc_ce_unschedule_object_id', 'alg_wc_ce_unschedule_time', '_wpnonce' ) ) );
-			exit;
+					// WP Cron
+					$class     = wc_clean( $_REQUEST['alg_wc_ce_unschedule_class'] );
+					$object_id = intval( $_REQUEST['alg_wc_ce_unschedule_object_id'] );
+					$time      = intval( $_REQUEST['alg_wc_ce_unschedule_time'] );
+					wp_unschedule_event( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+					wp_safe_redirect( remove_query_arg( array( 'alg_wc_ce_unschedule_class', 'alg_wc_ce_unschedule_object_id', 'alg_wc_ce_unschedule_time', 'alg_wc_ce_unscheduler', '_wpnonce' ) ) );
+					exit;
+
+				}
+			} elseif ( 'as' === $unscheduler ) {
+				if ( isset( $_REQUEST['alg_wc_ce_unschedule_action_id'] ) ) {
+
+					// Action Scheduler
+					$action_id = intval( $_REQUEST['alg_wc_ce_unschedule_action_id'] );
+					try {
+						ActionScheduler::store()->cancel_action( $action_id );
+					} catch ( Exception $exception ) {
+						ActionScheduler::logger()->log(
+							$action_id,
+							sprintf(
+								/* translators: %1$s is the name of the hook to be cancelled, %2$s is the exception message. */
+								__( 'Caught exception while cancelling action "%1$s": %2$s', 'woocommerce' ),
+								'alg_wc_custom_emails_send_email',
+								$exception->getMessage()
+							)
+						);
+					}
+					wp_safe_redirect( remove_query_arg( array( 'alg_wc_ce_unschedule_action_id', 'alg_wc_ce_unscheduler', '_wpnonce' ) ) );
+					exit;
+
+				}
+			}
 
 		}
 	}

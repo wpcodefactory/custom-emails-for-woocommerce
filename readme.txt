@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.6.3
+Stable tag: 2.7.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -109,7 +109,7 @@ ___
 
 ## What's Next? Check More Plugins by WPFactory##
 
-If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience. 
+If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience.
 
 Dive in and discover more tools to empower your WooCommerce Store!
 
@@ -137,6 +137,7 @@ Dive in and discover more tools to empower your WooCommerce Store!
 > “This plugin is fantastic - it offers a wide range of customization options, and the support is simply outstanding. The team responded quickly to my feature request and went above and beyond to assist me with any other issues. I highly recommend this plugin and the fantastic support that comes with it.” – ⭐⭐⭐⭐⭐ [Alex Nimanaj](https://wpfactory.com/item/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
 > “Top functionality and control options. Great support!: This plugin helped a lot in designing an individual solution for a customer requirement due to its numerous configuration options.” – ⭐⭐⭐⭐⭐ [suessbot](https://wordpress.org/support/topic/top-functionality-and-control-options-great-support/)
+
 == Installation ==
 
 1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
@@ -145,11 +146,14 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
+= 2.7.0 - 19/12/2023 =
+* Dev - General - "Scheduler" option added (defaults to "WP Cron").
+
 = 2.6.3 - 18/12/2023 =
-* Fix readme.txt file error.
+* Readme.txt file error fixed.
 
 = 2.6.2 - 18/12/2023 =
-* Update readme.txt file.
+* Readme.txt file updated.
 
 = 2.6.1 - 14/12/2023 =
 * Dev - Shortcodes - `[if]` - `case_insensitive` attribute added.
@@ -206,7 +210,7 @@ Dive in and discover more tools to empower your WooCommerce Store!
 * Dev - Shortcodes - `[order_item_meta]` shortcode added.
 
 = 2.2.3 - 18/07/2023 =
-* Dev â€“ "High-Performance Order Storage (HPOS)" compatibility.
+* Dev - "High-Performance Order Storage (HPOS)" compatibility.
 * Dev - Developers - `alg_wc_custom_emails_subject` filter added.
 * Dev - Developers - `alg_wc_custom_emails_content` filter added.
 * WC tested up to: 7.9.
