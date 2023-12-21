@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.6.0
+ * @version 2.7.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -375,7 +375,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.5.0
+	 * @version 2.7.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
@@ -506,6 +506,16 @@ class Alg_WC_Custom_Email_Settings {
 				'placeholder' => '',
 				'default'     => $this->get_default_content(),
 				'css'         => 'width:100%;height:500px;',
+			),
+			'alg_wc_ce_style' => array(
+				'title'       => __( 'Email style', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => __( 'Optional additional email styling.', 'custom-emails-for-woocommerce' ),
+				'description' => sprintf( __( 'Without the %s tag.', 'custom-emails-for-woocommerce' ),
+					'<code>' . esc_html( '<style></style>' ) . '</code>' ),
+				'type'        => 'textarea',
+				'placeholder' => '',
+				'default'     => '',
+				'css'         => 'width:100%;height:200px;',
 			),
 			'attachments' => array(
 				'title'       => __( 'Email attachments', 'custom-emails-for-woocommerce' ),

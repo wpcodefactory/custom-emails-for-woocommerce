@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.7.0
+ * @version 2.7.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -15,7 +15,42 @@ if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) :
 class Alg_WC_Custom_Email extends WC_Email {
 
 	/**
-	 * Constructor
+	 * alg_wc_ce_id.
+	 *
+	 * @version 2.7.1
+	 */
+	public $alg_wc_ce_id;
+
+	/**
+	 * alg_wc_ce_original_recipient.
+	 *
+	 * @version 2.7.1
+	 */
+	public $alg_wc_ce_original_recipient;
+
+	/**
+	 * alg_wc_ce_delay.
+	 *
+	 * @version 2.7.1
+	 */
+	public $alg_wc_ce_delay;
+
+	/**
+	 * alg_wc_ce_delay_unit.
+	 *
+	 * @version 2.7.1
+	 */
+	public $alg_wc_ce_delay_unit;
+
+	/**
+	 * alg_wc_ce_order_validator.
+	 *
+	 * @version 2.7.1
+	 */
+	public $alg_wc_ce_order_validator;
+
+	/**
+	 * Constructor.
 	 *
 	 * @version 2.0.0
 	 * @since   1.0.0
@@ -245,7 +280,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.7.0
+	 * @version 2.7.1
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -352,7 +387,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$res = $this->send(
 				$this->get_recipient(),
 				$this->alg_wc_ce_get_processed_subject( $order, $user, $product ),
-				$this->alg_wc_ce_get_processed_content( $order, $user, $product ),
+				$this->alg_wc_ce_get_style() . $this->alg_wc_ce_get_processed_content( $order, $user, $product ),
 				$this->get_headers(),
 				$this->get_attachments()
 			);
@@ -363,6 +398,16 @@ class Alg_WC_Custom_Email extends WC_Email {
 
 		}
 
+	}
+
+	/**
+	 * alg_wc_ce_get_style.
+	 *
+	 * @version 2.7.1
+	 * @since   2.7.1
+	 */
+	function alg_wc_ce_get_style() {
+		return ( ( $style = $this->get_option( 'alg_wc_ce_style', '' ) ) ? "<style>$style</style>" : '' );
 	}
 
 	/**
