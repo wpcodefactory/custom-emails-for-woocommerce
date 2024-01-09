@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.6.1
+ * @version 2.7.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.6.0
+	 * @version 2.7.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -58,39 +58,52 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 */
 	function __construct() {
 
-		add_shortcode( 'if',                         array( $this, 'if' ) );
-		add_shortcode( 'clear',                      array( $this, 'clear' ) );
-		add_shortcode( 'site_title',                 array( $this, 'site_title' ) );
-		add_shortcode( 'site_address',               array( $this, 'site_address' ) );
-		add_shortcode( 'translate',                  array( $this, 'translate' ) );
+		$shortcodes = array(
 
-		add_shortcode( 'order_meta',                 array( $this, 'order_meta' ) );
-		add_shortcode( 'order_func',                 array( $this, 'order_func' ) );
-		add_shortcode( 'order_number',               array( $this, 'order_number' ) );
-		add_shortcode( 'order_total',                array( $this, 'order_total' ) );
-		add_shortcode( 'order_total_tax',            array( $this, 'order_total_tax' ) );
-		add_shortcode( 'order_total_excl_tax',       array( $this, 'order_total_excl_tax' ) );
-		add_shortcode( 'order_shipping_total',       array( $this, 'order_shipping_total' ) );
-		add_shortcode( 'order_shipping_method',      array( $this, 'order_shipping_method' ) );
-		add_shortcode( 'order_payment_method_id',    array( $this, 'order_payment_method_id' ) );
-		add_shortcode( 'order_payment_method_title', array( $this, 'order_payment_method_title' ) );
-		add_shortcode( 'order_total_items_count',    array( $this, 'order_total_items_count' ) );
-		add_shortcode( 'order_date',                 array( $this, 'order_date' ) );
-		add_shortcode( 'order_details',              array( $this, 'order_details' ) );
-		add_shortcode( 'order_downloads',            array( $this, 'order_downloads' ) );
-		add_shortcode( 'order_billing_address',      array( $this, 'order_billing_address' ) );
-		add_shortcode( 'order_shipping_address',     array( $this, 'order_shipping_address' ) );
-		add_shortcode( 'order_item_meta',            array( $this, 'order_item_meta' ) );
-		add_shortcode( 'order_item_names',           array( $this, 'order_item_names' ) );
-		add_shortcode( 'order_item_product_ids',     array( $this, 'order_item_product_ids' ) );
-		add_shortcode( 'order_user_id',              array( $this, 'order_user_id' ) );
-		add_shortcode( 'order_user_data',            array( $this, 'order_user_data' ) );
+			'if',
+			'clear',
+			'site_title',
+			'site_address',
+			'translate',
 
-		add_shortcode( 'generate_coupon_code',       array( $this, 'generate_coupon_code' ) );
+			'order_meta',
+			'order_func',
+			'order_number',
+			'order_total',
+			'order_total_tax',
+			'order_total_excl_tax',
+			'order_shipping_total',
+			'order_shipping_method',
+			'order_payment_method_id',
+			'order_payment_method_title',
+			'order_total_items_count',
+			'order_date',
+			'order_details',
+			'order_downloads',
+			'order_billing_address',
+			'order_shipping_address',
+			'order_billing_first_name',
+			'order_billing_last_name',
+			'order_item_meta',
+			'order_item_names',
+			'order_item_product_ids',
+			'order_user_id',
+			'order_user_data',
+			'order_customer_note',
 
-		add_shortcode( 'user_prop',                  array( $this, 'user_prop' ) );
+			'generate_coupon_code',
 
-		add_shortcode( 'product_func',               array( $this, 'product_func' ) );
+			'user_prop',
+
+			'product_func',
+
+		);
+
+		$prefix = apply_filters( 'alg_wc_custom_emails_shortcode_prefix', '' );
+
+		foreach ( $shortcodes as $shortcode ) {
+			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
+		}
 
 	}
 
@@ -202,6 +215,45 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->user->get( $atts['key'] ), $atts );
+	}
+
+	/**
+	 * order_billing_last_name.
+	 *
+	 * @version 2.7.2
+	 * @since   2.7.2
+	 */
+	function order_billing_last_name( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_billing_last_name(), $atts );
+	}
+
+	/**
+	 * order_billing_first_name.
+	 *
+	 * @version 2.7.2
+	 * @since   2.7.2
+	 */
+	function order_billing_first_name( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_billing_first_name(), $atts );
+	}
+
+	/**
+	 * order_customer_note.
+	 *
+	 * @version 2.7.2
+	 * @since   2.7.2
+	 */
+	function order_customer_note( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_customer_note(), $atts );
 	}
 
 	/**

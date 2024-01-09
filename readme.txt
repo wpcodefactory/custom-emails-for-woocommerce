@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,14 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.7.2 - 09/01/2024 =
+* Dev - Shortcodes - `[order_billing_first_name]` shortcode added.
+* Dev - Shortcodes - `[order_billing_last_name]` shortcode added.
+* Dev - Shortcodes - `[order_customer_note]` shortcode added.
+* Dev - Shortcodes - Developers - `alg_wc_custom_emails_shortcode_prefix` filter added.
+* Dev - Shortcodes - Code refactoring.
+* WC tested up to: 8.5.
 
 = 2.7.1 - 21/12/2023 =
 * Dev - Email Data - "Email style" option added.
