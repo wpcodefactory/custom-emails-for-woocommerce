@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.7.1
+ * @version 2.7.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -52,7 +52,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.0.0
+	 * @version 2.7.3
 	 * @since   1.0.0
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Email.html
@@ -91,6 +91,36 @@ class Alg_WC_Custom_Email extends WC_Email {
 		// Admin actions
 		add_action( 'woocommerce_update_options_email_' . $this->id, array( $this, 'alg_wc_ce_admin_settings_tools' ) );
 
+		// Stop emails
+		$stop_emails = $this->get_option( 'alg_wc_ce_stop_emails', array() );
+		if ( ! empty( $stop_emails ) ) {
+			foreach ( $stop_emails as $stop_email ) {
+				add_filter( 'woocommerce_email_enabled_' . $stop_email, array( $this, 'alg_wc_ce_stop_email' ), PHP_INT_MAX, 2 );
+			}
+		}
+
+	}
+
+	/**
+	 * alg_wc_ce_stop_email.
+	 *
+	 * @version 2.7.3
+	 * @since   2.7.3
+	 *
+	 * @todo    (dev) add all emails, i.e., not only `order`
+	 */
+	function alg_wc_ce_stop_email( $is_enabled, $object ) {
+		if (
+			$is_enabled &&
+			$object &&
+			is_a( $object, 'WC_Order' ) &&
+			$this->is_enabled() &&
+			$this->alg_wc_ce_order_validator->validate( $object ) &&
+			$this->alg_wc_ce_do_send()
+		) {
+			return false;
+		}
+		return $is_enabled;
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.7.1
+ * @version 2.7.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -373,9 +373,29 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
+	 * get_stop_emails.
+	 *
+	 * @version 2.7.3
+	 * @since   2.7.3
+	 *
+	 * @todo    (dev) add all emails, e.g., subscriptions (`wp_list_pluck( WC()->mailer()->emails, 'title', 'id' )`)
+	 */
+	function get_stop_emails() {
+		return apply_filters( 'alg_wc_custom_emails_stop_emails_list', array(
+			'new_order'                 => __( 'New order', 'custom-emails-for-woocommerce' ),
+			'cancelled_order'           => __( 'Cancelled order', 'custom-emails-for-woocommerce' ),
+			'failed_order'              => __( 'Failed order', 'custom-emails-for-woocommerce' ),
+			'customer_on_hold_order'    => __( 'Order on-hold', 'custom-emails-for-woocommerce' ),
+			'customer_processing_order' => __( 'Processing order', 'custom-emails-for-woocommerce' ),
+			'customer_completed_order'  => __( 'Completed order', 'custom-emails-for-woocommerce' ),
+			'customer_refunded_order'   => __( 'Refunded order', 'custom-emails-for-woocommerce' ),
+		) );
+	}
+
+	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.7.1
+	 * @version 2.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
@@ -752,6 +772,16 @@ class Alg_WC_Custom_Email_Settings {
 			'advanced_options' => array(
 				'title'       => __( 'Advanced Options', 'custom-emails-for-woocommerce' ),
 				'type'        => 'title',
+			),
+			'alg_wc_ce_stop_emails' => array(
+				'title'       => __( 'Stop emails', 'custom-emails-for-woocommerce' ),
+				'desc_tip'    => __( 'Select emails that should NOT be sent for an order in case the current email is sent.', 'custom-emails-for-woocommerce' ) . ' ' .
+					__( 'For example, override the "Completed order" email for selected users (with the "Require users" option) and send the standard email to the remaining users.', 'custom-emails-for-woocommerce' ),
+				'type'        => 'multiselect',
+				'class'       => 'wc-enhanced-select',
+				'default'     => array(),
+				'options'     => $this->get_stop_emails(),
+				'css'         => 'width:100%;',
 			),
 			'exclude_recipients' => array(
 				'title'       => __( 'Exclude recipients', 'custom-emails-for-woocommerce' ),
