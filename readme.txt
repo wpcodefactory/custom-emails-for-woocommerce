@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.7.3
+Stable tag: 2.8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,11 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.8.0 - 29/01/2024 =
+* Dev - Order Options - "Require order status" option added.
+* Dev - Order Options - "Exclude order status" option added.
+* Dev - Debug - "Current filter" added to the "Triggered" log message.
 
 = 2.7.3 - 11/01/2024 =
 * Dev - Advanced Options - "Stop emails" option added.

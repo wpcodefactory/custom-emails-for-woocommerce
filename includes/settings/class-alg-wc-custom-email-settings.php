@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.7.3
+ * @version 2.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -395,7 +395,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.7.3
+	 * @version 2.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
@@ -727,6 +727,24 @@ class Alg_WC_Custom_Email_Settings {
 				'class'             => 'wc-enhanced-select',
 				'default'           => array(),
 				'options'           => $this->get_user_roles(),
+				'css'               => 'width:100%;',
+			),
+			'required_order_statuses' => array(
+				'title'             => __( 'Require order status', 'custom-emails-for-woocommerce' ),
+				'desc_tip'          => __( 'Developed to use with the scheduled emails ("Delay" option) to ensure order status has not changed.', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => wc_get_order_statuses(),
+				'css'               => 'width:100%;',
+			),
+			'excluded_order_statuses' => array(
+				'title'             => __( 'Exclude order status', 'custom-emails-for-woocommerce' ),
+				'desc_tip'          => __( 'Developed to use with the scheduled emails ("Delay" option) to ensure order status has not changed.', 'custom-emails-for-woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'default'           => array(),
+				'options'           => wc_get_order_statuses(),
 				'css'               => 'width:100%;',
 			),
 			'order_conditions_logical_operator' => array(

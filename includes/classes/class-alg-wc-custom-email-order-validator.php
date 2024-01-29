@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 2.5.0
+ * @version 2.8.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 2.5.0
+	 * @version 2.8.0
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
@@ -69,6 +69,8 @@ class Alg_WC_Custom_Email_Order_Validator {
 			'excluded_users',
 			'required_user_roles',
 			'excluded_user_roles',
+			'required_statuses',
+			'excluded_statuses',
 		);
 
 		if ( 'AND' === $this->email->get_option( 'order_conditions_logical_operator', 'AND' ) ) {
@@ -96,6 +98,50 @@ class Alg_WC_Custom_Email_Order_Validator {
 
 		}
 
+	}
+
+	/**
+	 * remove_order_status_prefix.
+	 *
+	 * @version 2.8.0
+	 * @since   2.8.0
+	 */
+	function remove_order_status_prefix( $status ) {
+		return ( 'wc-' === substr( $status, 0, 3 ) ? substr( $status, 3 ) : $status );
+	}
+
+	/**
+	 * required_statuses.
+	 *
+	 * @version 2.8.0
+	 * @since   2.8.0
+	 */
+	function required_statuses( $order ) {
+		$required_statuses = $this->email->get_option( 'required_order_statuses', array() );
+		$required_statuses = array_map( array( $this, 'remove_order_status_prefix' ), $required_statuses );
+		if ( ! empty( $required_statuses ) && ! $order->has_status( $required_statuses ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Require order status', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $required_statuses ) ? true : null );
+	}
+
+	/**
+	 * excluded_statuses
+	 *
+	 * @version 2.8.0
+	 * @since   2.8.0
+	 */
+	function excluded_statuses( $order ) {
+		$excluded_statuses = $this->email->get_option( 'excluded_order_statuses', array() );
+		$excluded_statuses = array_map( array( $this, 'remove_order_status_prefix' ), $excluded_statuses );
+		if ( ! empty( $excluded_statuses ) && $order->has_status( $excluded_statuses ) ) {
+			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+				$this->email->title, __( 'Exclude order status', 'custom-emails-for-woocommerce' ) ) );
+			return false;
+		}
+		return ( ! empty( $excluded_statuses ) ? true : null );
 	}
 
 	/**
