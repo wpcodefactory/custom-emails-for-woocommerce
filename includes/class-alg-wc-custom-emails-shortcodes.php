@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.7.2
+ * @version 2.8.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.7.2
+	 * @version 2.8.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -84,6 +84,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_shipping_address',
 			'order_billing_first_name',
 			'order_billing_last_name',
+			'order_billing_email',
+			'order_billing_phone',
 			'order_item_meta',
 			'order_item_names',
 			'order_item_product_ids',
@@ -215,6 +217,32 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->user->get( $atts['key'] ), $atts );
+	}
+
+	/**
+	 * order_billing_email.
+	 *
+	 * @version 2.8.1
+	 * @since   2.8.1
+	 */
+	function order_billing_email( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_billing_email(), $atts );
+	}
+
+	/**
+	 * order_billing_phone.
+	 *
+	 * @version 2.8.1
+	 * @since   2.8.1
+	 */
+	function order_billing_phone( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_billing_phone(), $atts );
 	}
 
 	/**
