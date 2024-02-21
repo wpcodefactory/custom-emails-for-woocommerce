@@ -44,7 +44,7 @@ class Alg_WC_Custom_Emails_Core {
 	 * @version 2.6.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g. "order completed" email, etc.)?
+	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
 	 */
 	function __construct() {
 

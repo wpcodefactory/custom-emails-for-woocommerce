@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.8.1
+ * @version 2.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.8.1
+	 * @version 2.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -76,6 +76,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_shipping_method',
 			'order_payment_method_id',
 			'order_payment_method_title',
+			'order_checkout_payment_url',
 			'order_total_items_count',
 			'order_date',
 			'order_details',
@@ -137,7 +138,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) generate coupon from *order*
-	 * @todo    (dev) more `$atts`, e.g. `discount_type`
+	 * @todo    (dev) more `$atts`, e.g., `discount_type`
 	 * @todo    (dev) optional `customer_email`
 	 * @todo    (dev) optional `first_name` in coupon code
 	 */
@@ -217,6 +218,21 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->user->get( $atts['key'] ), $atts );
+	}
+
+	/**
+	 * order_checkout_payment_url.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 *
+	 * @todo    (dev) add `[order_checkout_payment_link]` shortcode (i.e., `<a href="...">Pay</a>`)?
+	 */
+	function order_checkout_payment_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_checkout_payment_url(), $atts );
 	}
 
 	/**
@@ -695,7 +711,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) more common atts, e.g. find/replace, strip_tags, any_func, etc.
+	 * @todo    (dev) more common atts, e.g., find/replace, strip_tags, any_func, etc.
 	 */
 	function return_shortcode( $value, $atts ) {
 		if ( is_numeric( $value ) ) {

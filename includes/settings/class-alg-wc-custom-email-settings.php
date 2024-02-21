@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.8.0
+ * @version 2.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -74,7 +74,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) better default content (include more shortcodes, e.g. `[clear]`, `[if]` etc.)
+	 * @todo    (dev) better default content (include more shortcodes, e.g., `[clear]`, `[if]` etc.)
 	 */
 	function get_default_content() {
 		return '[order_details]' . PHP_EOL .
@@ -393,16 +393,30 @@ class Alg_WC_Custom_Email_Settings {
 	}
 
 	/**
+	 * get_order_statuses.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 */
+	function get_order_statuses() {
+		$statuses = wc_get_order_statuses();
+		if ( function_exists( 'wcs_get_subscription_statuses' ) ) {
+			$statuses = array_merge( $statuses, wcs_get_subscription_statuses() );
+		}
+		return $statuses;
+	}
+
+	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.8.0
+	 * @version 2.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) move this function to a separate file/class
 	 * @todo    (feature) "Custom triggers"
 	 * @todo    (feature) `cc` and `bcc`
 	 * @todo    (desc) `delay`: better desc
-	 * @todo    (dev) add sections, e.g. "Conditions"
+	 * @todo    (dev) add sections, e.g., "Conditions"
 	 * @todo    (dev) replace `woocommerce` text domain with `custom-emails-for-woocommerce` everywhere
 	 * @todo    (feature) separate option for plain content
 	 */
@@ -735,7 +749,7 @@ class Alg_WC_Custom_Email_Settings {
 				'type'              => 'multiselect',
 				'class'             => 'wc-enhanced-select',
 				'default'           => array(),
-				'options'           => wc_get_order_statuses(),
+				'options'           => $this->get_order_statuses(),
 				'css'               => 'width:100%;',
 			),
 			'excluded_order_statuses' => array(
@@ -744,7 +758,7 @@ class Alg_WC_Custom_Email_Settings {
 				'type'              => 'multiselect',
 				'class'             => 'wc-enhanced-select',
 				'default'           => array(),
-				'options'           => wc_get_order_statuses(),
+				'options'           => $this->get_order_statuses(),
 				'css'               => 'width:100%;',
 			),
 			'order_conditions_logical_operator' => array(

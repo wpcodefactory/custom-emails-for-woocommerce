@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.8.1
+Stable tag: 2.9.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,7 +22,7 @@ Our plugin allows you to add more emails than the defaults one by WooCommerce.
 
 Our plugin’s numerous configuration options allow for full control over what you can do with it. You can notify your customers when order status changed to "Completed", or only when it changed from "Pending payment" to "Completed".
 
-You can also add custom emails based on custom order statuses you have in your store, and these are automatically added to the plugin's triggers list. And with multilingual support you can expand your reach for the whole world not just english-speaking countries.
+You can also add custom emails based on custom order statuses you have in your store, and these are automatically added to the plugin's triggers list. And with multilingual support you can expand your reach for the whole world not just English-speaking countries.
 
 Our customers really love this plugin, read the full description to learn about all of its features and understand why they’re loving it.
 
@@ -34,7 +34,7 @@ Our customers really love this plugin, read the full description to learn about 
 
 ## 🚀 Main Features: FREE Version##
 
-Additional Custom Emails for WooCommerce plugin allows for full control over your communication with your customers and expands your reach to connect with your audience beyond just your store, the free version alone would allow you to do a lot, for the free version you can send one custome email based on these triggers:
+Additional Custom Emails for WooCommerce plugin allows for full control over your communication with your customers and expands your reach to connect with your audience beyond just your store, the free version alone would allow you to do a lot, for the free version you can send one custom email based on these triggers:
 
 ### 🚀 **Send email on Order status update** ###
 Notify your customers of the status of their orders, once their order is "shipped" or "completed" give them a note through the email of the state of their order.
@@ -46,13 +46,13 @@ Set any custom trigger you want to notify your customers when it happens and our
 In case you want to delay your emails for any reason you can use our plugin for that purpose, for example you can use to send custom email one week after order was completed.
 
 ### 🚀 **Require/exclude order product(s)** ###
-You can send emails only if some products or categorise were selected, so you have further control over when to send your custom emails.
+You can send emails only if some products or categories were selected, so you have further control over when to send your custom emails.
 
 ### 🚀 **Set minimum/maximum order amount** ###
 Say you want to offer free shipping for customers with order amount above certain limit, you can use this feature to notify your customers of their eligibility for free shipping using this feature. Generally if you want your customers with order amounts above or below certain limits to be notified you can use this feature to notify them.
 
 ### 🚀 **Require/exclude order payment gateways or shipping methods** ###
-If you want to requirce specific payment getways ot specific shipping methods you can use this criteria to send emails only to customers who allign with this criteria.
+If you want to require specific payment getaways or specific shipping methods you can use this criteria to send emails only to customers who align with this criteria.
 
 ### 🚀 **Require/exclude order user roles or users** ###
 Specify which emails to send to which user roles or whether you want to specify specific user to send the emails to.
@@ -70,7 +70,7 @@ Send your emails in TXT, HTML, or Multipart format or Wrap your emails in WooCom
 From the order actions box you can specify whether to send your custom email manually or in bulk.
 
 ### 🚀 **Set email recipient(s)** ###
-Specifiy the recipients of the custom email you are setting and who should recieve this email.
+Specify the recipients of the custom email you are setting and who should receive this email.
 
 ### 🚀 **Set email’s admin title** ###
 Set the admin title of the email that will show up as the sender in the recipient's inbox.
@@ -79,14 +79,14 @@ Set the admin title of the email that will show up as the sender in the recipien
 Our plugin has multilingual support and is compatible with WPML and Polylang.
 
 ### 🚀 **“High-Performance Order Storage (HPOS)” compatible.** ###
-This means your website can be as fast as it needs to be because HPOS allows for maximum effecieny when it comes to handling orders data at WooCommerce, so your store will can be customaizable and efficient.
+This means your website can be as fast as it needs to be because HPOS allows for maximum efficiency when it comes to handling orders data at WooCommerce, so your store will can be customizable and efficient.
 
 USE CASES:
 ### 🚀 **Send Email Based on Order status when it gets updated** ###
 Once the status of the order is changed from "shipping" to "completed" or from any other state to the other this trigger allows you to send custom to notify your customers with this status update.
 
 ### 🚀 **Send Email Based on Subscriptions** ###
-Notify your customers of the state of their subscreption whether they're subscriped or subscription status updated from one state to the other, you can also notify them about the renewal state of their subscription.
+Notify your customers of the state of their subscription whether they're subscribed or subscription status updated from one state to the other, you can also notify them about the renewal state of their subscription.
 
 > “nice plugin: Very easy to use! Does what is says…I did not find any problems so far.
 Thanks.” – ⭐⭐⭐⭐⭐ [vladimiryo](https://wordpress.org/support/topic/nice-plugin-4732/)
@@ -145,6 +145,13 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.9.0 - 21/02/2024 =
+* Dev - Order Options - Require/Exclude order status - "WooCommerce Subscriptions" statuses added.
+* Dev - Shortcodes - `[order_checkout_payment_url]` shortcode added.
+* Dev - Send email - Now trying to get object ID with the `get_id()` method (e.g., for "WooCommerce Subscriptions" status updated hooks).
+* Typos fixed in the plugin description section in readme.txt.
+* WC tested up to: 8.6.
 
 = 2.8.1 - 15/02/2024 =
 * Dev - Shortcodes - `[order_billing_email]` shortcode added.

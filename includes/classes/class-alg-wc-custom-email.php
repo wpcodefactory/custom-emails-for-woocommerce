@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.8.0
+ * @version 2.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -283,6 +283,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 *
 	 * @version 2.0.0
 	 * @since   1.0.0
+	 *
+	 * @todo    (dev) `is_callable( array( $object_id, 'get_id' )`?
 	 */
 	function alg_wc_ce_trigger( $object_id ) {
 		$this->alg_wc_ce_send_email( $object_id, false );
@@ -311,7 +313,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.8.0
+	 * @version 2.9.0
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -330,6 +332,11 @@ class Alg_WC_Custom_Email extends WC_Email {
 
 		// Debug
 		$this->alg_wc_ce_debug( sprintf( __( 'Triggered [%s].', 'custom-emails-for-woocommerce' ), current_filter() ) );
+
+		// Object ID
+		if ( is_callable( array( $object_id, 'get_id' ) ) ) {
+			$object_id = $object_id->get_id();
+		}
 
 		// Check if it's enabled
 		if ( ! $this->is_enabled() || ! apply_filters( 'alg_wc_custom_emails_is_enabled', true, $this, $object_id, $do_force_send ) ) {
