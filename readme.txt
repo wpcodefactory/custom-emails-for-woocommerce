@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -146,10 +146,16 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
+= 2.9.1 - 29/02/2024 =
+* Dev - Developers - `alg_wc_custom_emails_delay_start_time` filter added.
+* Dev - Developers - `alg_wc_custom_emails_email_sent` action added.
+* Dev - Developers - `alg_wc_custom_emails_exclude_recipients` filter added.
+* Dev - Code refactoring.
+
 = 2.9.0 - 21/02/2024 =
 * Dev - Order Options - Require/Exclude order status - "WooCommerce Subscriptions" statuses added.
 * Dev - Shortcodes - `[order_checkout_payment_url]` shortcode added.
-* Dev - Send email - Now trying to get object ID with the `get_id()` method (e.g., for "WooCommerce Subscriptions" status updated hooks).
+* Dev - Send email - Now trying to get object ID with the `get_id()` method (e.g., for "WooCommerce Subscriptions" status update hooks).
 * Typos fixed in the plugin description section in readme.txt.
 * WC tested up to: 8.6.
 

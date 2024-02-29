@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.9.0
+ * @version 2.9.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -102,29 +102,6 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
-	 * alg_wc_ce_stop_email.
-	 *
-	 * @version 2.7.3
-	 * @since   2.7.3
-	 *
-	 * @todo    (dev) add all emails, i.e., not only `order`
-	 * @todo    (dev) `alg_wc_ce_do_send()`: should include `$this->alg_wc_ce_order_validator->validate( $object )`?
-	 */
-	function alg_wc_ce_stop_email( $is_enabled, $object ) {
-		if (
-			$is_enabled &&
-			$object &&
-			is_a( $object, 'WC_Order' ) &&
-			$this->is_enabled() &&
-			$this->alg_wc_ce_order_validator->validate( $object ) &&
-			$this->alg_wc_ce_do_send()
-		) {
-			return false;
-		}
-		return $is_enabled;
-	}
-
-	/**
 	 * Get email attachments.
 	 *
 	 * @version 2.2.7
@@ -157,16 +134,6 @@ class Alg_WC_Custom_Email extends WC_Email {
 		// Apply filters
 		return apply_filters( 'woocommerce_email_attachments', $attachments, $this->id, $this->object, $this );
 
-	}
-
-	/**
-	 * alg_wc_ce_do_add_header_and_footer.
-	 *
-	 * @version 2.4.0
-	 * @since   2.4.0
-	 */
-	function alg_wc_ce_do_add_header_and_footer() {
-		return ( 'yes' === $this->get_option( 'wrap_in_wc_template', 'yes' ) );
 	}
 
 	/**
@@ -215,6 +182,39 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 */
 	function init_form_fields() {
 		$this->form_fields = alg_wc_custom_emails()->core->email_settings->get_form_fields( $this );
+	}
+
+	/**
+	 * alg_wc_ce_stop_email.
+	 *
+	 * @version 2.7.3
+	 * @since   2.7.3
+	 *
+	 * @todo    (dev) add all emails, i.e., not only `order`
+	 * @todo    (dev) `alg_wc_ce_do_send()`: should include `$this->alg_wc_ce_order_validator->validate( $object )`?
+	 */
+	function alg_wc_ce_stop_email( $is_enabled, $object ) {
+		if (
+			$is_enabled &&
+			$object &&
+			is_a( $object, 'WC_Order' ) &&
+			$this->is_enabled() &&
+			$this->alg_wc_ce_order_validator->validate( $object ) &&
+			$this->alg_wc_ce_do_send()
+		) {
+			return false;
+		}
+		return $is_enabled;
+	}
+
+	/**
+	 * alg_wc_ce_do_add_header_and_footer.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function alg_wc_ce_do_add_header_and_footer() {
+		return ( 'yes' === $this->get_option( 'wrap_in_wc_template', 'yes' ) );
 	}
 
 	/**
@@ -291,9 +291,9 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
-	 * schedule_single.
+	 * alg_wc_ce_schedule_single.
 	 *
-	 * @version 2.7.0
+	 * @version 2.9.1
 	 * @since   2.7.0
 	 *
 	 * @see     https://developer.wordpress.org/reference/functions/wp_schedule_single_event/
@@ -301,7 +301,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 *
 	 * @todo    (dev) `alg_wc_custom_emails_scheduler`: default to `as`
 	 */
-	function schedule_single( $timestamp, $hook, $args ) {
+	function alg_wc_ce_schedule_single( $timestamp, $hook, $args ) {
 		$scheduler = get_option( 'alg_wc_custom_emails_scheduler', 'wp_cron' );
 		if ( 'wp_cron' === $scheduler ) {
 			wp_schedule_single_event( $timestamp, $hook, $args );
@@ -311,9 +311,19 @@ class Alg_WC_Custom_Email extends WC_Email {
 	}
 
 	/**
+	 * alg_wc_ce_get_delay_start_time.
+	 *
+	 * @version 2.9.1
+	 * @since   2.9.1
+	 */
+	function alg_wc_ce_get_delay_start_time( $object_id ) {
+		return apply_filters( 'alg_wc_custom_emails_delay_start_time', time(), $this, $object_id );
+	}
+
+	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.9.0
+	 * @version 2.9.1
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -348,7 +358,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 		if ( ! $do_force_send && ! empty( $this->alg_wc_ce_delay ) ) {
 			$class = str_replace( 'alg_wc_custom', 'Alg_WC_Custom_Email', $this->id );
 			$delay = intval( $this->alg_wc_ce_delay * $this->alg_wc_ce_delay_unit );
-			$this->schedule_single( time() + $delay, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+			$time  = $this->alg_wc_ce_get_delay_start_time( $object_id ) + $delay;
+			$this->alg_wc_ce_schedule_single( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
 			$this->alg_wc_ce_debug( sprintf( __( 'Delayed (%s): In %d seconds.', 'custom-emails-for-woocommerce' ), $class, $delay ) );
 			return;
 		}
@@ -430,6 +441,9 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$this->get_attachments()
 			);
 
+			// Action
+			do_action( 'alg_wc_custom_emails_email_sent', $this );
+
 			// Debug
 			$this->alg_wc_ce_debug( sprintf( __( 'Sent: %s', 'custom-emails-for-woocommerce' ),
 				( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
@@ -441,17 +455,17 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_get_style.
 	 *
-	 * @version 2.7.1
+	 * @version 2.9.1
 	 * @since   2.7.1
 	 */
 	function alg_wc_ce_get_style() {
-		return ( ( $style = $this->get_option( 'alg_wc_ce_style', '' ) ) ? "<style>$style</style>" : '' );
+		return ( ( $style = $this->get_option( 'alg_wc_ce_style', '' ) ) ? "<style>{$style}</style>" : '' );
 	}
 
 	/**
 	 * alg_wc_ce_do_send.
 	 *
-	 * @version 2.0.0
+	 * @version 2.9.1
 	 * @since   1.9.6
 	 */
 	function alg_wc_ce_do_send() {
@@ -464,7 +478,8 @@ class Alg_WC_Custom_Email extends WC_Email {
 		}
 
 		// Exclude recipients
-		if ( '' !== ( $exclude_recipients = $this->get_option( 'exclude_recipients', '' ) ) ) {
+		$exclude_recipients = apply_filters( 'alg_wc_custom_emails_exclude_recipients', $this->get_option( 'exclude_recipients', '' ), $this );
+		if ( '' !== $exclude_recipients ) {
 			$exclude_recipients = array_filter( array_map( 'trim', explode( ',', str_replace( PHP_EOL, ',', $exclude_recipients ) ) ) );
 			foreach ( $exclude_recipients as $exclude_recipient ) {
 				if ( $exclude_recipient === $this->get_recipient() || $this->alg_wc_ce_wildcard_match( $exclude_recipient, $this->get_recipient() ) ) {
