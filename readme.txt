@@ -1,9 +1,9 @@
 === Additional Custom Emails for WooCommerce ===
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
-Tags: woocommerce, emails, email, custom email, custom emails, woo commerce
+Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -146,6 +146,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
+= 2.9.2 - 01/03/2024 =
+* Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
+* Readme.txt - Tags - `woo commerce` tag removed.
+
 = 2.9.1 - 29/02/2024 =
 * Dev - Developers - `alg_wc_custom_emails_delay_start_time` filter added.
 * Dev - Developers - `alg_wc_custom_emails_email_sent` action added.
@@ -285,149 +289,7 @@ Dive in and discover more tools to empower your WooCommerce Store!
 * Dev - Code refactoring - `Alg_WC_Custom_Email` class.
 * WC tested up to: 7.6.
 
-= 1.9.7 - 13/04/2023 =
-* Fix - Email Data - Email attachments - Handling empty option value properly now.
-
-= 1.9.6 - 10/04/2023 =
-* Dev - Advanced Options - "Exclude recipients" option added.
-* Dev - Admin Settings - Minor option titles, descriptions, style update.
-
-= 1.9.5 - 05/04/2023 =
-* Dev - Scheduled - "Unschedule email" (i.e., "Delete") buttons added.
-* Dev - Developers - `alg_wc_custom_emails_do_send` filter added.
-
-= 1.9.4 - 05/04/2023 =
-* Fix - Admin Options - Admin actions - Empty value fixed.
-
-= 1.9.3 - 31/03/2023 =
-* Dev - Shortcodes - `[order_details]` - Now passing the email object to the `WC_Emails::order_details()` function.
-
-= 1.9.2 - 31/03/2023 =
-* Dev - Email Data - "Email attachments" option added.
-* Tested up to: 6.2.
-
-= 1.9.1 - 23/03/2023 =
-* Dev - WPML/Polylang language - Order language detection algorithm improved.
-* Dev - WPML/Polylang language - Admin option renamed (was "Require WPML language").
-* Dev - WPML/Polylang language - Code moved to the `Alg_WC_Custom_Email_Order_Validator` class.
-* WC tested up to: 7.5.
-
-= 1.9.0 - 08/03/2023 =
-* Dev - Admin Options - Admin actions - "Orders > Preview" option added.
-* Dev - Admin Options - Admin actions - "Orders > Actions column" option added.
-* Dev - Admin Options - Admin actions - Code refactoring.
-* Dev - Developers - `alg_wc_custom_emails_order_product_term_ids` filter added.
-
-= 1.8.0 - 08/03/2023 =
-* Dev - Admin Options - "Admin actions" option added (defaults to "Edit order > Order actions" and "Orders > Bulk actions").
-* Dev - Admin Options - Admin settings rearranged ("Settings Tools" subsection added).
-* Dev - Order Options - Require/Exclude product categories/tags - Listing empty categories/tags as well now.
-* Dev - Order Options - "Logical operator" option added (defaults to `AND`).
-* Dev - Order Options - Code refactoring (`Alg_WC_Custom_Email_Order_Validator` class added).
-* Dev - Shortcodes - `[if]` - Code refactoring.
-* Dev - Compatibility - "Email Customizer for WooCommerce (Pro)" by ThemeHigh - PHP notice (regarding calling the `wc_get_product()` function too early) fixed.
-* WC tested up to: 7.4.
-
-= 1.7.2 - 26/01/2023 =
-* Dev - Admin Options - "Copy settings" tool added.
-* Dev - Admin Options - "Reset settings" tool added.
-* Dev - Shortcodes - `[generate_coupon_code]` - Coupon description (`post_excerpt`) updated.
-
-= 1.7.1 - 21/01/2023 =
-* Dev - Order Options - Require/Exclude products - Now using AJAX in admin settings.
-* WC tested up to: 7.3.
-
-= 1.7.0 - 24/12/2022 =
-* Dev - Email Data - "Require WPML language" option added.
-* Dev - Shortcodes - `[translate]` shortcode added (for WPML and Polylang plugins).
-
-= 1.6.0 - 21/12/2022 =
-* Dev - Order Options - "Require product categories" option added.
-* Dev - Order Options - "Exclude product categories" option added.
-* Dev - Order Options - "Require product tags" option added.
-* Dev - Order Options - "Exclude product tags" option added.
-* Dev - Admin settings rearranged; subsection titles added.
-* Dev - Code refactoring.
-* Deploy script added.
-* Tested up to: 6.1.
-* WC tested up to: 7.2.
-
-= 1.5.5 - 06/10/2022 =
-* WC tested up to: 6.9.
-* Readme.txt updated.
-
-= 1.5.4 - 12/09/2022 =
-* Dev - Shortcodes - `[order_details]` - `plain_text` and `sent_to_admin` attributes added (both default to `no`).
-* WC tested up to: 6.8.
-
-= 1.5.3 - 20/07/2022 =
-* Dev - Triggers - "Subscription status updated" trigger groups added ("WooCommerce Subscriptions" plugin).
-* WC tested up to: 6.7.
-
-= 1.5.2 - 30/06/2022 =
-* Fix - Settings - Trigger(s) - "Extra" triggers were not added to the list. This is fixed now.
-* Dev - Developers - `alg_wc_custom_emails_is_enabled` filter added.
-* WC tested up to: 6.6.
-* Tested up to: 6.0.
-
-= 1.5.1 - 01/08/2021 =
-* Fix - Error on WooCommerce Analytics page fixed.
-
-= 1.5.0 - 01/08/2021 =
-* Fix - Shortcodes - `[order_shipping_total]` shortcode fixed.
-* Fix - Shortcodes - `[order_shipping_method]` shortcode fixed.
-* Fix - Shortcodes - `[order_payment_method_title]` shortcode fixed.
-* Dev - General - "Enabled triggers groups" option added.
-* Dev - Triggers - "Subscriptions: Renewal order" trigger groups added.
-* Dev - Shortcodes - `[order_item_names]` shortcode added.
-* Dev - Debug - More info is added to the log now.
-
-= 1.4.1 - 28/07/2021 =
-* Dev - Escaping all output now.
-
-= 1.4.0 - 27/07/2021 =
-* Dev - All user input is properly sanitized now.
-* Dev - Localisation - `load_plugin_textdomain()` is called on `init` action now.
-* Dev - Code refactoring.
-* Tested up to: 5.8.
-* WC tested up to: 5.5.
-* Free plugin version released.
-
-= 1.3.1 - 05/04/2021 =
-* Dev - Email content - "Default content" button added.
-* Dev - Settings - Link to each email settings added.
-* Dev - Email settings - Triggers list rearranged; settings descriptions updated.
-* Dev - Code refactoring.
-
-= 1.3.0 - 30/03/2021 =
-* Dev - "Delay" options added (including "Scheduled" section).
-* Dev - Now always adding order note when sending an email.
-* Dev - Debug - More info added.
-* Dev - Code refactoring.
-
-= 1.2.1 - 22/03/2021 =
-* Dev - "Send email: ..." actions added to the "Bulk actions" select box in admin "Orders" list.
-* Dev - Code refactoring.
-
-= 1.2.0 - 19/03/2021 =
-* Dev - "Minimum order amount" option added.
-* Dev - "Maximum order amount" option added.
-* Dev - "Require order product(s)" option added.
-* Dev - "Exclude order product(s)" option added.
-* Dev - General - Advanced - "Debug" option added.
-* Dev - Settings - Minor descriptions update.
-* WC tested up to: 5.1.
-* Tested up to: 5.7.
-
-= 1.1.0 - 07/10/2020 =
-* Dev - `[generate_coupon_code]` shortcode added.
-* Dev - Trigger - `alg_wc_custom_emails_is_user_email` filter added.
-* Dev - Settings - Minor descriptions update.
-* WC tested up to: 4.5.
-* Tested up to: 5.5.
-
-= 1.0.0 - 21/01/2020 =
-* Initial Release.
+[See changelog for all versions](https://plugins.svn.wordpress.org/custom-emails-for-woocommerce/trunk/changelog.txt).
 
 == Upgrade Notice ==
 
