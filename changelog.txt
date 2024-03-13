@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 2.9.3 - 13/03/2024 =
+* Dev - Triggers - Extra - "Customer address changed" and "Customer address saved" triggers added.
+* Dev - Scheduled - Admin - Object ID validation added.
+
 = 2.9.2 - 01/03/2024 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
 * Readme.txt - Tags - `woo commerce` tag removed.

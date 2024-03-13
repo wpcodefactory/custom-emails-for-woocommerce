@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Scheduled Section Settings
  *
- * @version 2.7.0
+ * @version 2.9.3
  * @since   1.3.0
  *
  * @author  Algoritmika Ltd
@@ -109,7 +109,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_delayed_emails_info.
 	 *
-	 * @version 2.7.0
+	 * @version 2.9.3
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) better solution instead of `_get_cron_array()`?
@@ -133,8 +133,8 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 							$result[] = sprintf( '<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
 								$this->get_email_title_from_class( $class ),
 								$this->get_formatted_local_time( $timestamp ),
-								$object_id,
-								$this->get_unschedule_button_html_wp_cron( $class, $object_id, $timestamp )
+								( is_scalar( $object_id ) ? $object_id : '' ),
+								( is_scalar( $object_id ) ? $this->get_unschedule_button_html_wp_cron( $class, $object_id, $timestamp ) : '' )
 							);
 						}
 					}
@@ -157,7 +157,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 					$result[] = sprintf( '<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
 						$this->get_email_title_from_class( $class ),
 						$this->get_formatted_local_time( $scheduled_action->get_schedule()->get_date()->getTimestamp() ),
-						$object_id,
+						( is_scalar( $object_id ) ? $object_id : '' ),
 						$this->get_unschedule_button_html_as( $scheduled_action_id )
 					);
 				}

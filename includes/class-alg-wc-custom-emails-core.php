@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.6.0
+ * @version 2.9.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.6.0
+	 * @version 2.9.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -62,6 +62,9 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Templates
 		add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
+
+		// User address changed
+		add_action( 'woocommerce_after_save_address_validation', array( $this, 'alg_wc_ce_user_address_changed' ), 10, 4 );
 
 		// Product published
 		add_action( 'transition_post_status', array( $this, 'alg_wc_ce_product_published' ), 10, 3 );
@@ -93,6 +96,31 @@ class Alg_WC_Custom_Emails_Core {
 		if ( $this->do_debug ) {
 			$this->add_to_log( $message );
 		}
+	}
+
+	/**
+	 * alg_wc_ce_user_address_changed.
+	 *
+	 * @version 2.9.3
+	 * @since   2.9.3
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/blob/8.6.1/plugins/woocommerce/includes/class-wc-form-handler.php#L200
+	 *
+	 * @todo    (dev) run this only if `alg_wc_ce_user_address_changed` is in `$email->get_option( 'trigger' )` for at least one of the emails?
+	 * @todo    (feature) `alg_wc_ce_user_billing_address_changed` and `alg_wc_ce_user_shipping_address_changed`
+	 * @todo    (feature) show "changes" (with a shortcode?)
+	 */
+	function alg_wc_ce_user_address_changed( $user_id, $address_type, $address, $customer ) {
+
+		if ( 0 < wc_notice_count( 'error' ) ) {
+			return;
+		}
+
+		$data_changes = ( $customer ? $customer->get_changes() : false );
+		if ( ! empty( $data_changes ) ) {
+			do_action( 'alg_wc_ce_user_address_changed', $user_id );
+		}
+
 	}
 
 	/**
@@ -198,7 +226,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_email_trigger_actions.
 	 *
-	 * @version 2.6.0
+	 * @version 2.9.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
@@ -220,6 +248,10 @@ class Alg_WC_Custom_Emails_Core {
 				}
 			}
 		}
+
+		// Users
+		$email_actions[] = 'woocommerce_after_save_address_validation';
+		$email_actions[] = 'alg_wc_ce_user_address_changed';
 
 		// Products
 		$email_actions[] = 'alg_wc_ce_product_published';

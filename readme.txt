@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.9.2
+Stable tag: 2.9.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.9.3 - 13/03/2024 =
+* Dev - Triggers - Extra - "Customer address changed" and "Customer address saved" triggers added.
+* Dev - Scheduled - Admin - Object ID validation added.
 
 = 2.9.2 - 01/03/2024 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.9.1
+ * @version 2.9.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -323,7 +323,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.9.1
+	 * @version 2.9.3
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -371,7 +371,11 @@ class Alg_WC_Custom_Email extends WC_Email {
 		if ( $object_id ) {
 
 			if (
-				'woocommerce_created_customer_notification' === current_filter() ||
+				in_array( current_filter(), array(
+					'woocommerce_created_customer_notification',
+					'woocommerce_after_save_address_validation_notification',
+					'alg_wc_ce_user_address_changed_notification',
+				) ) ||
 				apply_filters( 'alg_wc_custom_emails_is_user_email', false, current_filter() )
 			) {
 

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.9.0
+ * @version 2.9.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -89,7 +89,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_triggers.
 	 *
-	 * @version 2.6.0
+	 * @version 2.9.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_ce_product_published_notification`: `woocommerce_new_product`?
@@ -132,16 +132,18 @@ class Alg_WC_Custom_Email_Settings {
 
 		// Extra triggers
 		$triggers['extra'] = array(
-			'woocommerce_reset_password_notification'           => __( 'Reset password notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_order_fully_refunded_notification'     => __( 'Order fully refunded notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_order_partially_refunded_notification' => __( 'Order partially refunded notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_new_customer_note_notification'        => __( 'New customer note notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_low_stock_notification'                => __( 'Low stock notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_no_stock_notification'                 => __( 'No stock notification', 'custom-emails-for-woocommerce' ),
-			'woocommerce_product_on_backorder_notification'     => __( 'Product on backorder notification', 'custom-emails-for-woocommerce' ),
-			'alg_wc_ce_product_published_notification'          => __( 'Product published', 'custom-emails-for-woocommerce' ),
-			'woocommerce_update_product_notification'           => __( 'Product updated', 'custom-emails-for-woocommerce' ),
-			'woocommerce_created_customer_notification'         => __( 'Created customer notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_reset_password_notification'                => __( 'Reset password notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_order_fully_refunded_notification'          => __( 'Order fully refunded notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_order_partially_refunded_notification'      => __( 'Order partially refunded notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_new_customer_note_notification'             => __( 'New customer note notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_low_stock_notification'                     => __( 'Low stock notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_no_stock_notification'                      => __( 'No stock notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_product_on_backorder_notification'          => __( 'Product on backorder notification', 'custom-emails-for-woocommerce' ),
+			'alg_wc_ce_product_published_notification'               => __( 'Product published', 'custom-emails-for-woocommerce' ),
+			'woocommerce_update_product_notification'                => __( 'Product updated', 'custom-emails-for-woocommerce' ),
+			'woocommerce_created_customer_notification'              => __( 'Created customer notification', 'custom-emails-for-woocommerce' ),
+			'woocommerce_after_save_address_validation_notification' => __( 'Customer address saved', 'custom-emails-for-woocommerce' ),
+			'alg_wc_ce_user_address_changed_notification'            => __( 'Customer address changed', 'custom-emails-for-woocommerce' ),
 		);
 
 		// WooCommerce Subscriptions
