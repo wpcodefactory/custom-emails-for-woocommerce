@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.9.0
+ * @version 2.9.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.9.0
+	 * @version 2.9.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -68,6 +68,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 
 			'order_meta',
 			'order_func',
+			'order_id',
 			'order_number',
 			'order_total',
 			'order_total_tax',
@@ -77,6 +78,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_payment_method_id',
 			'order_payment_method_title',
 			'order_checkout_payment_url',
+			'order_view_url',
+			'order_edit_url',
+			'order_received_url',
+			'order_cancel_url',
+			'order_shipping_address_map_url',
 			'order_total_items_count',
 			'order_date',
 			'order_details',
@@ -233,6 +239,71 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->order->get_checkout_payment_url(), $atts );
+	}
+
+	/**
+	 * order_cancel_url.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_cancel_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_cancel_order_url(), $atts );
+	}
+
+	/**
+	 * order_received_url.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_received_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_checkout_order_received_url(), $atts );
+	}
+
+	/**
+	 * order_edit_url.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_edit_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_edit_order_url(), $atts );
+	}
+
+	/**
+	 * order_shipping_address_map_url.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_shipping_address_map_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_shipping_address_map_url(), $atts );
+	}
+
+	/**
+	 * order_view_url.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_view_url( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_view_order_url(), $atts );
 	}
 
 	/**
@@ -631,6 +702,19 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( wc_format_datetime( $this->order->get_date_created() ), $atts );
+	}
+
+	/**
+	 * order_id.
+	 *
+	 * @version 2.9.4
+	 * @since   2.9.4
+	 */
+	function order_id( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		return $this->return_shortcode( $this->order->get_id(), $atts );
 	}
 
 	/**

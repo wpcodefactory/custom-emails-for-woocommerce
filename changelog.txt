@@ -1,5 +1,14 @@
 == Changelog ==
 
+= 2.9.4 - 01/04/2024 =
+* Dev - Shortcodes - `[order_view_url]` shortcode added.
+* Dev - Shortcodes - `[order_edit_url]` shortcode added.
+* Dev - Shortcodes - `[order_received_url]` shortcode added.
+* Dev - Shortcodes - `[order_cancel_url]` shortcode added.
+* Dev - Shortcodes - `[order_shipping_address_map_url]` shortcode added.
+* Dev - Shortcodes - `[order_id]` shortcode added.
+* WC tested up to: 8.7.
+
 = 2.9.3 - 13/03/2024 =
 * Dev - Triggers - Extra - "Customer address changed" and "Customer address saved" triggers added.
 * Dev - Scheduled - Admin - Object ID validation added.

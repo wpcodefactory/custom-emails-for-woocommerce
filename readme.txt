@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.4
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,15 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 2.9.4 - 01/04/2024 =
+* Dev - Shortcodes - `[order_view_url]` shortcode added.
+* Dev - Shortcodes - `[order_edit_url]` shortcode added.
+* Dev - Shortcodes - `[order_received_url]` shortcode added.
+* Dev - Shortcodes - `[order_cancel_url]` shortcode added.
+* Dev - Shortcodes - `[order_shipping_address_map_url]` shortcode added.
+* Dev - Shortcodes - `[order_id]` shortcode added.
+* WC tested up to: 8.7.
 
 = 2.9.3 - 13/03/2024 =
 * Dev - Triggers - Extra - "Customer address changed" and "Customer address saved" triggers added.
