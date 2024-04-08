@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.9.4
+ * @version 2.9.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.9.4
+	 * @version 2.9.5
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -66,39 +66,40 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'site_address',
 			'translate',
 
-			'order_meta',
-			'order_func',
-			'order_id',
-			'order_number',
-			'order_total',
-			'order_total_tax',
-			'order_total_excl_tax',
-			'order_shipping_total',
-			'order_shipping_method',
-			'order_payment_method_id',
-			'order_payment_method_title',
-			'order_checkout_payment_url',
-			'order_view_url',
-			'order_edit_url',
-			'order_received_url',
+			'order_billing_address',
+			'order_billing_email',
+			'order_billing_first_name',
+			'order_billing_last_name',
+			'order_billing_phone',
 			'order_cancel_url',
-			'order_shipping_address_map_url',
-			'order_total_items_count',
+			'order_checkout_payment_url',
+			'order_customer_note',
 			'order_date',
 			'order_details',
 			'order_downloads',
-			'order_billing_address',
-			'order_shipping_address',
-			'order_billing_first_name',
-			'order_billing_last_name',
-			'order_billing_email',
-			'order_billing_phone',
+			'order_edit_url',
+			'order_func',
+			'order_id',
 			'order_item_meta',
 			'order_item_names',
 			'order_item_product_ids',
-			'order_user_id',
+			'order_meta',
+			'order_number',
+			'order_payment_method_id',
+			'order_payment_method_title',
+			'order_received_url',
+			'order_shipping_address',
+			'order_shipping_address_map_url',
+			'order_shipping_method',
+			'order_shipping_total',
+			'order_total',
+			'order_total_excl_tax',
+			'order_total_items_count',
+			'order_total_items_qty',
+			'order_total_tax',
 			'order_user_data',
-			'order_customer_note',
+			'order_user_id',
+			'order_view_url',
 
 			'generate_coupon_code',
 
@@ -571,6 +572,23 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( count( $this->order->get_items() ), $atts );
+	}
+
+	/**
+	 * order_total_items_qty.
+	 *
+	 * @version 2.9.5
+	 * @since   2.9.5
+	 */
+	function order_total_items_qty( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		$qty = 0;
+		foreach ( $this->order->get_items() as $item ) {
+			$qty += $item->get_quantity();
+		}
+		return $this->return_shortcode( $qty, $atts );
 	}
 
 	/**
