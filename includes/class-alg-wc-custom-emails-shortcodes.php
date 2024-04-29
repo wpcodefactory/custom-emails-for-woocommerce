@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.9.5
+ * @version 2.9.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.9.5
+	 * @version 2.9.6
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -74,6 +74,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_cancel_url',
 			'order_checkout_payment_url',
 			'order_customer_note',
+			'order_customer_order_notes',
 			'order_date',
 			'order_details',
 			'order_downloads',
@@ -225,6 +226,27 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->user->get( $atts['key'] ), $atts );
+	}
+
+	/**
+	 * order_customer_order_notes.
+	 *
+	 * @version 2.9.6
+	 * @since   2.9.6
+	 *
+	 * @todo    (dev) `comment_date`?
+	 * @todo    (dev) `comment_author`, `comment_author_email`?
+	 * @todo    (dev) customizable glue (`<br>`)?
+	 * @todo    (dev) customizable sorting?
+	 */
+	function order_customer_order_notes( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		$notes = $this->order->get_customer_order_notes();
+		$notes = wp_list_pluck( $notes, 'comment_content' );
+		$notes = implode( '<br>', $notes );
+		return $this->return_shortcode( $notes, $atts );
 	}
 
 	/**
@@ -813,9 +835,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) more common atts, e.g., find/replace, strip_tags, any_func, etc.
+	 * @todo    (dev) more common atts, e.g., on_empty, find/replace, strip_tags, any_func, etc.
 	 */
 	function return_shortcode( $value, $atts ) {
+
+		// Add, multiply
 		if ( is_numeric( $value ) ) {
 			if ( ! empty( $atts['add'] ) ) {
 				$value += $atts['add'];
@@ -824,6 +848,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 				$value *= $atts['multiply'];
 			}
 		}
+
+		// Format
 		if ( isset( $atts['format'] ) ) {
 			switch ( $atts['format'] ) {
 				case 'price':
@@ -833,7 +859,17 @@ class Alg_WC_Custom_Emails_Shortcodes {
 					$value = sprintf( $atts['format'], $value );
 			}
 		}
-		return ( '' !== $value ? ( ( isset( $atts['before'] ) ? $atts['before'] : '' ) . $value . ( isset( $atts['after'] ) ? $atts['after'] : '' ) ) : '' );
+
+		// Before, after
+		return ( '' !== $value ?
+			(
+				( isset( $atts['before'] ) ? $atts['before'] : '' ) .
+					$value .
+				( isset( $atts['after'] )  ? $atts['after']  : '' )
+			) :
+			''
+		);
+
 	}
 
 }
