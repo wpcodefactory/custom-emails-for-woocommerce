@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 2.9.7 - 02/05/2024 =
+* Dev - Shortcodes - `[order_details]` - `add_product_links` attribute added.
+
 = 2.9.6 - 29/04/2024 =
 * Dev - Shortcodes - `[order_customer_order_notes]` shortcode added.
 * WC tested up to: 8.8.

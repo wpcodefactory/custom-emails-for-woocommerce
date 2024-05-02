@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Emails Shortcodes Class
  *
- * @version 2.9.6
+ * @version 2.9.7
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -696,21 +696,54 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
+	 * add_order_details_product_link.
+	 *
+	 * @version 2.9.7
+	 * @since   2.9.7
+	 */
+	function add_order_details_product_link( $item_name, $item ) {
+
+		// No changes
+		if (
+			! is_callable( array( $item, 'get_product' ) ) ||
+			! ( $product = $item->get_product() ) ||
+			! ( $product_permalink = $product->get_permalink() )
+		) {
+			return $item_name;
+		}
+
+		// Permalink
+		return sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() );
+
+	}
+
+	/**
 	 * order_details.
 	 *
-	 * @version 1.9.3
+	 * @version 2.9.7
 	 * @since   1.0.0
 	 */
 	function order_details( $atts, $content = '' ) {
+
 		if ( ! $this->order || ! $this->email ) {
 			return '';
 		}
-		$sent_to_admin = ( isset( $atts['sent_to_admin'] ) && filter_var( $atts['sent_to_admin'], FILTER_VALIDATE_BOOLEAN ) );
-		$plain_text    = ( isset( $atts['plain_text'] )    && filter_var( $atts['plain_text'],    FILTER_VALIDATE_BOOLEAN ) );
-		$wc_emails     = WC_Emails::instance();
+
+		$sent_to_admin        = ( isset( $atts['sent_to_admin'] )     && filter_var( $atts['sent_to_admin'],     FILTER_VALIDATE_BOOLEAN ) );
+		$plain_text           = ( isset( $atts['plain_text'] )        && filter_var( $atts['plain_text'],        FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_links = ( isset( $atts['add_product_links'] ) && filter_var( $atts['add_product_links'], FILTER_VALIDATE_BOOLEAN ) );
+		$wc_emails            = WC_Emails::instance();
+
 		ob_start();
+		if ( $do_add_product_links ) {
+			add_filter( 'woocommerce_order_item_name', array( $this, 'add_order_details_product_link' ), PHP_INT_MAX, 2 );
+		}
 		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text, $this->email );
+		if ( $do_add_product_links ) {
+			remove_filter( 'woocommerce_order_item_name', array( $this, 'add_order_details_product_link' ), PHP_INT_MAX );
+		}
 		return $this->return_shortcode( ob_get_clean(), $atts );
+
 	}
 
 	/**
@@ -720,15 +753,19 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @since   2.1.0
 	 */
 	function order_downloads( $atts, $content = '' ) {
+
 		if ( ! $this->order || ! $this->email ) {
 			return '';
 		}
+
 		$sent_to_admin = ( isset( $atts['sent_to_admin'] ) && filter_var( $atts['sent_to_admin'], FILTER_VALIDATE_BOOLEAN ) );
 		$plain_text    = ( isset( $atts['plain_text'] )    && filter_var( $atts['plain_text'],    FILTER_VALIDATE_BOOLEAN ) );
 		$wc_emails     = WC_Emails::instance();
+
 		ob_start();
 		$wc_emails->order_downloads( $this->order, $sent_to_admin, $plain_text, $this->email );
 		return $this->return_shortcode( ob_get_clean(), $atts );
+
 	}
 
 	/**
