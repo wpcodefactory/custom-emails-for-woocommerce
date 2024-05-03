@@ -1,7 +1,10 @@
 == Changelog ==
 
+= 2.9.8 - 03/05/2024 =
+* Dev - Order Options - Require/Exclude products/users - Admin options are loaded only in the backend now.
+
 = 2.9.7 - 02/05/2024 =
-* Dev - Shortcodes - `[order_details]` - `add_product_links` attribute added.
+* Dev - Shortcodes - `[order_details]` - `add_product_links` attribute added (defaults to `no`).
 
 = 2.9.6 - 29/04/2024 =
 * Dev - Shortcodes - `[order_customer_order_notes]` shortcode added.

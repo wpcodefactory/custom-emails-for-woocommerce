@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.9.3
+ * @version 2.9.8
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -260,7 +260,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_ajax_options.
 	 *
-	 * @version 1.8.0
+	 * @version 2.9.8
 	 * @since   1.7.1
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1569
@@ -273,6 +273,11 @@ class Alg_WC_Custom_Email_Settings {
 
 		// Make sure we are not calling the `wc_get_product()` function too early: https://github.com/woocommerce/woocommerce/blob/7.4.1/plugins/woocommerce/includes/wc-product-functions.php#L64
 		if ( ! did_action( 'woocommerce_init' ) || ! did_action( 'woocommerce_after_register_taxonomy' ) || ! did_action( 'woocommerce_after_register_post_type' ) ) {
+			return $options;
+		}
+
+		// Make sure it's backend
+		if ( ! is_admin() ) {
 			return $options;
 		}
 
@@ -414,6 +419,7 @@ class Alg_WC_Custom_Email_Settings {
 	 * @version 2.9.0
 	 * @since   1.0.0
 	 *
+	 * @todo    (dev) load this in admin only (see `get_ajax_options()`)?
 	 * @todo    (dev) move this function to a separate file/class
 	 * @todo    (feature) "Custom triggers"
 	 * @todo    (feature) `cc` and `bcc`

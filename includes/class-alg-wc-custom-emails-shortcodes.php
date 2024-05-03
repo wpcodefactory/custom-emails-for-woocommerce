@@ -700,6 +700,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 *
 	 * @version 2.9.7
 	 * @since   2.9.7
+	 *
+	 * @todo    (dev) No changes: add `... || ! ( $name = $item->get_name() ) ...`?
 	 */
 	function add_order_details_product_link( $item_name, $item ) {
 

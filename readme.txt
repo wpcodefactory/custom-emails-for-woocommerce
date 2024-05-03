@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.5
-Stable tag: 2.9.7
+Stable tag: 2.9.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -146,8 +146,11 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
+= 2.9.8 - 03/05/2024 =
+* Dev - Order Options - Require/Exclude products/users - Admin options are loaded only in the backend now.
+
 = 2.9.7 - 02/05/2024 =
-* Dev - Shortcodes - `[order_details]` - `add_product_links` attribute added.
+* Dev - Shortcodes - `[order_details]` - `add_product_links` attribute added (defaults to `no`).
 
 = 2.9.6 - 29/04/2024 =
 * Dev - Shortcodes - `[order_customer_order_notes]` shortcode added.
