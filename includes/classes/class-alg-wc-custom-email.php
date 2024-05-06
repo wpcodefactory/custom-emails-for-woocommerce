@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.9.3
+ * @version 2.9.9
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -98,6 +98,76 @@ class Alg_WC_Custom_Email extends WC_Email {
 				add_filter( 'woocommerce_email_enabled_' . $stop_email, array( $this, 'alg_wc_ce_stop_email' ), PHP_INT_MAX, 2 );
 			}
 		}
+
+	}
+
+	/**
+	 * Get the from name for outgoing emails.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 *
+	 * @return  string
+	 */
+	function get_from_name( $from_name = '' ) {
+
+		$_from_name = $this->alg_wc_ce_process_content( $this->get_option( 'alg_wc_ce_from_name', '' ) );
+
+		$from_name = ( '' === $_from_name ?
+			parent::get_from_name( $from_name ) :
+			wp_specialchars_decode( esc_html( $_from_name ), ENT_QUOTES )
+		);
+
+		return apply_filters( 'alg_wc_custom_emails_from_name', $from_name, $this );
+
+	}
+
+	/**
+	 * Get the from address for outgoing emails.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 *
+	 * @return  string
+	 */
+	function get_from_address( $from_email = '' ) {
+
+		$_from_email = $this->alg_wc_ce_process_content( $this->get_option( 'alg_wc_ce_from_address', '' ) );
+
+		$from_email = ( '' === $_from_email ?
+			parent::get_from_address( $from_email ) :
+			sanitize_email( $_from_email )
+		);
+
+		return apply_filters( 'alg_wc_custom_emails_from_address', $from_email, $this );
+
+	}
+
+	/**
+	 * Get email headers (`Reply-to`).
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 *
+	 * @return  string
+	 */
+	function get_headers() {
+
+		$reply_to_name    = $this->alg_wc_ce_process_content( $this->get_option( 'alg_wc_ce_reply_to_name',    '' ) );
+		$reply_to_address = $this->alg_wc_ce_process_content( $this->get_option( 'alg_wc_ce_reply_to_address', '' ) );
+
+		$headers = ( '' === $reply_to_name && '' === $reply_to_address ?
+			parent::get_headers() :
+			(
+				'Content-Type: ' . $this->get_content_type() . "\r\n" .
+				'Reply-to: ' .
+					       ( '' !== $reply_to_name    ? $reply_to_name    : $this->get_from_name() ) .
+					' <' . ( '' !== $reply_to_address ? $reply_to_address : $this->get_from_address() ) . '>' .
+				"\r\n"
+			)
+		);
+
+		return apply_filters( 'alg_wc_custom_emails_headers', $headers, $this );
 
 	}
 
@@ -535,6 +605,53 @@ class Alg_WC_Custom_Email extends WC_Email {
 	function alg_wc_ce_get_processed_content( $order, $user, $product ) {
 		$content = alg_wc_custom_emails()->core->process_content( $this->get_content(), $this->placeholders, $order, $user, $product, $this );
 		return apply_filters( 'alg_wc_custom_emails_content', $content, $this, $order, $user, $product );
+	}
+
+	/**
+	 * alg_wc_ce_process_content.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 */
+	function alg_wc_ce_process_content( $content ) {
+		return alg_wc_custom_emails()->core->process_content(
+			$content,
+			$this->placeholders,
+			$this->alg_wc_ce_get_order(),
+			$this->alg_wc_ce_get_user(),
+			$this->alg_wc_ce_get_product(),
+			$this
+		);
+	}
+
+	/**
+	 * alg_wc_ce_get_order.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 */
+	function alg_wc_ce_get_order() {
+		return ( $this->object && is_a( $this->object, 'WC_Order' ) ? $this->object : false );
+	}
+
+	/**
+	 * alg_wc_ce_get_user.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 */
+	function alg_wc_ce_get_user() {
+		return ( $this->object && is_a( $this->object, 'WP_User' ) ? $this->object : false );
+	}
+
+	/**
+	 * alg_wc_ce_get_product.
+	 *
+	 * @version 2.9.9
+	 * @since   2.9.9
+	 */
+	function alg_wc_ce_get_product() {
+		return ( $this->object && is_a( $this->object, 'WC_Product' ) ? $this->object : false );
 	}
 
 	/**

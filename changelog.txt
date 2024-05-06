@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 2.9.9 - 06/05/2024 =
+* Dev - "Email Sender Options" subsection added ("From"/"Reply-to" name/address).
+
 = 2.9.8 - 03/05/2024 =
 * Dev - Order Options - Require/Exclude products/users - Admin options are loaded only in the backend now.
 

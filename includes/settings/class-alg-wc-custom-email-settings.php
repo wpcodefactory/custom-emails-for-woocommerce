@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.9.8
+ * @version 2.9.9
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -416,7 +416,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.9.0
+	 * @version 2.9.9
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) load this in admin only (see `get_ajax_options()`)?
@@ -781,6 +781,45 @@ class Alg_WC_Custom_Email_Settings {
 					'AND' => 'AND',
 					'OR'  => 'OR',
 				),
+			),
+		) );
+
+		// Email Sender Options
+		$fields = array_merge( $fields, array(
+			'email_sender_options' => array(
+				'title'       => __( 'Email Sender Options', 'custom-emails-for-woocommerce' ),
+				'type'        => 'title',
+				'description' => sprintf( __( 'You can use shortcodes here, e.g., %s (Name fields) or %s (Address fields).', 'custom-emails-for-woocommerce' ),
+					'<code>[order_billing_first_name] [order_billing_last_name]</code>',
+					'<code>[order_billing_email]</code>' ),
+			),
+			'alg_wc_ce_from_name' => array(
+				'title'       => __( '"From" name', 'custom-emails-for-woocommerce' ),
+				'placeholder' => $email->get_from_name(),
+				'type'        => 'text',
+				'css'         => 'width:100%;',
+				'default'     => '',
+			),
+			'alg_wc_ce_from_address' => array(
+				'title'       => __( '"From" address', 'custom-emails-for-woocommerce' ),
+				'placeholder' => $email->get_from_address(),
+				'type'        => 'text',
+				'css'         => 'width:100%;',
+				'default'     => '',
+			),
+			'alg_wc_ce_reply_to_name' => array(
+				'title'       => __( '"Reply-to" name', 'custom-emails-for-woocommerce' ),
+				'placeholder' => $email->get_from_name(),
+				'type'        => 'text',
+				'css'         => 'width:100%;',
+				'default'     => '',
+			),
+			'alg_wc_ce_reply_to_address' => array(
+				'title'       => __( '"Reply-to" address', 'custom-emails-for-woocommerce' ),
+				'placeholder' => $email->get_from_address(),
+				'type'        => 'text',
+				'css'         => 'width:100%;',
+				'default'     => '',
 			),
 		) );
 
