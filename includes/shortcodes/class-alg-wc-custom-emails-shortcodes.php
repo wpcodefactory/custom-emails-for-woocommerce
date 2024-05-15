@@ -1,8 +1,8 @@
 <?php
 /**
- * Custom Emails for WooCommerce - Emails Shortcodes Class
+ * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 2.9.7
+ * @version 3.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.9.6
+	 * @version 3.0.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -59,12 +59,6 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	function __construct() {
 
 		$shortcodes = array(
-
-			'if',
-			'clear',
-			'site_title',
-			'site_address',
-			'translate',
 
 			'order_billing_address',
 			'order_billing_email',
@@ -103,9 +97,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_view_url',
 
 			'generate_coupon_code',
-
 			'user_prop',
-
 			'product_func',
 
 		);
@@ -116,27 +108,6 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
 		}
 
-	}
-
-	/**
-	 * translate.
-	 *
-	 * @version 1.7.0
-	 * @since   1.7.0
-	 *
-	 * @todo    (dev) try to get *order* language (see `get_order_wpml_language()`)
-	 */
-	function translate( $atts, $content = '' ) {
-		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
-		if ( isset( $atts['lang_text'] ) && isset( $atts['not_lang_text'] ) && ! empty( $atts['lang'] ) ) {
-			return ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ?
-				$atts['not_lang_text'] : $atts['lang_text'];
-		}
-		// E.g.: `[translate lang="EN,DE"]Text for EN & DE[/translate][translate not_lang="EN,DE"]Text for other languages[/translate]`
-		return (
-			( ! empty( $atts['lang'] )     && ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ) ||
-			( ! empty( $atts['not_lang'] ) &&     defined( 'ICL_LANGUAGE_CODE' ) &&   in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) ) ) )
-		) ? '' : $content;
 	}
 
 	/**
@@ -614,62 +585,6 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
-	 * if.
-	 *
-	 * @version 2.6.1
-	 * @since   1.0.0
-	 */
-	function if( $atts, $content = '' ) {
-
-		if ( ! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) || '' === $content ) {
-			return '';
-		}
-
-		$value1 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value1'] ) );
-		$value2 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value2'] ) );
-
-		if ( isset( $atts['case_insensitive'] ) && filter_var( $atts['case_insensitive'], FILTER_VALIDATE_BOOLEAN ) ) {
-			$value1 = strtolower( $value1 );
-			$value2 = strtolower( $value2 );
-		}
-
-		return ( $this->eval_operator( $value1, $atts['operator'], $value2 ) ? do_shortcode( $content ) : '' );
-
-	}
-
-	/**
-	 * eval_operator.
-	 *
-	 * @version 2.6.1
-	 * @since   1.8.0
-	 */
-	function eval_operator( $value1, $operator, $value2 ) {
-		switch ( $operator ) {
-			case 'equal':
-				return ( $value1 == $value2 );
-			case 'not_equal':
-				return ( $value1 != $value2 );
-			case 'less':
-				return ( $value1 <  $value2 );
-			case 'less_or_equal':
-				return ( $value1 <= $value2 );
-			case 'greater':
-				return ( $value1 >  $value2 );
-			case 'greater_or_equal':
-				return ( $value1 >= $value2 );
-			case 'in':
-				return (   in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
-			case 'not_in':
-				return ( ! in_array( $value1, array_map( 'trim', explode( ',', $value2 ) ) ) );
-			case 'find':
-				return ( false !== strpos( $value2, $value1 ) );
-			case 'not_find':
-				return ( false === strpos( $value2, $value1 ) );
-		}
-		return false;
-	}
-
-	/**
 	 * order_shipping_address.
 	 *
 	 * @version 1.0.0
@@ -836,36 +751,6 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 		$func = $atts['func'];
 		return $this->return_shortcode( $this->order->{$func}(), $atts );
-	}
-
-	/**
-	 * site_title.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function site_title( $atts, $content = '' ) {
-		return $this->return_shortcode( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ), $atts );
-	}
-
-	/**
-	 * site_address.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function site_address( $atts, $content = '' ) {
-		return $this->return_shortcode( wp_parse_url( home_url(), PHP_URL_HOST ), $atts );
-	}
-
-	/**
-	 * clear.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function clear( $atts, $content = '' ) {
-		return $this->return_shortcode( '<p></p>', $atts );
 	}
 
 	/**

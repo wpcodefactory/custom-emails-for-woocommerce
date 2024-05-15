@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 2.9.3
+ * @version 3.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -41,7 +41,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.9.3
+	 * @version 3.0.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -49,9 +49,10 @@ class Alg_WC_Custom_Emails_Core {
 	function __construct() {
 
 		// Properties
-		$this->do_debug       = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
-		$this->email_settings = require_once( 'settings/class-alg-wc-custom-email-settings.php' );
-		$this->shortcodes     = require_once( 'class-alg-wc-custom-emails-shortcodes.php' );
+		$this->do_debug           = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
+		$this->email_settings     = require_once( 'settings/email/class-alg-wc-custom-email-settings.php' );
+		$this->shortcodes         = require_once( 'shortcodes/class-alg-wc-custom-emails-shortcodes.php' );
+		$this->general_shortcodes = require_once( 'shortcodes/class-alg-wc-custom-emails-shortcodes-general.php' );
 
 		// Hooks
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_custom_emails' ) );
@@ -363,12 +364,17 @@ class Alg_WC_Custom_Emails_Core {
 
 			'extra'                       => __( 'Extra', 'custom-emails-for-woocommerce' ),
 
-			'subscription_status'         => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Subscription status updated to', 'custom-emails-for-woocommerce' ),
-			'subscription_status_change'  => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Subscription status updated from to', 'custom-emails-for-woocommerce' ),
+			'subscription_status'         => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' .
+				__( 'Subscription status updated to', 'custom-emails-for-woocommerce' ),
+			'subscription_status_change'  => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' .
+				__( 'Subscription status updated from to', 'custom-emails-for-woocommerce' ),
 
-			'renewal_order_status'        => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Renewal order status updated to', 'custom-emails-for-woocommerce' ),
-			'renewal_order_status_change' => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Renewal order status updated from to', 'custom-emails-for-woocommerce' ),
-			'renewal_new_order'           => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' . __( 'Renewal new order', 'custom-emails-for-woocommerce' ),
+			'renewal_order_status'        => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' .
+				__( 'Renewal order status updated to', 'custom-emails-for-woocommerce' ),
+			'renewal_order_status_change' => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' .
+				__( 'Renewal order status updated from to', 'custom-emails-for-woocommerce' ),
+			'renewal_new_order'           => __( 'Subscriptions', 'custom-emails-for-woocommerce' ) . ': ' .
+				__( 'Renewal new order', 'custom-emails-for-woocommerce' ),
 
 		);
 	}

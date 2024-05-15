@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.0.0 - 15/05/2024 =
+* Dev - Code refactoring.
+* WooCommerce added to the "Requires Plugins" (plugin header).
+
 = 2.9.9 - 06/05/2024 =
 * Dev - "Email Sender Options" subsection added ("From"/"Reply-to" name/address).
 
