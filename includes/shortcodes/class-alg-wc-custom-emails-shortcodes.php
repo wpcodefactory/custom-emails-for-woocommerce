@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.0.0
+ * @version 3.0.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.0
+	 * @version 3.0.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -78,6 +78,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_item_meta',
 			'order_item_names',
 			'order_item_product_ids',
+			'order_item_product_images',
 			'order_meta',
 			'order_number',
 			'order_payment_method_id',
@@ -464,6 +465,32 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
+	 * order_item_product_images.
+	 *
+	 * @version 3.0.1
+	 * @since   3.0.1
+	 *
+	 * @todo    (dev) customizable separator
+	 */
+	function order_item_product_images( $atts, $content = '' ) {
+		if ( ! $this->order ) {
+			return '';
+		}
+		$order_item_product_images = array();
+		foreach ( $this->order->get_items() as $item ) {
+			if (
+				is_callable( array( $item, 'get_product' ) ) &&
+				( $product = $item->get_product() ) &&
+				( $image = $product->get_image() )
+			) {
+				$order_item_product_images[] = $image;
+			}
+		}
+		$order_item_product_images = implode( '<br>', $order_item_product_images );
+		return $this->return_shortcode( $order_item_product_images, $atts );
+	}
+
+	/**
 	 * order_total.
 	 *
 	 * @version 1.0.0
@@ -635,9 +662,22 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
+	 * add_order_details_product_image.
+	 *
+	 * @version 3.0.1
+	 * @since   3.0.1
+	 *
+	 * @todo    (dev) `$args['image_size'] = array( 32, 32 );`
+	 */
+	function add_order_details_product_image( $args ) {
+		$args['show_image'] = true;
+		return $args;
+	}
+
+	/**
 	 * order_details.
 	 *
-	 * @version 2.9.7
+	 * @version 3.0.1
 	 * @since   1.0.0
 	 */
 	function order_details( $atts, $content = '' ) {
@@ -646,19 +686,42 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 
-		$sent_to_admin        = ( isset( $atts['sent_to_admin'] )     && filter_var( $atts['sent_to_admin'],     FILTER_VALIDATE_BOOLEAN ) );
-		$plain_text           = ( isset( $atts['plain_text'] )        && filter_var( $atts['plain_text'],        FILTER_VALIDATE_BOOLEAN ) );
-		$do_add_product_links = ( isset( $atts['add_product_links'] ) && filter_var( $atts['add_product_links'], FILTER_VALIDATE_BOOLEAN ) );
-		$wc_emails            = WC_Emails::instance();
+		// Atts
+		$sent_to_admin         = ( isset( $atts['sent_to_admin'] )      && filter_var( $atts['sent_to_admin'],      FILTER_VALIDATE_BOOLEAN ) );
+		$plain_text            = ( isset( $atts['plain_text'] )         && filter_var( $atts['plain_text'],         FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_links  = ( isset( $atts['add_product_links'] )  && filter_var( $atts['add_product_links'],  FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_images = ( isset( $atts['add_product_images'] ) && filter_var( $atts['add_product_images'], FILTER_VALIDATE_BOOLEAN ) );
 
+		// WC Emails
+		$wc_emails = WC_Emails::instance();
+
+		// Turn on output buffering
 		ob_start();
+
+		// Product links
 		if ( $do_add_product_links ) {
 			add_filter( 'woocommerce_order_item_name', array( $this, 'add_order_details_product_link' ), PHP_INT_MAX, 2 );
 		}
+
+		// Product images
+		if ( $do_add_product_images ) {
+			add_filter( 'woocommerce_email_order_items_args', array( $this, 'add_order_details_product_image' ), PHP_INT_MAX );
+		}
+
+		// Order details
 		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text, $this->email );
+
+		// Product links
 		if ( $do_add_product_links ) {
 			remove_filter( 'woocommerce_order_item_name', array( $this, 'add_order_details_product_link' ), PHP_INT_MAX );
 		}
+
+		// Product images
+		if ( $do_add_product_images ) {
+			remove_filter( 'woocommerce_email_order_items_args', array( $this, 'add_order_details_product_image' ), PHP_INT_MAX );
+		}
+
+		// The end
 		return $this->return_shortcode( ob_get_clean(), $atts );
 
 	}

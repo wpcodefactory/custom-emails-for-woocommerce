@@ -1065,11 +1065,11 @@ msgstr ""
 msgid "Refunded order"
 msgstr ""
 
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:146
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:147
 #, php-format
 msgid "Created by the \"%s\" plugin"
 msgstr ""
 
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:147
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:148
 msgid "Custom Emails for WooCommerce"
 msgstr ""

@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 3.0.1 - 05/06/2024 =
+* Dev - Shortcodes - `[order_details]` - `add_product_images` attribute added (defaults to `no`).
+* Dev - Shortcodes - `[order_item_product_images]` shortcode added.
+* WC tested up to: 8.9.
+
 = 3.0.0 - 15/05/2024 =
 * Dev - Code refactoring.
 * WooCommerce added to the "Requires Plugins" (plugin header).
