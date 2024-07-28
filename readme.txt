@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.5
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,9 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 3.0.2 - 28/07/2024 =
+* WC tested up to: 9.0.
 
 = 3.0.1 - 05/06/2024 =
 * Dev - Shortcodes - `[order_details]` - `add_product_images` attribute added (defaults to `no`).
