@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.0.1
+ * @version 3.0.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.1
+	 * @version 3.0.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -95,6 +95,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'order_total_tax',
 			'order_user_data',
 			'order_user_id',
+			'order_user_meta',
 			'order_view_url',
 
 			'generate_coupon_code',
@@ -364,6 +365,23 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return '';
 		}
 		return $this->return_shortcode( $this->order->get_customer_note(), $atts );
+	}
+
+	/**
+	 * order_user_meta.
+	 *
+	 * @version 3.0.4
+	 * @since   3.0.4
+	 */
+	function order_user_meta( $atts, $content = '' ) {
+		if (
+			! $this->order ||
+			! isset( $atts['key'] ) ||
+			! ( $user_id = $this->order->get_user_id() )
+		) {
+			return '';
+		}
+		return $this->return_shortcode( get_user_meta( $user_id, $atts['key'], true ), $atts );
 	}
 
 	/**
@@ -675,9 +693,62 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	}
 
 	/**
+	 * add_order_details_product_short_desc.
+	 *
+	 * @version 3.0.4
+	 * @since   3.0.4
+	 */
+	function add_order_details_product_short_desc( $item_id, $item, $order, $plain_text ) {
+		$this->add_order_details_product_desc( $item_id, $item, $order, $plain_text, 'short' );
+	}
+
+	/**
+	 * add_order_details_product_long_desc.
+	 *
+	 * @version 3.0.4
+	 * @since   3.0.4
+	 */
+	function add_order_details_product_long_desc( $item_id, $item, $order, $plain_text ) {
+		$this->add_order_details_product_desc( $item_id, $item, $order, $plain_text, 'long' );
+	}
+
+	/**
+	 * add_order_details_product_desc.
+	 *
+	 * @version 3.0.4
+	 * @since   3.0.4
+	 */
+	function add_order_details_product_desc( $item_id, $item, $order, $plain_text, $short_or_long ) {
+
+		// Get product
+		if (
+			! is_callable( array( $item, 'get_product' ) ) ||
+			! ( $product = $item->get_product() )
+		) {
+			return;
+		}
+
+		// Get product description
+		$product_desc = ( 'short' === $short_or_long ?
+			$product->get_short_description() :
+			$product->get_description()
+		);
+		if ( '' === $product_desc ) {
+			return;
+		}
+
+		// Output product description
+		echo ( $plain_text ?
+			"\n" . strip_tags( $product_desc ) :
+			'<br>' . $product_desc
+		);
+
+	}
+
+	/**
 	 * order_details.
 	 *
-	 * @version 3.0.1
+	 * @version 3.0.4
 	 * @since   1.0.0
 	 */
 	function order_details( $atts, $content = '' ) {
@@ -687,10 +758,12 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 
 		// Atts
-		$sent_to_admin         = ( isset( $atts['sent_to_admin'] )      && filter_var( $atts['sent_to_admin'],      FILTER_VALIDATE_BOOLEAN ) );
-		$plain_text            = ( isset( $atts['plain_text'] )         && filter_var( $atts['plain_text'],         FILTER_VALIDATE_BOOLEAN ) );
-		$do_add_product_links  = ( isset( $atts['add_product_links'] )  && filter_var( $atts['add_product_links'],  FILTER_VALIDATE_BOOLEAN ) );
-		$do_add_product_images = ( isset( $atts['add_product_images'] ) && filter_var( $atts['add_product_images'], FILTER_VALIDATE_BOOLEAN ) );
+		$sent_to_admin             = ( isset( $atts['sent_to_admin'] )          && filter_var( $atts['sent_to_admin'],          FILTER_VALIDATE_BOOLEAN ) );
+		$plain_text                = ( isset( $atts['plain_text'] )             && filter_var( $atts['plain_text'],             FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_links      = ( isset( $atts['add_product_links'] )      && filter_var( $atts['add_product_links'],      FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_images     = ( isset( $atts['add_product_images'] )     && filter_var( $atts['add_product_images'],     FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_desc       = ( isset( $atts['add_product_desc'] )       && filter_var( $atts['add_product_desc'],       FILTER_VALIDATE_BOOLEAN ) );
+		$do_add_product_short_desc = ( isset( $atts['add_product_short_desc'] ) && filter_var( $atts['add_product_short_desc'], FILTER_VALIDATE_BOOLEAN ) );
 
 		// WC Emails
 		$wc_emails = WC_Emails::instance();
@@ -708,6 +781,16 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			add_filter( 'woocommerce_email_order_items_args', array( $this, 'add_order_details_product_image' ), PHP_INT_MAX );
 		}
 
+		// Product desc
+		if ( $do_add_product_desc ) {
+			add_action( 'woocommerce_order_item_meta_end', array( $this, 'add_order_details_product_long_desc' ), 10, 4 );
+		}
+
+		// Product short desc
+		if ( $do_add_product_short_desc ) {
+			add_action( 'woocommerce_order_item_meta_end', array( $this, 'add_order_details_product_short_desc' ), 10, 4 );
+		}
+
 		// Order details
 		$wc_emails->order_details( $this->order, $sent_to_admin, $plain_text, $this->email );
 
@@ -719,6 +802,16 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		// Product images
 		if ( $do_add_product_images ) {
 			remove_filter( 'woocommerce_email_order_items_args', array( $this, 'add_order_details_product_image' ), PHP_INT_MAX );
+		}
+
+		// Product desc
+		if ( $do_add_product_desc ) {
+			remove_action( 'woocommerce_order_item_meta_end', array( $this, 'add_order_details_product_long_desc' ), 10 );
+		}
+
+		// Product short desc
+		if ( $do_add_product_short_desc ) {
+			remove_action( 'woocommerce_order_item_meta_end', array( $this, 'add_order_details_product_short_desc' ), 10 );
 		}
 
 		// The end
