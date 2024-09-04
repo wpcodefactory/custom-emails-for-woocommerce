@@ -1,8 +1,10 @@
 #: includes/class-alg-wc-custom-emails-admin.php:70
+#: includes/pro/class-alg-wc-custom-emails-pro.php:121
 msgid "Are you sure?"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:94
+#: includes/pro/class-alg-wc-custom-emails-pro.php:86
 msgid "Invalid user role."
 msgstr ""
 
@@ -16,7 +18,7 @@ msgid "Caught exception while cancelling action \"%1$s\": %2$s"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:187
-#: includes/pro/class-alg-wc-custom-emails-pro.php:197
+#: includes/pro/class-alg-wc-custom-emails-pro.php:311
 msgid "bulk actions"
 msgstr ""
 
@@ -26,7 +28,7 @@ msgid "Emails: \"%s\" sent for %d orders."
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:229
-#: includes/pro/class-alg-wc-custom-emails-pro.php:212
+#: includes/pro/class-alg-wc-custom-emails-pro.php:326
 msgid "manually"
 msgstr ""
 
@@ -34,10 +36,10 @@ msgstr ""
 #: includes/class-alg-wc-custom-emails-admin.php:254
 #: includes/class-alg-wc-custom-emails-admin.php:316
 #: includes/class-alg-wc-custom-emails-admin.php:366
-#: includes/pro/class-alg-wc-custom-emails-pro.php:150
-#: includes/pro/class-alg-wc-custom-emails-pro.php:178
-#: includes/pro/class-alg-wc-custom-emails-pro.php:225
-#: includes/pro/class-alg-wc-custom-emails-pro.php:241
+#: includes/pro/class-alg-wc-custom-emails-pro.php:261
+#: includes/pro/class-alg-wc-custom-emails-pro.php:292
+#: includes/pro/class-alg-wc-custom-emails-pro.php:342
+#: includes/pro/class-alg-wc-custom-emails-pro.php:361
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:123
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:414
 #, php-format
@@ -314,17 +316,21 @@ msgstr ""
 msgid "Exclude recipients"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:77
+#: includes/pro/class-alg-wc-custom-emails-pro.php:122
+msgid "Move to Trash"
+msgstr ""
+
+#: includes/pro/class-alg-wc-custom-emails-pro.php:179
 #, php-format
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:79
+#: includes/pro/class-alg-wc-custom-emails-pro.php:182
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:62
 msgid "settings"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:81
+#: includes/pro/class-alg-wc-custom-emails-pro.php:185
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:95
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:36
 #, php-format

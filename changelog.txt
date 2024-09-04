@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.0.5 - 04/09/2024 =
+* Dev - Trash buttons added.
+* WC tested up to: 9.2.
+
 = 3.0.4 - 18/08/2024 =
 * Dev - Shortcodes - `[order_user_meta]` shortcode added.
 * Dev - Shortcodes - `[order_details]` - `add_product_desc` attribute added (defaults to `no`).
