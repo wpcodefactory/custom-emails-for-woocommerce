@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 2.7.0
+ * @version 3.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.3.0
+	 * @version 3.1.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -51,6 +51,9 @@ class Alg_WC_Custom_Emails_Admin {
 
 		// Admin core loaded
 		do_action( 'alg_wc_custom_emails_admin_core_loaded', $this );
+
+		// Shortcode dropdown CSS
+		add_action( 'admin_footer', array( $this, 'shortcode_dropdown_style' ) );
 
 	}
 
@@ -142,7 +145,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * add_content_template_script.
 	 *
-	 * @version 1.4.1
+	 * @version 3.1.0
 	 * @since   1.3.1
 	 *
 	 * @todo    (dev) more templates
@@ -151,12 +154,101 @@ class Alg_WC_Custom_Emails_Admin {
 	function add_content_template_script() {
 		if (
 			isset( $_GET['page'], $_GET['tab'], $_GET['section'] ) &&
-			'wc-settings' === wc_clean( $_GET['page'] ) && 'email' === wc_clean( $_GET['tab'] ) && 'alg_wc_custom_email' === substr( wc_clean( $_GET['section'] ), 0, 19 )
+			'wc-settings' === wc_clean( $_GET['page'] ) &&
+			'email' === wc_clean( $_GET['tab'] ) &&
+			'alg_wc_custom_email' === substr( wc_clean( $_GET['section'] ), 0, 19 )
 		) {
-			$email_id = str_replace( 'alg_wc_custom_email', '', wc_clean( $_GET['section'] ) );
-			?><script>
-				jQuery( document ).ready( function() {
-					var templates = [
+			?>
+			<script>
+				jQuery( document ).ready( function ( $ ) {
+
+					// Add button to each element with the class 'alg-wc-shortcode-field'
+					$( '.alg-wc-shortcode-field' ).each( function () {
+						// Find the closest ancestor element and add a class to it
+						const shortcode_closest_element = $( this ).parents().first().addClass( 'alg-wc-shortcode-wrap' );
+
+						// Create the link element
+						let link = $( '<a>', {
+							href: '#',
+							title: '<?php esc_html_e( 'Shortcodes', 'custom-emails-for-woocommerce' ); ?>',
+							class: 'alg-wc-shortcode-button button button-secondary',
+							text: '<?php esc_html_e( 'Shortcodes', 'custom-emails-for-woocommerce' ); ?>'
+						} );
+
+						// Create the span element for the icon
+						let icon = $( '<span>', {
+							class: 'dashicons dashicons-arrow-down-alt2',
+						} );
+
+						// Append the icon to the link
+						link.append( icon );
+
+						// Append the link to the selected element
+						shortcode_closest_element.append( link );
+					} );
+
+					// Define the content to append
+					let shortcodes_list = `<?php echo alg_wc_custom_emails()->core->generate_shortcode_list_html(); ?>`;
+
+					const shortcode_list_class = '.alg-wc-shortcode-list';
+
+					$( document ).on( 'click', '.alg-wc-shortcode-button', function ( e ) {
+						e.preventDefault();
+
+						let container = $( this ).closest( '.alg-wc-shortcode-wrap' );
+
+						$( shortcode_list_class ).not( container.find( shortcode_list_class ) ).hide();
+
+						if ( container.find( shortcode_list_class ).length ) {
+							container.find( shortcode_list_class ).toggle();
+						} else {
+							container.append( `${shortcodes_list}` );
+							container.find( shortcode_list_class ).toggle();
+						}
+
+						e.stopPropagation();
+					} );
+
+					// Click event for hiding shortcodes list when clicking outside
+					$( document ).on( 'click', function ( e ) {
+						const shortcode_lists = $( shortcode_list_class );
+
+						if ( ! shortcode_lists.is( e.target ) && 0 === shortcode_lists.has( e.target ).length ) {
+							shortcode_lists.hide();
+						}
+					} );
+
+					// Click and append shortcodes to the field or TinyMCE editor
+					$( document ).on( 'click', '.alg-wc-shortcode-list li', function () {
+						const shortcode = $( this ).data( 'shortcode' );
+						const field_container = $( this ).closest( '.alg-wc-shortcode-wrap' );
+						const field_id = field_container.find( '.alg-wc-shortcode-field' ).attr( 'id' );
+
+
+						// For standard text field
+						const field = $( `#${field_id}` );
+						const cursor_pos = field.prop( 'selectionStart' );
+						const field_value = field.val();
+
+						// Insert the shortcode at the cursor position
+						field.val( field_value.substring( 0, cursor_pos ) + shortcode + field_value.substring( cursor_pos ) );
+						field.focus();
+						field.prop( 'selectionStart', cursor_pos + shortcode.length );
+						field.prop( 'selectionEnd', cursor_pos + shortcode.length );
+
+						// For TinyMCE editor (Visual Editor)
+						if ( typeof tinyMCE !== "undefined" ) {
+							const editor = tinyMCE.get( field_id );
+
+							if ( editor ) {
+								// Insert the shortcode into the TinyMCE editor
+								editor.execCommand( 'mceInsertContent', false, shortcode );
+							}
+						}
+					} );
+
+					// Default template content
+					let templates = [
 						"[order_details]\n" +
 						"<table>\n" +
 						"    <tbody>\n" +
@@ -165,10 +257,42 @@ class Alg_WC_Custom_Emails_Admin {
 						"    </tbody>\n" +
 						"</table>",
 					];
-					jQuery( '#alg_wc_custom_emails_content_template_0' ).click( function( event ) {
-						jQuery( '#woocommerce_alg_wc_custom<?php echo esc_attr( $email_id ); ?>_content' ).val( templates[0] );
+
+					// Reset default template content
+					$( '#alg_wc_custom_emails_content_template_0' ).on( 'click', function ( event ) {
+						event.preventDefault();
+
+						const editor_container = $( this ).closest( '.alg-wc-editor' );
+						const editor_id = editor_container.find( '.wp-editor-area' ).attr( 'id' );
+
+						if ( typeof tinyMCE !== "undefined" ) {
+							const editor = tinyMCE.get( editor_id );
+
+							if ( editor ) {
+								editor.setContent( templates[0] );
+								$( `#${editor_id}` ).trigger( 'input' );
+							}
+						}
+
+						const text_area = $( `#${editor_id}` );
+						text_area.val( templates[0] );
+
 						return false;
 					} );
+
+					// Listen for changes in TinyMCE editor (Visual Editor)
+					if ( typeof tinyMCE !== "undefined" ) {
+						const editor_container = $( '.alg-wc-editor' );
+						const editor_id = editor_container.find( '.wp-editor-area' ).attr( 'id' );
+						const editor = tinyMCE.get( editor_id );
+
+						if ( editor ) {
+							editor.on( 'Change', function () {
+								$( `#${editor_id}` ).trigger( 'input' );
+							} );
+						}
+					}
+
 				} );
 			</script><?php
 		}
@@ -384,6 +508,76 @@ class Alg_WC_Custom_Emails_Admin {
 			$wc_emails->emails[ $email ] instanceof WC_Email &&
 			in_array( $option, $wc_emails->emails[ $email ]->get_option( 'admin_actions', array() ) )
 		);
+	}
+
+	/**
+	 * Shortcode dropdown style.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 */
+	function shortcode_dropdown_style() {
+		?>
+		<style>
+			.alg-wc-shortcode-wrap {
+				position: relative;
+			}
+
+			.alg-wc-shortcode-button.button-secondary {
+				position: absolute;
+				top: 0;
+				right: 0;
+				vertical-align: middle;
+				display: flex;
+				align-items: center;
+				min-height: 30px;
+				flex-direction: row-reverse;
+				padding: 0 10px 0 5px;
+			}
+
+			.alg-wc-shortcode-button.button-secondary > span {
+				padding-right: 3px;
+			}
+
+			.alg-wc-shortcode-wrap.wp-editor-container .alg-wc-shortcode-button.button-secondary {
+				top: 2px;
+			}
+
+			.alg-rich-text-editor .wp-editor-container {
+				position: relative;
+			}
+
+			.alg-wc-shortcode-list {
+				z-index: 999;
+				display: none;
+				overflow: auto;
+				max-width: 450px;
+				border: 1px solid #b5bfc9;
+				border-radius: 6px;
+				background: #fff;
+				position: absolute;
+				top: 36px;
+				right: 0;
+				height: 220px;
+				width: 80%;
+			}
+
+			.alg-wc-shortcode-list ul {
+				margin: 0;
+			}
+
+			.alg-wc-shortcode-list li {
+				margin: 0;
+				padding: 10px 10px;
+				cursor: pointer;
+				border-bottom: 1px solid #b5bfc9;
+			}
+
+			.alg-wc-shortcode-list li:last-child {
+				border: none;
+			}
+		</style>
+		<?php
 	}
 
 }

@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.6
-Stable tag: 3.0.5
+Stable tag: 3.1.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,11 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 3.1.0 - 18/09/2024 =
+* Dev - Email content - Integrated a rich text editor.
+* Dev - Subject / Email heading / Email content - Added a shortcode selector.
+* WC tested up to: 9.3.
 
 = 3.0.5 - 04/09/2024 =
 * Dev - Trash buttons added.

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings - Fields
  *
- * @version 3.0.0
+ * @version 3.1.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd
@@ -84,6 +84,7 @@ $fields = array_merge( $fields, array(
 	'subject' => array(
 		'title'       => __( 'Subject', 'woocommerce' ),
 		'type'        => 'text',
+		'class'       => 'alg-wc-shortcode-field',
 		'description' => $this->get_placeholder_text(),
 		'placeholder' => $this->get_default_subject(),
 		'default'     => '',
@@ -108,6 +109,7 @@ $fields = array_merge( $fields, array(
 	'heading' => array(
 		'title'       => __( 'Email heading', 'woocommerce' ),
 		'type'        => 'text',
+		'class'       => 'alg-wc-shortcode-field',
 		'desc_tip'    => __( 'Used only if "Header & footer" option is enabled.', 'custom-emails-for-woocommerce' ),
 		'description' => $this->get_placeholder_text(),
 		'placeholder' => $this->get_default_heading(),
@@ -116,7 +118,8 @@ $fields = array_merge( $fields, array(
 	),
 	'content' => array(
 		'title'       => __( 'Email content', 'custom-emails-for-woocommerce' ),
-		'type'        => 'textarea',
+		'type'        => 'alg_wc_ce_editor',
+		'class'       => 'alg-wc-shortcode-field',
 		'desc_tip'    => __( 'Please make sure content is not empty.', 'custom-emails-for-woocommerce' ),
 		'description' => $this->get_placeholder_text() . '<br>' .
 			sprintf( __( 'You can test this email by opening some order\'s admin edit page, and selecting "%s" in "Order actions".', 'custom-emails-for-woocommerce' ),

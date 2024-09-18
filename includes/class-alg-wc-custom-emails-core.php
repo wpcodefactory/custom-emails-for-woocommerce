@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.0.0
+ * @version 3.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -393,6 +393,30 @@ class Alg_WC_Custom_Emails_Core {
 			$res[ $custom_trigger[0] ] = ( isset( $custom_trigger[1] ) ? $custom_trigger[1] : $custom_trigger[0] );
 		}
 		return $res;
+	}
+
+	/**
+	 * Generate shortcode list.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 */
+	function generate_shortcode_list_html( $shortcodes = array() ) {
+		$default_shortcodes = $this->shortcodes->shortcodes ?? array();
+
+		$shortcodes = ! empty( $shortcodes ) ? $shortcodes : $default_shortcodes;
+
+		$html = '<div class="alg-wc-shortcode-list">';
+		$html .= '<ul>';
+
+		foreach ( $shortcodes as $shortcode ) {
+			$html .= '<li data-shortcode="[' . esc_attr( $shortcode ) . ']">[' . esc_html( $shortcode ) . ']</li>';
+		}
+
+		$html .= '</ul>';
+		$html .= '</div>';
+
+		return $html;
 	}
 
 }

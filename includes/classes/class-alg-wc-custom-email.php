@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 2.9.9
+ * @version 3.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -662,6 +662,67 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 */
 	function alg_wc_ce_debug( $message ) {
 		alg_wc_custom_emails()->core->debug( sprintf( '%s: %s', $this->title, $message ) );
+	}
+
+	/**
+	 * Generate rich text editor HTML.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 */
+	public function generate_alg_wc_ce_editor_html( $key, $data ) {
+		$field_key = $this->get_field_key( $key );
+		$defaults  = array(
+			'title'             => '',
+			'disabled'          => false,
+			'class'             => '',
+			'css'               => '',
+			'placeholder'       => '',
+			'type'              => 'text',
+			'desc_tip'          => false,
+			'description'       => '',
+			'custom_attributes' => array(),
+		);
+
+		$data = wp_parse_args( $data, $defaults );
+
+		ob_start();
+		?>
+		<tr valign="top">
+			<th scope="row" class="titledesc">
+				<label
+					for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo $this->get_tooltip_html( $data ); ?></label>
+			</th>
+			<td class="forminp alg-wc-editor">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span>
+					</legend>
+					<?php
+					$editor_id = esc_attr( $field_key );
+					$settings  = array(
+						'textarea_name' => esc_attr( $field_key ),
+						'editor_class'  => esc_attr( $data['class'] ),
+					);
+					wp_editor( htmlspecialchars_decode( $this->get_option( $key ), ENT_QUOTES ), $editor_id, $settings );
+					echo $this->get_description_html( $data );
+					?>
+				</fieldset>
+			</td>
+		</tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Validate rich text editor field.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 */
+	public function validate_alg_wc_ce_editor_field( $key, $value ) {
+		$value = is_null( $value ) ? '' : $value;
+		return wp_kses_post( trim( stripslashes( $value ) ) );
 	}
 
 }

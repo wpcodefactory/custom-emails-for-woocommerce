@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 3.1.0 - 18/09/2024 =
+* Dev - Email content - Integrated a rich text editor.
+* Dev - Subject / Email heading / Email content - Added a shortcode selector.
+* WC tested up to: 9.3.
+
 = 3.0.5 - 04/09/2024 =
 * Dev - Trash buttons added.
 * WC tested up to: 9.2.

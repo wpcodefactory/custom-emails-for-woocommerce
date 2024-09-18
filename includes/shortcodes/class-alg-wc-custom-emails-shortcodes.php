@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.0.4
+ * @version 3.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,14 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_Custom_Emails_Shortcodes' ) ) :
 
 class Alg_WC_Custom_Emails_Shortcodes {
+
+	/**
+	 * shortcodes.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 */
+	public $shortcodes = array();
 
 	/**
 	 * order.
@@ -49,7 +57,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.4
+	 * @version 3.1.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -58,7 +66,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 */
 	function __construct() {
 
-		$shortcodes = array(
+		$this->shortcodes = array(
 
 			'order_billing_address',
 			'order_billing_email',
@@ -106,7 +114,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 
 		$prefix = apply_filters( 'alg_wc_custom_emails_shortcode_prefix', '' );
 
-		foreach ( $shortcodes as $shortcode ) {
+		foreach ( $this->shortcodes as $shortcode ) {
 			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
 		}
 
