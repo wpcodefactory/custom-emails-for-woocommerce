@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 3.1.0
+ * @version 3.1.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -513,12 +513,16 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Shortcode dropdown style.
 	 *
-	 * @version 3.1.0
+	 * @version 3.1.1
 	 * @since   3.1.0
 	 */
 	function shortcode_dropdown_style() {
 		?>
 		<style>
+			.woocommerce table.form-table .alg-wc-editor textarea {
+				width: 100%;
+			}
+
 			.alg-wc-shortcode-wrap {
 				position: relative;
 			}
