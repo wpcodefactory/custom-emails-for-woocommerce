@@ -1,7 +1,7 @@
 == Changelog ==
 
-= 3.1.1 - 18/09/2024 =
-* Fix - Email content - Rich text editor - Resolved horizontal scroll issue in the "Text" mode.
+= 3.1.1 - 19/09/2024 =
+* Fix - Email content - Rich text editor - Resolved vertical scroll issue in the "Text" mode.
 
 = 3.1.0 - 18/09/2024 =
 * Dev - Email content - Integrated a rich text editor.
