@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 3.1.1
+ * @version 3.1.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -145,7 +145,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * add_content_template_script.
 	 *
-	 * @version 3.1.0
+	 * @version 3.1.2
 	 * @since   1.3.1
 	 *
 	 * @todo    (dev) more templates
@@ -223,16 +223,27 @@ class Alg_WC_Custom_Emails_Admin {
 						const shortcode = $( this ).data( 'shortcode' );
 						const field_container = $( this ).closest( '.alg-wc-shortcode-wrap' );
 						const field_id = field_container.find( '.alg-wc-shortcode-field' ).attr( 'id' );
-
-
-						// For standard text field
 						const field = $( `#${field_id}` );
-						const cursor_pos = field.prop( 'selectionStart' );
-						const field_value = field.val();
 
-						// Insert the shortcode at the cursor position
-						field.val( field_value.substring( 0, cursor_pos ) + shortcode + field_value.substring( cursor_pos ) );
+						if ( ! field.length ) {
+							return;
+						} // Ensure the field exists
+
 						field.focus();
+
+						// Get current cursor position
+						const cursor_pos = field.prop( 'selectionStart' );
+
+						// Use execCommand to insert text
+						try {
+							document.execCommand( 'insertText', false, shortcode );
+						} catch ( error ) {
+							// Fallback method if execCommand fails
+							const field_value = field.val();
+							field.val( field_value.substring( 0, cursor_pos ) + shortcode + field_value.substring( cursor_pos ) );
+						}
+
+						// Update cursor position after inserting the shortcode
 						field.prop( 'selectionStart', cursor_pos + shortcode.length );
 						field.prop( 'selectionEnd', cursor_pos + shortcode.length );
 
@@ -292,6 +303,14 @@ class Alg_WC_Custom_Emails_Admin {
 							} );
 						}
 					}
+
+					// Filter items in the dropdown shortcode list.
+					$( document ).on( 'keyup', '.alg-wc-shortcode-search', function () {
+						let filter = $( this ).val().toLowerCase();
+						$( this ).closest( '.alg-wc-shortcode-list' ).find( 'li' ).filter( function () {
+							$( this ).toggle( $( this ).text().toLowerCase().indexOf( filter ) > - 1 );
+						} );
+					} );
 
 				} );
 			</script><?php
@@ -513,7 +532,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Shortcode dropdown style.
 	 *
-	 * @version 3.1.1
+	 * @version 3.1.2
 	 * @since   3.1.0
 	 */
 	function shortcode_dropdown_style() {
@@ -554,7 +573,6 @@ class Alg_WC_Custom_Emails_Admin {
 			.alg-wc-shortcode-list {
 				z-index: 999;
 				display: none;
-				overflow: auto;
 				max-width: 450px;
 				border: 1px solid #b5bfc9;
 				border-radius: 6px;
@@ -562,12 +580,21 @@ class Alg_WC_Custom_Emails_Admin {
 				position: absolute;
 				top: 36px;
 				right: 0;
-				height: 220px;
 				width: 80%;
 			}
 
+			.alg-wc-shortcode-search {
+				width: calc(100% - 10px) !important;
+				position: absolute;
+				top: 5px;
+				left: 5px;
+				margin-top: 5px;
+			}
+
 			.alg-wc-shortcode-list ul {
-				margin: 0;
+				margin: 40px 0 0 0;
+				height: 220px;
+				overflow: auto;
 			}
 
 			.alg-wc-shortcode-list li {

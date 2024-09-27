@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 3.1.2 - 27/09/2024 =
+* Fix - Resolved Ctrl+Z shortcut issue in the rich text editor.
+* Dev - Added search field to the shortcode selector.
+* Dev - PHP 8.2 compatibility - "Creation of dynamic property is deprecated" notice fixed.
+
 = 3.1.1 - 19/09/2024 =
 * Fix - Email content - Rich text editor - Resolved vertical scroll issue in the "Text" mode.
 

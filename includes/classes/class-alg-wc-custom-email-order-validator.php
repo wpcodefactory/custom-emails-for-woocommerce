@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 2.8.0
+ * @version 3.1.2
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -15,12 +15,18 @@ if ( ! class_exists( 'Alg_WC_Custom_Email_Order_Validator' ) ) :
 class Alg_WC_Custom_Email_Order_Validator {
 
 	/**
+	 * email.
+	 *
+	 * @version 3.1.2
+	 * @since   3.1.2
+	 */
+	public $email;
+
+	/**
 	 * Constructor
 	 *
 	 * @version 1.8.0
 	 * @since   1.8.0
-	 *
-	 * @todo    (dev) `public $email;`
 	 */
 	function __construct( $email ) {
 		$this->email = $email;

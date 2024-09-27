@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 2.9.9
+ * @version 3.1.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,14 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_Custom_Email_Settings' ) ) :
 
 class Alg_WC_Custom_Email_Settings {
+
+	/**
+	 * terms.
+	 *
+	 * @version 3.1.2
+	 * @since   3.1.2
+	 */
+	public $terms;
 
 	/**
 	 * Constructor.

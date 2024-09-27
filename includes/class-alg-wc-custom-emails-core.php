@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.1.0
+ * @version 3.1.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -37,6 +37,14 @@ class Alg_WC_Custom_Emails_Core {
 	 * @since   1.0.0
 	 */
 	public $shortcodes;
+
+	/**
+	 * general_shortcodes.
+	 *
+	 * @version 3.1.2
+	 * @since   3.1.2
+	 */
+	public $general_shortcodes;
 
 	/**
 	 * Constructor.
@@ -398,7 +406,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Generate shortcode list.
 	 *
-	 * @version 3.1.0
+	 * @version 3.1.2
 	 * @since   3.1.0
 	 */
 	function generate_shortcode_list_html( $shortcodes = array() ) {
@@ -407,10 +415,15 @@ class Alg_WC_Custom_Emails_Core {
 		$shortcodes = ! empty( $shortcodes ) ? $shortcodes : $default_shortcodes;
 
 		$html = '<div class="alg-wc-shortcode-list">';
+		$html .= '<input type="text" class="alg-wc-shortcode-search" placeholder="' . __( 'Search for a shortcode&hellip;', 'custom-emails-for-woocommerce' ) . '">';
 		$html .= '<ul>';
 
 		foreach ( $shortcodes as $shortcode ) {
-			$html .= '<li data-shortcode="[' . esc_attr( $shortcode ) . ']">[' . esc_html( $shortcode ) . ']</li>';
+			$html .= sprintf(
+				'<li data-shortcode="[%1$s]">[%2$s]</li>',
+				esc_attr( $shortcode ),
+				esc_html( $shortcode )
+			);
 		}
 
 		$html .= '</ul>';
