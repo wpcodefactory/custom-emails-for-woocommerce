@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.2.0 - 28/09/2024 =
+* Fix - Pro - Admin Options - Admin actions - Orders > Bulk actions - HPOS compatibility (`wc-orders` page).
+* Dev - "Key Manager" added.
+
 = 3.1.2 - 27/09/2024 =
 * Fix - Resolved Ctrl+Z shortcut issue in the rich text editor.
 * Dev - Added search field to the shortcode selector.
