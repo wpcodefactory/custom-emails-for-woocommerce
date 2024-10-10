@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.3.0 - 10/10/2024 =
+* Dev - General - "Replace line breaks" option added (defaults to `yes`).
+* Dev - Key Manager - Library updated.
+
 = 3.2.0 - 28/09/2024 =
 * Fix - Pro - Admin Options - Admin actions - Orders > Bulk actions - HPOS compatibility (`wc-orders` page).
 * Dev - "Key Manager" added.

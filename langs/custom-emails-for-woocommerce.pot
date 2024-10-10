@@ -253,74 +253,74 @@ msgstr ""
 msgid "does not exist!"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:311
+#: includes/classes/class-alg-wc-custom-email.php:316
 msgid "Your settings have been copied."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:325
+#: includes/classes/class-alg-wc-custom-email.php:330
 #: includes/settings/class-alg-wc-custom-emails-settings.php:89
 msgid "Your settings have been reset."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:414
+#: includes/classes/class-alg-wc-custom-email.php:419
 #, php-format
 msgid "Triggered [%s]."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:423
+#: includes/classes/class-alg-wc-custom-email.php:428
 msgid "Disabled."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:433
+#: includes/classes/class-alg-wc-custom-email.php:438
 #, php-format
 msgid "Delayed (%s): In %d seconds."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:462
+#: includes/classes/class-alg-wc-custom-email.php:467
 #, php-format
 msgid "Product #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:473
+#: includes/classes/class-alg-wc-custom-email.php:478
 #, php-format
 msgid "Order #%s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:477
-#: includes/classes/class-alg-wc-custom-email.php:549
+#: includes/classes/class-alg-wc-custom-email.php:482
+#: includes/classes/class-alg-wc-custom-email.php:554
 #, php-format
 msgid "Blocked by the \"%s\" filter."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:499
+#: includes/classes/class-alg-wc-custom-email.php:504
 #, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:500
+#: includes/classes/class-alg-wc-custom-email.php:505
 #, php-format
 msgid "Description: %s."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:522
+#: includes/classes/class-alg-wc-custom-email.php:527
 #, php-format
 msgid "Sent: %s"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:523
+#: includes/classes/class-alg-wc-custom-email.php:528
 msgid "success"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:523
+#: includes/classes/class-alg-wc-custom-email.php:528
 msgid "failed"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:560
+#: includes/classes/class-alg-wc-custom-email.php:565
 #, php-format
 msgid "Blocked by the \"%s\" option."
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email.php:561
+#: includes/classes/class-alg-wc-custom-email.php:566
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:448
 msgid "Exclude recipients"
 msgstr ""
@@ -448,19 +448,39 @@ msgid "Action Scheduler"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:127
-msgid "Debug"
+msgid "Replace line breaks"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:128
+msgid "Replace line breaks in HTML email content"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:131
+#, php-format
+msgid ""
+"Replaces double line breaks with paragraph elements, and all remaining line "
+"breaks with %s tag."
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:135
+#, php-format
+msgid "Uses WordPress %s function."
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:143
+msgid "Debug"
+msgstr ""
+
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:144
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:129
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:145
 #, php-format
 msgid "Will add a log to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-custom-emails-settings-general.php:130
+#: includes/settings/class-alg-wc-custom-emails-settings-general.php:146
 msgid "WooCommerce > Status > Logs"
 msgstr ""
 
