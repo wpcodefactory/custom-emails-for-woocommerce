@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.6
-Stable tag: 3.3.0
+Stable tag: 3.3.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,9 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
 
 == Changelog ==
+
+= 3.3.1 - 11/10/2024 =
+* Dev - Admin settings descriptions updated.
 
 = 3.3.0 - 10/10/2024 =
 * Dev - General - "Replace line breaks" option added (defaults to `yes`).

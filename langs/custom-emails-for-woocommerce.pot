@@ -458,7 +458,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:131
 #, php-format
 msgid ""
-"Replaces double line breaks with paragraph elements, and all remaining line "
+"Replaces double line breaks with HTML paragraph tags, and all remaining line "
 "breaks with %s tag."
 msgstr ""
 

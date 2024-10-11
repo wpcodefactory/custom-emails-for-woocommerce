@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.3.1 - 11/10/2024 =
+* Dev - Admin settings descriptions updated.
+
 = 3.3.0 - 10/10/2024 =
 * Dev - General - "Replace line breaks" option added (defaults to `yes`).
 * Dev - Key Manager - Library updated.

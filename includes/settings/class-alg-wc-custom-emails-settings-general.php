@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 3.3.0
+ * @version 3.3.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -128,8 +128,8 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'desc'     => __( 'Replace line breaks in HTML email content', 'custom-emails-for-woocommerce' ),
 				'desc_tip' =>
 					sprintf(
-						__( 'Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag.', 'custom-emails-for-woocommerce' ),
-						'<code>' . esc_html( '<br>' ) . '</code>'
+						__( 'Replaces double line breaks with HTML paragraph tags, and all remaining line breaks with %s tag.', 'custom-emails-for-woocommerce' ),
+						'<code>' . esc_html( '<br />' ) . '</code>'
 					) . ' ' .
 					sprintf(
 						__( 'Uses WordPress %s function.', 'custom-emails-for-woocommerce' ),
