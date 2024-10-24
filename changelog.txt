@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 3.4.0 - 24/10/2024 =
+* Dev - Plugin settings moved to the "WPFactory" menu.
+* Dev - "Recommendations" added.
+* Dev - Key Manager - Library updated.
+* Dev - Code refactoring.
+
 = 3.3.1 - 11/10/2024 =
 * Dev - Admin settings descriptions updated.
 

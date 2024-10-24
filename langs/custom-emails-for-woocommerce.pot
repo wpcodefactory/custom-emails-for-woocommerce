@@ -122,12 +122,18 @@ msgstr ""
 msgid "Search for a shortcode&hellip;"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:169
+#: includes/class-alg-wc-custom-emails.php:193
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails.php:172
+#: includes/class-alg-wc-custom-emails.php:197
 msgid "Go Pro"
+msgstr ""
+
+#: includes/class-alg-wc-custom-emails.php:241
+#: includes/class-alg-wc-custom-emails.php:242
+#: includes/settings/class-alg-wc-custom-emails-settings.php:25
+msgid "Custom Emails"
 msgstr ""
 
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:45
@@ -523,10 +529,6 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:199
 msgid "Scheduled Emails"
-msgstr ""
-
-#: includes/settings/class-alg-wc-custom-emails-settings.php:25
-msgid "Custom Emails"
 msgstr ""
 
 #: includes/settings/class-alg-wc-custom-emails-settings.php:43
