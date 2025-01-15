@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.1.2
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -58,9 +58,9 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Properties
 		$this->do_debug           = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
-		$this->email_settings     = require_once( 'settings/email/class-alg-wc-custom-email-settings.php' );
-		$this->shortcodes         = require_once( 'shortcodes/class-alg-wc-custom-emails-shortcodes.php' );
-		$this->general_shortcodes = require_once( 'shortcodes/class-alg-wc-custom-emails-shortcodes-general.php' );
+		$this->email_settings     = require_once plugin_dir_path( __FILE__ ) . 'settings/email/class-alg-wc-custom-email-settings.php';
+		$this->shortcodes         = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes.php';
+		$this->general_shortcodes = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes-general.php';
 
 		// Hooks
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_custom_emails' ) );
@@ -212,7 +212,13 @@ class Alg_WC_Custom_Emails_Core {
 	 * @todo    (dev) better debug info
 	 */
 	function send_delayed_email( $email, $object_id ) {
-		$this->debug( sprintf( esc_html__( '%s: Sending delayed email.', 'custom-emails-for-woocommerce' ), $email ) );
+		$this->debug(
+			sprintf(
+				/* Translators: %s: Email class name. */
+				esc_html__( '%s: Sending delayed email.', 'custom-emails-for-woocommerce' ),
+				$email
+			)
+		);
 		$this->send_email( $email, $object_id, __( 'delayed', 'custom-emails-for-woocommerce' ) );
 	}
 
@@ -293,17 +299,17 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_emails.
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 */
 	function add_custom_emails( $emails ) {
 
 		if ( ! class_exists( 'Alg_WC_Custom_Email_Order_Validator' ) ) {
-			require_once( 'classes/class-alg-wc-custom-email-order-validator.php' );
+			require_once plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email-order-validator.php';
 		}
 
 		if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) {
-			require_once( 'classes/class-alg-wc-custom-email.php' );
+			require_once plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email.php';
 		}
 
 		$emails['Alg_WC_Custom_Email'] = new Alg_WC_Custom_Email();
@@ -415,7 +421,11 @@ class Alg_WC_Custom_Emails_Core {
 		$shortcodes = ! empty( $shortcodes ) ? $shortcodes : $default_shortcodes;
 
 		$html = '<div class="alg-wc-shortcode-list">';
-		$html .= '<input type="text" class="alg-wc-shortcode-search" placeholder="' . __( 'Search for a shortcode&hellip;', 'custom-emails-for-woocommerce' ) . '">';
+		$html .= '<input' .
+			' type="text"' .
+			' class="alg-wc-shortcode-search"' .
+			' placeholder="' . __( 'Search for a shortcode&hellip;', 'custom-emails-for-woocommerce' ) . '"' .
+		'>';
 		$html .= '<ul>';
 
 		foreach ( $shortcodes as $shortcode ) {

@@ -1,5 +1,18 @@
 == Changelog ==
 
+= 3.5.0 - 15/01/2025 =
+* Dev - Security - Output escaped.
+* Dev - Security - Input sanitized.
+* Dev - Security - Nonces added.
+* Dev - Recommendations - Library updated.
+* Dev - Key Manager - Library updated.
+* Dev - Composer - `autoloader-suffix` param added.
+* Dev - Code refactoring.
+* Dev - Coding standards improved.
+* Tested up to: 6.7.
+* WC tested up to: 9.5.
+* Plugin name updated.
+
 = 3.4.0 - 24/10/2024 =
 * Dev - Plugin settings moved to the "WPFactory" menu.
 * Dev - "Recommendations" added.

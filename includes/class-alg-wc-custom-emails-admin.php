@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 3.1.2
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -84,7 +84,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * unschedule_email.
 	 *
-	 * @version 2.7.0
+	 * @version 3.5.0
 	 * @since   1.9.5
 	 *
 	 * @todo    (dev) add success/error notice
@@ -97,17 +97,17 @@ class Alg_WC_Custom_Emails_Admin {
 				wp_die( esc_html__( 'Invalid user role.', 'custom-emails-for-woocommerce' ) );
 			}
 
-			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'] ) ) {
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) ) ) {
 				wp_die( esc_html__( 'Invalid nonce.', 'custom-emails-for-woocommerce' ) );
 			}
 
-			$unscheduler = wc_clean( $_REQUEST['alg_wc_ce_unscheduler'] );
+			$unscheduler = sanitize_text_field( wp_unslash( $_REQUEST['alg_wc_ce_unscheduler'] ) );
 
 			if ( 'wp_cron' === $unscheduler ) {
 				if ( isset( $_REQUEST['alg_wc_ce_unschedule_class'], $_REQUEST['alg_wc_ce_unschedule_object_id'], $_REQUEST['alg_wc_ce_unschedule_time'] ) ) {
 
 					// WP Cron
-					$class     = wc_clean( $_REQUEST['alg_wc_ce_unschedule_class'] );
+					$class     = sanitize_text_field( wp_unslash( $_REQUEST['alg_wc_ce_unschedule_class'] ) );
 					$object_id = intval( $_REQUEST['alg_wc_ce_unschedule_object_id'] );
 					$time      = intval( $_REQUEST['alg_wc_ce_unschedule_time'] );
 					wp_unschedule_event( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
@@ -127,7 +127,7 @@ class Alg_WC_Custom_Emails_Admin {
 							$action_id,
 							sprintf(
 								/* translators: %1$s is the name of the hook to be cancelled, %2$s is the exception message. */
-								__( 'Caught exception while cancelling action "%1$s": %2$s', 'woocommerce' ),
+								__( 'Caught exception while cancelling action "%1$s": %2$s', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 								'alg_wc_custom_emails_send_email',
 								$exception->getMessage()
 							)
@@ -145,7 +145,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * add_content_template_script.
 	 *
-	 * @version 3.1.2
+	 * @version 3.5.0
 	 * @since   1.3.1
 	 *
 	 * @todo    (dev) more templates
@@ -153,10 +153,10 @@ class Alg_WC_Custom_Emails_Admin {
 	 */
 	function add_content_template_script() {
 		if (
-			isset( $_GET['page'], $_GET['tab'], $_GET['section'] ) &&
-			'wc-settings' === wc_clean( $_GET['page'] ) &&
-			'email' === wc_clean( $_GET['tab'] ) &&
-			'alg_wc_custom_email' === substr( wc_clean( $_GET['section'] ), 0, 19 )
+			isset( $_GET['page'], $_GET['tab'], $_GET['section'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'wc-settings' === sanitize_text_field( wp_unslash( $_GET['page'] ) ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'email' === sanitize_text_field( wp_unslash( $_GET['tab'] ) ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'alg_wc_custom_email' === substr( sanitize_text_field( wp_unslash( $_GET['section'] ) ), 0, 19 ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			?>
 			<script>
@@ -188,7 +188,19 @@ class Alg_WC_Custom_Emails_Admin {
 					} );
 
 					// Define the content to append
-					let shortcodes_list = `<?php echo alg_wc_custom_emails()->core->generate_shortcode_list_html(); ?>`;
+					let shortcodes_list = `<?php echo wp_kses(
+						alg_wc_custom_emails()->core->generate_shortcode_list_html(),
+						array_merge(
+							wp_kses_allowed_html( 'post' ),
+							array(
+								'input' => array(
+									'type'        => true,
+									'class'       => true,
+									'placeholder' => true,
+								),
+							)
+						)
+					); ?>`;
 
 					const shortcode_list_class = '.alg-wc-shortcode-list';
 
@@ -337,15 +349,20 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * bulk_action_admin_notice.
 	 *
-	 * @version 1.4.1
+	 * @version 3.5.0
 	 * @since   1.2.1
 	 */
 	function bulk_action_admin_notice() {
-		if ( isset( $_REQUEST['alg_wc_send_email_custom_count'], $_REQUEST['alg_wc_send_email_custom_num'] ) ) {
-			$email = apply_filters( 'alg_wc_custom_emails_class', 'Alg_WC_Custom_Email', intval( $_REQUEST['alg_wc_send_email_custom_num'] ) );
-			$count = intval( $_REQUEST['alg_wc_send_email_custom_count'] );
+		if ( isset( $_REQUEST['alg_wc_send_email_custom_count'], $_REQUEST['alg_wc_send_email_custom_num'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$email = apply_filters( 'alg_wc_custom_emails_class', 'Alg_WC_Custom_Email', intval( $_REQUEST['alg_wc_send_email_custom_num'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$count = intval( $_REQUEST['alg_wc_send_email_custom_count'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			echo '<div class="notice notice-success is-dismissible"><p>' .
-				sprintf( esc_html__( 'Emails: "%s" sent for %d orders.', 'custom-emails-for-woocommerce' ), WC()->mailer()->emails[ $email ]->get_title(), $count ) .
+				sprintf(
+					/* Translators: %1$s: Custom email title, %2$d: Number of orders. */
+					esc_html__( 'Emails: "%1$s" sent for %2$d orders.', 'custom-emails-for-woocommerce' ),
+					esc_html( WC()->mailer()->emails[ $email ]->get_title() ),
+					$count // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				) .
 			'</p></div>';
 		}
 	}
@@ -380,8 +397,11 @@ class Alg_WC_Custom_Emails_Admin {
 	 */
 	function add_order_actions( $actions ) {
 		if ( $this->do_add_admin_action( 'Alg_WC_Custom_Email', 'order_actions_single' ) ) {
-			$actions['alg_wc_send_email_custom'] = sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
-				alg_wc_custom_emails()->core->email_settings->get_title() );
+			$actions['alg_wc_send_email_custom'] = sprintf(
+				/* Translators: %s: Custom email title. */
+				esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+				alg_wc_custom_emails()->core->email_settings->get_title()
+			);
 		}
 		return apply_filters( 'alg_wc_custom_emails_admin_add_order_actions', $actions );
 	}
@@ -394,8 +414,11 @@ class Alg_WC_Custom_Emails_Admin {
 	 */
 	function add_order_actions_bulk( $actions ) {
 		if ( $this->do_add_admin_action( 'Alg_WC_Custom_Email', 'order_actions_bulk' ) ) {
-			$actions['alg_wc_send_email_custom'] = sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
-				alg_wc_custom_emails()->core->email_settings->get_title() );
+			$actions['alg_wc_send_email_custom'] = sprintf(
+				/* Translators: %s: Custom email title. */
+				esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+				alg_wc_custom_emails()->core->email_settings->get_title()
+			);
 		}
 		return apply_filters( 'alg_wc_custom_emails_admin_add_order_actions_bulk', $actions );
 	}
@@ -403,7 +426,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * do_order_actions_column.
 	 *
-	 * @version 1.9.0
+	 * @version 3.5.0
 	 * @since   1.9.0
 	 *
 	 * @see     https://wordpress.stackexchange.com/questions/256513/should-nonce-be-sanitized
@@ -413,11 +436,11 @@ class Alg_WC_Custom_Emails_Admin {
 	function do_order_actions_column() {
 		if (
 			isset( $_GET['action'], $_GET['email_id'], $_GET['order_id'], $_GET['_wpnonce'] ) &&
-			'alg_wc_send_email_custom' === wc_clean( $_GET['action'] ) &&
-			( $order = wc_get_order( intval( $_GET['order_id'] ) ) )
+			'alg_wc_send_email_custom' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) &&
+			( $order = wc_get_order( intval( $_GET['order_id'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
-			if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'alg_wc_send_email_custom' ) ) {
-				wp_die( __( 'Link has expired.', 'custom-emails-for-woocommerce' ) );
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'alg_wc_send_email_custom' ) ) {
+				wp_die( esc_html__( 'Link has expired.', 'custom-emails-for-woocommerce' ) );
 			}
 			$email = apply_filters( 'alg_wc_custom_emails_class', 'Alg_WC_Custom_Email', intval( $_GET['email_id'] ) );
 			$this->send_order_email( $email, $order, __( 'order actions column', 'custom-emails-for-woocommerce' ) );
@@ -456,8 +479,11 @@ class Alg_WC_Custom_Emails_Admin {
 					'email_id' => 1,
 					'order_id' => $order->get_id(),
 				) ), 'alg_wc_send_email_custom' ),
-				'name'   => sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
-					alg_wc_custom_emails()->core->email_settings->get_title() ),
+				'name'   => sprintf(
+					/* Translators: %s: Custom email title. */
+					esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+					alg_wc_custom_emails()->core->email_settings->get_title()
+				),
 				'action' => 'alg_wc_send_email_custom',
 			);
 		}
@@ -468,7 +494,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * do_order_actions_preview.
 	 *
-	 * @version 1.9.0
+	 * @version 3.5.0
 	 * @since   1.9.0
 	 *
 	 * @see     https://wordpress.stackexchange.com/questions/256513/should-nonce-be-sanitized
@@ -476,11 +502,11 @@ class Alg_WC_Custom_Emails_Admin {
 	function do_order_actions_preview() {
 		if (
 			isset( $_GET['action'], $_GET['email_id'], $_GET['order_id'], $_GET['_wpnonce'] ) &&
-			'alg_wc_send_email_custom' === wc_clean( $_GET['action'] ) &&
-			( $order = wc_get_order( intval( $_GET['order_id'] ) ) )
+			'alg_wc_send_email_custom' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) &&
+			( $order = wc_get_order( intval( $_GET['order_id'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
-			if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'alg_wc_send_email_custom' ) ) {
-				wp_die( __( 'Link has expired.', 'custom-emails-for-woocommerce' ) );
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'alg_wc_send_email_custom' ) ) {
+				wp_die( esc_html__( 'Link has expired.', 'custom-emails-for-woocommerce' ) );
 			}
 			$email = apply_filters( 'alg_wc_custom_emails_class', 'Alg_WC_Custom_Email', intval( $_GET['email_id'] ) );
 			$this->send_order_email( $email, $order, __( 'order preview', 'custom-emails-for-woocommerce' ) );
@@ -506,8 +532,11 @@ class Alg_WC_Custom_Emails_Admin {
 					'order_id' => $order->get_id(),
 				), admin_url( 'edit.php?post_type=shop_order' ) ), 'alg_wc_send_email_custom' ),
 				'name'   => alg_wc_custom_emails()->core->email_settings->get_title(),
-				'title'  => sprintf( esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
-					alg_wc_custom_emails()->core->email_settings->get_title() ),
+				'title'  => sprintf(
+					/* Translators: %s: Custom email title. */
+					esc_html__( 'Send email: %s', 'custom-emails-for-woocommerce' ),
+					alg_wc_custom_emails()->core->email_settings->get_title()
+				),
 				'action' => 'alg_wc_send_email_custom',
 			);
 		}

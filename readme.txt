@@ -1,9 +1,9 @@
-=== Additional Custom Emails for WooCommerce ===
+=== Additional Custom Emails & Recipients for WooCommerce ===
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
-Tested up to: 6.6
-Stable tag: 3.4.0
+Tested up to: 6.7
+Stable tag: 3.5.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,7 @@ Take full control over the emails you send and customize your WooCommerce emails
 > “Great plugin! Great Support!: The best plugin for sending custom emails. Great integration in WooCommerce.
 The best Support Team.” – ⭐⭐⭐⭐⭐  [wicresetpl](https://wordpress.org/support/topic/great-plugin-great-support-1734/)
 
-Communication is key in business, and your customers would appreciate knowing the status of their orders from the moment of checking out till the moment it’s shipped in front of their doors, that’s why you need our ‘Additional Custom Emails for WooCommerce’ plugin.
+Communication is key in business, and your customers would appreciate knowing the status of their orders from the moment of checking out till the moment it’s shipped in front of their doors, that’s why you need our ‘Additional Custom Emails & Recipients for WooCommerce’ plugin.
 
 WooCommerce by default allows you to send emails based on several triggers (that are located under WooCommerce Settings >> Emails) like "New order", "Failed order" and so on.
 
@@ -34,7 +34,7 @@ Our customers really love this plugin, read the full description to learn about 
 
 ## 🚀 Main Features: FREE Version##
 
-Additional Custom Emails for WooCommerce plugin allows for full control over your communication with your customers and expands your reach to connect with your audience beyond just your store, the free version alone would allow you to do a lot, for the free version you can send one custom email based on these triggers:
+Additional Custom Emails & Recipients for WooCommerce plugin allows for full control over your communication with your customers and expands your reach to connect with your audience beyond just your store, the free version alone would allow you to do a lot, for the free version you can send one custom email based on these triggers:
 
 ### 🚀 **Send email on Order status update** ###
 Notify your customers of the status of their orders, once their order is "shipped" or "completed" give them a note through the email of the state of their order.
@@ -142,9 +142,22 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Start by visiting plugin settings at "WooCommerce > Settings > Custom Emails".
+3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.5.0 - 15/01/2025 =
+* Dev - Security - Output escaped.
+* Dev - Security - Input sanitized.
+* Dev - Security - Nonces added.
+* Dev - Recommendations - Library updated.
+* Dev - Key Manager - Library updated.
+* Dev - Composer - `autoloader-suffix` param added.
+* Dev - Code refactoring.
+* Dev - Coding standards improved.
+* Tested up to: 6.7.
+* WC tested up to: 9.5.
+* Plugin name updated.
 
 = 3.4.0 - 24/10/2024 =
 * Dev - Plugin settings moved to the "WPFactory" menu.

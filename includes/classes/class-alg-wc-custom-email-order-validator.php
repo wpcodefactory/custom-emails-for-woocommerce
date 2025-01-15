@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 3.1.2
+ * @version 3.5.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -35,15 +35,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 2.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
 
 		// Check filter
 		if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: New order: different status.', 'custom-emails-for-woocommerce' ),
-				$this->email->title ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %s: Email title. */
+					__( '%s: New order: different status.', 'custom-emails-for-woocommerce' ),
+					$this->email->title
+				)
+			);
 			return false;
 		}
 
@@ -51,8 +56,14 @@ class Alg_WC_Custom_Email_Order_Validator {
 		if ( apply_filters( 'wpml_active_languages', null ) ) {
 			$required_wpml_languages = $this->email->get_option( 'required_wpml_languages', array() );
 			if ( ! empty( $required_wpml_languages ) && ! in_array( $this->get_order_wpml_language( $order ), $required_wpml_languages ) ) {
-				alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-					$this->email->title, __( 'Require WPML language', 'custom-emails-for-woocommerce' ) ) );
+				alg_wc_custom_emails()->core->debug(
+					sprintf(
+						/* Translators: %1$s: Email title, %2$s: Condition title. */
+						__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+						$this->email->title,
+						__( 'Require WPML language', 'custom-emails-for-woocommerce' )
+					)
+				);
 				return false;
 			}
 		}
@@ -119,15 +130,21 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_statuses.
 	 *
-	 * @version 2.8.0
+	 * @version 3.5.0
 	 * @since   2.8.0
 	 */
 	function required_statuses( $order ) {
 		$required_statuses = $this->email->get_option( 'required_order_statuses', array() );
 		$required_statuses = array_map( array( $this, 'remove_order_status_prefix' ), $required_statuses );
 		if ( ! empty( $required_statuses ) && ! $order->has_status( $required_statuses ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order status', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order status', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_statuses ) ? true : null );
@@ -136,15 +153,21 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_statuses
 	 *
-	 * @version 2.8.0
+	 * @version 3.5.0
 	 * @since   2.8.0
 	 */
 	function excluded_statuses( $order ) {
 		$excluded_statuses = $this->email->get_option( 'excluded_order_statuses', array() );
 		$excluded_statuses = array_map( array( $this, 'remove_order_status_prefix' ), $excluded_statuses );
 		if ( ! empty( $excluded_statuses ) && $order->has_status( $excluded_statuses ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order status', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order status', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_statuses ) ? true : null );
@@ -178,14 +201,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_users.
 	 *
-	 * @version 2.5.0
+	 * @version 3.5.0
 	 * @since   2.5.0
 	 */
 	function required_users( $order ) {
 		$required_user_ids = $this->email->get_option( 'required_order_user_ids', array() );
 		if ( ! empty( $required_user_ids ) && ! $this->check_user_id( $order, $required_user_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require users', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require users', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_user_ids ) ? true : null );
@@ -194,14 +223,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_users
 	 *
-	 * @version 2.5.0
+	 * @version 3.5.0
 	 * @since   2.5.0
 	 */
 	function excluded_users( $order ) {
 		$excluded_user_ids = $this->email->get_option( 'excluded_order_user_ids', array() );
 		if ( ! empty( $excluded_user_ids ) && $this->check_user_id( $order, $excluded_user_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude users', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude users', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_user_ids ) ? true : null );
@@ -210,14 +245,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_user_roles.
 	 *
-	 * @version 2.5.0
+	 * @version 3.5.0
 	 * @since   2.5.0
 	 */
 	function required_user_roles( $order ) {
 		$required_user_roles = $this->email->get_option( 'required_order_user_roles', array() );
 		if ( ! empty( $required_user_roles ) && ! $this->check_user_role( $order, $required_user_roles ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require user roles', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require user roles', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_user_roles ) ? true : null );
@@ -226,14 +267,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_user_roles
 	 *
-	 * @version 2.5.0
+	 * @version 3.5.0
 	 * @since   2.5.0
 	 */
 	function excluded_user_roles( $order ) {
 		$excluded_user_roles = $this->email->get_option( 'excluded_order_user_roles', array() );
 		if ( ! empty( $excluded_user_roles ) && $this->check_user_role( $order, $excluded_user_roles ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude user roles', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude user roles', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_user_roles ) ? true : null );
@@ -242,7 +289,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * get_order_wpml_language.
 	 *
-	 * @version 1.9.1
+	 * @version 3.5.0
 	 * @since   1.9.1
 	 *
 	 * @see     https://wpml.org/faq/how-to-get-current-language-with-wpml/
@@ -259,8 +306,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 		}
 
 		// Polylang order language (term)
-		$terms = get_the_terms( $order->get_id(), 'language' );
-		if ( $terms && ! is_wp_error( $terms ) ) {
+		if (
+			( $terms = get_the_terms( $order->get_id(), 'language' ) ) &&
+			! is_wp_error( $terms )
+		) {
 			foreach ( $terms as $term ) {
 				if ( ! empty( $term->slug ) ) {
 					return $term->slug;
@@ -274,14 +323,30 @@ class Alg_WC_Custom_Email_Order_Validator {
 		}
 
 		// Polylang current language
-		if ( function_exists( 'pll_current_language' ) && ( $lang = pll_current_language() ) ) {
+		if (
+			function_exists( 'pll_current_language' ) &&
+			( $lang = pll_current_language() )
+		) {
 			return $lang;
 		}
 
+		/* phpcs:disable WordPress.Security.NonceVerification.Recommended */
+
 		// WPML language in `$_REQUEST`
-		if ( ! empty( $_REQUEST['meta'] ) && is_array( $_REQUEST['meta'] ) ) {
-			foreach ( $_REQUEST['meta'] as $meta ) {
-				if ( isset( $meta['key'] ) && 'wpml_language' === $meta['key'] && ! empty( $meta['value'] ) ) {
+		if (
+			! empty( $_REQUEST['meta'] ) &&
+			is_array( $_REQUEST['meta'] )
+		) {
+			$metas = array_map(
+				'sanitize_text_field',
+				wp_unslash( $_REQUEST['meta'] )
+			);
+			foreach ( $metas as $meta ) {
+				if (
+					isset( $meta['key'] ) &&
+					'wpml_language' === $meta['key'] &&
+					! empty( $meta['value'] )
+				) {
 					return wc_clean( $meta['value'] );
 				}
 			}
@@ -289,8 +354,10 @@ class Alg_WC_Custom_Email_Order_Validator {
 
 		// Polylang language in `$_REQUEST`
 		if ( ! empty( $_REQUEST['post_lang_choice'] ) ) {
-			return wc_clean( $_REQUEST['post_lang_choice'] );
+			return sanitize_text_field( wp_unslash( $_REQUEST['post_lang_choice'] ) );
 		}
+
+		/* phpcs:enable WordPress.Security.NonceVerification.Recommended */
 
 		// No results
 		return false;
@@ -333,14 +400,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_payment_gateways
 	 *
-	 * @version 2.2.0
+	 * @version 3.5.0
 	 * @since   2.2.0
 	 */
 	function required_payment_gateways( $order ) {
 		$required_order_payment_gateway_ids = $this->email->get_option( 'required_order_payment_gateway_ids', array() );
 		if ( ! empty( $required_order_payment_gateway_ids ) && ! $this->check_payment_gateway( $order, $required_order_payment_gateway_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order payment gateways', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order payment gateways', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_order_payment_gateway_ids ) ? true : null );
@@ -349,14 +422,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_payment_gateways
 	 *
-	 * @version 2.2.0
+	 * @version 3.5.0
 	 * @since   2.2.0
 	 */
 	function excluded_payment_gateways( $order ) {
 		$excluded_order_payment_gateway_ids = $this->email->get_option( 'excluded_order_payment_gateway_ids', array() );
 		if ( ! empty( $excluded_order_payment_gateway_ids ) && $this->check_payment_gateway( $order, $excluded_order_payment_gateway_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order payment gateways', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order payment gateways', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_order_payment_gateway_ids ) ? true : null );
@@ -398,14 +477,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_shipping_methods
 	 *
-	 * @version 2.2.0
+	 * @version 3.5.0
 	 * @since   2.2.0
 	 */
 	function required_shipping_methods( $order ) {
 		$required_order_shipping_instance_ids = $this->email->get_option( 'required_order_shipping_instance_ids', array() );
 		if ( ! empty( $required_order_shipping_instance_ids ) && ! $this->check_shipping_method_instances( $order, $required_order_shipping_instance_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order shipping methods', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order shipping methods', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_order_shipping_instance_ids ) ? true : null );
@@ -414,14 +499,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_shipping_methods
 	 *
-	 * @version 2.2.0
+	 * @version 3.5.0
 	 * @since   2.2.0
 	 */
 	function excluded_shipping_methods( $order ) {
 		$excluded_order_shipping_instance_ids = $this->email->get_option( 'excluded_order_shipping_instance_ids', array() );
 		if ( ! empty( $excluded_order_shipping_instance_ids ) && $this->check_shipping_method_instances( $order, $excluded_order_shipping_instance_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order shipping methods', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order shipping methods', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_order_shipping_instance_ids ) ? true : null );
@@ -430,14 +521,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_products
 	 *
-	 * @version 1.9.6
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function required_products( $order ) {
 		$required_order_product_ids = $this->email->get_option( 'required_order_product_ids', array() );
 		if ( ! empty( $required_order_product_ids ) && ! $this->check_order_products( $order, $required_order_product_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order products', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order products', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_order_product_ids ) ? true : null );
@@ -446,14 +543,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_products
 	 *
-	 * @version 1.9.6
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function excluded_products( $order ) {
 		$excluded_order_product_ids = $this->email->get_option( 'excluded_order_product_ids', array() );
 		if ( ! empty( $excluded_order_product_ids ) && $this->check_order_products( $order, $excluded_order_product_ids ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order products', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order products', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_order_product_ids ) ? true : null );
@@ -462,14 +565,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_product_cats
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function required_product_cats( $order ) {
 		$required_order_product_cats_ids = $this->email->get_option( 'required_order_product_cats_ids', array() );
 		if ( ! empty( $required_order_product_cats_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_cats_ids, 'product_cat' ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order product categories', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order product categories', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_order_product_cats_ids ) ? true : null );
@@ -478,14 +587,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_product_cats
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function excluded_product_cats( $order ) {
 		$excluded_order_product_cats_ids = $this->email->get_option( 'excluded_order_product_cats_ids', array() );
 		if ( ! empty( $excluded_order_product_cats_ids ) &&   $this->check_order_product_terms( $order, $excluded_order_product_cats_ids, 'product_cat' ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order product categories', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order product categories', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_order_product_cats_ids ) ? true : null );
@@ -494,14 +609,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * required_product_tags
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function required_product_tags( $order ) {
 		$required_order_product_tags_ids = $this->email->get_option( 'required_order_product_tags_ids', array() );
 		if ( ! empty( $required_order_product_tags_ids ) && ! $this->check_order_product_terms( $order, $required_order_product_tags_ids, 'product_tag' ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Require order product tags', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Require order product tags', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $required_order_product_tags_ids ) ? true : null );
@@ -510,14 +631,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * excluded_product_tags
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function excluded_product_tags( $order ) {
 		$excluded_order_product_tags_ids = $this->email->get_option( 'excluded_order_product_tags_ids', array() );
 		if ( ! empty( $excluded_order_product_tags_ids ) &&   $this->check_order_product_terms( $order, $excluded_order_product_tags_ids, 'product_tag' ) ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Exclude order product tags', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Exclude order product tags', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $excluded_order_product_tags_ids ) ? true : null );
@@ -526,14 +653,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * min_amount
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function min_amount( $order ) {
 		$min_order_amount = $this->email->get_option( 'min_order_amount', '' );
 		if ( ! empty( $min_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $min_order_amount ) && $this->get_order_amount( $order ) < $min_order_amount ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Minimum order amount', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Minimum order amount', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $min_order_amount ) ? true : null );
@@ -542,14 +675,20 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * max_amount
 	 *
-	 * @version 1.8.0
+	 * @version 3.5.0
 	 * @since   1.8.0
 	 */
 	function max_amount( $order ) {
 		$max_order_amount = $this->email->get_option( 'max_order_amount', '' );
 		if ( ! empty( $max_order_amount ) && ! $this->is_equal_float( $this->get_order_amount( $order ), $max_order_amount ) && $this->get_order_amount( $order ) > $max_order_amount ) {
-			alg_wc_custom_emails()->core->debug( sprintf( __( '%s: Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-				$this->email->title, __( 'Maximum order amount', 'custom-emails-for-woocommerce' ) ) );
+			alg_wc_custom_emails()->core->debug(
+				sprintf(
+					/* Translators: %1$s: Email title, %2$s: Condition title. */
+					__( '%1$s: Blocked by the "%2$s" option.', 'custom-emails-for-woocommerce' ),
+					$this->email->title,
+					__( 'Maximum order amount', 'custom-emails-for-woocommerce' )
+				)
+			);
 			return false;
 		}
 		return ( ! empty( $max_order_amount ) ? true : null );

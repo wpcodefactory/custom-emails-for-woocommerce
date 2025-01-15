@@ -127,7 +127,8 @@ final class Alg_WC_Custom_Emails {
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			$files = ( defined( 'ALG_WC_CUSTOM_EMAILS_FILE_FREE' ) ?
+			$files = (
+				defined( 'ALG_WC_CUSTOM_EMAILS_FILE_FREE' ) ?
 				array( ALG_WC_CUSTOM_EMAILS_FILE, ALG_WC_CUSTOM_EMAILS_FILE_FREE ) :
 				array( ALG_WC_CUSTOM_EMAILS_FILE )
 			);
@@ -189,14 +190,17 @@ final class Alg_WC_Custom_Emails {
 	 */
 	function action_links( $links ) {
 		$custom_links = array();
+
 		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_emails' ) . '">' .
 			__( 'Settings', 'custom-emails-for-woocommerce' ) .
 		'</a>';
+
 		if ( 'custom-emails-for-woocommerce.php' === basename( ALG_WC_CUSTOM_EMAILS_FILE ) ) {
 			$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/custom-emails-for-woocommerce/">' .
 				__( 'Go Pro', 'custom-emails-for-woocommerce' ) .
 			'</a>';
 		}
+
 		return array_merge( $custom_links, $links );
 	}
 

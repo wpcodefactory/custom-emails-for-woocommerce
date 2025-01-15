@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Settings
  *
- * @version 1.4.1
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,17 +17,20 @@ class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.3.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
+
 		$this->id    = 'alg_wc_custom_emails';
 		$this->label = __( 'Custom Emails', 'custom-emails-for-woocommerce' );
 		parent::__construct();
+
 		// Sections
-		require_once( 'class-alg-wc-custom-emails-settings-section.php' );
-		require_once( 'class-alg-wc-custom-emails-settings-general.php' );
-		require_once( 'class-alg-wc-custom-emails-settings-scheduled.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-section.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-general.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-scheduled.php';
+
 	}
 
 	/**

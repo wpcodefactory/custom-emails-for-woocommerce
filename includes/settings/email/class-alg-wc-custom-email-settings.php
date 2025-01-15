@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 3.1.2
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -35,13 +35,23 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_title.
 	 *
-	 * @version 1.0.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 */
 	function get_title( $id = 1 ) {
 		$titles = get_option( 'alg_wc_custom_emails_titles', array() );
-		return ( isset( $titles[ $id ] ) ? $titles[ $id ] :
-			( 1 == $id ? __( 'Custom email', 'custom-emails-for-woocommerce' ) : sprintf( __( 'Custom email #%d', 'custom-emails-for-woocommerce' ), $id ) ) );
+		return (
+			$titles[ $id ] ??
+			(
+				1 == $id ?
+				__( 'Custom email', 'custom-emails-for-woocommerce' ) :
+				sprintf(
+					/* Translators: %d: Custom email ID. */
+					__( 'Custom email #%d', 'custom-emails-for-woocommerce' ),
+					$id
+				)
+			)
+		);
 	}
 
 	/**
@@ -63,17 +73,27 @@ class Alg_WC_Custom_Email_Settings {
 	 * @since   1.0.0
 	 */
 	function get_default_heading() {
-		return sprintf( __( 'Order %s', 'custom-emails-for-woocommerce' ), '{order_number}' );
+		return sprintf(
+			/* Translators: %s: Order number placeholder. */
+			__( 'Order %s', 'custom-emails-for-woocommerce' ),
+			'{order_number}'
+		);
 	}
 
 	/**
 	 * get_default_subject.
 	 *
-	 * @version 1.0.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 */
 	function get_default_subject() {
-		return sprintf( __( '[%s] Order (%s) - %s', 'custom-emails-for-woocommerce' ), '{site_title}', '{order_number}', '{order_date}' );
+		return sprintf(
+			/* Translators: %1$s: Site title placeholder, %2$s: Order number placeholder, %3$s: Order date placeholder. */
+			__( '[%1$s] Order (%2$s) - %3$s', 'custom-emails-for-woocommerce' ),
+			'{site_title}',
+			'{order_number}',
+			'{order_date}'
+		);
 	}
 
 	/**
@@ -97,7 +117,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_triggers.
 	 *
-	 * @version 2.9.3
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_ce_product_published_notification`: `woocommerce_new_product`?
@@ -125,15 +145,41 @@ class Alg_WC_Custom_Email_Settings {
 		$order_statuses = wc_get_order_statuses();
 		foreach ( $order_statuses as $id => $name ) {
 			$slug = substr( $id, 3 );
-			$triggers['new_order'][            "woocommerce_new_order_notification_{$slug}" ]            = sprintf( __( 'New order (%s)', 'custom-emails-for-woocommerce' ),                     $name );
-			$triggers['order_status'][         "woocommerce_order_status_{$slug}_notification" ]         = sprintf( __( 'Order status updated to %s', 'custom-emails-for-woocommerce' ),         $name );
-			$triggers['renewal_new_order'][    "woocommerce_new_order_renewal_notification_{$slug}" ]    = sprintf( __( 'Renewal new order (%s)', 'custom-emails-for-woocommerce' ),             $name );
-			$triggers['renewal_order_status'][ "woocommerce_order_status_{$slug}_renewal_notification" ] = sprintf( __( 'Renewal order status updated to %s', 'custom-emails-for-woocommerce' ), $name );
+			$triggers['new_order'][ "woocommerce_new_order_notification_{$slug}" ] = sprintf(
+				/* Translators: %s: Status name. */
+				__( 'New order (%s)', 'custom-emails-for-woocommerce' ),
+				$name
+			);
+			$triggers['order_status'][ "woocommerce_order_status_{$slug}_notification" ] = sprintf(
+				/* Translators: %s: Status name. */
+				__( 'Order status updated to %s', 'custom-emails-for-woocommerce' ),
+				$name
+			);
+			$triggers['renewal_new_order'][ "woocommerce_new_order_renewal_notification_{$slug}" ] = sprintf(
+				/* Translators: %s: Status name. */
+				__( 'Renewal new order (%s)', 'custom-emails-for-woocommerce' ),
+				$name
+			);
+			$triggers['renewal_order_status'][ "woocommerce_order_status_{$slug}_renewal_notification" ] = sprintf(
+				/* Translators: %s: Status name. */
+				__( 'Renewal order status updated to %s', 'custom-emails-for-woocommerce' ),
+				$name
+			);
 			foreach ( $order_statuses as $_id => $_name ) {
 				if ( $id != $_id ) {
 					$_slug = substr( $_id, 3 );
-					$triggers['order_status_change'][         "woocommerce_order_status_{$slug}_to_{$_slug}_notification" ]         = sprintf( __( 'Order status %s to %s', 'custom-emails-for-woocommerce' ),         $name, $_name );
-					$triggers['renewal_order_status_change'][ "woocommerce_order_status_{$slug}_to_{$_slug}_renewal_notification" ] = sprintf( __( 'Renewal order status %s to %s', 'custom-emails-for-woocommerce' ), $name, $_name );
+					$triggers['order_status_change'][ "woocommerce_order_status_{$slug}_to_{$_slug}_notification" ] = sprintf(
+						/* Translators: %1$s: Status name, %2$s: Status name. */
+						__( 'Order status %1$s to %2$s', 'custom-emails-for-woocommerce' ),
+						$name,
+						$_name
+					);
+					$triggers['renewal_order_status_change'][ "woocommerce_order_status_{$slug}_to_{$_slug}_renewal_notification" ] = sprintf(
+						/* Translators: %1$s: Status name, %2$s: Status name. */
+						__( 'Renewal order status %1$s to %2$s', 'custom-emails-for-woocommerce' ),
+						$name,
+						$_name
+					);
 				}
 			}
 		}
@@ -158,11 +204,20 @@ class Alg_WC_Custom_Email_Settings {
 		$order_statuses = ( function_exists( 'wcs_get_subscription_statuses' ) ? wcs_get_subscription_statuses() : array() );
 		foreach ( $order_statuses as $id => $name ) {
 			$slug = substr( $id, 3 );
-			$triggers['subscription_status'][ "woocommerce_subscription_status_{$slug}_notification" ] = sprintf( __( 'Subscription status updated to %s', 'custom-emails-for-woocommerce' ), $name );
+			$triggers['subscription_status'][ "woocommerce_subscription_status_{$slug}_notification" ] = sprintf(
+				/* Translators: %s: Status name. */
+				__( 'Subscription status updated to %s', 'custom-emails-for-woocommerce' ),
+				$name
+			);
 			foreach ( $order_statuses as $_id => $_name ) {
 				if ( $id != $_id ) {
 					$_slug = substr( $_id, 3 );
-					$triggers['subscription_status_change'][ "woocommerce_subscription_status_{$slug}_to_{$_slug}_notification" ] = sprintf( __( 'Subscription status %s to %s', 'custom-emails-for-woocommerce' ), $name, $_name );
+					$triggers['subscription_status_change'][ "woocommerce_subscription_status_{$slug}_to_{$_slug}_notification" ] = sprintf(
+						/* Translators: %1$s: Status name, %2$s: Status name. */
+						__( 'Subscription status %1$s to %2$s', 'custom-emails-for-woocommerce' ),
+						$name,
+						$_name
+					);
 				}
 			}
 		}
@@ -191,13 +246,18 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_placeholder_text.
 	 *
-	 * @version 2.5.0
+	 * @version 3.5.0
 	 * @since   1.0.0
 	 */
 	function get_placeholder_text() {
 		$placeholders = array( '{site_title}', '{site_address}', '{order_number}', '{order_date}' );
-		return sprintf( __( 'You can use <a href="%s" target="_blank">shortcodes</a> or <span title="%s" style="%s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
-			'https://wpfactory.com/docs/custom-emails-for-woocommerce/', implode( ', ', $placeholders ), 'text-decoration:underline;' );
+		return sprintf(
+			/* Translators: %1$s: Plugin URL, %2$s: Placeholder list, %3$s: Style. */
+			__( 'You can use <a href="%1$s" target="_blank">shortcodes</a> or <span title="%2$s" style="%3$s">standard placeholders</span> here.', 'custom-emails-for-woocommerce' ),
+			'https://wpfactory.com/docs/custom-emails-for-woocommerce/',
+			implode( ', ', $placeholders ),
+			'text-decoration:underline;'
+		);
 	}
 
 	/**
@@ -323,9 +383,11 @@ class Alg_WC_Custom_Email_Settings {
 				// Not valid
 				switch ( $type ) {
 					case 'product':
+						/* Translators: %d: Product ID. */
 						$res = sprintf( esc_html__( 'Product #%d', 'custom-emails-for-woocommerce' ), $id );
 						break;
 					case 'customer':
+						/* Translators: %d: User ID. */
 						$res = sprintf( esc_html__( 'User #%d', 'custom-emails-for-woocommerce' ), $id );
 						break;
 				}
@@ -340,7 +402,7 @@ class Alg_WC_Custom_Email_Settings {
 					case 'customer':
 						$res = sprintf(
 							/* translators: $1: customer name, $2 customer id, $3: customer email */
-							esc_html__( '%1$s (#%2$s &ndash; %3$s)', 'woocommerce' ),
+							esc_html__( '%1$s (#%2$s &ndash; %3$s)', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 							$obj->get_first_name() . ' ' . $obj->get_last_name(),
 							$obj->get_id(),
 							$obj->get_email()

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2bbb02d49bf52c2c8e12ec4277a9ccea
+class ComposerStaticInitWPFactoryCustomEmailsForWooCommerce
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -20,7 +20,7 @@ class ComposerStaticInit2bbb02d49bf52c2c8e12ec4277a9ccea
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit2bbb02d49bf52c2c8e12ec4277a9ccea::$classMap;
+            $loader->classMap = ComposerStaticInitWPFactoryCustomEmailsForWooCommerce::$classMap;
 
         }, null, ClassLoader::class);
     }

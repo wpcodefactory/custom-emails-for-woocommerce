@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.1.0
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -123,7 +123,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * generate_coupon_code.
 	 *
-	 * @version 1.7.2
+	 * @version 3.5.0
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) generate coupon from *order*
@@ -153,8 +153,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'post_status'  => 'publish',
 			'post_author'  => 1,
 			'post_type'    => 'shop_coupon',
-			'post_excerpt' => sprintf( esc_html__( 'Created by the "%s" plugin', 'custom-emails-for-woocommerce' ),
-				__( 'Custom Emails for WooCommerce', 'custom-emails-for-woocommerce' ) ),
+			'post_excerpt' => sprintf(
+				/* Translators: %s: Plugin name. */
+				esc_html__( 'Created by the "%s" plugin', 'custom-emails-for-woocommerce' ),
+				__( 'Additional Custom Emails & Recipients for WooCommerce', 'custom-emails-for-woocommerce' )
+			),
 		);
 		$coupon_id = wp_insert_post( $coupon );
 		if ( $coupon_id && ! is_wp_error( $coupon_id ) ) {
@@ -461,7 +464,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		foreach ( $this->order->get_items() as $item ) {
 			$meta[] = ( ! $is_debug ?
 				$item->get_meta( $atts['key'] ) :
-				'<pre>' . print_r( $item->get_meta_data(), true ) . '</pre>'
+				'<pre>' . print_r( $item->get_meta_data(), true ) . '</pre>' // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 			);
 		}
 		$sep  = ( ! $is_debug ? ', ' : '' );
@@ -723,7 +726,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * add_order_details_product_desc.
 	 *
-	 * @version 3.0.4
+	 * @version 3.5.0
 	 * @since   3.0.4
 	 */
 	function add_order_details_product_desc( $item_id, $item, $order, $plain_text, $short_or_long ) {
@@ -737,7 +740,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 
 		// Get product description
-		$product_desc = ( 'short' === $short_or_long ?
+		$product_desc = (
+			'short' === $short_or_long ?
 			$product->get_short_description() :
 			$product->get_description()
 		);
@@ -745,11 +749,15 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			return;
 		}
 
-		// Output product description
-		echo ( $plain_text ?
-			"\n" . strip_tags( $product_desc ) :
+		// Plain text or HTML
+		$product_desc = (
+			$plain_text ?
+			"\n" . strip_tags( $product_desc ) : // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags
 			'<br>' . $product_desc
 		);
+
+		// Output product description
+		echo wp_kses_post( $product_desc );
 
 	}
 

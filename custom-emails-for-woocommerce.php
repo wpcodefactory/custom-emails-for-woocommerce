@@ -1,15 +1,17 @@
 <?php
 /*
-Plugin Name: Additional Custom Emails for WooCommerce
+Plugin Name: Additional Custom Emails & Recipients for WooCommerce
 Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
 Description: Add custom emails to WooCommerce.
-Version: 3.4.0
+Version: 3.5.0
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: custom-emails-for-woocommerce
 Domain Path: /langs
-WC tested up to: 9.3
+WC tested up to: 9.5
 Requires Plugins: woocommerce
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,11 +33,11 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '3.4.0' );
+defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '3.5.0' );
 
 defined( 'ALG_WC_CUSTOM_EMAILS_FILE' ) || define( 'ALG_WC_CUSTOM_EMAILS_FILE', __FILE__ );
 
-require_once( 'includes/class-alg-wc-custom-emails.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-alg-wc-custom-emails.php';
 
 if ( ! function_exists( 'alg_wc_custom_emails' ) ) {
 	/**

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 3.3.0
+ * @version 3.5.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -174,7 +174,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * Get email attachments.
 	 *
-	 * @version 2.2.7
+	 * @version 3.5.0
 	 * @since   1.9.2
 	 *
 	 * @return  array
@@ -192,12 +192,18 @@ class Alg_WC_Custom_Email extends WC_Email {
 		// Debug
 		if ( alg_wc_custom_emails()->core->do_debug ) {
 			foreach ( $attachments as $attachment ) {
-				$this->alg_wc_ce_debug( sprintf( __( 'Email attachment: %s [%s].', 'custom-emails-for-woocommerce' ),
-					$attachment,
-					( file_exists( $attachment ) ?
-						__( 'ok', 'custom-emails-for-woocommerce' ) :
-						__( 'does not exist!', 'custom-emails-for-woocommerce' ) )
-				) );
+				$this->alg_wc_ce_debug(
+					sprintf(
+						/* Translators: %1$s: Attachment file path, %2$s: Status ("ok" or "does not exist!"). */
+						__( 'Email attachment: %1$s [%2$s].', 'custom-emails-for-woocommerce' ),
+						$attachment,
+						(
+							file_exists( $attachment ) ?
+							__( 'ok', 'custom-emails-for-woocommerce' ) :
+							__( 'does not exist!', 'custom-emails-for-woocommerce' )
+						)
+					)
+				);
 			}
 		}
 
@@ -398,7 +404,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_send_email.
 	 *
-	 * @version 2.9.3
+	 * @version 3.5.0
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) `wc_get_product( $object_id )`: better solution, e.g., use `current_filter()`?
@@ -416,7 +422,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 	function alg_wc_ce_send_email( $object_id, $do_force_send, $note = '' ) {
 
 		// Debug
-		$this->alg_wc_ce_debug( sprintf( __( 'Triggered [%s].', 'custom-emails-for-woocommerce' ), current_filter() ) );
+		$this->alg_wc_ce_debug(
+			sprintf(
+				/* Translators: %s: Current filter name. */
+				__( 'Triggered [%s].', 'custom-emails-for-woocommerce' ),
+				current_filter()
+			)
+		);
 
 		// Object ID
 		if ( is_callable( array( $object_id, 'get_id' ) ) ) {
@@ -435,7 +447,14 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$delay = intval( $this->alg_wc_ce_delay * $this->alg_wc_ce_delay_unit );
 			$time  = $this->alg_wc_ce_get_delay_start_time( $object_id ) + $delay;
 			$this->alg_wc_ce_schedule_single( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
-			$this->alg_wc_ce_debug( sprintf( __( 'Delayed (%s): In %d seconds.', 'custom-emails-for-woocommerce' ), $class, $delay ) );
+			$this->alg_wc_ce_debug(
+				sprintf(
+					/* Translators: %1$s: Class name, %2$d: Number of seconds. */
+					__( 'Delayed (%1$s): In %2$d seconds.', 'custom-emails-for-woocommerce' ),
+					$class,
+					$delay
+				)
+			);
 			return;
 		}
 
@@ -464,7 +483,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$product = $_product;
 
 				// Debug
-				$this->alg_wc_ce_debug( sprintf( __( 'Product #%s.', 'custom-emails-for-woocommerce' ), $product->get_id() ) );
+				$this->alg_wc_ce_debug(
+					sprintf(
+						/* Translators: %s: Product ID. */
+						__( 'Product #%s.', 'custom-emails-for-woocommerce' ),
+						$product->get_id()
+					)
+				);
 
 			} elseif ( ( $_order = wc_get_order( $object_id ) ) && is_a( $_order, 'WC_Order' ) ) {
 
@@ -475,12 +500,23 @@ class Alg_WC_Custom_Email extends WC_Email {
 				$this->object = $order;
 
 				// Debug
-				$this->alg_wc_ce_debug( sprintf( __( 'Order #%s.', 'custom-emails-for-woocommerce' ), $order->get_id() ) );
+				$this->alg_wc_ce_debug(
+					sprintf(
+						/* Translators: %s: Order ID. */
+						__( 'Order #%s.', 'custom-emails-for-woocommerce' ),
+						$order->get_id()
+					)
+				);
 
 				// Filter
 				if ( ! apply_filters( 'alg_wc_custom_emails_do_send_order_email', true, $this, $order ) ) {
-					$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
-						'alg_wc_custom_emails_do_send_order_email' ) );
+					$this->alg_wc_ce_debug(
+						sprintf(
+							/* Translators: %s: Filter name. */
+							__( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
+							'alg_wc_custom_emails_do_send_order_email'
+						)
+					);
 					return;
 				}
 
@@ -501,8 +537,22 @@ class Alg_WC_Custom_Email extends WC_Email {
 				}
 
 				// Order note
-				$order_note = sprintf( esc_html__( 'Sending "%s" email.', 'custom-emails-for-woocommerce' ), $this->get_title() ) .
-					( '' != $note ? ' ' . sprintf( esc_html__( 'Description: %s.', 'custom-emails-for-woocommerce' ), $note ) : '' );
+				$order_note = (
+					sprintf(
+						/* Translators: %s: Email title. */
+						esc_html__( 'Sending "%s" email.', 'custom-emails-for-woocommerce' ),
+						$this->get_title()
+					) .
+					(
+						'' != $note ?
+						' ' . sprintf(
+							/* Translators: %s: Note text. */
+							esc_html__( 'Description: %s.', 'custom-emails-for-woocommerce' ),
+							$note
+						) :
+						''
+					)
+				);
 				$order->add_order_note( $order_note );
 
 			}
@@ -524,8 +574,17 @@ class Alg_WC_Custom_Email extends WC_Email {
 			do_action( 'alg_wc_custom_emails_email_sent', $this );
 
 			// Debug
-			$this->alg_wc_ce_debug( sprintf( __( 'Sent: %s', 'custom-emails-for-woocommerce' ),
-				( $res ? __( 'success', 'custom-emails-for-woocommerce' ) : __( 'failed', 'custom-emails-for-woocommerce' ) ) ) );
+			$this->alg_wc_ce_debug(
+				sprintf(
+					/* Translators: %s: Status ("success" or "failed"). */
+					__( 'Sent: %s', 'custom-emails-for-woocommerce' ),
+					(
+						$res ?
+						__( 'success', 'custom-emails-for-woocommerce' ) :
+						__( 'failed', 'custom-emails-for-woocommerce' )
+					)
+				)
+			);
 
 		}
 
@@ -551,8 +610,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 
 		// Filter
 		if ( ! apply_filters( 'alg_wc_custom_emails_do_send', true, $this ) ) {
-			$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
-				'alg_wc_custom_emails_do_send' ) );
+			$this->alg_wc_ce_debug(
+				sprintf(
+					/* Translators: %s: Filter name. */
+					__( 'Blocked by the "%s" filter.', 'custom-emails-for-woocommerce' ),
+					'alg_wc_custom_emails_do_send'
+				)
+			);
 			return false;
 		}
 
@@ -562,8 +626,13 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$exclude_recipients = array_filter( array_map( 'trim', explode( ',', str_replace( PHP_EOL, ',', $exclude_recipients ) ) ) );
 			foreach ( $exclude_recipients as $exclude_recipient ) {
 				if ( $exclude_recipient === $this->get_recipient() || $this->alg_wc_ce_wildcard_match( $exclude_recipient, $this->get_recipient() ) ) {
-					$this->alg_wc_ce_debug( sprintf( __( 'Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
-						__( 'Exclude recipients', 'custom-emails-for-woocommerce' ) ) );
+					$this->alg_wc_ce_debug(
+						sprintf(
+							/* Translators: %s: Option title. */
+							__( 'Blocked by the "%s" option.', 'custom-emails-for-woocommerce' ),
+							__( 'Exclude recipients', 'custom-emails-for-woocommerce' )
+						)
+					);
 					return false;
 				}
 			}
@@ -664,13 +733,19 @@ class Alg_WC_Custom_Email extends WC_Email {
 	 * @since   1.9.6
 	 */
 	function alg_wc_ce_debug( $message ) {
-		alg_wc_custom_emails()->core->debug( sprintf( '%s: %s', $this->title, $message ) );
+		alg_wc_custom_emails()->core->debug(
+			sprintf(
+				'%s: %s',
+				$this->title,
+				$message
+			)
+		);
 	}
 
 	/**
 	 * Generate rich text editor HTML.
 	 *
-	 * @version 3.1.0
+	 * @version 3.5.0
 	 * @since   3.1.0
 	 */
 	public function generate_alg_wc_ce_editor_html( $key, $data ) {
@@ -693,8 +768,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 		?>
 		<tr valign="top">
 			<th scope="row" class="titledesc">
-				<label
-					for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo $this->get_tooltip_html( $data ); ?></label>
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 			</th>
 			<td class="forminp alg-wc-editor">
 				<fieldset>
@@ -707,7 +781,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 						'editor_class'  => esc_attr( $data['class'] ),
 					);
 					wp_editor( htmlspecialchars_decode( $this->get_option( $key ), ENT_QUOTES ), $editor_id, $settings );
-					echo $this->get_description_html( $data );
+					echo $this->get_description_html( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					?>
 				</fieldset>
 			</td>

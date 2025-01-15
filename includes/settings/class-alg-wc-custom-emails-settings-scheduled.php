@@ -41,7 +41,8 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	 * @since   1.9.5
 	 */
 	function get_unschedule_button_html( $url ) {
-		return sprintf( '<a href="%s" title="%s" class="%s">%s</a>',
+		return sprintf(
+			'<a href="%s" title="%s" class="%s">%s</a>',
 			$url,
 			esc_html__( 'Cancel', 'custom-emails-for-woocommerce' ),
 			'alg-wc-custom-emails-unschedule',
@@ -91,8 +92,18 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 		}
 		$id = str_replace( array( 'Alg_WC_Custom_Email', '_' ), '', $class );
 		$id = ( ! empty( $id ) ? $id : 1 );
-		return ( $this->email_titles[ $id ] ??
-			( 1 == $id ? __( 'Custom email', 'custom-emails-for-woocommerce' ) : sprintf( __( 'Custom email #%d', 'custom-emails-for-woocommerce' ), $id ) ) );
+		return (
+			$this->email_titles[ $id ] ??
+			(
+				1 == $id ?
+				__( 'Custom email', 'custom-emails-for-woocommerce' ) :
+				sprintf(
+					/* Translators: %d: Email ID. */
+					__( 'Custom email #%d', 'custom-emails-for-woocommerce' ),
+					$id
+				)
+			)
+		);
 	}
 
 	/**
@@ -130,7 +141,8 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 						if ( 2 == count( $_cron['args'] ) ) {
 							$class     = $_cron['args'][0];
 							$object_id = $_cron['args'][1];
-							$result[] = sprintf( '<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
+							$result[] = sprintf(
+								'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
 								$this->get_email_title_from_class( $class ),
 								$this->get_formatted_local_time( $timestamp ),
 								( is_scalar( $object_id ) ? $object_id : '' ),
@@ -154,7 +166,8 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 				if ( 2 == count( $args ) ) {
 					$class     = $args[0];
 					$object_id = $args[1];
-					$result[] = sprintf( '<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
+					$result[] = sprintf(
+						'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
 						$this->get_email_title_from_class( $class ),
 						$this->get_formatted_local_time( $scheduled_action->get_schedule()->get_date()->getTimestamp() ),
 						( is_scalar( $object_id ) ? $object_id : '' ),
@@ -181,7 +194,11 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 				'<tr>' . implode( '</tr><tr>', $result ) . '</tr>' .
 			'</tbody></table>' .
 			'<p><a href="">' . __( 'Refresh list', 'custom-emails-for-woocommerce' ) . '</a></p>' .
-			'<p>' . sprintf( __( 'Current time: %s', 'custom-emails-for-woocommerce' ), date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) ) ) . '</p>';
+			'<p>' . sprintf(
+				/* Translators: %s: Time. */
+				__( 'Current time: %s', 'custom-emails-for-woocommerce' ),
+				date_i18n( 'Y-m-d H:i:s', current_time( 'timestamp' ) )
+			) . '</p>';
 
 		}
 
