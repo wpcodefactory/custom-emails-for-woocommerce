@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Main Class
  *
- * @version 3.4.0
+ * @version 3.5.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -152,7 +152,7 @@ final class Alg_WC_Custom_Emails {
 	/**
 	 * admin.
 	 *
-	 * @version 3.4.0
+	 * @version 3.5.1
 	 * @since   1.0.0
 	 */
 	function admin() {
@@ -167,7 +167,7 @@ final class Alg_WC_Custom_Emails {
 		$this->add_cross_selling_library();
 
 		// WC Settings tab as WPFactory submenu item
-		$this->move_wc_settings_tab_to_wpfactory_menu();
+		add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
 
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
