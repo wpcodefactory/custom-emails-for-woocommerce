@@ -2,50 +2,56 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: custom-emails-for-woocommerce 3.5.1\n"
+"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.5.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-22T22:46:45+02:00\n"
+"POT-Creation-Date: 2025-05-14T12:04:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-msgid "Additional Custom Emails & Recipients for WooCommerce Pro"
+#: custom-emails-for-woocommerce.php
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:159
+msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com/item/custom-emails-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "Add custom emails to WooCommerce."
 msgstr ""
 
 #. Author of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "WPFactory"
 msgstr ""
 
 #. Author URI of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:73
-#: includes/pro/class-alg-wc-custom-emails-pro.php:150
+#: includes/pro/class-alg-wc-custom-emails-pro.php:157
 msgid "Are you sure?"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:97
-#: includes/pro/class-alg-wc-custom-emails-pro.php:104
+#: includes/pro/class-alg-wc-custom-emails-pro.php:111
 msgid "Invalid user role."
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:101
-#: includes/pro/class-alg-wc-custom-emails-pro.php:100
+#: includes/pro/class-alg-wc-custom-emails-pro.php:107
 msgid "Invalid nonce."
 msgstr ""
 
@@ -55,7 +61,7 @@ msgid "Shortcodes"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:342
-#: includes/pro/class-alg-wc-custom-emails-pro.php:356
+#: includes/pro/class-alg-wc-custom-emails-pro.php:363
 msgid "bulk actions"
 msgstr ""
 
@@ -65,7 +71,7 @@ msgid "Emails: \"%1$s\" sent for %2$d orders."
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails-admin.php:389
-#: includes/pro/class-alg-wc-custom-emails-pro.php:371
+#: includes/pro/class-alg-wc-custom-emails-pro.php:378
 msgid "manually"
 msgstr ""
 
@@ -75,10 +81,10 @@ msgstr ""
 #: includes/class-alg-wc-custom-emails-admin.php:419
 #: includes/class-alg-wc-custom-emails-admin.php:484
 #: includes/class-alg-wc-custom-emails-admin.php:537
-#: includes/pro/class-alg-wc-custom-emails-pro.php:302
-#: includes/pro/class-alg-wc-custom-emails-pro.php:336
-#: includes/pro/class-alg-wc-custom-emails-pro.php:389
-#: includes/pro/class-alg-wc-custom-emails-pro.php:411
+#: includes/pro/class-alg-wc-custom-emails-pro.php:309
+#: includes/pro/class-alg-wc-custom-emails-pro.php:343
+#: includes/pro/class-alg-wc-custom-emails-pro.php:396
+#: includes/pro/class-alg-wc-custom-emails-pro.php:418
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:143
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:454
 msgid "Send email: %s"
@@ -364,23 +370,23 @@ msgstr ""
 msgid "Exclude recipients"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:151
+#: includes/pro/class-alg-wc-custom-emails-pro.php:158
 msgid "Move to Trash"
 msgstr ""
 
 #. Translators: %d: Email ID.
-#: includes/pro/class-alg-wc-custom-emails-pro.php:210
+#: includes/pro/class-alg-wc-custom-emails-pro.php:217
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:216
+#: includes/pro/class-alg-wc-custom-emails-pro.php:223
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:78
 msgid "settings"
 msgstr ""
 
 #. Translators: %d: Email ID.
 #. Translators: %d: Custom email ID.
-#: includes/pro/class-alg-wc-custom-emails-pro.php:221
+#: includes/pro/class-alg-wc-custom-emails-pro.php:228
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:102
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:50
 msgid "Custom email #%d"
@@ -1062,8 +1068,4 @@ msgstr ""
 #. Translators: %s: Plugin name.
 #: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:158
 msgid "Created by the \"%s\" plugin"
-msgstr ""
-
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:159
-msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""

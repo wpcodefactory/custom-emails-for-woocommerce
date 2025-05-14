@@ -1,5 +1,16 @@
 == Changelog ==
 
+= 3.5.2 - 14/05/2025 =
+* Fix - Vulnerability in the `[translate]` shortcode output.
+* Dev - Recommendations - Move to the `init` action.
+* Dev - Key Manager - Move to the `init` action.
+* Dev - Key Manager - Library updated.
+* Tested up to: 6.8.
+
+= 3.5.1 - 22/04/2025 =
+* Fix - Translation loading for domain was triggered too early.
+* WC tested up to: 9.8.
+
 = 3.5.0 - 15/01/2025 =
 * Dev - Security - Output escaped.
 * Dev - Security - Input sanitized.
