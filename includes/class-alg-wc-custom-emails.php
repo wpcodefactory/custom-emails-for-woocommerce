@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Main Class
  *
- * @version 3.5.2
+ * @version 3.5.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -45,7 +45,7 @@ final class Alg_WC_Custom_Emails {
 	protected static $_instance = null;
 
 	/**
-	 * Main Alg_WC_Custom_Emails Instance
+	 * Main Alg_WC_Custom_Emails Instance.
 	 *
 	 * Ensures only one instance of Alg_WC_Custom_Emails is loaded or can be loaded.
 	 *
@@ -225,7 +225,7 @@ final class Alg_WC_Custom_Emails {
 	/**
 	 * move_wc_settings_tab_to_wpfactory_menu.
 	 *
-	 * @version 3.4.0
+	 * @version 3.5.3
 	 * @since   3.4.0
 	 */
 	function move_wc_settings_tab_to_wpfactory_menu() {
@@ -243,7 +243,11 @@ final class Alg_WC_Custom_Emails {
 		$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
 			'wc_settings_tab_id' => 'alg_wc_custom_emails',
 			'menu_title'         => __( 'Custom Emails', 'custom-emails-for-woocommerce' ),
-			'page_title'         => __( 'Custom Emails', 'custom-emails-for-woocommerce' ),
+			'page_title'         => __( 'Additional Custom Emails & Recipients for WooCommerce', 'custom-emails-for-woocommerce' ),
+			'plugin_icon'        => array(
+				'get_url_method'    => 'wporg_plugins_api',
+				'wporg_plugin_slug' => 'custom-emails-for-woocommerce',
+			),
 		) );
 
 	}

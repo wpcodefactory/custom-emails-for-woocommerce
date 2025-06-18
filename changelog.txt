@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 3.5.3 - 18/06/2025 =
+* Dev - WPFactory Admin Menu - Plugin icon added.
+* Dev - WPFactory Admin Menu - Library updated.
+* WC tested up to: 9.9.
+
 = 3.5.2 - 14/05/2025 =
 * Fix - Vulnerability in the `[translate]` shortcode output.
 * Dev - Recommendations - Move to the `init` action.

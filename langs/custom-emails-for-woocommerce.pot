@@ -2,20 +2,21 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.5.2\n"
+"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.5.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-14T12:04:04+00:00\n"
+"POT-Creation-Date: 2025-06-18T09:01:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
 
 #. Plugin Name of the plugin
 #: custom-emails-for-woocommerce.php
+#: includes/class-alg-wc-custom-emails.php:246
 #: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:159
 msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
@@ -170,7 +171,6 @@ msgid "Go Pro"
 msgstr ""
 
 #: includes/class-alg-wc-custom-emails.php:245
-#: includes/class-alg-wc-custom-emails.php:246
 #: includes/settings/class-alg-wc-custom-emails-settings.php:26
 msgid "Custom Emails"
 msgstr ""
