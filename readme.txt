@@ -1,9 +1,9 @@
 === Additional Custom Emails & Recipients for WooCommerce ===
-Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli, aegkr
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 3.5.3
+Stable tag: 3.6.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,8 +75,8 @@ Specify the recipients of the custom email you are setting and who should receiv
 ### 🚀 **Set email’s admin title** ###
 Set the admin title of the email that will show up as the sender in the recipient's inbox.
 
-### 🚀 **WPML and Polylang compatible** ###
-Our plugin has multilingual support and is compatible with WPML and Polylang.
+### 🚀 **WPML, Polylang and TranslatePress compatible** ###
+Our plugin has multilingual support and is compatible with WPML, Polylang and TranslatePress.
 
 ### 🚀 **“High-Performance Order Storage (HPOS)” compatible.** ###
 This means your website can be as fast as it needs to be because HPOS allows for maximum efficiency when it comes to handling orders data at WooCommerce, so your store will can be customizable and efficient.
@@ -145,6 +145,13 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.6.0 - 19/06/2025 =
+* Dev - Block-based checkout compatibility - "New order" trigger added.
+* Dev - Shortcodes - `[translate]` - TranslatePress (https://wordpress.org/plugins/translatepress-multilingual/) compatibility added.
+* Dev - Shortcodes - `before` and `after` attributes escaped.
+* Dev - Admin settings descriptions updated.
+* Dev - Code refactoring.
 
 = 3.5.3 - 18/06/2025 =
 * Dev - WPFactory Admin Menu - Plugin icon added.

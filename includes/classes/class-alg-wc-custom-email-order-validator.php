@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Order Validator
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   1.8.0
  *
  * @author  Algoritmika Ltd
@@ -35,13 +35,22 @@ class Alg_WC_Custom_Email_Order_Validator {
 	/**
 	 * validate
 	 *
-	 * @version 3.5.0
+	 * @version 3.6.0
 	 * @since   1.8.0
 	 */
 	function validate( $order ) {
 
 		// Check filter
-		if ( 'woocommerce_checkout_order_processed_notification' === current_filter() && ! $this->check_new_order_status( $order ) ) {
+		if (
+			in_array(
+				current_filter(),
+				array(
+					'woocommerce_checkout_order_processed_notification',
+					'alg_wc_ce_store_api_checkout_update_order_notification',
+				)
+			) &&
+			! $this->check_new_order_status( $order )
+		) {
 			alg_wc_custom_emails()->core->debug(
 				sprintf(
 					/* Translators: %s: Email title. */

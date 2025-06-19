@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,43 +17,103 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.1.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
 		// Edit order > Order actions (dropdown)
-		add_filter( 'woocommerce_order_actions',                         array( $this, 'add_order_actions' ), PHP_INT_MAX );
-		add_action( 'woocommerce_order_action_alg_wc_send_email_custom', array( $this, 'do_order_actions' ), PHP_INT_MAX );
+		add_filter(
+			'woocommerce_order_actions',
+			array( $this, 'add_order_actions' ),
+			PHP_INT_MAX
+		);
+		add_action(
+			'woocommerce_order_action_alg_wc_send_email_custom',
+			array( $this, 'do_order_actions' ),
+			PHP_INT_MAX
+		);
 
 		// Orders > Bulk actions (dropdown)
-		add_filter( 'bulk_actions-edit-shop_order',                   array( $this, 'add_order_actions_bulk' ), 20 );
-		add_filter( 'bulk_actions-woocommerce_page_wc-orders',        array( $this, 'add_order_actions_bulk' ), 20 );
-		add_filter( 'handle_bulk_actions-edit-shop_order',            array( $this, 'do_order_actions_bulk' ), 10, 3 );
-		add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( $this, 'do_order_actions_bulk' ), 10, 3 );
-		add_action( 'admin_notices',                                  array( $this, 'bulk_action_admin_notice' ) );
+		add_filter(
+			'bulk_actions-edit-shop_order',
+			array( $this, 'add_order_actions_bulk' ),
+			20
+		);
+		add_filter(
+			'bulk_actions-woocommerce_page_wc-orders',
+			array( $this, 'add_order_actions_bulk' ),
+			20
+		);
+		add_filter(
+			'handle_bulk_actions-edit-shop_order',
+			array( $this, 'do_order_actions_bulk' ),
+			10,
+			3
+		);
+		add_filter(
+			'handle_bulk_actions-woocommerce_page_wc-orders',
+			array( $this, 'do_order_actions_bulk' ),
+			10,
+			3
+		);
+		add_action(
+			'admin_notices',
+			array( $this, 'bulk_action_admin_notice' )
+		);
 
 		// Orders > Preview
-		add_filter( 'woocommerce_admin_order_preview_actions', array( $this, 'add_order_actions_preview' ), 10, 2 );
-		add_filter( 'admin_init',                              array( $this, 'do_order_actions_preview' ) );
+		add_filter(
+			'woocommerce_admin_order_preview_actions',
+			array( $this, 'add_order_actions_preview' ),
+			10,
+			2
+		);
+		add_filter(
+			'admin_init',
+			array( $this, 'do_order_actions_preview' )
+		);
 
 		// Orders > Actions (column)
-		add_filter( 'woocommerce_admin_order_actions', array( $this, 'add_order_actions_column' ), 10, 2 );
-		add_filter( 'admin_init',                      array( $this, 'do_order_actions_column' ) );
-		add_action( 'admin_footer',                    array( $this, 'order_actions_column_icon_style' ) );
+		add_filter(
+			'woocommerce_admin_order_actions',
+			array( $this, 'add_order_actions_column' ),
+			10,
+			2
+		);
+		add_filter(
+			'admin_init',
+			array( $this, 'do_order_actions_column' )
+		);
+		add_action(
+			'admin_footer',
+			array( $this, 'order_actions_column_icon_style' )
+		);
 
 		// Content template script
-		add_action( 'admin_footer', array( $this, 'add_content_template_script' ) );
+		add_action(
+			'admin_footer',
+			array( $this, 'add_content_template_script' )
+		);
 
 		// Unschedule email
-		add_action( 'wp_loaded',    array( $this, 'unschedule_email' ) );
-		add_action( 'admin_footer', array( $this, 'unschedule_email_confirm_js' ) );
+		add_action(
+			'wp_loaded',
+			array( $this, 'unschedule_email' )
+		);
+		add_action(
+			'admin_footer',
+			array( $this, 'unschedule_email_confirm_js' )
+		);
+
+		// Shortcode dropdown CSS
+		add_action(
+			'admin_footer',
+			array( $this, 'shortcode_dropdown_style' )
+		);
 
 		// Admin core loaded
 		do_action( 'alg_wc_custom_emails_admin_core_loaded', $this );
-
-		// Shortcode dropdown CSS
-		add_action( 'admin_footer', array( $this, 'shortcode_dropdown_style' ) );
 
 	}
 
@@ -104,7 +164,11 @@ class Alg_WC_Custom_Emails_Admin {
 			$unscheduler = sanitize_text_field( wp_unslash( $_REQUEST['alg_wc_ce_unscheduler'] ) );
 
 			if ( 'wp_cron' === $unscheduler ) {
-				if ( isset( $_REQUEST['alg_wc_ce_unschedule_class'], $_REQUEST['alg_wc_ce_unschedule_object_id'], $_REQUEST['alg_wc_ce_unschedule_time'] ) ) {
+				if ( isset(
+					$_REQUEST['alg_wc_ce_unschedule_class'],
+					$_REQUEST['alg_wc_ce_unschedule_object_id'],
+					$_REQUEST['alg_wc_ce_unschedule_time']
+				) ) {
 
 					// WP Cron
 					$class     = sanitize_text_field( wp_unslash( $_REQUEST['alg_wc_ce_unschedule_class'] ) );

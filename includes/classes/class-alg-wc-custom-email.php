@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Class
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -342,7 +342,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 	/**
 	 * alg_wc_ce_hook_triggers.
 	 *
-	 * @version 2.6.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 */
 	function alg_wc_ce_hook_triggers() {
@@ -350,11 +350,24 @@ class Alg_WC_Custom_Email extends WC_Email {
 		if ( ! empty( $triggers ) && is_array( $triggers ) ) {
 			$is_new_order_hook_added = false;
 			foreach ( $triggers as $trigger ) {
-				if ( ! $is_new_order_hook_added && false !== strpos( $trigger, 'woocommerce_new_order_notification_' ) ) {
-					$trigger                 = 'woocommerce_checkout_order_processed_notification';
-					$is_new_order_hook_added = true;
+				if ( false !== strpos( $trigger, 'woocommerce_new_order_notification_' ) ) {
+					if ( ! $is_new_order_hook_added ) {
+						$new_order_hooks = array(
+							'woocommerce_checkout_order_processed_notification',
+							'alg_wc_ce_store_api_checkout_update_order_notification',
+						);
+						foreach ( $new_order_hooks as $new_order_hook ) {
+							add_action(
+								$new_order_hook,
+								array( $this, 'alg_wc_ce_trigger' ),
+								PHP_INT_MAX
+							);
+						}
+						$is_new_order_hook_added = true;
+					}
+				} else {
+					add_action( $trigger, array( $this, 'alg_wc_ce_trigger' ), PHP_INT_MAX );
 				}
-				add_action( $trigger, array( $this, 'alg_wc_ce_trigger' ), PHP_INT_MAX );
 			}
 		}
 	}
@@ -446,7 +459,11 @@ class Alg_WC_Custom_Email extends WC_Email {
 			$class = str_replace( 'alg_wc_custom', 'Alg_WC_Custom_Email', $this->id );
 			$delay = intval( $this->alg_wc_ce_delay * $this->alg_wc_ce_delay_unit );
 			$time  = $this->alg_wc_ce_get_delay_start_time( $object_id ) + $delay;
-			$this->alg_wc_ce_schedule_single( $time, 'alg_wc_custom_emails_send_email', array( $class, $object_id ) );
+			$this->alg_wc_ce_schedule_single(
+				$time,
+				'alg_wc_custom_emails_send_email',
+				array( $class, $object_id )
+			);
 			$this->alg_wc_ce_debug(
 				sprintf(
 					/* Translators: %1$s: Class name, %2$d: Number of seconds. */

@@ -112,7 +112,9 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 						'<code>action</code>',
 						'<code>action|title</code>',
 						'<code>woocommerce_checkout_order_processed</code>',
-						'<code>woocommerce_checkout_order_processed|' . __( 'Checkout order processed', 'custom-emails-for-woocommerce' ) . '</code>'
+						'<code>woocommerce_checkout_order_processed|' .
+							__( 'Checkout order processed', 'custom-emails-for-woocommerce' ) .
+						'</code>'
 					),
 				'id'       => 'alg_wc_custom_emails_custom_triggers',
 				'default'  => '',

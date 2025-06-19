@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -57,7 +57,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.1.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -110,6 +110,8 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'user_prop',
 			'product_func',
 
+			'translate',
+
 		);
 
 		$prefix = apply_filters( 'alg_wc_custom_emails_shortcode_prefix', '' );
@@ -117,6 +119,103 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		foreach ( $this->shortcodes as $shortcode ) {
 			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
 		}
+
+	}
+
+	/**
+	 * translate_get_current_language.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 *
+	 * @todo    (dev) WPML, Polylang: order language (see `get_order_wpml_language()`)
+	 * @todo    (v3.6.0) use `get_locale()`?
+	 * @todo    (v3.6.0) use `$_POST['language']`?
+	 *
+	 * @see     https://translatepress.com/docs/developers/
+	 */
+	function translate_get_current_language() {
+
+		// Order
+		if ( $this->order ) {
+
+			// TranslatePress
+			if ( '' !== ( $meta_value = $this->order->get_meta( 'trp_language' ) ) ) {
+				return strtolower( $meta_value );
+			}
+
+		}
+
+		// WPML, Polylang
+		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+			return strtolower( ICL_LANGUAGE_CODE );
+		}
+
+		// TranslatePress
+		global $TRP_LANGUAGE;
+		if ( $TRP_LANGUAGE ) {
+			return strtolower( $TRP_LANGUAGE );
+		}
+
+		return false;
+	}
+
+	/**
+	 * translate.
+	 *
+	 * @version 3.6.0
+	 * @since   1.7.0
+	 */
+	function translate( $atts, $content = '' ) {
+
+		$current_language = $this->translate_get_current_language();
+
+		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
+		if (
+			isset( $atts['lang_text'] ) &&
+			isset( $atts['not_lang_text'] ) &&
+			! empty( $atts['lang'] )
+		) {
+			return (
+				(
+					false === $current_language ||
+					! in_array(
+						$current_language,
+						array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) )
+					)
+				) ?
+				wp_kses_post( $atts['not_lang_text'] ) :
+				wp_kses_post( $atts['lang_text'] )
+			);
+		}
+
+		// E.g.: `[translate lang="EN,DE"]Text for EN & DE[/translate][translate not_lang="EN,DE"]Text for other languages[/translate]`
+		return (
+			(
+				(
+					! empty( $atts['lang'] ) &&
+					(
+						false === $current_language ||
+						! in_array(
+							$current_language,
+							array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) )
+						)
+					)
+				) ||
+				(
+					! empty( $atts['not_lang'] ) &&
+					(
+						false !== $current_language &&
+						in_array(
+							$current_language,
+							array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) )
+						)
+					)
+				)
+			) ?
+			'' :
+			wp_kses_post( $content )
+		);
 
 	}
 
@@ -192,7 +291,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @todo    (dev) add (optional) function args
 	 */
 	function product_func( $atts, $content = '' ) {
-		if ( ! $this->product || ! isset( $atts['func'] ) || ! is_callable( array( $this->product, $atts['func'] ) ) ) {
+		if (
+			! $this->product ||
+			! isset( $atts['func'] ) ||
+			! is_callable( array( $this->product, $atts['func'] ) )
+		) {
 			return '';
 		}
 		$func = $atts['func'];
@@ -928,7 +1031,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * return_shortcode.
 	 *
-	 * @version 1.0.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) more common atts, e.g., on_empty, find/replace, strip_tags, any_func, etc.
@@ -957,11 +1060,12 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 
 		// Before, after
-		return ( '' !== $value ?
+		return (
+			'' !== $value ?
 			(
-				( isset( $atts['before'] ) ? $atts['before'] : '' ) .
+				( isset( $atts['before'] ) ? wp_kses_post( $atts['before'] ) : '' ) .
 					$value .
-				( isset( $atts['after'] )  ? $atts['after']  : '' )
+				( isset( $atts['after'] )  ? wp_kses_post( $atts['after'] )  : '' )
 			) :
 			''
 		);

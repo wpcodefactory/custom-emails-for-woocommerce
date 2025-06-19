@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.5.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -62,21 +62,57 @@ class Alg_WC_Custom_Emails_Core {
 		$this->shortcodes         = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes.php';
 		$this->general_shortcodes = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes-general.php';
 
-		// Hooks
-		add_filter( 'woocommerce_email_classes', array( $this, 'add_custom_emails' ) );
-		add_filter( 'woocommerce_email_actions', array( $this, 'add_custom_email_trigger_actions' ) );
+		// Email classes
+		add_filter(
+			'woocommerce_email_classes',
+			array( $this, 'add_custom_emails' )
+		);
+
+		// Email actions
+		add_filter(
+			'woocommerce_email_actions',
+			array( $this, 'add_custom_email_trigger_actions' )
+		);
 
 		// Delayed emails
-		add_action( 'alg_wc_custom_emails_send_email', array( $this, 'send_delayed_email' ), 10, 2 );
+		add_action(
+			'alg_wc_custom_emails_send_email',
+			array( $this, 'send_delayed_email' ),
+			10,
+			2
+		);
 
 		// Templates
-		add_filter( 'woocommerce_locate_template', array( $this, 'locate_template' ), 10, 3 );
+		add_filter(
+			'woocommerce_locate_template',
+			array( $this, 'locate_template' ),
+			10,
+			3
+		);
 
 		// User address changed
-		add_action( 'woocommerce_after_save_address_validation', array( $this, 'alg_wc_ce_user_address_changed' ), 10, 4 );
+		add_action(
+			'woocommerce_after_save_address_validation',
+			array( $this, 'alg_wc_ce_user_address_changed' ),
+			10,
+			4
+		);
 
 		// Product published
-		add_action( 'transition_post_status', array( $this, 'alg_wc_ce_product_published' ), 10, 3 );
+		add_action(
+			'transition_post_status',
+			array( $this, 'alg_wc_ce_product_published' ),
+			10,
+			3
+		);
+
+		// Block-based checkout
+		add_action(
+			'woocommerce_store_api_checkout_update_order_from_request',
+			array( $this, 'store_api_checkout_update_order_from_request' ),
+			10,
+			2
+		);
 
 		// Core loaded
 		do_action( 'alg_wc_custom_emails_core_loaded', $this );
@@ -90,8 +126,15 @@ class Alg_WC_Custom_Emails_Core {
 	 * @since   1.2.0
 	 */
 	function add_to_log( $message ) {
-		if ( function_exists( 'wc_get_logger' ) && ( $log = wc_get_logger() ) ) {
-			$log->log( 'info', esc_html( $message ), array( 'source' => 'custom-emails-for-woocommerce' ) );
+		if (
+			function_exists( 'wc_get_logger' ) &&
+			( $log = wc_get_logger() )
+		) {
+			$log->log(
+				'info',
+				esc_html( $message ),
+				array( 'source' => 'custom-emails-for-woocommerce' )
+			);
 		}
 	}
 
@@ -104,6 +147,20 @@ class Alg_WC_Custom_Emails_Core {
 	function debug( $message ) {
 		if ( $this->do_debug ) {
 			$this->add_to_log( $message );
+		}
+	}
+
+	/**
+	 * store_api_checkout_update_order_from_request.
+	 *
+	 * For the block-based checkout.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 */
+	function store_api_checkout_update_order_from_request( $order, $request ) {
+		if ( ! $request->get_param( '__experimental_calc_totals' ) ) {
+			do_action( 'alg_wc_ce_store_api_checkout_update_order', $order );
 		}
 	}
 
@@ -143,7 +200,11 @@ class Alg_WC_Custom_Emails_Core {
 	 * @todo    (dev) run this only if `alg_wc_ce_product_published` is in `$email->get_option( 'trigger' )` for at least one of the emails?
 	 */
 	function alg_wc_ce_product_published( $new_status, $old_status, $post ) {
-		if ( 'product' === $post->post_type && 'publish' === $new_status && 'publish' !== $old_status ) {
+		if (
+			'product' === $post->post_type &&
+			'publish' === $new_status &&
+			'publish' !== $old_status
+		) {
 			do_action( 'alg_wc_ce_product_published', $post->ID );
 		}
 	}
@@ -156,7 +217,13 @@ class Alg_WC_Custom_Emails_Core {
 	 */
 	function locate_template( $template, $template_name, $template_path ) {
 		if (
-			in_array( $template_name, array( 'emails/alg-wc-custom-email.php', 'emails/plain/alg-wc-custom-email.php' ) ) &&
+			in_array(
+				$template_name,
+				array(
+					'emails/alg-wc-custom-email.php',
+					'emails/plain/alg-wc-custom-email.php'
+				)
+			) &&
 			! file_exists( $template )
 		) {
 			return alg_wc_custom_emails()->plugin_path() . '/templates/' . $template_name;
@@ -241,7 +308,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_email_trigger_actions.
 	 *
-	 * @version 2.9.3
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] maybe we need to add "Subscriptions: Renewals" here (`'woocommerce_order_status_' . $slug . '_renewal'`, `'woocommerce_order_status_' . $slug . '_to_' . $_slug . '_renewal'`)?
@@ -250,6 +317,7 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Checkout order processed (new order)
 		$email_actions[] = 'woocommerce_checkout_order_processed';
+		$email_actions[] = 'alg_wc_ce_store_api_checkout_update_order';
 
 		// Order statuses
 		$order_statuses = wc_get_order_statuses();
@@ -396,15 +464,24 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * get_custom_triggers.
 	 *
-	 * @version 2.1.0
+	 * @version 3.6.0
 	 * @since   2.1.0
 	 */
 	function get_custom_triggers() {
 		$res = array();
-		$custom_triggers = array_map( 'trim', explode( PHP_EOL, get_option( 'alg_wc_custom_emails_custom_triggers', '' ) ) );
+		$custom_triggers = array_map(
+			'trim',
+			explode(
+				PHP_EOL,
+				get_option( 'alg_wc_custom_emails_custom_triggers', '' )
+			)
+		);
 		foreach ( $custom_triggers as $custom_trigger ) {
-			$custom_trigger = array_map( 'trim', explode( '|', $custom_trigger, 2 ) );
-			$res[ $custom_trigger[0] ] = ( isset( $custom_trigger[1] ) ? $custom_trigger[1] : $custom_trigger[0] );
+			$custom_trigger = array_map(
+				'trim',
+				explode( '|', $custom_trigger, 2 )
+			);
+			$res[ $custom_trigger[0] ] = ( $custom_trigger[1] ?? $custom_trigger[0] );
 		}
 		return $res;
 	}

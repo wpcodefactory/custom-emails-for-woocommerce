@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings - Fields
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd
@@ -50,7 +50,7 @@ $fields = array_merge( $fields, array(
 			/* Translators: %1$s: Settings page URL, %2$s: Settings page path. */
 			__( 'Scheduled emails will be listed in <a href="%1$s">%2$s</a>.', 'custom-emails-for-woocommerce' ),
 			admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_emails&section=scheduled' ),
-			__( 'WooCommerce > Settings > Custom Emails > Scheduled', 'custom-emails-for-woocommerce' )
+			__( 'WPFactory > Custom Emails > Scheduled', 'custom-emails-for-woocommerce' )
 		),
 		'type'              => 'select',
 		'class'             => 'chosen_select',
