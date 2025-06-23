@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.6.1 - 23/06/2025 =
+* Dev - WPFactory Admin Menu - Library updated.
+
 = 3.6.0 - 19/06/2025 =
 * Dev - Block-based checkout compatibility - "New order" trigger added.
 * Dev - Shortcodes - `[translate]` - TranslatePress (https://wordpress.org/plugins/translatepress-multilingual/) compatibility added.
