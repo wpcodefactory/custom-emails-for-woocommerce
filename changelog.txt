@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.6.2 - 22/09/2025 =
+* WC tested up to: 10.2.
+
 = 3.6.1 - 23/06/2025 =
 * Dev - WPFactory Admin Menu - Library updated.
 
