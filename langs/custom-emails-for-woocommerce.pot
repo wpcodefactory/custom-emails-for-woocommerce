@@ -2,42 +2,40 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.6.1\n"
+"Project-Id-Version: custom-emails-for-woocommerce 3.6.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-23T09:06:21+00:00\n"
+"POT-Creation-Date: 2025-09-22T17:42:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: custom-emails-for-woocommerce.php
-#: includes/class-alg-wc-custom-emails.php:246
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:258
-msgid "Additional Custom Emails & Recipients for WooCommerce"
+#: custom-emails-for-woocommerce-pro.php
+msgid "Additional Custom Emails & Recipients for WooCommerce Pro"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: custom-emails-for-woocommerce.php
+#: custom-emails-for-woocommerce-pro.php
 msgid "https://wpfactory.com/item/custom-emails-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
-#: custom-emails-for-woocommerce.php
+#: custom-emails-for-woocommerce-pro.php
 msgid "Add custom emails to WooCommerce."
 msgstr ""
 
 #. Author of the plugin
-#: custom-emails-for-woocommerce.php
+#: custom-emails-for-woocommerce-pro.php
 msgid "WPFactory"
 msgstr ""
 
 #. Author URI of the plugin
-#: custom-emails-for-woocommerce.php
+#: custom-emails-for-woocommerce-pro.php
 msgid "https://wpfactory.com"
 msgstr ""
 
@@ -68,6 +66,7 @@ msgstr ""
 
 #. Translators: %1$s: Custom email title, %2$d: Number of orders.
 #: includes/class-alg-wc-custom-emails-admin.php:426
+#, php-format
 msgid "Emails: \"%1$s\" sent for %2$d orders."
 msgstr ""
 
@@ -88,6 +87,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-custom-emails-pro.php:418
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:143
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:454
+#, php-format
 msgid "Send email: %s"
 msgstr ""
 
@@ -106,6 +106,7 @@ msgstr ""
 
 #. Translators: %s: Email class name.
 #: includes/class-alg-wc-custom-emails-core.php:285
+#, php-format
 msgid "%s: Sending delayed email."
 msgstr ""
 
@@ -175,8 +176,14 @@ msgstr ""
 msgid "Custom Emails"
 msgstr ""
 
+#: includes/class-alg-wc-custom-emails.php:246
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:258
+msgid "Additional Custom Emails & Recipients for WooCommerce"
+msgstr ""
+
 #. Translators: %s: Email title.
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:57
+#, php-format
 msgid "%s: New order: different status."
 msgstr ""
 
@@ -200,6 +207,7 @@ msgstr ""
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:652
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:674
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:696
+#, php-format
 msgid "%1$s: Blocked by the \"%2$s\" option."
 msgstr ""
 
@@ -287,6 +295,7 @@ msgstr ""
 
 #. Translators: %1$s: Attachment file path, %2$s: Status ("ok" or "does not exist!").
 #: includes/classes/class-alg-wc-custom-email.php:198
+#, php-format
 msgid "Email attachment: %1$s [%2$s]."
 msgstr ""
 
@@ -309,6 +318,7 @@ msgstr ""
 
 #. Translators: %s: Current filter name.
 #: includes/classes/class-alg-wc-custom-email.php:441
+#, php-format
 msgid "Triggered [%s]."
 msgstr ""
 
@@ -318,37 +328,44 @@ msgstr ""
 
 #. Translators: %1$s: Class name, %2$d: Number of seconds.
 #: includes/classes/class-alg-wc-custom-email.php:470
+#, php-format
 msgid "Delayed (%1$s): In %2$d seconds."
 msgstr ""
 
 #. Translators: %s: Product ID.
 #: includes/classes/class-alg-wc-custom-email.php:506
+#, php-format
 msgid "Product #%s."
 msgstr ""
 
 #. Translators: %s: Order ID.
 #: includes/classes/class-alg-wc-custom-email.php:523
+#, php-format
 msgid "Order #%s."
 msgstr ""
 
 #. Translators: %s: Filter name.
 #: includes/classes/class-alg-wc-custom-email.php:533
 #: includes/classes/class-alg-wc-custom-email.php:633
+#, php-format
 msgid "Blocked by the \"%s\" filter."
 msgstr ""
 
 #. Translators: %s: Email title.
 #: includes/classes/class-alg-wc-custom-email.php:560
+#, php-format
 msgid "Sending \"%s\" email."
 msgstr ""
 
 #. Translators: %s: Note text.
 #: includes/classes/class-alg-wc-custom-email.php:567
+#, php-format
 msgid "Description: %s."
 msgstr ""
 
 #. Translators: %s: Status ("success" or "failed").
 #: includes/classes/class-alg-wc-custom-email.php:597
+#, php-format
 msgid "Sent: %s"
 msgstr ""
 
@@ -362,6 +379,7 @@ msgstr ""
 
 #. Translators: %s: Option title.
 #: includes/classes/class-alg-wc-custom-email.php:649
+#, php-format
 msgid "Blocked by the \"%s\" option."
 msgstr ""
 
@@ -376,6 +394,7 @@ msgstr ""
 
 #. Translators: %d: Email ID.
 #: includes/pro/class-alg-wc-custom-emails-pro.php:217
+#, php-format
 msgid "Admin title #%d"
 msgstr ""
 
@@ -389,6 +408,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-custom-emails-pro.php:228
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:102
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:50
+#, php-format
 msgid "Custom email #%d"
 msgstr ""
 
@@ -402,6 +422,7 @@ msgstr ""
 
 #. Translators: %s: Emails link.
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:47
+#, php-format
 msgid "Settings for each custom email are located in %s."
 msgstr ""
 
@@ -451,6 +472,7 @@ msgstr ""
 
 #. Translators: %1$s: Format, %2$s: Format, %3$s: Example, %4$s: Example.
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:111
+#, php-format
 msgid "Format: %1$s or %2$s, e.g.: %3$s or %4$s."
 msgstr ""
 
@@ -500,11 +522,13 @@ msgstr ""
 
 #. Translators: %s: Tag name.
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:154
+#, php-format
 msgid "Replaces double line breaks with HTML paragraph tags, and all remaining line breaks with %s tag."
 msgstr ""
 
 #. Translators: %s: Function link.
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:159
+#, php-format
 msgid "Uses WordPress %s function."
 msgstr ""
 
@@ -518,6 +542,7 @@ msgstr ""
 
 #. Translators: %s: Logs link.
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:171
+#, php-format
 msgid "Will add a log to %s."
 msgstr ""
 
@@ -559,6 +584,7 @@ msgstr ""
 
 #. Translators: %s: Time.
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:199
+#, php-format
 msgid "Current time: %s"
 msgstr ""
 
@@ -603,6 +629,7 @@ msgstr ""
 
 #. Translators: %1$s: Settings page URL, %2$s: Settings page path.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:51
+#, php-format
 msgid "Scheduled emails will be listed in <a href=\"%1$s\">%2$s</a>."
 msgstr ""
 
@@ -640,6 +667,7 @@ msgstr ""
 
 #. Translators: %s: Customer email placeholder.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:88
+#, php-format
 msgid "Use %s for customer billing email."
 msgstr ""
 
@@ -669,6 +697,7 @@ msgstr ""
 
 #. Translators: %s: "Send email" option title.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:140
+#, php-format
 msgid "You can test this email by opening some order's admin edit page, and selecting \"%s\" in \"Order actions\"."
 msgstr ""
 
@@ -686,6 +715,7 @@ msgstr ""
 
 #. Translators: %s: Tag name.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:160
+#, php-format
 msgid "Without the %s tag."
 msgstr ""
 
@@ -695,6 +725,7 @@ msgstr ""
 
 #. Translators: %1$s: Directory path, %2$s: File path example.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:173
+#, php-format
 msgid "File paths in %1$s, e.g.: %2$s"
 msgstr ""
 
@@ -801,6 +832,7 @@ msgstr ""
 
 #. Translators: %1$s: Order option examples, %2$s: Order option examples.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:385
+#, php-format
 msgid "Logical operator for the \"Order Options\" section, for example: %1$s vs %2$s."
 msgstr ""
 
@@ -818,6 +850,7 @@ msgstr ""
 
 #. Translators: %1$s: Placeholder examples, %2$s: Placeholder examples.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:406
+#, php-format
 msgid "You can use shortcodes here, e.g., %1$s (Name fields) or %2$s (Address fields)."
 msgstr ""
 
@@ -847,6 +880,7 @@ msgstr ""
 
 #. Translators: %s: "Send email" option title.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:451
+#, php-format
 msgid "This will add \"%s\" option to the selected positions."
 msgstr ""
 
@@ -880,6 +914,7 @@ msgstr ""
 
 #. Translators: %s: Customer email placeholder.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:492
+#, php-format
 msgid "Excludes recipient email addresses. For example, if you are using the `%s` placeholder for the recipient, you may want to block some email addresses from getting the email."
 msgstr ""
 
@@ -889,6 +924,7 @@ msgstr ""
 
 #. Translators: %1$s: Wildcard symbol, %2$s: Example.
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:499
+#, php-format
 msgid "Separate emails with a comma or with a new line. You can also use wildcard (%1$s) here, for example: %2$s"
 msgstr ""
 
@@ -918,11 +954,13 @@ msgstr ""
 
 #. Translators: %s: Order number placeholder.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:78
+#, php-format
 msgid "Order %s"
 msgstr ""
 
 #. Translators: %1$s: Site title placeholder, %2$s: Order number placeholder, %3$s: Order date placeholder.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:92
+#, php-format
 msgid "[%1$s] Order (%2$s) - %3$s"
 msgstr ""
 
@@ -932,31 +970,37 @@ msgstr ""
 
 #. Translators: %s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:150
+#, php-format
 msgid "New order (%s)"
 msgstr ""
 
 #. Translators: %s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:155
+#, php-format
 msgid "Order status updated to %s"
 msgstr ""
 
 #. Translators: %s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:160
+#, php-format
 msgid "Renewal new order (%s)"
 msgstr ""
 
 #. Translators: %s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:165
+#, php-format
 msgid "Renewal order status updated to %s"
 msgstr ""
 
 #. Translators: %1$s: Status name, %2$s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:173
+#, php-format
 msgid "Order status %1$s to %2$s"
 msgstr ""
 
 #. Translators: %1$s: Status name, %2$s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:179
+#, php-format
 msgid "Renewal order status %1$s to %2$s"
 msgstr ""
 
@@ -1010,26 +1054,31 @@ msgstr ""
 
 #. Translators: %s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:209
+#, php-format
 msgid "Subscription status updated to %s"
 msgstr ""
 
 #. Translators: %1$s: Status name, %2$s: Status name.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:217
+#, php-format
 msgid "Subscription status %1$s to %2$s"
 msgstr ""
 
 #. Translators: %1$s: Plugin URL, %2$s: Placeholder list, %3$s: Style.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:256
+#, php-format
 msgid "You can use <a href=\"%1$s\" target=\"_blank\">shortcodes</a> or <span title=\"%2$s\" style=\"%3$s\">standard placeholders</span> here."
 msgstr ""
 
 #. Translators: %d: Product ID.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:387
+#, php-format
 msgid "Product #%d"
 msgstr ""
 
 #. Translators: %d: User ID.
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:391
+#, php-format
 msgid "User #%d"
 msgstr ""
 
@@ -1067,5 +1116,6 @@ msgstr ""
 
 #. Translators: %s: Plugin name.
 #: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:257
+#, php-format
 msgid "Created by the \"%s\" plugin"
 msgstr ""

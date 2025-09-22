@@ -1,9 +1,9 @@
 === Additional Custom Emails & Recipients for WooCommerce ===
-Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, aegkr
+Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,9 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.6.2 - 22/09/2025 =
+* WC tested up to: 10.2.
 
 = 3.6.1 - 23/06/2025 =
 * Dev - WPFactory Admin Menu - Library updated.
