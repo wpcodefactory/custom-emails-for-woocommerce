@@ -77,7 +77,11 @@ class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
 					delete_option( $id[0] );
 				}
 			}
-			add_action( 'admin_notices', array( $this, 'admin_notices_settings_reset_success' ), PHP_INT_MAX );
+			add_action(
+				'admin_notices',
+				array( $this, 'admin_notices_settings_reset_success' ),
+				PHP_INT_MAX
+			);
 		}
 	}
 
@@ -89,7 +93,8 @@ class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
 	 */
 	function admin_notices_settings_reset_success() {
 		echo '<div class="notice notice-success is-dismissible"><p><strong>' .
-			esc_html__( 'Your settings have been reset.', 'custom-emails-for-woocommerce' ) . '</strong></p></div>';
+			esc_html__( 'Your settings have been reset.', 'custom-emails-for-woocommerce' ) .
+		'</strong></p></div>';
 	}
 
 	/**

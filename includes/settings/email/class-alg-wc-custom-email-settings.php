@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 3.5.0
+ * @version 3.6.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -275,10 +275,13 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_shipping_zones.
 	 *
-	 * @version 2.2.0
+	 * @version 3.6.3
 	 * @since   2.2.0
 	 */
 	function get_shipping_zones( $include_empty_zone = true ) {
+		if ( empty( WC()->countries ) ) {
+			return array();
+		}
 		$zones = WC_Shipping_Zones::get_zones();
 		if ( $include_empty_zone ) {
 			$zone                                                = new WC_Shipping_Zone( 0 );

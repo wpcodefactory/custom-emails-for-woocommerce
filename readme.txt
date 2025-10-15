@@ -3,7 +3,7 @@ Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 3.6.2
+Stable tag: 3.6.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.6.3 - 15/10/2025 =
+* Fix - Possible "call to a member function `get_continents()`" PHP error fixed (in the `Alg_WC_Custom_Email_Settings` class).
+* Dev - WPFactory Recommendations - Library updated (to v1.0.6).
 
 = 3.6.2 - 22/09/2025 =
 * WC tested up to: 10.2.
