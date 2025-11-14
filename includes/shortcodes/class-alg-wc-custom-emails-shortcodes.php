@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.6.0
+ * @version 3.6.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -163,7 +163,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * translate.
 	 *
-	 * @version 3.6.0
+	 * @version 3.6.4
 	 * @since   1.7.0
 	 */
 	function translate( $atts, $content = '' ) {
@@ -214,7 +214,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 				)
 			) ?
 			'' :
-			wp_kses_post( $content )
+			wp_kses_post( do_shortcode( $content ) )
 		);
 
 	}

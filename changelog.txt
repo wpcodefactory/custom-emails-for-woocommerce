@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.6.4 - 14/11/2025 =
+* Dev - Shortcodes - `[translate]` - Apply shortcodes in the content.
+* WC tested up to: 10.3.
+
 = 3.6.3 - 15/10/2025 =
 * Fix - Possible "call to a member function `get_continents()`" PHP error fixed (in the `Alg_WC_Custom_Email_Settings` class).
 * Dev - WPFactory Recommendations - Library updated (to v1.0.6).

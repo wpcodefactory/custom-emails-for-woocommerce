@@ -3,7 +3,7 @@ Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 3.6.3
+Stable tag: 3.6.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,7 +30,6 @@ Our customers really love this plugin, read the full description to learn about 
 * [**Plugin Main Page**](https://wpfactory.com/item/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 * [**Plugin Support Forum**](https://wpfactory.com/support/item/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme )
 * [**Documentation & How to**](https://wpfactory.com/docs/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme )
-
 
 ## 🚀 Main Features: FREE Version##
 
@@ -97,7 +96,6 @@ Thanks.” – ⭐⭐⭐⭐⭐ [vladimiryo](https://wordpress.org/support/topic/
 
 With our pro version you will have unlimited access to all of our custom emails and custom triggers so you can send your customers as many amount of emails as you want with any type of trigger you can imagine.
 
-
 ## 💯 Why WPFactory?##
 
 * **Experience You Can Trust:** Over a decade in the business
@@ -112,7 +110,6 @@ ___
 If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience.
 
 Dive in and discover more tools to empower your WooCommerce Store!
-
 
 * [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Define a min max, step and default quantity for products, show a dropdown, quantities on archive/categories pages, use decimal quantities, and much more on WooCommerce stores (**[Try our Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Try our Free version")**)
 
@@ -145,6 +142,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.6.4 - 14/11/2025 =
+* Dev - Shortcodes - `[translate]` - Apply shortcodes in the content.
+* WC tested up to: 10.3.
 
 = 3.6.3 - 15/10/2025 =
 * Fix - Possible "call to a member function `get_continents()`" PHP error fixed (in the `Alg_WC_Custom_Email_Settings` class).
