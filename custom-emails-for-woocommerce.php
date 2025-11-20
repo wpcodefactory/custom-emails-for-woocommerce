@@ -3,7 +3,7 @@
 Plugin Name: Additional Custom Emails & Recipients for WooCommerce
 Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
 Description: Add custom emails to WooCommerce.
-Version: 3.6.4
+Version: 3.6.5
 Author: WPFactory
 Author URI: https://wpfactory.com
 Requires at least: 4.4
@@ -37,7 +37,7 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '3.6.4' );
+defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '3.6.5' );
 
 defined( 'ALG_WC_CUSTOM_EMAILS_FILE' ) || define( 'ALG_WC_CUSTOM_EMAILS_FILE', __FILE__ );
 

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.6.4\n"
+"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.6.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-14T10:32:48+00:00\n"
+"POT-Creation-Date: 2025-11-20T17:13:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: custom-emails-for-woocommerce.php
 #: includes/class-alg-wc-custom-emails.php:246
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:258
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:288
 msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
@@ -188,18 +188,18 @@ msgstr ""
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:244
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:266
 #: includes/classes/class-alg-wc-custom-email-order-validator.php:288
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:421
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:443
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:498
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:520
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:542
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:564
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:586
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:608
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:630
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:652
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:674
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:696
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:422
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:444
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:499
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:521
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:543
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:565
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:587
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:609
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:631
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:653
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:675
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:697
 msgid "%1$s: Blocked by the \"%2$s\" option."
 msgstr ""
 
@@ -237,51 +237,51 @@ msgstr ""
 msgid "Exclude user roles"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:423
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:424
 msgid "Require order payment gateways"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:445
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:446
 msgid "Exclude order payment gateways"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:500
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:501
 msgid "Require order shipping methods"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:522
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:523
 msgid "Exclude order shipping methods"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:544
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:545
 msgid "Require order products"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:566
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:567
 msgid "Exclude order products"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:588
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:589
 msgid "Require order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:610
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:611
 msgid "Exclude order product categories"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:632
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:633
 msgid "Require order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:654
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:655
 msgid "Exclude order product tags"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:676
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:677
 msgid "Minimum order amount"
 msgstr ""
 
-#: includes/classes/class-alg-wc-custom-email-order-validator.php:698
+#: includes/classes/class-alg-wc-custom-email-order-validator.php:699
 msgid "Maximum order amount"
 msgstr ""
 
@@ -1066,6 +1066,6 @@ msgid "Refunded order"
 msgstr ""
 
 #. Translators: %s: Plugin name.
-#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:257
+#: includes/shortcodes/class-alg-wc-custom-emails-shortcodes.php:287
 msgid "Created by the \"%s\" plugin"
 msgstr ""

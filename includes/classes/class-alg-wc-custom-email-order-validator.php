@@ -305,6 +305,7 @@ class Alg_WC_Custom_Email_Order_Validator {
 	 * @see     https://wpml.org/wpml-hook/wpml_active_languages/
 	 * @see     https://polylang.pro/doc/function-reference/
 	 *
+	 * @todo    (v3.6.5) WPML: `wpml_language` or `wpml_languages`?
 	 * @todo    (dev) `ICL_LANGUAGE_CODE`?
 	 */
 	function get_order_wpml_language( $order ) {
