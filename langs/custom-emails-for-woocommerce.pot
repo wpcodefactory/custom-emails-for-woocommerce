@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.6.5\n"
+"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.6.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-20T17:13:44+00:00\n"
+"POT-Creation-Date: 2025-11-23T22:27:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
@@ -41,66 +41,66 @@ msgstr ""
 msgid "https://wpfactory.com"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:133
-#: includes/pro/class-alg-wc-custom-emails-pro.php:157
+#: includes/class-alg-wc-custom-emails-admin.php:159
+#: includes/pro/class-alg-wc-custom-emails-pro.php:208
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:157
-#: includes/pro/class-alg-wc-custom-emails-pro.php:111
+#: includes/class-alg-wc-custom-emails-admin.php:183
+#: includes/pro/class-alg-wc-custom-emails-pro.php:162
 msgid "Invalid user role."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:161
-#: includes/pro/class-alg-wc-custom-emails-pro.php:107
+#: includes/class-alg-wc-custom-emails-admin.php:187
+#: includes/pro/class-alg-wc-custom-emails-pro.php:158
 msgid "Invalid nonce."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:237
-#: includes/class-alg-wc-custom-emails-admin.php:239
+#: includes/class-alg-wc-custom-emails-admin.php:263
+#: includes/class-alg-wc-custom-emails-admin.php:265
 msgid "Shortcodes"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:406
-#: includes/pro/class-alg-wc-custom-emails-pro.php:363
+#: includes/class-alg-wc-custom-emails-admin.php:432
+#: includes/pro/class-alg-wc-custom-emails-pro.php:444
 msgid "bulk actions"
 msgstr ""
 
 #. Translators: %1$s: Custom email title, %2$d: Number of orders.
-#: includes/class-alg-wc-custom-emails-admin.php:426
+#: includes/class-alg-wc-custom-emails-admin.php:452
 msgid "Emails: \"%1$s\" sent for %2$d orders."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:453
-#: includes/pro/class-alg-wc-custom-emails-pro.php:378
+#: includes/class-alg-wc-custom-emails-admin.php:479
+#: includes/pro/class-alg-wc-custom-emails-pro.php:459
 msgid "manually"
 msgstr ""
 
 #. Translators: %s: Custom email title.
 #. Translators: %s: Email title.
-#: includes/class-alg-wc-custom-emails-admin.php:466
-#: includes/class-alg-wc-custom-emails-admin.php:483
-#: includes/class-alg-wc-custom-emails-admin.php:548
-#: includes/class-alg-wc-custom-emails-admin.php:601
-#: includes/pro/class-alg-wc-custom-emails-pro.php:309
-#: includes/pro/class-alg-wc-custom-emails-pro.php:343
-#: includes/pro/class-alg-wc-custom-emails-pro.php:396
-#: includes/pro/class-alg-wc-custom-emails-pro.php:418
+#: includes/class-alg-wc-custom-emails-admin.php:492
+#: includes/class-alg-wc-custom-emails-admin.php:509
+#: includes/class-alg-wc-custom-emails-admin.php:574
+#: includes/class-alg-wc-custom-emails-admin.php:627
+#: includes/pro/class-alg-wc-custom-emails-pro.php:390
+#: includes/pro/class-alg-wc-custom-emails-pro.php:424
+#: includes/pro/class-alg-wc-custom-emails-pro.php:477
+#: includes/pro/class-alg-wc-custom-emails-pro.php:499
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:143
 #: includes/settings/email/class-alg-wc-custom-email-settings-fields.php:454
 msgid "Send email: %s"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:507
-#: includes/class-alg-wc-custom-emails-admin.php:573
+#: includes/class-alg-wc-custom-emails-admin.php:533
+#: includes/class-alg-wc-custom-emails-admin.php:599
 msgid "Link has expired."
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:510
+#: includes/class-alg-wc-custom-emails-admin.php:536
 msgid "order actions column"
 msgstr ""
 
-#: includes/class-alg-wc-custom-emails-admin.php:576
+#: includes/class-alg-wc-custom-emails-admin.php:602
 msgid "order preview"
 msgstr ""
 
@@ -370,23 +370,23 @@ msgstr ""
 msgid "Exclude recipients"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:158
+#: includes/pro/class-alg-wc-custom-emails-pro.php:209
 msgid "Move to Trash"
 msgstr ""
 
 #. Translators: %d: Email ID.
-#: includes/pro/class-alg-wc-custom-emails-pro.php:217
+#: includes/pro/class-alg-wc-custom-emails-pro.php:268
 msgid "Admin title #%d"
 msgstr ""
 
-#: includes/pro/class-alg-wc-custom-emails-pro.php:223
+#: includes/pro/class-alg-wc-custom-emails-pro.php:274
 #: includes/settings/class-alg-wc-custom-emails-settings-general.php:78
 msgid "settings"
 msgstr ""
 
 #. Translators: %d: Email ID.
 #. Translators: %d: Custom email ID.
-#: includes/pro/class-alg-wc-custom-emails-pro.php:228
+#: includes/pro/class-alg-wc-custom-emails-pro.php:279
 #: includes/settings/class-alg-wc-custom-emails-settings-scheduled.php:102
 #: includes/settings/email/class-alg-wc-custom-email-settings.php:50
 msgid "Custom email #%d"

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Admin Class
  *
- * @version 3.6.0
+ * @version 3.6.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_Custom_Emails_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.6.0
+	 * @version 3.6.6
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -61,6 +61,32 @@ class Alg_WC_Custom_Emails_Admin {
 			'admin_notices',
 			array( $this, 'bulk_action_admin_notice' )
 		);
+
+		// Subscriptions > Bulk actions (dropdown)
+		if ( class_exists( 'WC_Subscriptions' ) ) {
+			add_filter(
+				'bulk_actions-edit-shop_subscription',
+				array( $this, 'add_order_actions_bulk' ),
+				20
+			);
+			add_filter(
+				'bulk_actions-woocommerce_page_wc-orders--shop_subscription',
+				array( $this, 'add_order_actions_bulk' ),
+				20
+			);
+			add_filter(
+				'handle_bulk_actions-edit-shop_subscription',
+				array( $this, 'do_order_actions_bulk' ),
+				10,
+				3
+			);
+			add_filter(
+				'handle_bulk_actions-woocommerce_page_wc-orders--shop_subscription',
+				array( $this, 'do_order_actions_bulk' ),
+				10,
+				3
+			);
+		}
 
 		// Orders > Preview
 		add_filter(

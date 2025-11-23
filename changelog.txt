@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 3.6.6 - 23/11/2025 =
+* Dev - Admin Options - Admin actions - Orders > Bulk actions - WooCommerce Subscriptions compatibility.
+
+= 3.6.5 - 20/11/2025 =
+* Dev - Shortcodes - `[translate]` - Get WPML and Polylang order language.
+
 = 3.6.4 - 14/11/2025 =
 * Dev - Shortcodes - `[translate]` - Apply shortcodes in the content.
 * WC tested up to: 10.3.
