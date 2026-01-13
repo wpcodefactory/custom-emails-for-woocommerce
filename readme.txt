@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
-Tested up to: 6.8
-Stable tag: 3.6.6
+Tested up to: 6.9
+Stable tag: 3.6.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,7 +29,7 @@ Our customers really love this plugin, read the full description to learn about 
 #### Useful Links ####
 * [**Plugin Main Page**](https://wpfactory.com/item/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 * [**Plugin Support Forum**](https://wpfactory.com/support/item/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme )
-* [**Documentation & How to**](https://wpfactory.com/docs/custom-emails-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme )
+* [**Documentation & How to**](https://wpfactory.com/docs/additional-custom-emails-recipients/?utm_source=wporg&utm_medium=organic&utm_campaign=readme )
 
 ## 🚀 Main Features: FREE Version##
 
@@ -142,6 +142,12 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.6.7 - 13/01/2026 =
+* Fix - Admin settings - "Shortcodes" link fixed.
+* Fix - Readme.txt - "Documentation & How to" link fixed.
+* Tested up to: 6.9.
+* WC tested up to: 10.4.
 
 = 3.6.6 - 23/11/2025 =
 * Dev - Admin Options - Admin actions - Orders > Bulk actions - WooCommerce Subscriptions compatibility.
