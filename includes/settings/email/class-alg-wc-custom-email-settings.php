@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 3.6.7
+ * @version 3.6.8
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -448,7 +448,11 @@ class Alg_WC_Custom_Email_Settings {
 		global $wp_roles;
 		return array_merge(
 			array( 'alg_wc_ce_guest' => __( 'No role (guest)', 'custom-emails-for-woocommerce' ) ),
-			( ! empty( $wp_roles->roles ) ? wp_list_pluck( apply_filters( 'editable_roles', $wp_roles->roles ), 'name' ) : array() )
+			(
+				! empty( $wp_roles->roles ) ?
+				wp_list_pluck( apply_filters( 'editable_roles', $wp_roles->roles ), 'name' ) : // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+				array()
+			)
 		);
 	}
 
@@ -489,7 +493,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 2.9.9
+	 * @version 3.6.8
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) load this in admin only (see `get_ajax_options()`)?
@@ -502,7 +506,7 @@ class Alg_WC_Custom_Email_Settings {
 	 */
 	function get_form_fields( $email ) {
 		$fields = array();
-		require( 'class-alg-wc-custom-email-settings-fields.php' );
+		require plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-email-settings-fields.php';
 		return $fields;
 	}
 

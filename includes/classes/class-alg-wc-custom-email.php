@@ -208,7 +208,7 @@ class Alg_WC_Custom_Email extends WC_Email {
 		}
 
 		// Apply filters
-		return apply_filters( 'woocommerce_email_attachments', $attachments, $this->id, $this->object, $this );
+		return apply_filters( 'woocommerce_email_attachments', $attachments, $this->id, $this->object, $this ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 	}
 

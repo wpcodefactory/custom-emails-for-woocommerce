@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 3.5.0
+ * @version 3.6.8
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.5.0
+	 * @version 3.6.8
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -174,6 +174,22 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 					'</a>'
 				),
 				'id'       => 'alg_wc_custom_emails_debug_enabled',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Delete plugin data', 'custom-emails-for-woocommerce' ),
+				'desc'     => (
+					'<span style="color:red;"><strong>' .
+						__( 'Delete', 'custom-emails-for-woocommerce' ) .
+					'</strong></span>'
+				),
+				'desc_tip' => (
+					__( 'This will delete all plugin data, including all custom email settings.', 'custom-emails-for-woocommerce' ) . ' ' .
+					__( 'Please note that there is no undo for this action.', 'custom-emails-for-woocommerce' ) . ' ' .
+					__( 'Check the box and save changes to delete.', 'custom-emails-for-woocommerce' )
+				),
+				'id'       => 'alg_wc_custom_emails_delete_plugin_data',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

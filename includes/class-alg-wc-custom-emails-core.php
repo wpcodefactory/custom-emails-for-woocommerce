@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.6.0
+ * @version 3.6.8
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.6.0
+	 * @version 3.6.8
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -114,9 +114,50 @@ class Alg_WC_Custom_Emails_Core {
 			2
 		);
 
+		// Delete plugin data
+		add_action(
+			'alg_wc_custom_emails_settings_saved',
+			array( $this, 'maybe_delete_plugin_data' )
+		);
+
 		// Core loaded
 		do_action( 'alg_wc_custom_emails_core_loaded', $this );
 
+	}
+
+	/**
+	 * maybe_delete_plugin_data.
+	 *
+	 * @version 3.6.8
+	 * @since   3.6.8
+	 *
+	 * @todo    (v3.6.8) add admin notice?
+	 */
+	function maybe_delete_plugin_data() {
+		if ( 'yes' === get_option( 'alg_wc_custom_emails_delete_plugin_data', 'no' ) ) {
+			$this->delete_all_plugin_options();
+			wp_safe_redirect( add_query_arg( array() ) );
+			exit();
+		}
+	}
+
+	/**
+	 * delete_all_plugin_options.
+	 *
+	 * @version 3.6.8
+	 * @since   3.6.8
+	 */
+	function delete_all_plugin_options() {
+		global $wpdb;
+		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			"
+			DELETE FROM {$wpdb->prefix}options
+			WHERE
+				option_name = 'alg_wc_ce_trashed' OR
+				option_name LIKE 'alg_wc_custom_emails_%' OR
+				option_name LIKE 'woocommerce_alg_wc_custom_%'
+			"
+		);
 	}
 
 	/**

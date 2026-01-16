@@ -30,5 +30,5 @@ if ( $email->alg_wc_ce_do_add_header_and_footer() ) {
 	/**
 	 * Footer.
 	 */
-	echo wp_kses_post( apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) ) );
+	echo wp_kses_post( apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 }

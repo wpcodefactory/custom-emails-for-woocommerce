@@ -10,6 +10,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Enable/Disable
 $fields = array_merge( $fields, array(
 	'enabled' => array(
@@ -68,7 +70,7 @@ $fields = array_merge( $fields, array(
 ) );
 
 // Email Data
-$wpml_active_languages = apply_filters( 'wpml_active_languages', null );
+$wpml_active_languages = apply_filters( 'wpml_active_languages', null ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 $fields = array_merge( $fields, array(
 	'data_options' => array(
 		'title'       => __( 'Email Data', 'custom-emails-for-woocommerce' ),
@@ -535,3 +537,5 @@ $fields = array_merge( $fields, array(
 		'default'     => 'no',
 	),
 ) );
+
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 3.6.8 - 16/01/2026 =
+* Dev - General - "Delete plugin data" tool added.
+* Dev - Developers - `alg_wc_custom_emails_settings_saved` action added.
+* Dev - Coding standards improved.
+
 = 3.6.7 - 13/01/2026 =
 * Fix - Admin settings - "Shortcodes" link fixed.
 * Fix - Readme.txt - "Documentation & How to" link fixed.
