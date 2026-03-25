@@ -143,6 +143,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 == Changelog ==
 
+= 3.6.9 - 25/03/2026 =
+* Fix - Fixed the Email Preview that was incorrectly showing always the last custom email.
+* WC tested up to: 10.6.
+
 = 3.6.8 - 16/01/2026 =
 * Dev - General - "Delete plugin data" tool added.
 * Dev - Developers - `alg_wc_custom_emails_settings_saved` action added.

@@ -2,7 +2,7 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.6.8
+ * @version 3.6.9
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -408,7 +408,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_emails.
 	 *
-	 * @version 3.5.0
+	 * @version 3.6.9
 	 * @since   1.0.0
 	 */
 	function add_custom_emails( $emails ) {
@@ -419,6 +419,13 @@ class Alg_WC_Custom_Emails_Core {
 
 		if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) {
 			require_once plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email.php';
+		}
+
+		// Pro: load distinct subclasses for extra custom emails so WooCommerce
+		// Email Preview can map each email type by unique get_class() values.
+		$subclasses_file = plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email-subclasses.php';
+		if ( file_exists( $subclasses_file ) ) {
+			require_once $subclasses_file;
 		}
 
 		$emails['Alg_WC_Custom_Email'] = new Alg_WC_Custom_Email();
