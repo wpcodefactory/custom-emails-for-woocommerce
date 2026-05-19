@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.7.1 - 19/05/2026 =
+* Tested up to: 7.0.
+* WC tested up to: 10.7.
+
 = 3.7.0 - 25/03/2026 =
 * Dev - Improved release mechanism.
 
