@@ -1,5 +1,18 @@
 == Changelog ==
 
+= 3.7.3 - 19/06/2026 =
+* Dev - Security - Shortcodes - Output escaped.
+* Dev - Security - Send order email - User capability checks added.
+* Dev - Prefixes updated (from `alg` to `wpfactory`).
+* Dev - All CSS and JS moved to external files.
+* Dev - `woocommerce` text domain updated.
+* Dev - WPFactory Admin Menu - Library updated (to v1.1.1).
+* Dev - WPFactory Cross-Selling - Library updated (to v1.1.2).
+* Dev - WPFactory Key Manager - Library updated (to v1.0.8).
+* Dev - `wpfactory_wc_custom_emails_shortcode_product_func` filter added.
+* Dev - `wpfactory_wc_custom_emails_shortcode_order_func` filter added.
+* Dev - Code refactoring.
+
 = 3.7.2 - 01/06/2026 =
 * Dev - Move custom email subclasses code to the Pro version.
 * WC tested up to: 10.8.

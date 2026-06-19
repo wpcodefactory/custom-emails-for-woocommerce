@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - Core Class
  *
- * @version 3.7.2
+ * @version 3.7.3
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Core' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Core' ) ) :
 
-class Alg_WC_Custom_Emails_Core {
+class WPFactory_WC_Custom_Emails_Core {
 
 	/**
 	 * do_debug.
@@ -49,7 +49,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.6.8
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to conditionally disable some standard WC emails (e.g., "order completed" email, etc.)?
@@ -58,9 +58,9 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Properties
 		$this->do_debug           = ( 'yes' === get_option( 'alg_wc_custom_emails_debug_enabled', 'no' ) );
-		$this->email_settings     = require_once plugin_dir_path( __FILE__ ) . 'settings/email/class-alg-wc-custom-email-settings.php';
-		$this->shortcodes         = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes.php';
-		$this->general_shortcodes = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-alg-wc-custom-emails-shortcodes-general.php';
+		$this->email_settings     = require_once plugin_dir_path( __FILE__ ) . 'settings/email/class-wpfactory-wc-custom-email-settings.php';
+		$this->shortcodes         = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-wpfactory-wc-custom-emails-shortcodes.php';
+		$this->general_shortcodes = require_once plugin_dir_path( __FILE__ ) . 'shortcodes/class-wpfactory-wc-custom-emails-shortcodes-general.php';
 
 		// Email classes
 		add_filter(
@@ -76,7 +76,7 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Delayed emails
 		add_action(
-			'alg_wc_custom_emails_send_email',
+			'wpfactory_wc_custom_emails_send_email',
 			array( $this, 'send_delayed_email' ),
 			10,
 			2
@@ -93,7 +93,7 @@ class Alg_WC_Custom_Emails_Core {
 		// User address changed
 		add_action(
 			'woocommerce_after_save_address_validation',
-			array( $this, 'alg_wc_ce_user_address_changed' ),
+			array( $this, 'user_address_changed' ),
 			10,
 			4
 		);
@@ -101,7 +101,7 @@ class Alg_WC_Custom_Emails_Core {
 		// Product published
 		add_action(
 			'transition_post_status',
-			array( $this, 'alg_wc_ce_product_published' ),
+			array( $this, 'product_published' ),
 			10,
 			3
 		);
@@ -116,12 +116,12 @@ class Alg_WC_Custom_Emails_Core {
 
 		// Delete plugin data
 		add_action(
-			'alg_wc_custom_emails_settings_saved',
+			'wpfactory_wc_custom_emails_settings_saved',
 			array( $this, 'maybe_delete_plugin_data' )
 		);
 
 		// Core loaded
-		do_action( 'alg_wc_custom_emails_core_loaded', $this );
+		do_action( 'wpfactory_wc_custom_emails_core_loaded', $this );
 
 	}
 
@@ -201,23 +201,23 @@ class Alg_WC_Custom_Emails_Core {
 	 */
 	function store_api_checkout_update_order_from_request( $order, $request ) {
 		if ( ! $request->get_param( '__experimental_calc_totals' ) ) {
-			do_action( 'alg_wc_ce_store_api_checkout_update_order', $order );
+			do_action( 'alg_wc_ce_store_api_checkout_update_order', $order ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 	}
 
 	/**
-	 * alg_wc_ce_user_address_changed.
+	 * user_address_changed.
 	 *
-	 * @version 2.9.3
+	 * @version 3.7.3
 	 * @since   2.9.3
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/8.6.1/plugins/woocommerce/includes/class-wc-form-handler.php#L200
 	 *
 	 * @todo    (dev) run this only if `alg_wc_ce_user_address_changed` is in `$email->get_option( 'trigger' )` for at least one of the emails?
-	 * @todo    (feature) `alg_wc_ce_user_billing_address_changed` and `alg_wc_ce_user_shipping_address_changed`
+	 * @todo    (feature) `wpfactory_wc_ce_user_billing_address_changed` and `wpfactory_wc_ce_user_shipping_address_changed`
 	 * @todo    (feature) show "changes" (with a shortcode?)
 	 */
-	function alg_wc_ce_user_address_changed( $user_id, $address_type, $address, $customer ) {
+	function user_address_changed( $user_id, $address_type, $address, $customer ) {
 
 		if ( 0 < wc_notice_count( 'error' ) ) {
 			return;
@@ -225,35 +225,35 @@ class Alg_WC_Custom_Emails_Core {
 
 		$data_changes = ( $customer ? $customer->get_changes() : false );
 		if ( ! empty( $data_changes ) ) {
-			do_action( 'alg_wc_ce_user_address_changed', $user_id );
+			do_action( 'alg_wc_ce_user_address_changed', $user_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 
 	}
 
 	/**
-	 * alg_wc_ce_product_published.
+	 * product_published.
 	 *
-	 * @version 2.6.0
+	 * @version 3.7.3
 	 * @since   2.6.0
 	 *
 	 * @see     https://developer.wordpress.org/reference/hooks/transition_post_status/
 	 *
 	 * @todo    (dev) run this only if `alg_wc_ce_product_published` is in `$email->get_option( 'trigger' )` for at least one of the emails?
 	 */
-	function alg_wc_ce_product_published( $new_status, $old_status, $post ) {
+	function product_published( $new_status, $old_status, $post ) {
 		if (
 			'product' === $post->post_type &&
 			'publish' === $new_status &&
 			'publish' !== $old_status
 		) {
-			do_action( 'alg_wc_ce_product_published', $post->ID );
+			do_action( 'alg_wc_ce_product_published', $post->ID ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 	}
 
 	/**
 	 * locate_template.
 	 *
-	 * @version 2.4.0
+	 * @version 3.7.3
 	 * @since   2.4.0
 	 */
 	function locate_template( $template, $template_name, $template_path ) {
@@ -261,13 +261,13 @@ class Alg_WC_Custom_Emails_Core {
 			in_array(
 				$template_name,
 				array(
-					'emails/alg-wc-custom-email.php',
-					'emails/plain/alg-wc-custom-email.php'
+					'emails/wpfactory-wc-custom-email.php',
+					'emails/plain/wpfactory-wc-custom-email.php'
 				)
 			) &&
 			! file_exists( $template )
 		) {
-			return alg_wc_custom_emails()->plugin_path() . '/templates/' . $template_name;
+			return wpfactory_wc_custom_emails()->plugin_path() . '/templates/' . $template_name;
 		}
 		return $template;
 	}
@@ -277,7 +277,7 @@ class Alg_WC_Custom_Emails_Core {
 	 *
 	 * E.g., for attachments.
 	 *
-	 * @version 2.2.7
+	 * @version 3.7.3
 	 * @since   2.2.7
 	 */
 	function get_base_dir() {
@@ -290,7 +290,7 @@ class Alg_WC_Custom_Emails_Core {
 			default: // 'abspath'
 				$res = ABSPATH;
 		}
-		return apply_filters( 'alg_wc_custom_emails_base_dir', trailingslashit( $res ) );
+		return apply_filters( 'wpfactory_wc_custom_emails_base_dir', trailingslashit( $res ) );
 	}
 
 	/**
@@ -314,7 +314,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * send_delayed_email.
 	 *
-	 * @version 1.4.1
+	 * @version 3.7.3
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) better debug info
@@ -327,13 +327,29 @@ class Alg_WC_Custom_Emails_Core {
 				$email
 			)
 		);
-		$this->send_email( $email, $object_id, __( 'delayed', 'custom-emails-for-woocommerce' ) );
+
+		if ( 0 === strpos( $email, 'Alg_WC_Custom_Email' ) ) {
+			/**
+			 * @deprecated since 3.7.3, use `WPFactory_WC_Custom_Email`
+			 */
+			$email = str_replace(
+				'Alg_WC_Custom_Email',
+				'WPFactory_WC_Custom_Email',
+				$email
+			);
+		}
+
+		$this->send_email(
+			$email,
+			$object_id,
+			__( 'delayed', 'custom-emails-for-woocommerce' )
+		);
 	}
 
 	/**
 	 * send_email.
 	 *
-	 * @version 2.0.0
+	 * @version 3.7.3
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) what's with `WC()->payment_gateways()` and `WC()->shipping()`?
@@ -342,7 +358,7 @@ class Alg_WC_Custom_Emails_Core {
 		WC()->payment_gateways();
 		WC()->shipping();
 		if ( ! empty( WC()->mailer()->emails[ $email ] ) ) {
-			WC()->mailer()->emails[ $email ]->alg_wc_ce_send_email( $object_id, true, $note );
+			WC()->mailer()->emails[ $email ]->wpfactory_wc_ce_send_email( $object_id, true, $note );
 		}
 	}
 
@@ -408,24 +424,24 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * add_custom_emails.
 	 *
-	 * @version 3.7.2
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 */
 	function add_custom_emails( $emails ) {
 
-		if ( ! class_exists( 'Alg_WC_Custom_Email_Order_Validator' ) ) {
-			require_once plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email-order-validator.php';
+		if ( ! class_exists( 'WPFactory_WC_Custom_Email_Order_Validator' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . 'classes/class-wpfactory-wc-custom-email-order-validator.php';
 		}
 
-		if ( ! class_exists( 'Alg_WC_Custom_Email' ) ) {
-			require_once plugin_dir_path( __FILE__ ) . 'classes/class-alg-wc-custom-email.php';
+		if ( ! class_exists( 'WPFactory_WC_Custom_Email' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . 'classes/class-wpfactory-wc-custom-email.php';
 		}
 
-		do_action( 'alg_wc_custom_emails_before_add' );
+		do_action( 'wpfactory_wc_custom_emails_before_add' );
 
-		$emails['Alg_WC_Custom_Email'] = new Alg_WC_Custom_Email();
+		$emails['WPFactory_WC_Custom_Email'] = new WPFactory_WC_Custom_Email();
 
-		return apply_filters( 'alg_wc_custom_emails_add', $emails );
+		return apply_filters( 'wpfactory_wc_custom_emails_add', $emails );
 
 	}
 
@@ -532,7 +548,7 @@ class Alg_WC_Custom_Emails_Core {
 	/**
 	 * Generate shortcode list.
 	 *
-	 * @version 3.1.2
+	 * @version 3.7.3
 	 * @since   3.1.0
 	 */
 	function generate_shortcode_list_html( $shortcodes = array() ) {
@@ -540,12 +556,14 @@ class Alg_WC_Custom_Emails_Core {
 
 		$shortcodes = ! empty( $shortcodes ) ? $shortcodes : $default_shortcodes;
 
-		$html = '<div class="alg-wc-shortcode-list">';
+		$html = '<div class="wpfactory-wc-ce-shortcode-list">';
+
 		$html .= '<input' .
 			' type="text"' .
-			' class="alg-wc-shortcode-search"' .
+			' class="wpfactory-wc-ce-shortcode-search"' .
 			' placeholder="' . __( 'Search for a shortcode&hellip;', 'custom-emails-for-woocommerce' ) . '"' .
 		'>';
+
 		$html .= '<ul>';
 
 		foreach ( $shortcodes as $shortcode ) {
@@ -557,6 +575,7 @@ class Alg_WC_Custom_Emails_Core {
 		}
 
 		$html .= '</ul>';
+
 		$html .= '</div>';
 
 		return $html;
@@ -566,4 +585,4 @@ class Alg_WC_Custom_Emails_Core {
 
 endif;
 
-return new Alg_WC_Custom_Emails_Core();
+return new WPFactory_WC_Custom_Emails_Core();

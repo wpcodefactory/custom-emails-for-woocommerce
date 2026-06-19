@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - Custom Email Template - Plain Text
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/emails/plain/alg-wc-custom-email.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/emails/plain/wpfactory-wc-custom-email.php.
  *
- * @version 2.4.0
+ * @version 3.7.3
  * @since   2.4.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( $email->alg_wc_ce_do_add_header_and_footer() ) {
+if ( $email->wpfactory_wc_ce_do_add_header_and_footer() ) {
 	/**
 	 * Header.
 	 */
@@ -26,7 +26,7 @@ if ( $email->alg_wc_ce_do_add_header_and_footer() ) {
  */
 echo wp_kses_post( $content );
 
-if ( $email->alg_wc_ce_do_add_header_and_footer() ) {
+if ( $email->wpfactory_wc_ce_do_add_header_and_footer() ) {
 	/**
 	 * Footer.
 	 */

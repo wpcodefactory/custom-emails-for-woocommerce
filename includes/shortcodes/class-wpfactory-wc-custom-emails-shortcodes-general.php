@@ -2,22 +2,22 @@
 /**
  * Custom Emails for WooCommerce - General Shortcodes Class
  *
- * @version 3.6.0
+ * @version 3.7.3
  * @since   3.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Shortcodes_General' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Shortcodes_General' ) ) :
 
-class Alg_WC_Custom_Emails_Shortcodes_General {
+class WPFactory_WC_Custom_Emails_Shortcodes_General {
 
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.6.0
+	 * @version 3.7.3
 	 * @since   3.0.0
 	 */
 	function __construct() {
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Shortcodes_General {
 			'site_address',
 		);
 
-		$prefix = apply_filters( 'alg_wc_custom_emails_shortcode_prefix', '' );
+		$prefix = apply_filters( 'wpfactory_wc_custom_emails_shortcode_prefix', '' );
 
 		foreach ( $shortcodes as $shortcode ) {
 			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
@@ -40,21 +40,25 @@ class Alg_WC_Custom_Emails_Shortcodes_General {
 	/**
 	 * site_title.
 	 *
-	 * @version 3.0.0
+	 * @version 3.7.3
 	 * @since   1.0.0
+	 *
+	 * @todo    (v3.7.3) use `esc_html()` instead of `wp_kses_post()`?
 	 */
 	function site_title( $atts, $content = '' ) {
-		return wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		return wp_kses_post( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) );
 	}
 
 	/**
 	 * site_address.
 	 *
-	 * @version 3.0.0
+	 * @version 3.7.3
 	 * @since   1.0.0
+	 *
+	 * @todo    (v3.7.3) use `esc_url()` instead of `wp_kses_post()`?
 	 */
 	function site_address( $atts, $content = '' ) {
-		return wp_parse_url( home_url(), PHP_URL_HOST );
+		return wp_kses_post( wp_parse_url( home_url(), PHP_URL_HOST ) );
 	}
 
 	/**
@@ -70,26 +74,37 @@ class Alg_WC_Custom_Emails_Shortcodes_General {
 	/**
 	 * if.
 	 *
-	 * @version 2.6.1
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
+	 * @todo    (v3.7.3) make sure `wp_kses_post()` is ok?
 	 * @todo    (dev) rename the function to `shortcode_if`?
 	 */
 	function if( $atts, $content = '' ) {
 
-		if ( ! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) || '' === $content ) {
+		if (
+			! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) ||
+			'' === $content
+		) {
 			return '';
 		}
 
 		$value1 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value1'] ) );
 		$value2 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value2'] ) );
 
-		if ( isset( $atts['case_insensitive'] ) && filter_var( $atts['case_insensitive'], FILTER_VALIDATE_BOOLEAN ) ) {
+		if (
+			isset( $atts['case_insensitive'] ) &&
+			filter_var( $atts['case_insensitive'], FILTER_VALIDATE_BOOLEAN )
+		) {
 			$value1 = strtolower( $value1 );
 			$value2 = strtolower( $value2 );
 		}
 
-		return ( $this->eval_operator( $value1, $atts['operator'], $value2 ) ? do_shortcode( $content ) : '' );
+		return (
+			$this->eval_operator( $value1, $atts['operator'], $value2 ) ?
+			wp_kses_post( do_shortcode( $content ) ) :
+			''
+		);
 
 	}
 
@@ -129,4 +144,4 @@ class Alg_WC_Custom_Emails_Shortcodes_General {
 
 endif;
 
-return new Alg_WC_Custom_Emails_Shortcodes_General();
+return new WPFactory_WC_Custom_Emails_Shortcodes_General();

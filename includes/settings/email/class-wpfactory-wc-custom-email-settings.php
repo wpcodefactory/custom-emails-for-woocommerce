@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - Email Settings Class
  *
- * @version 3.6.8
+ * @version 3.7.3
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Email_Settings' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Email_Settings' ) ) :
 
-class Alg_WC_Custom_Email_Settings {
+class WPFactory_WC_Custom_Email_Settings {
 
 	/**
 	 * terms.
@@ -117,12 +117,12 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_triggers.
 	 *
-	 * @version 3.5.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_ce_product_published_notification`: `woocommerce_new_product`?
 	 * @todo    (dev) `renewal`: are we sure all of them exist?
-	 * @todo    (dev) `renewal`: `woocommerce_new_order_renewal_notification_alg_wc_ce_any`?
+	 * @todo    (dev) `renewal`: `woocommerce_new_order_renewal_notification_wpfactory_wc_ce_any`?
 	 * @todo    (dev) `renewal`: only add if `WC_Subscriptions` class exist?
 	 */
 	function get_triggers() {
@@ -224,14 +224,14 @@ class Alg_WC_Custom_Email_Settings {
 
 		// Filter enabled trigger groups
 		$enabled_triggers       = array();
-		$all_trigger_groups     = alg_wc_custom_emails()->core->get_trigger_groups();
+		$all_trigger_groups     = wpfactory_wc_custom_emails()->core->get_trigger_groups();
 		$enabled_trigger_groups = get_option( 'alg_wc_custom_emails_enabled_trigger_groups', array( 'order_status', 'order_status_change', 'new_order', 'extra' ) );
 		foreach ( $enabled_trigger_groups as $trigger_group ) {
 			$enabled_triggers[ $all_trigger_groups[ $trigger_group ] ] = $triggers[ $trigger_group ];
 		}
 
 		// Custom triggers
-		foreach ( alg_wc_custom_emails()->core->get_custom_triggers() as $custom_trigger_action => $custom_trigger_title ) {
+		foreach ( wpfactory_wc_custom_emails()->core->get_custom_triggers() as $custom_trigger_action => $custom_trigger_title ) {
 			$triggers['custom_triggers'][ $custom_trigger_action . '_notification' ] = $custom_trigger_title;
 		}
 		if ( ! empty( $triggers['custom_triggers'] ) ) {
@@ -331,7 +331,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_ajax_options.
 	 *
-	 * @version 2.9.8
+	 * @version 3.7.3
 	 * @since   1.7.1
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/6.3.1/plugins/woocommerce/includes/class-wc-ajax.php#L1569
@@ -405,7 +405,7 @@ class Alg_WC_Custom_Email_Settings {
 					case 'customer':
 						$res = sprintf(
 							/* translators: $1: customer name, $2 customer id, $3: customer email */
-							esc_html__( '%1$s (#%2$s &ndash; %3$s)', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+							esc_html__( '%1$s (#%2$s &ndash; %3$s)', 'custom-emails-for-woocommerce' ),
 							$obj->get_first_name() . ' ' . $obj->get_last_name(),
 							$obj->get_id(),
 							$obj->get_email()
@@ -426,15 +426,15 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_copy_emails_option.
 	 *
-	 * @version 1.7.2
+	 * @version 3.7.3
 	 * @since   1.7.2
 	 */
 	function get_copy_emails_option( $email ) {
-		$copy_emails = apply_filters( 'alg_wc_custom_email_settings_copy', array(
+		$copy_emails = apply_filters( 'wpfactory_wc_custom_email_settings_copy', array(
 			0 => __( 'Select an email&hellip;', 'custom-emails-for-woocommerce' ),
-			1 => alg_wc_custom_emails()->core->email_settings->get_title( 1 ),
+			1 => wpfactory_wc_custom_emails()->core->email_settings->get_title( 1 ),
 		) );
-		unset( $copy_emails[ $email->alg_wc_ce_id ] );
+		unset( $copy_emails[ $email->wpfactory_wc_ce_id ] );
 		return ( count( $copy_emails ) > 1 ? $copy_emails : false );
 	}
 
@@ -459,13 +459,13 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_stop_emails.
 	 *
-	 * @version 2.7.3
+	 * @version 3.7.3
 	 * @since   2.7.3
 	 *
 	 * @todo    (dev) add all emails, e.g., subscriptions (`wp_list_pluck( WC()->mailer()->emails, 'title', 'id' )`)
 	 */
 	function get_stop_emails() {
-		return apply_filters( 'alg_wc_custom_emails_stop_emails_list', array(
+		return apply_filters( 'wpfactory_wc_custom_emails_stop_emails_list', array(
 			'new_order'                 => __( 'New order', 'custom-emails-for-woocommerce' ),
 			'cancelled_order'           => __( 'Cancelled order', 'custom-emails-for-woocommerce' ),
 			'failed_order'              => __( 'Failed order', 'custom-emails-for-woocommerce' ),
@@ -493,7 +493,7 @@ class Alg_WC_Custom_Email_Settings {
 	/**
 	 * get_form_fields.
 	 *
-	 * @version 3.6.8
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) load this in admin only (see `get_ajax_options()`)?
@@ -506,7 +506,7 @@ class Alg_WC_Custom_Email_Settings {
 	 */
 	function get_form_fields( $email ) {
 		$fields = array();
-		require plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-email-settings-fields.php';
+		require plugin_dir_path( __FILE__ ) . 'wpfactory-wc-custom-email-settings-fields.php';
 		return $fields;
 	}
 
@@ -514,4 +514,4 @@ class Alg_WC_Custom_Email_Settings {
 
 endif;
 
-return new Alg_WC_Custom_Email_Settings();
+return new WPFactory_WC_Custom_Email_Settings();

@@ -2,10 +2,10 @@
 /**
  * Custom Emails for WooCommerce - Email Settings - Fields
  *
- * @version 3.6.0
+ * @version 3.7.3
  * @since   3.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,9 +15,9 @@ defined( 'ABSPATH' ) || exit;
 // Enable/Disable
 $fields = array_merge( $fields, array(
 	'enabled' => array(
-		'title'       => __( 'Enable/Disable', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'title'       => __( 'Enable/Disable', 'custom-emails-for-woocommerce' ),
 		'type'        => 'checkbox',
-		'label'       => __( 'Enable this email notification', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'label'       => __( 'Enable this email notification', 'custom-emails-for-woocommerce' ),
 		'default'     => 'yes',
 	),
 ) );
@@ -51,7 +51,7 @@ $fields = array_merge( $fields, array(
 		'description'       => sprintf(
 			/* Translators: %1$s: Settings page URL, %2$s: Settings page path. */
 			__( 'Scheduled emails will be listed in <a href="%1$s">%2$s</a>.', 'custom-emails-for-woocommerce' ),
-			admin_url( 'admin.php?page=wc-settings&tab=alg_wc_custom_emails&section=scheduled' ),
+			admin_url( 'admin.php?page=wc-settings&tab=wpfactory_wc_custom_emails&section=scheduled' ),
 			__( 'WPFactory > Custom Emails > Scheduled', 'custom-emails-for-woocommerce' )
 		),
 		'type'              => 'select',
@@ -82,7 +82,7 @@ $fields = array_merge( $fields, array(
 		'description' => (
 			sprintf(
 				/* Translators: %s: Admin email. */
-				__( 'Enter recipients (comma separated) for this email. Defaults to %s.', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+				__( 'Enter recipients (comma separated) for this email. Defaults to %s.', 'custom-emails-for-woocommerce' ),
 				'<code>' . esc_attr( get_option( 'admin_email' ) ) . '</code>'
 			) . ' ' .
 			sprintf(
@@ -96,18 +96,18 @@ $fields = array_merge( $fields, array(
 		'css'         => 'width:100%;',
 	),
 	'subject' => array(
-		'title'       => __( 'Subject', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'title'       => __( 'Subject', 'custom-emails-for-woocommerce' ),
 		'type'        => 'text',
-		'class'       => 'alg-wc-shortcode-field',
+		'class'       => 'wpfactory-wc-ce-shortcode-field',
 		'description' => $this->get_placeholder_text(),
 		'placeholder' => $this->get_default_subject(),
 		'default'     => '',
 		'css'         => 'width:100%;',
 	),
 	'email_type' => array(
-		'title'       => __( 'Email type', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'title'       => __( 'Email type', 'custom-emails-for-woocommerce' ),
 		'type'        => 'select',
-		'desc_tip'    => __( 'Choose which format of email to send.', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'desc_tip'    => __( 'Choose which format of email to send.', 'custom-emails-for-woocommerce' ),
 		'default'     => 'html',
 		'class'       => 'email_type wc-enhanced-select',
 		'options'     => $email->get_email_type_options(),
@@ -121,9 +121,9 @@ $fields = array_merge( $fields, array(
 		'default'     => 'yes',
 	),
 	'heading' => array(
-		'title'       => __( 'Email heading', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		'title'       => __( 'Email heading', 'custom-emails-for-woocommerce' ),
 		'type'        => 'text',
-		'class'       => 'alg-wc-shortcode-field',
+		'class'       => 'wpfactory-wc-ce-shortcode-field',
 		'desc_tip'    => __( 'Used only if "Header & footer" option is enabled.', 'custom-emails-for-woocommerce' ),
 		'description' => $this->get_placeholder_text(),
 		'placeholder' => $this->get_default_heading(),
@@ -132,8 +132,8 @@ $fields = array_merge( $fields, array(
 	),
 	'content' => array(
 		'title'       => __( 'Email content', 'custom-emails-for-woocommerce' ),
-		'type'        => 'alg_wc_ce_editor',
-		'class'       => 'alg-wc-shortcode-field',
+		'type'        => 'wpfactory_wc_ce_editor',
+		'class'       => 'wpfactory-wc-ce-shortcode-field',
 		'desc_tip'    => __( 'Please make sure content is not empty.', 'custom-emails-for-woocommerce' ),
 		'description' => (
 			$this->get_placeholder_text() . '<br>' .
@@ -147,7 +147,7 @@ $fields = array_merge( $fields, array(
 				)
 			) .
 			'<p>' .
-				'<a class="button" href="#" id="alg_wc_custom_emails_content_template_0">' . __( 'Default content', 'custom-emails-for-woocommerce' ) . '</a>' .
+				'<a class="button" href="#" id="wpfactory_wc_custom_emails_content_template_0">' . __( 'Default content', 'custom-emails-for-woocommerce' ) . '</a>' .
 			'</p>'
 		),
 		'placeholder' => '',
@@ -173,8 +173,8 @@ $fields = array_merge( $fields, array(
 		'description' => sprintf(
 			/* Translators: %1$s: Directory path, %2$s: File path example. */
 			__( 'File paths in %1$s, e.g.: %2$s', 'custom-emails-for-woocommerce' ),
-			'<code>' . alg_wc_custom_emails()->core->get_base_dir() . '</code>',
-			'<code>' . alg_wc_custom_emails()->core->get_base_dir_example() . '</code>'
+			'<code>' . wpfactory_wc_custom_emails()->core->get_base_dir() . '</code>',
+			'<code>' . wpfactory_wc_custom_emails()->core->get_base_dir_example() . '</code>'
 		),
 		'desc_tip'    => __( 'One file path per line.', 'custom-emails-for-woocommerce' ),
 		'default'     => '',
@@ -213,7 +213,7 @@ $fields = array_merge( $fields, array(
 		'desc_tip'          => __( 'Email will be sent only if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
 		'css'               => 'width:100%;',
 		'custom_attributes' => array(
-			'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'custom-emails-for-woocommerce' ),
 			'data-action'      => 'woocommerce_json_search_products_and_variations',
 			'data-allow_clear' => true,
 		),
@@ -227,7 +227,7 @@ $fields = array_merge( $fields, array(
 		'desc_tip'          => __( 'Email will NOT be sent if there is at least one of the selected products in the order.', 'custom-emails-for-woocommerce' ),
 		'css'               => 'width:100%;',
 		'custom_attributes' => array(
-			'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'custom-emails-for-woocommerce' ),
 			'data-action'      => 'woocommerce_json_search_products_and_variations',
 			'data-allow_clear' => true,
 		),
@@ -330,7 +330,7 @@ $fields = array_merge( $fields, array(
 		'options'           => $this->get_ajax_options( 'customer', $email, 'required_order_user_ids' ),
 		'css'               => 'width:100%;',
 		'custom_attributes' => array(
-			'data-placeholder' => __( 'Search for a user&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'data-placeholder' => __( 'Search for a user&hellip;', 'custom-emails-for-woocommerce' ),
 			'data-allow_clear' => true,
 		),
 	),
@@ -342,7 +342,7 @@ $fields = array_merge( $fields, array(
 		'options'           => $this->get_ajax_options( 'customer', $email, 'excluded_order_user_ids' ),
 		'css'               => 'width:100%;',
 		'custom_attributes' => array(
-			'data-placeholder' => __( 'Search for a user&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'data-placeholder' => __( 'Search for a user&hellip;', 'custom-emails-for-woocommerce' ),
 			'data-allow_clear' => true,
 		),
 	),

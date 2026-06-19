@@ -3,7 +3,7 @@
 Plugin Name: Additional Custom Emails & Recipients for WooCommerce
 Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
 Description: Add custom emails to WooCommerce.
-Version: 3.7.2
+Version: 3.7.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Requires at least: 4.4
@@ -21,7 +21,7 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
 	/**
 	 * Check if Pro plugin version is activated.
 	 *
-	 * @version 2.2.7
+	 * @version 3.7.3
 	 * @since   1.4.0
 	 */
 	$plugin = 'custom-emails-for-woocommerce-pro/custom-emails-for-woocommerce-pro.php';
@@ -32,27 +32,51 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
 			array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) )
 		)
 	) {
-		defined( 'ALG_WC_CUSTOM_EMAILS_FILE_FREE' ) || define( 'ALG_WC_CUSTOM_EMAILS_FILE_FREE', __FILE__ );
+		defined( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE', __FILE__ );
 		return;
 	}
 }
 
-defined( 'ALG_WC_CUSTOM_EMAILS_VERSION' ) || define( 'ALG_WC_CUSTOM_EMAILS_VERSION', '3.7.2' );
+/**
+ * WPFACTORY_WC_CUSTOM_EMAILS_VERSION.
+ *
+ * @version 3.7.3
+ * @since   1.0.0
+ */
+defined( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION', '3.7.3' );
 
-defined( 'ALG_WC_CUSTOM_EMAILS_FILE' ) || define( 'ALG_WC_CUSTOM_EMAILS_FILE', __FILE__ );
+/**
+ * WPFACTORY_WC_CUSTOM_EMAILS_FILE.
+ *
+ * @version 3.7.3
+ * @since   1.0.0
+ */
+defined( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE', __FILE__ );
 
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-alg-wc-custom-emails.php';
+/**
+ * Require main class.
+ *
+ * @version 3.7.3
+ * @since   1.0.0
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpfactory-wc-custom-emails.php';
 
-if ( ! function_exists( 'alg_wc_custom_emails' ) ) {
+if ( ! function_exists( 'wpfactory_wc_custom_emails' ) ) {
 	/**
-	 * Returns the main instance of Alg_WC_Custom_Emails to prevent the need to use globals.
+	 * Returns the main instance of WPFactory_WC_Custom_Emails to prevent the need to use globals.
 	 *
-	 * @version 1.0.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 */
-	function alg_wc_custom_emails() {
-		return Alg_WC_Custom_Emails::instance();
+	function wpfactory_wc_custom_emails() {
+		return WPFactory_WC_Custom_Emails::instance();
 	}
 }
 
-add_action( 'plugins_loaded', 'alg_wc_custom_emails' );
+/**
+ * Init.
+ *
+ * @version 3.7.3
+ * @since   1.0.0
+ */
+add_action( 'plugins_loaded', 'wpfactory_wc_custom_emails' );

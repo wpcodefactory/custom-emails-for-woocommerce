@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - Shortcodes Class
  *
- * @version 3.6.5
+ * @version 3.7.3
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Shortcodes' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Shortcodes' ) ) :
 
-class Alg_WC_Custom_Emails_Shortcodes {
+class WPFactory_WC_Custom_Emails_Shortcodes {
 
 	/**
 	 * shortcodes.
@@ -57,7 +57,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.6.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) not order related (e.g., customer; product)
@@ -114,7 +114,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 
 		);
 
-		$prefix = apply_filters( 'alg_wc_custom_emails_shortcode_prefix', '' );
+		$prefix = apply_filters( 'wpfactory_wc_custom_emails_shortcode_prefix', '' );
 
 		foreach ( $this->shortcodes as $shortcode ) {
 			add_shortcode( $prefix . $shortcode, array( $this, $shortcode ) );
@@ -128,7 +128,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	 * @version 3.6.5
 	 * @since   3.6.0
 	 *
-	 * @todo    (v3.6.5) merge with `Alg_WC_Custom_Email_Order_Validator::get_order_wpml_language()`?
+	 * @todo    (v3.6.5) merge with `WPFactory_WC_Custom_Email_Order_Validator::get_order_wpml_language()`?
 	 * @todo    (v3.6.5) WPML and Polylang: test?
 	 * @todo    (v3.6.5) WPML: `wpml_language` or `wpml_languages`?
 	 * @todo    (v3.6.0) use `get_locale()`?
@@ -252,9 +252,10 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * generate_coupon_code.
 	 *
-	 * @version 3.5.0
+	 * @version 3.7.3
 	 * @since   1.1.0
 	 *
+	 * @todo    (v3.7.3) use `esc_html()` instead of `wp_kses_post()`?
 	 * @todo    (dev) generate coupon from *order*
 	 * @todo    (dev) more `$atts`, e.g., `discount_type`
 	 * @todo    (dev) optional `customer_email`
@@ -306,7 +307,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			foreach ( $data as $key => $value ) {
 				update_post_meta( $coupon_id, $key, $value );
 			}
-			return $coupon_code;
+			return wp_kses_post( $coupon_code );
 		} else {
 			return '';
 		}
@@ -315,7 +316,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * product_func.
 	 *
-	 * @version 2.6.0
+	 * @version 3.7.3
 	 * @since   2.6.0
 	 *
 	 * @todo    (dev) add (optional) function args
@@ -324,6 +325,12 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		if (
 			! $this->product ||
 			! isset( $atts['func'] ) ||
+			'' === $atts['func'] ||
+			! in_array(
+				$atts['func'],
+				apply_filters( 'wpfactory_wc_custom_emails_shortcode_product_func', array() ),
+				true
+			) ||
 			! is_callable( array( $this->product, $atts['func'] ) )
 		) {
 			return '';
@@ -819,7 +826,11 @@ class Alg_WC_Custom_Emails_Shortcodes {
 		}
 
 		// Permalink
-		return sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() );
+		return sprintf(
+			'<a href="%s">%s</a>',
+			$product_permalink,
+			$item->get_name()
+		);
 
 	}
 
@@ -1045,13 +1056,23 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * order_func.
 	 *
-	 * @version 1.0.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) add (optional) function args
 	 */
 	function order_func( $atts, $content = '' ) {
-		if ( ! $this->order || ! isset( $atts['func'] ) || ! is_callable( array( $this->order, $atts['func'] ) ) ) {
+		if (
+			! $this->order ||
+			! isset( $atts['func'] ) ||
+			'' === $atts['func'] ||
+			! in_array(
+				$atts['func'],
+				apply_filters( 'wpfactory_wc_custom_emails_shortcode_order_func', array() ),
+				true
+			) ||
+			! is_callable( array( $this->order, $atts['func'] ) )
+		) {
 			return '';
 		}
 		$func = $atts['func'];
@@ -1061,9 +1082,10 @@ class Alg_WC_Custom_Emails_Shortcodes {
 	/**
 	 * return_shortcode.
 	 *
-	 * @version 3.6.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
+	 * @todo    (v3.7.3) make sure `wp_kses_post()` is ok?
 	 * @todo    (dev) more common atts, e.g., on_empty, find/replace, strip_tags, any_func, etc.
 	 */
 	function return_shortcode( $value, $atts ) {
@@ -1094,7 +1116,7 @@ class Alg_WC_Custom_Emails_Shortcodes {
 			'' !== $value ?
 			(
 				( isset( $atts['before'] ) ? wp_kses_post( $atts['before'] ) : '' ) .
-					$value .
+				wp_kses_post( $value ) .
 				( isset( $atts['after'] )  ? wp_kses_post( $atts['after'] )  : '' )
 			) :
 			''
@@ -1106,4 +1128,4 @@ class Alg_WC_Custom_Emails_Shortcodes {
 
 endif;
 
-return new Alg_WC_Custom_Emails_Shortcodes();
+return new WPFactory_WC_Custom_Emails_Shortcodes();

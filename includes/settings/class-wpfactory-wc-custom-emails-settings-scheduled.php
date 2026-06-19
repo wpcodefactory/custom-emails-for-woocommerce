@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - Scheduled Section Settings
  *
- * @version 2.9.3
+ * @version 3.7.3
  * @since   1.3.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Settings_Scheduled' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Settings_Scheduled' ) ) :
 
-class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Settings_Section {
+class WPFactory_WC_Custom_Emails_Settings_Scheduled extends WPFactory_WC_Custom_Emails_Settings_Section {
 
 	/**
 	 * email_titles.
@@ -37,7 +37,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_unschedule_button_html
 	 *
-	 * @version 2.7.0
+	 * @version 3.7.3
 	 * @since   1.9.5
 	 */
 	function get_unschedule_button_html( $url ) {
@@ -45,7 +45,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 			'<a href="%s" title="%s" class="%s">%s</a>',
 			$url,
 			esc_html__( 'Cancel', 'custom-emails-for-woocommerce' ),
-			'alg-wc-custom-emails-unschedule',
+			'wpfactory-wc-custom-emails-unschedule',
 			'<span class="dashicons dashicons-trash"></span>'
 		);
 	}
@@ -53,15 +53,15 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_unschedule_button_html_wp_cron.
 	 *
-	 * @version 2.7.0
+	 * @version 3.7.3
 	 * @since   2.7.0
 	 */
 	function get_unschedule_button_html_wp_cron( $class, $object_id, $timestamp ) {
 		$url = wp_nonce_url( add_query_arg( array(
-			'alg_wc_ce_unschedule_class'     => $class,
-			'alg_wc_ce_unschedule_object_id' => $object_id,
-			'alg_wc_ce_unschedule_time'      => $timestamp,
-			'alg_wc_ce_unscheduler'          => 'wp_cron',
+			'wpfactory_wc_ce_unschedule_class'     => $class,
+			'wpfactory_wc_ce_unschedule_object_id' => $object_id,
+			'wpfactory_wc_ce_unschedule_time'      => $timestamp,
+			'wpfactory_wc_ce_unscheduler'          => 'wp_cron',
 		) ) );
 		return $this->get_unschedule_button_html( $url );
 	}
@@ -69,13 +69,13 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_unschedule_button_html_as.
 	 *
-	 * @version 2.7.0
+	 * @version 3.7.3
 	 * @since   2.7.0
 	 */
 	function get_unschedule_button_html_as( $action_id ) {
 		$url = wp_nonce_url( add_query_arg( array(
-			'alg_wc_ce_unschedule_action_id' => $action_id,
-			'alg_wc_ce_unscheduler'          => 'as',
+			'wpfactory_wc_ce_unschedule_action_id' => $action_id,
+			'wpfactory_wc_ce_unscheduler'          => 'as',
 		) ) );
 		return $this->get_unschedule_button_html( $url );
 	}
@@ -83,15 +83,34 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_email_title_from_class.
 	 *
-	 * @version 2.7.0
+	 * @version 3.7.3
 	 * @since   2.7.0
 	 */
 	function get_email_title_from_class( $class ) {
+		$id = $class;
+
+		/**
+		 * Remove legacy class name
+		 *
+		 * @deprecated since 3.7.3, use `WPFactory_WC_Custom_Email`
+		 */
+		$id = str_replace( 'Alg_WC_Custom_Email', '', $id );
+
+		// Remove class name
+		$id = str_replace( 'WPFactory_WC_Custom_Email', '', $id );
+
+		// Remove underscore
+		$id = str_replace( '_', '', $id );
+
+		// Get ID
+		$id = ( ! empty( $id ) ? $id : 1 );
+
+		// All email titles
 		if ( ! isset( $this->email_titles ) ) {
 			$this->email_titles = get_option( 'alg_wc_custom_emails_titles', array() );
 		}
-		$id = str_replace( array( 'Alg_WC_Custom_Email', '_' ), '', $class );
-		$id = ( ! empty( $id ) ? $id : 1 );
+
+		// Email title
 		return (
 			$this->email_titles[ $id ] ??
 			(
@@ -120,7 +139,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_delayed_emails_info.
 	 *
-	 * @version 2.9.3
+	 * @version 3.7.3
 	 * @since   1.3.0
 	 *
 	 * @todo    (dev) better solution instead of `_get_cron_array()`?
@@ -132,22 +151,37 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 
 		$result = array();
 
+		$hooks = array(
+			'alg_wc_custom_emails_send_email', // @deprecated since 3.7.3, use `wpfactory_wc_custom_emails_send_email`
+			'wpfactory_wc_custom_emails_send_email',
+		);
+
 		// WP Cron
 		$crons = _get_cron_array();
 		if ( ! empty( $crons ) ) {
 			foreach ( $crons as $timestamp => $cron ) {
-				if ( isset( $cron['alg_wc_custom_emails_send_email'] ) ) {
-					foreach ( $cron['alg_wc_custom_emails_send_email'] as $_cron ) {
-						if ( 2 == count( $_cron['args'] ) ) {
-							$class     = $_cron['args'][0];
-							$object_id = $_cron['args'][1];
-							$result[] = sprintf(
-								'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
-								$this->get_email_title_from_class( $class ),
-								$this->get_formatted_local_time( $timestamp ),
-								( is_scalar( $object_id ) ? $object_id : '' ),
-								( is_scalar( $object_id ) ? $this->get_unschedule_button_html_wp_cron( $class, $object_id, $timestamp ) : '' )
-							);
+				foreach ( $hooks as $hook ) {
+					if ( isset( $cron[ $hook ] ) ) {
+						foreach ( $cron[ $hook ] as $_cron ) {
+							if ( 2 == count( $_cron['args'] ) ) {
+								$class     = $_cron['args'][0];
+								$object_id = $_cron['args'][1];
+								$result[] = sprintf(
+									'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
+									$this->get_email_title_from_class( $class ),
+									$this->get_formatted_local_time( $timestamp ),
+									( is_scalar( $object_id ) ? $object_id : '' ),
+									(
+										is_scalar( $object_id ) ?
+										$this->get_unschedule_button_html_wp_cron(
+											$class,
+											$object_id,
+											$timestamp
+										) :
+										''
+									)
+								);
+							}
 						}
 					}
 				}
@@ -155,24 +189,26 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 		}
 
 		// Action Scheduler
-		$scheduled_actions = as_get_scheduled_actions( array(
-			'hook'     => 'alg_wc_custom_emails_send_email',
-			'per_page' => -1,
-			'status'   => ActionScheduler_Store::STATUS_PENDING,
-		) );
-		if ( ! empty( $scheduled_actions ) ) {
-			foreach ( $scheduled_actions as $scheduled_action_id => $scheduled_action ) {
-				$args = $scheduled_action->get_args();
-				if ( 2 == count( $args ) ) {
-					$class     = $args[0];
-					$object_id = $args[1];
-					$result[] = sprintf(
-						'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
-						$this->get_email_title_from_class( $class ),
-						$this->get_formatted_local_time( $scheduled_action->get_schedule()->get_date()->getTimestamp() ),
-						( is_scalar( $object_id ) ? $object_id : '' ),
-						$this->get_unschedule_button_html_as( $scheduled_action_id )
-					);
+		foreach ( $hooks as $hook ) {
+			$scheduled_actions = as_get_scheduled_actions( array(
+				'hook'     => $hook,
+				'per_page' => -1,
+				'status'   => ActionScheduler_Store::STATUS_PENDING,
+			) );
+			if ( ! empty( $scheduled_actions ) ) {
+				foreach ( $scheduled_actions as $scheduled_action_id => $scheduled_action ) {
+					$args = $scheduled_action->get_args();
+					if ( 2 == count( $args ) ) {
+						$class     = $args[0];
+						$object_id = $args[1];
+						$result[] = sprintf(
+							'<td>%s</td><td>%s</td><td>%s</td><td>%s</td>',
+							$this->get_email_title_from_class( $class ),
+							$this->get_formatted_local_time( $scheduled_action->get_schedule()->get_date()->getTimestamp() ),
+							( is_scalar( $object_id ) ? $object_id : '' ),
+							$this->get_unschedule_button_html_as( $scheduled_action_id )
+						);
+					}
 				}
 			}
 		}
@@ -188,7 +224,10 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 				'<tr>' .
 					'<th>' . __( 'Email', 'custom-emails-for-woocommerce' ) . '</th>' .
 					'<th>' . __( 'Date', 'custom-emails-for-woocommerce' ) . '</th>' .
-					'<th>' . __( 'Object ID', 'custom-emails-for-woocommerce' ) . ' ' . wc_help_tip( __( 'E.g., order ID.', 'custom-emails-for-woocommerce' ) ) . '</th>' .
+					'<th>' .
+						__( 'Object ID', 'custom-emails-for-woocommerce' ) . ' ' .
+						wc_help_tip( __( 'E.g., order ID.', 'custom-emails-for-woocommerce' ) ) .
+					'</th>' .
 					'<th></th>' .
 				'</tr>' .
 				'<tr>' . implode( '</tr><tr>', $result ) . '</tr>' .
@@ -207,7 +246,7 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.3.0
+	 * @version 3.7.3
 	 * @since   1.3.0
 	 */
 	function get_settings() {
@@ -215,12 +254,12 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 			array(
 				'title' => __( 'Scheduled Emails', 'custom-emails-for-woocommerce' ),
 				'type'  => 'title',
-				'id'    => 'alg_wc_custom_emails_scheduled',
+				'id'    => 'wpfactory_wc_custom_emails_scheduled',
 				'desc'  => $this->get_delayed_emails_info(),
 			),
 			array(
 				'type'  => 'sectionend',
-				'id'    => 'alg_wc_custom_emails_scheduled',
+				'id'    => 'wpfactory_wc_custom_emails_scheduled',
 			),
 		);
 	}
@@ -229,4 +268,4 @@ class Alg_WC_Custom_Emails_Settings_Scheduled extends Alg_WC_Custom_Emails_Setti
 
 endif;
 
-return new Alg_WC_Custom_Emails_Settings_Scheduled();
+return new WPFactory_WC_Custom_Emails_Settings_Scheduled();

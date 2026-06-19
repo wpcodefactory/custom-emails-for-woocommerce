@@ -2,34 +2,34 @@
 /**
  * Custom Emails for WooCommerce - Settings
  *
- * @version 3.6.8
+ * @version 3.7.3
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Settings' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Settings' ) ) :
 
-class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
+class WPFactory_WC_Custom_Emails_Settings extends WC_Settings_Page {
 
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.5.0
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
-		$this->id    = 'alg_wc_custom_emails';
+		$this->id    = 'wpfactory_wc_custom_emails';
 		$this->label = __( 'Custom Emails', 'custom-emails-for-woocommerce' );
 		parent::__construct();
 
 		// Sections
-		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-section.php';
-		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-general.php';
-		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-custom-emails-settings-scheduled.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-settings-section.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-settings-general.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-settings-scheduled.php';
 
 	}
 
@@ -103,17 +103,17 @@ class Alg_WC_Custom_Emails_Settings extends WC_Settings_Page {
 	/**
 	 * save.
 	 *
-	 * @version 3.6.8
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 */
 	function save() {
 		parent::save();
 		$this->maybe_reset_settings();
-		do_action( 'alg_wc_custom_emails_settings_saved' );
+		do_action( 'wpfactory_wc_custom_emails_settings_saved' );
 	}
 
 }
 
 endif;
 
-return new Alg_WC_Custom_Emails_Settings();
+return new WPFactory_WC_Custom_Emails_Settings();

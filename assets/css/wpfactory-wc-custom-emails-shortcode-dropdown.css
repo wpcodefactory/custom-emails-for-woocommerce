@@ -1,0 +1,78 @@
+/**
+ * Custom Emails for WooCommerce - Shortcode Dropdown CSS
+ *
+ * @version 3.7.3
+ * @since   3.7.3
+ *
+ * @author  WPFactory
+ */
+
+.woocommerce table.form-table .wpfactory-wc-ce-editor textarea {
+	width: 100%;
+}
+
+.wpfactory-wc-ce-shortcode-wrap {
+	position: relative;
+}
+
+.wpfactory-wc-ce-shortcode-button.button-secondary {
+	position: absolute;
+	top: 0;
+	right: 0;
+	vertical-align: middle;
+	display: flex;
+	align-items: center;
+	min-height: 30px;
+	flex-direction: row-reverse;
+	padding: 0 10px 0 5px;
+}
+
+.wpfactory-wc-ce-shortcode-button.button-secondary > span {
+	padding-right: 3px;
+}
+
+.wpfactory-wc-ce-shortcode-wrap.wp-editor-container .wpfactory-wc-ce-shortcode-button.button-secondary {
+	top: 2px;
+}
+
+.wpfactory-wc-ce-rich-text-editor .wp-editor-container {
+	position: relative;
+}
+
+.wpfactory-wc-ce-shortcode-list {
+	z-index: 999;
+	display: none;
+	max-width: 450px;
+	border: 1px solid #b5bfc9;
+	border-radius: 6px;
+	background: #fff;
+	position: absolute;
+	top: 36px;
+	right: 0;
+	width: 80%;
+}
+
+.wpfactory-wc-ce-shortcode-search {
+	width: calc(100% - 10px) !important;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	margin-top: 5px;
+}
+
+.wpfactory-wc-ce-shortcode-list ul {
+	margin: 40px 0 0 0;
+	height: 220px;
+	overflow: auto;
+}
+
+.wpfactory-wc-ce-shortcode-list li {
+	margin: 0;
+	padding: 10px 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #b5bfc9;
+}
+
+.wpfactory-wc-ce-shortcode-list li:last-child {
+	border: none;
+}

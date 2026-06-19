@@ -2,17 +2,17 @@
 /**
  * Custom Emails for WooCommerce - General Section Settings
  *
- * @version 3.6.8
+ * @version 3.7.3
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Alg_WC_Custom_Emails_Settings_General' ) ) :
+if ( ! class_exists( 'WPFactory_WC_Custom_Emails_Settings_General' ) ) :
 
-class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Settings_Section {
+class WPFactory_WC_Custom_Emails_Settings_General extends WPFactory_WC_Custom_Emails_Settings_Section {
 
 	/**
 	 * Constructor.
@@ -29,7 +29,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.6.8
+	 * @version 3.7.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) `alg_wc_custom_emails_enabled_trigger_groups`
@@ -39,7 +39,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 	 */
 	function get_settings() {
 
-		$general_settings = apply_filters( 'alg_wc_custom_emails_admin_settings_general', array(
+		$general_settings = apply_filters( 'wpfactory_wc_custom_emails_admin_settings_general', array(
 			array(
 				'title'             => __( 'General Options', 'custom-emails-for-woocommerce' ),
 				'desc'              => sprintf(
@@ -52,12 +52,12 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 					)
 				),
 				'type'              => 'title',
-				'id'                => 'alg_wc_custom_emails_general_options',
+				'id'                => 'wpfactory_wc_custom_emails_general_options',
 			),
 			array(
 				'title'             => __( 'Number of custom emails', 'custom-emails-for-woocommerce' ),
 				'desc'              => apply_filters(
-					'alg_wc_custom_emails_admin_settings',
+					'wpfactory_wc_custom_emails_admin_settings',
 					'You will need <a href="https://wpfactory.com/item/custom-emails-for-woocommerce/">Additional Custom Emails & Recipients for WooCommerce Pro</a> plugin to add more than one custom email.',
 					'button-total'
 				),
@@ -65,7 +65,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'default'           => 1,
 				'type'              => 'number',
 				'custom_attributes' => apply_filters(
-					'alg_wc_custom_emails_admin_settings',
+					'wpfactory_wc_custom_emails_admin_settings',
 					array( 'readonly' => 'readonly' ),
 					'array-total'
 				),
@@ -74,7 +74,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'title'             => __( 'Admin title', 'custom-emails-for-woocommerce' ),
 				'desc'              => sprintf(
 					'[<a href="%s">%s</a>]',
-					admin_url( 'admin.php?page=wc-settings&tab=email&section=alg_wc_custom_email' ),
+					admin_url( 'admin.php?page=wc-settings&tab=email&section=wpfactory_wc_custom_email' ),
 					__( 'settings', 'custom-emails-for-woocommerce' )
 				),
 				'id'                => 'alg_wc_custom_emails_titles[1]',
@@ -83,7 +83,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 			),
 			array(
 				'type'              => 'sectionend',
-				'id'                => 'alg_wc_custom_emails_general_options',
+				'id'                => 'wpfactory_wc_custom_emails_general_options',
 			),
 		) );
 
@@ -91,7 +91,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 			array(
 				'title'    => __( 'Advanced Options', 'custom-emails-for-woocommerce' ),
 				'type'     => 'title',
-				'id'       => 'alg_wc_custom_emails_advanced_options',
+				'id'       => 'wpfactory_wc_custom_emails_advanced_options',
 			),
 			array(
 				'title'    => __( 'Enabled triggers groups', 'custom-emails-for-woocommerce' ),
@@ -101,7 +101,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 				'default'  => array( 'order_status', 'order_status_change', 'new_order', 'extra' ),
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
-				'options'  => alg_wc_custom_emails()->core->get_trigger_groups(),
+				'options'  => wpfactory_wc_custom_emails()->core->get_trigger_groups(),
 			),
 			array(
 				'title'    => __( 'Custom triggers', 'custom-emails-for-woocommerce' ),
@@ -195,7 +195,7 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 			),
 			array(
 				'type'     => 'sectionend',
-				'id'       => 'alg_wc_custom_emails_advanced_options',
+				'id'       => 'wpfactory_wc_custom_emails_advanced_options',
 			),
 		);
 
@@ -206,4 +206,4 @@ class Alg_WC_Custom_Emails_Settings_General extends Alg_WC_Custom_Emails_Setting
 
 endif;
 
-return new Alg_WC_Custom_Emails_Settings_General();
+return new WPFactory_WC_Custom_Emails_Settings_General();
