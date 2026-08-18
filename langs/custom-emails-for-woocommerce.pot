@@ -2,42 +2,35 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.7.3\n"
+"Project-Id-Version: custom-emails-for-woocommerce 3.7.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-19T16:14:23+00:00\n"
+"POT-Creation-Date: 2026-08-18T22:47:18+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: custom-emails-for-woocommerce.php
-#: includes/class-wpfactory-wc-custom-emails.php:235
-#: includes/shortcodes/class-wpfactory-wc-custom-emails-shortcodes.php:289
-msgid "Additional Custom Emails & Recipients for WooCommerce"
+msgid "Additional Custom Emails & Recipients for WooCommerce Pro"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com/item/custom-emails-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
-#: custom-emails-for-woocommerce.php
 msgid "Add custom emails to WooCommerce."
 msgstr ""
 
 #. Author of the plugin
-#: custom-emails-for-woocommerce.php
 msgid "WPFactory"
 msgstr ""
 
 #. Author URI of the plugin
-#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com"
 msgstr ""
 
@@ -183,6 +176,11 @@ msgstr ""
 #: includes/class-wpfactory-wc-custom-emails.php:234
 #: includes/settings/class-wpfactory-wc-custom-emails-settings.php:26
 msgid "Custom Emails"
+msgstr ""
+
+#: includes/class-wpfactory-wc-custom-emails.php:235
+#: includes/shortcodes/class-wpfactory-wc-custom-emails-shortcodes.php:289
+msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
 #. Translators: %s: Email title.

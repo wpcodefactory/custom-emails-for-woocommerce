@@ -3,7 +3,7 @@ Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, emails, email, custom email, custom emails
 Requires at least: 4.4
 Tested up to: 7.0
-Stable tag: 3.7.3
+Stable tag: 3.7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -142,6 +142,10 @@ Dive in and discover more tools to empower your WooCommerce Store!
 3. Start by visiting plugin settings at "WPFactory > Custom Emails".
 
 == Changelog ==
+
+= 3.7.4 - 18/08/2026 =
+* Dev - WPFactory Key Manager - Library updated (to v1.1.0).
+* WC tested up to: 11.0.
 
 = 3.7.3 - 19/06/2026 =
 * Dev - Security - Shortcodes - Output escaped.
