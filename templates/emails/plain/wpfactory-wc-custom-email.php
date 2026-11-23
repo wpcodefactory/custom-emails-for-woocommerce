@@ -7,7 +7,9 @@
  * @version 3.7.3
  * @since   2.4.0
  *
- * @author  WPFactory
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_Custom_Emails\Templates
  */
 
 defined( 'ABSPATH' ) || exit;

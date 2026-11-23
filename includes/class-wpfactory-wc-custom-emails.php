@@ -2,290 +2,305 @@
 /**
  * Custom Emails for WooCommerce - Main Class
  *
- * @version 3.7.3
+ * @version 3.7.5
  * @since   1.0.0
  *
- * @author  WPFactory
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_Custom_Emails
  */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'WPFactory_WC_Custom_Emails' ) ) :
 
-final class WPFactory_WC_Custom_Emails {
-
 	/**
-	 * Plugin version.
+	 * WPFactory_WC_Custom_Emails class.
 	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	public $version = WPFACTORY_WC_CUSTOM_EMAILS_VERSION;
-
-	/**
-	 * core.
-	 *
-	 * @version 2.1.0
+	 * @version 3.7.5
 	 * @since   1.0.0
 	 */
-	public $core;
+	final class WPFactory_WC_Custom_Emails {
 
-	/**
-	 * admin_core.
-	 *
-	 * @version 2.1.0
-	 * @since   1.0.0
-	 */
-	public $admin_core;
+		/**
+		 * Plugin version.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @var string
+		 */
+		public $version = WPFACTORY_WC_CUSTOM_EMAILS_VERSION;
 
-	/**
-	 * @var   WPFactory_WC_Custom_Emails The single instance of the class
-	 * @since 1.0.0
-	 */
-	protected static $_instance = null;
+		/**
+		 * Core.
+		 *
+		 * @version 2.1.0
+		 * @since   1.0.0
+		 *
+		 * @var WPFactory_WC_Custom_Emails_Core
+		 */
+		public $core;
 
-	/**
-	 * Main WPFactory_WC_Custom_Emails Instance.
-	 *
-	 * Ensures only one instance of WPFactory_WC_Custom_Emails is loaded or can be loaded.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 *
-	 * @static
-	 * @return  WPFactory_WC_Custom_Emails - Main instance
-	 */
-	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-		return self::$_instance;
-	}
+		/**
+		 * Admin core.
+		 *
+		 * @version 2.1.0
+		 * @since   1.0.0
+		 *
+		 * @var WPFactory_WC_Custom_Emails_Admin
+		 */
+		public $admin_core;
 
-	/**
-	 * WPFactory_WC_Custom_Emails Constructor.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 *
-	 * @access  public
-	 */
-	function __construct() {
+		/**
+		 * The single instance of the class.
+		 *
+		 * @version 3.7.5
+		 * @since   1.0.0
+		 *
+		 * @var WPFactory_WC_Custom_Emails
+		 */
+		protected static $instance = null;
 
-		// Check for active WooCommerce plugin
-		if ( ! function_exists( 'WC' ) ) {
-			return;
-		}
-
-		// Load libs
-		if ( is_admin() ) {
-			require_once plugin_dir_path( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) . 'vendor/autoload.php';
-		}
-
-		// Declare compatibility with custom order tables for WooCommerce
-		add_action( 'before_woocommerce_init', array( $this, 'wc_declare_compatibility' ) );
-
-		// Pro
-		if ( 'custom-emails-for-woocommerce-pro.php' === basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) ) {
-			require_once plugin_dir_path( __FILE__ ) . 'pro/class-wpfactory-wc-custom-emails-pro.php';
-		}
-
-		// Include required files
-		$this->includes();
-
-		// Admin
-		if ( is_admin() ) {
-			$this->admin();
+		/**
+		 * Main WPFactory_WC_Custom_Emails Instance.
+		 *
+		 * Ensures only one instance of WPFactory_WC_Custom_Emails is loaded or can be loaded.
+		 *
+		 * @version 3.7.5
+		 * @since   1.0.0
+		 *
+		 * @static
+		 *
+		 * @return WPFactory_WC_Custom_Emails
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+			return self::$instance;
 		}
 
-	}
+		/**
+		 * WPFactory_WC_Custom_Emails Constructor.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @access public
+		 */
+		public function __construct() {
+			// Check for active WooCommerce plugin.
+			if ( ! function_exists( 'WC' ) ) {
+				return;
+			}
 
-	/**
-	 * wc_declare_compatibility.
-	 *
-	 * @version 3.7.3
-	 * @since   2.2.3
-	 *
-	 * @see     https://developer.woocommerce.com/docs/features/high-performance-order-storage/recipe-book/
-	 */
-	function wc_declare_compatibility() {
-		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			$files = (
-				defined( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE' ) ?
-				array( WPFACTORY_WC_CUSTOM_EMAILS_FILE, WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE ) :
-				array( WPFACTORY_WC_CUSTOM_EMAILS_FILE )
-			);
-			foreach ( $files as $file ) {
-				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
-					'custom_order_tables',
-					$file,
-					true
-				);
+			// Load libs.
+			if ( is_admin() ) {
+				require_once plugin_dir_path( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) . 'vendor/autoload.php';
+			}
+
+			// Declare compatibility with custom order tables for WooCommerce.
+			add_action( 'before_woocommerce_init', array( $this, 'wc_declare_compatibility' ) );
+
+			// Pro.
+			if ( 'custom-emails-for-woocommerce-pro.php' === basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) ) {
+				require_once plugin_dir_path( __FILE__ ) . 'pro/class-wpfactory-wc-custom-emails-pro.php';
+			}
+
+			// Include required files.
+			$this->includes();
+
+			// Admin.
+			if ( is_admin() ) {
+				$this->admin();
 			}
 		}
-	}
 
-	/**
-	 * includes.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 */
-	function includes() {
-		require_once plugin_dir_path( __FILE__ ) . 'wpfactory-wc-custom-emails-functions.php';
-		$this->core = require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-core.php';
-	}
-
-	/**
-	 * admin.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 */
-	function admin() {
-
-		// Admin core
-		$this->admin_core = require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-admin.php';
-
-		// Action links
-		add_filter( 'plugin_action_links_' . plugin_basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ), array( $this, 'action_links' ) );
-
-		// "Recommendations" page
-		add_action( 'init', array( $this, 'add_cross_selling_library' ) );
-
-		// WC Settings tab as WPFactory submenu item
-		add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
-
-		// Settings
-		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
-
-		// Version update
-		if ( get_option( 'alg_wc_custom_emails_version', '' ) !== $this->version ) {
-			add_action( 'admin_init', array( $this, 'version_updated' ) );
+		/**
+		 * WC declare compatibility.
+		 *
+		 * @version 3.7.3
+		 * @since   2.2.3
+		 *
+		 * @see https://developer.woocommerce.com/docs/features/high-performance-order-storage/recipe-book/
+		 */
+		public function wc_declare_compatibility() {
+			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+				$files = (
+					defined( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE' ) ?
+					array( WPFACTORY_WC_CUSTOM_EMAILS_FILE, WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE ) :
+					array( WPFACTORY_WC_CUSTOM_EMAILS_FILE )
+				);
+				foreach ( $files as $file ) {
+					\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+						'custom_order_tables',
+						$file,
+						true
+					);
+				}
+			}
 		}
 
-	}
+		/**
+		 * Includes.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 */
+		public function includes() {
+			require_once plugin_dir_path( __FILE__ ) . 'wpfactory-wc-custom-emails-functions.php';
+			$this->core = require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-core.php';
+		}
 
-	/**
-	 * action_links.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 *
-	 * @param   mixed $links
-	 * @return  array
-	 */
-	function action_links( $links ) {
-		$custom_links = array();
+		/**
+		 * Admin.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 */
+		public function admin() {
+			// Admin core.
+			$this->admin_core = require_once plugin_dir_path( __FILE__ ) . 'class-wpfactory-wc-custom-emails-admin.php';
 
-		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=wpfactory_wc_custom_emails' ) . '">' .
-			__( 'Settings', 'custom-emails-for-woocommerce' ) .
-		'</a>';
+			// Action links.
+			add_filter( 'plugin_action_links_' . plugin_basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ), array( $this, 'action_links' ) );
 
-		if ( 'custom-emails-for-woocommerce.php' === basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) ) {
-			$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/custom-emails-for-woocommerce/">' .
-				__( 'Go Pro', 'custom-emails-for-woocommerce' ) .
+			// "Recommendations" page.
+			add_action( 'init', array( $this, 'add_cross_selling_library' ) );
+
+			// WC Settings tab as WPFactory submenu item.
+			add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
+
+			// Settings.
+			add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
+
+			// Version update.
+			if ( get_option( 'alg_wc_custom_emails_version', '' ) !== $this->version ) {
+				add_action( 'admin_init', array( $this, 'version_updated' ) );
+			}
+		}
+
+		/**
+		 * Action links.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @param mixed $links Plugin action links.
+		 *
+		 * @return array Modified plugin action links.
+		 */
+		public function action_links( $links ) {
+			$custom_links = array();
+
+			$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=wpfactory_wc_custom_emails' ) . '">' .
+				__( 'Settings', 'custom-emails-for-woocommerce' ) .
 			'</a>';
+
+			if ( 'custom-emails-for-woocommerce.php' === basename( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) ) {
+				$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/custom-emails-for-woocommerce/">' .
+					__( 'Go Pro', 'custom-emails-for-woocommerce' ) .
+				'</a>';
+			}
+
+			return array_merge( $custom_links, $links );
 		}
 
-		return array_merge( $custom_links, $links );
-	}
+		/**
+		 * Add cross selling library.
+		 *
+		 * @version 3.7.3
+		 * @since   3.4.0
+		 */
+		public function add_cross_selling_library() {
+			if ( ! class_exists( '\WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling' ) ) {
+				return;
+			}
 
-	/**
-	 * add_cross_selling_library.
-	 *
-	 * @version 3.7.3
-	 * @since   3.4.0
-	 */
-	function add_cross_selling_library() {
-
-		if ( ! class_exists( '\WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling' ) ) {
-			return;
+			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
+			$cross_selling->setup( array( 'plugin_file_path' => WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
+			$cross_selling->init();
 		}
 
-		$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
-		$cross_selling->setup( array( 'plugin_file_path' => WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
-		$cross_selling->init();
+		/**
+		 * Move WC settings tab to WPFactory menu.
+		 *
+		 * @version 3.7.3
+		 * @since   3.4.0
+		 */
+		public function move_wc_settings_tab_to_wpfactory_menu() {
+			if ( ! class_exists( '\WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
+				return;
+			}
 
-	}
+			$wpfactory_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
 
-	/**
-	 * move_wc_settings_tab_to_wpfactory_menu.
-	 *
-	 * @version 3.7.3
-	 * @since   3.4.0
-	 */
-	function move_wc_settings_tab_to_wpfactory_menu() {
+			if ( ! method_exists( $wpfactory_admin_menu, 'move_wc_settings_tab_to_wpfactory_menu' ) ) {
+				return;
+			}
 
-		if ( ! class_exists( '\WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
-			return;
+			$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu(
+				array(
+					'wc_settings_tab_id' => 'wpfactory_wc_custom_emails',
+					'menu_title'         => __( 'Custom Emails', 'custom-emails-for-woocommerce' ),
+					'page_title'         => __( 'Additional Custom Emails & Recipients for WooCommerce', 'custom-emails-for-woocommerce' ),
+					'plugin_icon'        => array(
+						'get_url_method'    => 'wporg_plugins_api',
+						'wporg_plugin_slug' => 'custom-emails-for-woocommerce',
+					),
+				)
+			);
 		}
 
-		$wpfactory_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
-
-		if ( ! method_exists( $wpfactory_admin_menu, 'move_wc_settings_tab_to_wpfactory_menu' ) ) {
-			return;
+		/**
+		 * Add WooCommerce settings tab.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @param array $settings WooCommerce settings array.
+		 *
+		 * @return array Modified WooCommerce settings array.
+		 */
+		public function add_woocommerce_settings_tab( $settings ) {
+			$settings[] = require_once plugin_dir_path( __FILE__ ) . 'settings/class-wpfactory-wc-custom-emails-settings.php';
+			return $settings;
 		}
 
-		$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
-			'wc_settings_tab_id' => 'wpfactory_wc_custom_emails',
-			'menu_title'         => __( 'Custom Emails', 'custom-emails-for-woocommerce' ),
-			'page_title'         => __( 'Additional Custom Emails & Recipients for WooCommerce', 'custom-emails-for-woocommerce' ),
-			'plugin_icon'        => array(
-				'get_url_method'    => 'wporg_plugins_api',
-				'wporg_plugin_slug' => 'custom-emails-for-woocommerce',
-			),
-		) );
+		/**
+		 * Version updated.
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 */
+		public function version_updated() {
+			update_option( 'alg_wc_custom_emails_version', $this->version );
+		}
 
+		/**
+		 * Plugin URL.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @return string
+		 */
+		public function plugin_url() {
+			return untrailingslashit( plugin_dir_url( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
+		}
+
+		/**
+		 * Plugin path.
+		 *
+		 * @version 3.7.3
+		 * @since   1.0.0
+		 *
+		 * @return string
+		 */
+		public function plugin_path() {
+			return untrailingslashit( plugin_dir_path( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
+		}
 	}
-
-	/**
-	 * add_woocommerce_settings_tab.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 */
-	function add_woocommerce_settings_tab( $settings ) {
-		$settings[] = require_once plugin_dir_path( __FILE__ ) . 'settings/class-wpfactory-wc-custom-emails-settings.php';
-		return $settings;
-	}
-
-	/**
-	 * version_updated.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function version_updated() {
-		update_option( 'alg_wc_custom_emails_version', $this->version );
-	}
-
-	/**
-	 * plugin_url.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 *
-	 * @return  string
-	 */
-	function plugin_url() {
-		return untrailingslashit( plugin_dir_url( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
-	}
-
-	/**
-	 * plugin_path.
-	 *
-	 * @version 3.7.3
-	 * @since   1.0.0
-	 *
-	 * @return  string
-	 */
-	function plugin_path() {
-		return untrailingslashit( plugin_dir_path( WPFACTORY_WC_CUSTOM_EMAILS_FILE ) );
-	}
-
-}
 
 endif;

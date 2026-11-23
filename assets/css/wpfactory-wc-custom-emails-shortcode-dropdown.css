@@ -4,7 +4,7 @@
  * @version 3.7.3
  * @since   3.7.3
  *
- * @author  WPFactory
+ * @author WPFactory
  */
 
 .woocommerce table.form-table .wpfactory-wc-ce-editor textarea {
@@ -27,7 +27,7 @@
 	padding: 0 10px 0 5px;
 }
 
-.wpfactory-wc-ce-shortcode-button.button-secondary > span {
+.wpfactory-wc-ce-shortcode-button.button-secondary>span {
 	padding-right: 3px;
 }
 

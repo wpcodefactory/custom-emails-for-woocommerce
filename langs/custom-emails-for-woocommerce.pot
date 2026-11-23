@@ -2,84 +2,91 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: custom-emails-for-woocommerce 3.7.4\n"
+"Project-Id-Version: Additional Custom Emails & Recipients for WooCommerce 3.7.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-emails-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-18T22:47:18+02:00\n"
+"POT-Creation-Date: 2026-11-23T10:05:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-emails-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-msgid "Additional Custom Emails & Recipients for WooCommerce Pro"
+#: custom-emails-for-woocommerce.php
+#: includes/class-wpfactory-wc-custom-emails.php:247
+#: includes/shortcodes/class-wpfactory-wc-custom-emails-shortcodes.php:289
+msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com/item/custom-emails-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "Add custom emails to WooCommerce."
 msgstr ""
 
 #. Author of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "WPFactory"
 msgstr ""
 
 #. Author URI of the plugin
+#: custom-emails-for-woocommerce.php
 msgid "https://wpfactory.com"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:199
+#: includes/class-wpfactory-wc-custom-emails-admin.php:209
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:254
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:217
+#: includes/class-wpfactory-wc-custom-emails-admin.php:227
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:201
 msgid "Invalid user role."
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:221
+#: includes/class-wpfactory-wc-custom-emails-admin.php:231
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:197
 msgid "Invalid nonce."
 msgstr ""
 
 #. translators: %1$s is the name of the hook to be cancelled, %2$s is the exception message.
-#: includes/class-wpfactory-wc-custom-emails-admin.php:287
+#: includes/class-wpfactory-wc-custom-emails-admin.php:298
 msgid "Caught exception while cancelling action \"%1$s\": %2$s"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:354
-#: includes/class-wpfactory-wc-custom-emails-admin.php:355
+#: includes/class-wpfactory-wc-custom-emails-admin.php:364
+#: includes/class-wpfactory-wc-custom-emails-admin.php:365
 msgid "Shortcodes"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:386
+#: includes/class-wpfactory-wc-custom-emails-admin.php:402
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:518
 msgid "bulk actions"
 msgstr ""
 
 #. Translators: %1$s: Custom email title, %2$d: Number of orders.
-#: includes/class-wpfactory-wc-custom-emails-admin.php:422
+#: includes/class-wpfactory-wc-custom-emails-admin.php:438
 msgid "Emails: \"%1$s\" sent for %2$d orders."
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:452
+#: includes/class-wpfactory-wc-custom-emails-admin.php:478
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:547
 msgid "manually"
 msgstr ""
 
 #. Translators: %s: Custom email title.
 #. Translators: %s: Email title.
-#: includes/class-wpfactory-wc-custom-emails-admin.php:471
-#: includes/class-wpfactory-wc-custom-emails-admin.php:496
-#: includes/class-wpfactory-wc-custom-emails-admin.php:630
-#: includes/class-wpfactory-wc-custom-emails-admin.php:738
+#: includes/class-wpfactory-wc-custom-emails-admin.php:501
+#: includes/class-wpfactory-wc-custom-emails-admin.php:530
+#: includes/class-wpfactory-wc-custom-emails-admin.php:669
+#: includes/class-wpfactory-wc-custom-emails-admin.php:782
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:446
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:491
 #: includes/pro/class-wpfactory-wc-custom-emails-pro.php:571
@@ -89,21 +96,21 @@ msgstr ""
 msgid "Send email: %s"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:533
-#: includes/class-wpfactory-wc-custom-emails-admin.php:666
+#: includes/class-wpfactory-wc-custom-emails-admin.php:567
+#: includes/class-wpfactory-wc-custom-emails-admin.php:705
 msgid "Wrong user."
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:542
-#: includes/class-wpfactory-wc-custom-emails-admin.php:675
+#: includes/class-wpfactory-wc-custom-emails-admin.php:576
+#: includes/class-wpfactory-wc-custom-emails-admin.php:714
 msgid "Link has expired."
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:559
+#: includes/class-wpfactory-wc-custom-emails-admin.php:593
 msgid "order actions column"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails-admin.php:692
+#: includes/class-wpfactory-wc-custom-emails-admin.php:731
 msgid "order preview"
 msgstr ""
 
@@ -165,22 +172,17 @@ msgstr ""
 msgid "Search for a shortcode&hellip;"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails.php:184
+#: includes/class-wpfactory-wc-custom-emails.php:198
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails.php:189
+#: includes/class-wpfactory-wc-custom-emails.php:203
 msgid "Go Pro"
 msgstr ""
 
-#: includes/class-wpfactory-wc-custom-emails.php:234
+#: includes/class-wpfactory-wc-custom-emails.php:246
 #: includes/settings/class-wpfactory-wc-custom-emails-settings.php:26
 msgid "Custom Emails"
-msgstr ""
-
-#: includes/class-wpfactory-wc-custom-emails.php:235
-#: includes/shortcodes/class-wpfactory-wc-custom-emails-shortcodes.php:289
-msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
 #. Translators: %s: Email title.

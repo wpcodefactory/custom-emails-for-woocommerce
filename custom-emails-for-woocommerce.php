@@ -1,37 +1,46 @@
 <?php
-/*
-Plugin Name: Additional Custom Emails & Recipients for WooCommerce
-Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
-Description: Add custom emails to WooCommerce.
-Version: 3.7.4
-Author: WPFactory
-Author URI: https://wpfactory.com
-Requires at least: 4.4
-Text Domain: custom-emails-for-woocommerce
-Domain Path: /langs
-WC tested up to: 11.0
-Requires Plugins: woocommerce
-License: GNU General Public License v3.0
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-*/
+/**
+ * Plugin Name: Additional Custom Emails & Recipients for WooCommerce
+ * Plugin URI: https://wpfactory.com/item/custom-emails-for-woocommerce/
+ * Description: Add custom emails to WooCommerce.
+ * Version: 3.7.5
+ * Author: WPFactory
+ * Author URI: https://wpfactory.com
+ * Requires PHP: 7.4
+ * Requires at least: 4.4
+ * Text Domain: custom-emails-for-woocommerce
+ * Domain Path: /langs
+ * WC tested up to: 11.3
+ * Requires Plugins: woocommerce
+ * License: GNU General Public License v3.0
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @package WPFactory\WC_Custom_Emails
+ */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
-	/**
-	 * Check if Pro plugin version is activated.
-	 *
-	 * @version 3.7.3
-	 * @since   1.4.0
-	 */
-	$plugin = 'custom-emails-for-woocommerce-pro/custom-emails-for-woocommerce-pro.php';
-	if (
-		in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) ||
-		(
-			is_multisite() &&
-			array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) )
-		)
-	) {
+	if ( ! function_exists( 'wpfactory_wc_custom_emails_is_pro_activated' ) ) {
+		/**
+		 * Check if Pro plugin version is activated.
+		 *
+		 * @version 3.7.5
+		 * @since   1.4.0
+		 */
+		function wpfactory_wc_custom_emails_is_pro_activated() {
+			$plugin = 'custom-emails-for-woocommerce-pro/custom-emails-for-woocommerce-pro.php';
+			return (
+				in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) ||
+				(
+					is_multisite() &&
+					array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) )
+				)
+			);
+		}
+	}
+
+	if ( wpfactory_wc_custom_emails_is_pro_activated() ) {
 		defined( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_FILE_FREE', __FILE__ );
 		return;
 	}
@@ -43,7 +52,7 @@ if ( 'custom-emails-for-woocommerce.php' === basename( __FILE__ ) ) {
  * @version 3.7.3
  * @since   1.0.0
  */
-defined( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION', '3.7.4' );
+defined( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION' ) || define( 'WPFACTORY_WC_CUSTOM_EMAILS_VERSION', '3.7.5' );
 
 /**
  * WPFACTORY_WC_CUSTOM_EMAILS_FILE.
